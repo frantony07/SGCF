@@ -1,7 +1,9 @@
 package People;
 
+import Functions.functionOfData;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class Funcionario extends People {
 
@@ -16,7 +18,11 @@ public class Funcionario extends People {
 
     public ArrayList<Language> getLanguagesSpoken() {return languagesSpoken;}
 
-    public  void addNewLanjuage(Language newLanguaje){ languagesSpoken.add(newLanguaje);}
+    public  void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
+
+    public void addNewSchedule(LocalDate date){
+        availableDays.add(date);
+    }
 
     public ArrayList<LocalDate> getAvailableDays() {
         return availableDays;
@@ -26,4 +32,14 @@ public class Funcionario extends People {
     public void chargePayment(double pay) {
     setAcount(pay *0.15);
     }
+
+    @Override
+    public void scheduleTour() {
+
+        functionOfData function = new functionOfData();
+        LocalDate data = function.writeData();
+        addNewSchedule(data);
+
+    }
+
 }
