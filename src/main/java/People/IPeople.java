@@ -3,6 +3,6 @@ package People;
 import java.time.LocalDate;
 
 public interface IPeople {
-    void chargePayment(double pay);
+    void chargeMethodPayment();
     void scheduleTour();
 }
