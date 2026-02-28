@@ -12,4 +12,20 @@ public class Reservations {
         this.date = date;
         this.tour = tour;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Passeio getTour() {
+        return tour;
+    }
+
+    public void setTour(Passeio tour) {
+        this.tour = tour;
+    }
 }

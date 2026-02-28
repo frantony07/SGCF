@@ -4,6 +4,7 @@ import Functions.Reservations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract  class People implements IPeople {
     private int id ;
@@ -44,7 +45,19 @@ public abstract  class People implements IPeople {
     }
 
     public void addNewSchedule(Reservations date){
-        availableDays.add(date);
+        LocalDate avaliveDate = date.getDate();
+        AtomicBoolean dateDuplicate = new AtomicBoolean(false);
+        this.availableDays.forEach(scheduled ->{
+            LocalDate date1 = scheduled.getDate();
+            if (date1.isEqual(avaliveDate)){
+                dateDuplicate.set(true);
+            }
+        });
+        if (!dateDuplicate.get()){
+            availableDays.add(date);
+            return;
+        }
+        System.out.println("a data ja possou uma reserva");
     }
 
     public ArrayList<Reservations> getAvailableDays() {
