@@ -24,7 +24,7 @@ public class Cliente extends People {
 
 
     @Override
-    public void chargeMethodPayment() {
+    public void addPayInAccount(double pay){
 
     }
 

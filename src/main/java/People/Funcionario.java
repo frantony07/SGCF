@@ -29,9 +29,11 @@ public class Funcionario extends People {
     }
 
     @Override
-    public void chargePayment(double pay) {
+    public void addPayInAccount(double pay) {
     setAcount(pay *0.15);
     }
+
+
 
     @Override
     public void scheduleTour() {
