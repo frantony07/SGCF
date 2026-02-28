@@ -8,11 +8,10 @@ import java.util.ArrayList;
 public class Funcionario extends People {
 
     private ArrayList<Language> languagesSpoken;
-    private ArrayList<LocalDate> availableDays;
 
-    public Funcionario(String cpfOrCnpj, int id, String name, ArrayList<LocalDate> availableDays, ArrayList<Language> languagesSpoken, double acount) {
-        super(cpfOrCnpj, id, name, acount);
-        this.availableDays = availableDays;
+
+    public Funcionario(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken) {
+        super(acount, availableDays, cpfOrCnpj, id, name);
         this.languagesSpoken = languagesSpoken;
     }
 
@@ -20,13 +19,7 @@ public class Funcionario extends People {
 
     public  void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 
-    public void addNewSchedule(LocalDate date){
-        availableDays.add(date);
-    }
 
-    public ArrayList<LocalDate> getAvailableDays() {
-        return availableDays;
-    }
 
     @Override
     public void addPayInAccount(double pay) {

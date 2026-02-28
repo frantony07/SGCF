@@ -1,5 +1,6 @@
 package People;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cliente extends People {
@@ -7,9 +8,11 @@ public class Cliente extends People {
     private ArrayList<Language> languageSpeak;
     private ArrayList<Country> countryOfCostumer;
 
-    public Cliente(String cpfOrCnpj, int id, String name, double acount, ArrayList<Language> languageSpeak) {
-        super(cpfOrCnpj, id, name, acount);
+
+    public Cliente(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<Country> countryOfCostumer) {
+        super(acount, availableDays, cpfOrCnpj, id, name);
         this.languageSpeak = languageSpeak;
+        this.countryOfCostumer = countryOfCostumer;
     }
 
     public ArrayList<Language> getLanguageSpeak() {
