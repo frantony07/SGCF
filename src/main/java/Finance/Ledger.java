@@ -7,13 +7,10 @@ public class Ledger {
     private double totalMoney;
     private LocalDate dateOfChange;
 
-    public Ledger(double tCash, LocalDate dayOfRetrieval, double moneyChange) {
-        this.recordedMoney = moneyChange;
-        this.totalMoney = totalMoney;
-        this.dateOfChange = dayOfRetrieval;
-    }
-
     public Ledger(double amount, double newTotal, LocalDate date) {
+        this.recordedMoney = amount;
+        this.totalMoney = newTotal;
+        this.dateOfChange = date;
     }
 
     public double getRecordedMoney() {
