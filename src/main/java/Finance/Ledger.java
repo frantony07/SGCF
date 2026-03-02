@@ -4,15 +4,16 @@ import java.time.LocalDate;
 
 public class Ledger {
     private double recordedMoney;
-    private double totalMoney;
+    private double totalMoney = 0;
     private LocalDate dateOfChange;
 
-    public Ledger(double amount, double newTotal, LocalDate date) {
-        this.recordedMoney = amount;
-        this.totalMoney = newTotal;
-        this.dateOfChange = date;
+    public Ledger(double tCash, LocalDate dayOfRetrieval, double moneyChange) {
+        this.recordedMoney = moneyChange;
+        this.dateOfChange = dayOfRetrieval;
     }
+    public void addRecordedInTotal(){
 
+    }
     public double getRecordedMoney() {
         return recordedMoney;
     }

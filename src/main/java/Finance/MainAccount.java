@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
-    public static void mainPagamento(String[] args) {
-        int menu = 0;
 
+    public static void mainPagamento(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Ledger> payments = new ArrayList<>();
+        int menu = 0;
 
         while (true) {
             System.out.println("Menu do caixa: ");
@@ -24,32 +24,33 @@ public class MainAccount {
             System.out.println("4. Sair");
 
             while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NÚMERO entre 1 e 4.");
+                System.out.println("Escolha um NUMERO entre 1 e 4.");
                 sc.next();
             }
             menu = sc.nextInt();
 
             switch (menu) {
                 case 1:
-                    addMoney(payments, sc);
-                    break;
+                    addMoney(payments);
+                break;
                 case 2:
-                    subtractMoney(payments, sc);
-                    break;
+                    subtractMoney(payments);
+                break;
                 case 3:
 
-                    break;
+                break;
                 case 4:
                     sc.close();
                     return;
                 default:
-                    System.out.println("Por favor digite um número entre 1 e 4.");
+                    System.out.println("Por favor digite um número entre 1 e 5.");
             }
         }
     }
 
-    public static void addMoney(ArrayList<Ledger> payments, Scanner sc) {
+    public static void addMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
+        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
@@ -69,8 +70,9 @@ public class MainAccount {
         payments.add(new Ledger(amount, newTotal, date));
     }
 
-    public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
+    public static void subtractMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
+        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
@@ -85,8 +87,28 @@ public class MainAccount {
         for (int i = 0; i < payments.size(); i++) {
             currentTotal -= payments.get(i).getRecordedMoney();
         }
-        double newTotal = currentTotal - amount;
+        double newTotal = currentTotal + amount;
 
         payments.add(new Ledger(amount, newTotal, date));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
