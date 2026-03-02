@@ -1,5 +1,8 @@
 package Finance;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +14,7 @@ public class MainAccount {
         ArrayList<Ledger> payments = new ArrayList<>();
 
         while (true) {
-            System.out.println("Menu do Ledger: ");
+            System.out.println("Menu do caixa: ");
             for (Ledger c : payments) {
                 System.out.println(c);
             }
@@ -29,10 +32,10 @@ public class MainAccount {
 
             switch (menu) {
                 case 1:
-                    // addMoney();
+                    addMoney(payments, sc);
                 break;
                 case 2:
-
+                    subtractMoney(payments, sc);
                 break;
                 case 3:
 
@@ -46,11 +49,49 @@ public class MainAccount {
         }
     }
 
-    public static void addMoney(ArrayList<Ledger> addPayments) {
+    public static void addMoney(ArrayList<Ledger> payments, Scanner sc) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("Data: " + date.format(formatter));
 
+        System.out.println("Digite o valor a ser adicionado:");
+        while (!sc.hasNextDouble()) {
+            System.out.println("Digite um número válido!");
+            sc.next();
+        }
+        double amount = sc.nextDouble();
+
+        double currentTotal = 0;
+        for (int i = 0; i < payments.size(); i++) {
+            currentTotal += payments.get(i).getRecordedMoney();
+        }
+        double newTotal = currentTotal + amount;
+
+
+        payments.add(new Ledger(amount, newTotal, date));
+    }
+
+    public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("Data: " + date.format(formatter));
+
+        System.out.println("Digite o valor a ser subtraído:");
+        while (!sc.hasNextDouble()) {
+            System.out.println("Digite um número válido!");
+            sc.next();
+        }
+        double amount = sc.nextDouble();
+
+        double currentTotal = 0;
+        for (int i = 0; i < payments.size(); i++) {
+            currentTotal -= payments.get(i).getRecordedMoney();
+        }
+        double newTotal = currentTotal + amount;
+
+        payments.add(new Ledger(amount, newTotal, date));
     }
 }
-
 
 
 
