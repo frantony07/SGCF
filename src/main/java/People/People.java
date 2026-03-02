@@ -11,7 +11,7 @@ public abstract  class People {
     private int id ;
     private String name;
     private  String cpfOrCnpj;
-    private ArrayList<Double> acount ;
+    private ArrayList<Double> account ;
     private ArrayList<Reservations> availableDays;
 
     public People(String cpfOrCnpj, int id, String name) {
@@ -21,12 +21,9 @@ public abstract  class People {
     }
 
     public ArrayList<Double> getAcount() {
-        return acount;
+        return account;
     }
 
-    public double getTotalAccount(){
-
-    }
 
     public String getCpfOrCnpj() {
         return cpfOrCnpj;
@@ -60,10 +57,10 @@ public abstract  class People {
         addPayInAccount(reservations);
     }
 
-    public void addPayInAccount(Reservations reservations, MainAccount account) {
+    public void addPayInAccount(Reservations reservations) {
         double money = reservations.getTour().getPrice();
-        acount.add(money);
-        account.a
+        account.add(money);
+
     }
 
     public ArrayList<Reservations> getAvailableDays() {
