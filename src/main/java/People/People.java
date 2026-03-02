@@ -1,13 +1,12 @@
 package People;
 
-import Finance.MainAccount;
 import Functions.Reservations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract  class People {
+public class People {
     private int id ;
     private String name;
     private  String cpfOrCnpj;
@@ -50,21 +49,15 @@ public abstract  class People {
             }
         });
         if (dateDuplicate.get()){
-            System.out.println("a data ja tem  uma reserva");
+            System.out.println("A data já tem  uma reserva");
             return;
         }
         availableDays.add(reservations);
-        addPayInAccount(reservations);
-    }
-
-    public void addPayInAccount(Reservations reservations) {
-        double money = reservations.getTour().getPrice();
-        account.add(money);
-
     }
 
     public ArrayList<Reservations> getAvailableDays() {
         return availableDays;
+
     }
 
 }
