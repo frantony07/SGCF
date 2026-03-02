@@ -7,7 +7,7 @@ public class Ledger {
     private double totalMoney = 0;
     private LocalDate dateOfChange;
 
-    public Ledger(double tCash, LocalDate dayOfRetrieval, double moneyChange) {
+    public Ledger(double tCash, double moneyChange, LocalDate dayOfRetrieval) {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
     }
