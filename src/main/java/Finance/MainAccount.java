@@ -66,7 +66,6 @@ public class MainAccount {
         }
         double newTotal = currentTotal + amount;
 
-
         payments.add(new Ledger(amount, newTotal, date));
     }
 

@@ -11,22 +11,21 @@ import java.time.LocalDate;
 public class Passeio {
 
     private double price;
-    private Duration durationOftourInMinute;
+    private Duration durationOfTourInMinute;
     private CountryTour countryTour;
     private String walk;
-    private Date revervation;
+    private Date reservation;
     private String nameOfTour;
     private String locations;
 
-    public Passeio(double price, long durationOftourInMinute, CountryTour countryTour, String walk, Date revervation , String nameOfTour,String locations) {
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations) {
         this.price = price;
-        this.durationOftourInMinute = Duration.ofMinutes(durationOftourInMinute);
+        this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
         this.countryTour = countryTour;
         this.walk = walk;
-        this.revervation = revervation;
+        this.reservation = reservation;
         this.nameOfTour = nameOfTour;
         this.locations = locations;
-
     }
 
     public CountryTour getCountryTour() {
@@ -38,8 +37,8 @@ public class Passeio {
     public String getNameOfTour() {
         return nameOfTour;
     }
-    public Date getRevervation() {
-        return revervation;
+    public Date getReservation() {
+        return reservation;
     }
     public String getWalk() {
         return walk;
@@ -47,8 +46,8 @@ public class Passeio {
     public double getPrice() {
         return price;
     }
-    public long getDurationOftourInMinute() {
-        return durationOftourInMinute.toMinutes() / 60;
+    public long getDurationOfTourInMinute() {
+        return durationOfTourInMinute.toMinutes() / 60;
     }
     public CountryTour getCountry() {
         return countryTour;
@@ -59,25 +58,23 @@ public class Passeio {
     public void setWalk(String walk) {
         this.walk = walk;
     }
-    public void setRevervation(Date revervation) {
-        this.revervation = revervation;
+    public void setReservation(Date reservation) {
+        this.reservation = reservation;
     }
     public void setPrice(double price) {
         this.price = price;
     }
-    public void setDurationOftourInMinute(long durationOftourInMinute) {
-        this.durationOftourInMinute = Duration.ofMinutes(durationOftourInMinute);
+    public void setDurationOfTourInMinute(long durationOfTourInMinute) {
+        this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
     }
 
     public void printInformationOfTour(){
-        System.out.println("O passeio " + nameOfTour + "conta com " + walk +"km de percorrido, com a durção de " +durationOftourInMinute + " minutos, com o valor de  R$" + price);
+        System.out.println("O passeio " + nameOfTour + " conta com " + walk + " km de percorrido, com a duração de " + durationOfTourInMinute + " minutos, com o valor de  R$" + price);
     }
     public void makeReservation(People people){
         LocalDate date = new functionOfData().writeData();
         Reservations reservations = new Reservations(date,this);
         people.addNewSchedule(reservations);
-        System.out.println("reserva realizada");
-
-
+        System.out.println("Reserva realizada.");
     }
 }

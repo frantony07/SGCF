@@ -10,22 +10,22 @@ public abstract  class People implements IPeople {
     private int id ;
     private String name;
     private  String cpfOrCnpj;
-    private double acount ;
+    private double account ;
     private ArrayList<Reservations> availableDays;
 
-    public People(double acount,  String cpfOrCnpj, int id, String name) {
-        this.acount = acount;
+    public People(double account,  String cpfOrCnpj, int id, String name) {
+        this.account = account;
         this.cpfOrCnpj = cpfOrCnpj;
         this.id = id;
         this.name = name;
     }
 
-    public double getAcount() {
-        return acount;
+    public double getAccount() {
+        return account;
     }
 
-    public void setAcount(double acount) {
-        this.acount = acount;
+    public void setAccount(double account) {
+        this.account = account;
     }
 
     public String getCpfOrCnpj() {
@@ -57,7 +57,7 @@ public abstract  class People implements IPeople {
             availableDays.add(date);
             return;
         }
-        System.out.println("a data ja possou uma reserva");
+        System.out.println("A data já possui uma reserva.");
     }
 
     public ArrayList<Reservations> getAvailableDays() {

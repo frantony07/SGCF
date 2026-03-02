@@ -9,8 +9,8 @@ public class Cliente extends People {
     private ArrayList<Country> countryOfCostumer;
 
 
-    public Cliente(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<Country> countryOfCostumer) {
-        super(acount, availableDays, cpfOrCnpj, id, name);
+    public Cliente(double account, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<Country> countryOfCostumer) {
+        super(account, availableDays, cpfOrCnpj, id, name);
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
     }
