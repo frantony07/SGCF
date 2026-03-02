@@ -43,7 +43,7 @@ public class MainAccount {
                     sc.close();
                     return;
                 default:
-                    System.out.println("Por favor digite um número entre 1 e 5.");
+                    System.out.println("Por favor digite um número entre 1 e 4.");
             }
         }
     }
