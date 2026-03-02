@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
+    ArrayList<Ledger> payments = new ArrayList<>();
 
-    public static void mainPagamento(String[] args) {
+    public void mainPagamento(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Ledger> payments = new ArrayList<>();
         int menu = 0;
 
         while (true) {
@@ -69,6 +69,22 @@ public class MainAccount {
 
         payments.add(new Ledger(amount, newTotal, date));
     }
+
+    public void autoAddMoney(double reservations) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("Data: " + date.format(formatter));
+
+        double currentTotal = 0;
+        for (int i = 0; i < this.payments.size(); i++) {
+            currentTotal += this.payments.get(i).getRecordedMoney();
+        }
+        double newTotal = currentTotal + reservations;
+
+        this.payments.add(new Ledger(reservations, newTotal, date));
+        System.out.println("Valor adicionado com sucesso!");
+    }
+
 
     public static void subtractMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
