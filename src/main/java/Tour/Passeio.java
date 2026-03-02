@@ -69,7 +69,7 @@ public class Passeio {
     }
 
     public void printInformationOfTour(){
-        System.out.println("O passeio " + nameOfTour + " conta com " + walk + " km de percorrido, com a duração de " + durationOfTourInMinute + " minutos, com o valor de  R$" + price);
+        System.out.println("O passeio " + nameOfTour + " conta com " + walk + " de KM percorrido, com a duração de " + durationOfTourInMinute + " minutos, com o valor de  R$" + price);
     }
     public void makeReservation(People people){
         LocalDate date = new functionOfData().writeData();
