@@ -86,7 +86,7 @@ public class MainAccount {
         for (int i = 0; i < payments.size(); i++) {
             currentTotal -= payments.get(i).getRecordedMoney();
         }
-        double newTotal = currentTotal + amount;
+        double newTotal = currentTotal - amount;
 
         payments.add(new Ledger(amount, newTotal, date));
     }
