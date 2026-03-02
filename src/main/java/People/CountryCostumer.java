@@ -1,6 +1,6 @@
 package People;
 
-public enum Country {
+public enum CountryCostumer {
     BRAZIL,
     PARAGUAI,
     UNITED_STATES,
