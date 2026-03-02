@@ -24,7 +24,7 @@ public class MainAccount {
             System.out.println("4. Sair");
 
             while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NUMERO entre 1 e 4.");
+                System.out.println("Escolha um NÚMERO entre 1 e 4.");
                 sc.next();
             }
             menu = sc.nextInt();
@@ -32,18 +32,18 @@ public class MainAccount {
             switch (menu) {
                 case 1:
                     addMoney(payments, sc);
-                break;
+                    break;
                 case 2:
                     subtractMoney(payments, sc);
-                break;
+                    break;
                 case 3:
 
-                break;
+                    break;
                 case 4:
                     sc.close();
                     return;
                 default:
-                    System.out.println("Por favor digite um número entre 1 e 5.");
+                    System.out.println("Por favor digite um número entre 1 e 4.");
             }
         }
     }
@@ -86,28 +86,8 @@ public class MainAccount {
         for (int i = 0; i < payments.size(); i++) {
             currentTotal -= payments.get(i).getRecordedMoney();
         }
-        double newTotal = currentTotal + amount;
+        double newTotal = currentTotal - amount;
 
         payments.add(new Ledger(amount, newTotal, date));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
