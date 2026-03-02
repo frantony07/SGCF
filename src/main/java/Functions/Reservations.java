@@ -28,4 +28,5 @@ public class Reservations {
     public void setTour(Passeio tour) {
         this.tour = tour;
     }
+
 }

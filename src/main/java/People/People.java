@@ -1,31 +1,31 @@
 package People;
 
+import Finance.MainAccount;
 import Functions.Reservations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract  class People implements IPeople {
+public abstract  class People {
     private int id ;
     private String name;
     private  String cpfOrCnpj;
-    private double acount ;
+    private ArrayList<Double> acount ;
     private ArrayList<Reservations> availableDays;
 
-    public People(double acount,  String cpfOrCnpj, int id, String name) {
-        this.acount = acount;
+    public People(String cpfOrCnpj, int id, String name) {
         this.cpfOrCnpj = cpfOrCnpj;
         this.id = id;
         this.name = name;
     }
 
-    public double getAcount() {
+    public ArrayList<Double> getAcount() {
         return acount;
     }
 
-    public void setAcount(double acount) {
-        this.acount = acount;
+    public double getTotalAccount(){
+
     }
 
     public String getCpfOrCnpj() {
@@ -44,26 +44,30 @@ public abstract  class People implements IPeople {
         this.name = name;
     }
 
-    public void addNewSchedule(Reservations date){
-        LocalDate avaliveDate = date.getDate();
+    public void addNewSchedule(Reservations reservations){
+        LocalDate date = reservations.getDate();
         AtomicBoolean dateDuplicate = new AtomicBoolean(false);
         this.availableDays.forEach(scheduled ->{
-            LocalDate date1 = scheduled.getDate();
-            if (date1.isEqual(avaliveDate)){
+            if (date.isEqual(scheduled.getDate())){
                 dateDuplicate.set(true);
             }
         });
-        if (!dateDuplicate.get()){
-            availableDays.add(date);
+        if (dateDuplicate.get()){
+            System.out.println("a data ja tem  uma reserva");
             return;
         }
-        System.out.println("a data ja possou uma reserva");
+        availableDays.add(reservations);
+        addPayInAccount(reservations);
+    }
+
+    public void addPayInAccount(Reservations reservations, MainAccount account) {
+        double money = reservations.getTour().getPrice();
+        acount.add(money);
+        account.a
     }
 
     public ArrayList<Reservations> getAvailableDays() {
         return availableDays;
     }
-
-
 
 }

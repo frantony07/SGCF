@@ -1,5 +1,7 @@
 package People;
 
+import Functions.Reservations;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,10 +11,10 @@ public class Cliente extends People {
     private ArrayList<Country> countryOfCostumer;
 
 
-    public Cliente(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<Country> countryOfCostumer) {
-        super(acount, availableDays, cpfOrCnpj, id, name);
-        this.languageSpeak = languageSpeak;
+    public Cliente(String cpfOrCnpj, int id, String name, ArrayList<Country> countryOfCostumer, ArrayList<Language> languageSpeak) {
+        super(cpfOrCnpj, id, name);
         this.countryOfCostumer = countryOfCostumer;
+        this.languageSpeak = languageSpeak;
     }
 
     public ArrayList<Language> getLanguageSpeak() {
@@ -26,13 +28,5 @@ public class Cliente extends People {
     public void addNewLanguage(Language newLanguaje){languageSpeak.add(newLanguaje);}
 
 
-    @Override
-    public void addPayInAccount(double pay){
 
-    }
-
-    @Override
-    public void scheduleTour() {
-
-    }
 }

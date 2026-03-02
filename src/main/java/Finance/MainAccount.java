@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
-    public static void mainPagamento(String[] args) {
-        int menu = 0;
 
+    public static void mainPagamento(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Ledger> payments = new ArrayList<>();
+        int menu = 0;
 
         while (true) {
             System.out.println("Menu do caixa: ");
@@ -31,10 +31,10 @@ public class MainAccount {
 
             switch (menu) {
                 case 1:
-                    addMoney(payments, sc);
+                    addMoney(payments);
                 break;
                 case 2:
-                    subtractMoney(payments, sc);
+                    subtractMoney(payments);
                 break;
                 case 3:
 
@@ -48,8 +48,9 @@ public class MainAccount {
         }
     }
 
-    public static void addMoney(ArrayList<Ledger> payments, Scanner sc) {
+    public static void addMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
+        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
@@ -70,8 +71,9 @@ public class MainAccount {
         payments.add(new Ledger(amount, newTotal, date));
     }
 
-    public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
+    public static void subtractMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
+        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
