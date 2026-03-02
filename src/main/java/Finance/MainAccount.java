@@ -8,23 +8,28 @@ public class MainAccount {
         int menu = 0;
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Caixa> payments = new ArrayList<>();
+        ArrayList<Ledger> payments = new ArrayList<>();
 
         while (true) {
-            System.out.println("Menu do caixa: ");
-            for (Caixa c : payments) {
+            System.out.println("Menu do Ledger: ");
+            for (Ledger c : payments) {
                 System.out.println(c);
             }
 
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
-            System.out.println("3. Totais");
-            System.out.println("4. Voltar");
-            System.out.println("5. Fechar");
+            System.out.println("3. Voltar");
+            System.out.println("4. Sair");
+
+            while (!sc.hasNextInt()) {
+                System.out.println("Escolha um NUMERO entre 1 e 4.");
+                sc.next();
+            }
+            menu = sc.nextInt();
 
             switch (menu) {
                 case 1:
-
+                    // addMoney();
                 break;
                 case 2:
 
@@ -33,9 +38,6 @@ public class MainAccount {
 
                 break;
                 case 4:
-
-                break;
-                case 5:
                     sc.close();
                     return;
                 default:
@@ -43,4 +45,29 @@ public class MainAccount {
             }
         }
     }
+
+    public static void addMoney(ArrayList<Ledger> addPayments) {
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
