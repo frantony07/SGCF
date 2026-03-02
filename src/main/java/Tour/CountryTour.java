@@ -1,6 +1,6 @@
 package Tour;
 
-public enum Country {
+public enum CountryTour {
     Argentina,
     Brasil,
     Paraguay
