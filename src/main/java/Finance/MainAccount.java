@@ -24,7 +24,7 @@ public class MainAccount {
             System.out.println("4. Sair");
 
             while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NUMERO entre 1 e 4.");
+                System.out.println("Escolha um NÚMERO entre 1 e 4.");
                 sc.next();
             }
             menu = sc.nextInt();
