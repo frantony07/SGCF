@@ -1,7 +1,6 @@
 package People;
 
 import Finance.Ledger;
-import Finance.MainAccount;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 public class Funcionario extends People {
 
     private ArrayList<Language> languagesSpoken;
-    private MainAccount mainAccount;
 
     public Funcionario(String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken) {
         super(cpfOrCnpj, id, name);
@@ -26,7 +24,7 @@ public class Funcionario extends People {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        ArrayList<Ledger> payments = mainAccount.getPayments();
+        ArrayList<Ledger> payments = Ledger.getPayments();
 
         double currentTotal = 0;
         for (int i = 0; i < payments.size(); i++) {
