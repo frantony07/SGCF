@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class MainAccount {
     ArrayList<Ledger> payments = new ArrayList<>();
+
     public ArrayList<Ledger> getPayments() {
         return payments;
     }
@@ -23,10 +24,12 @@ public class MainAccount {
 
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
-            System.out.println("3. Voltar");
+            System.out.println("3. Recebimentos");
+            System.out.println("4. Metas");
+            System.out.println("5. Voltar");
 
             while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NUMERO entre 1 e 4.");
+                System.out.println("Escolha um NÚMERO entre 1 e 5.");
                 sc.next();
             }
             menu = sc.nextInt();
@@ -39,6 +42,12 @@ public class MainAccount {
                     subtractMoney(payments);
                 break;
                 case 3:
+                    // receipts(payments);
+                break;
+                case 4:
+                    // quotas();
+                break;
+                case 5:
                     sc.close();
                     return;
                 default:
@@ -51,6 +60,7 @@ public class MainAccount {
         LocalDate date = LocalDate.now();
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         System.out.println("Data: " + date.format(formatter));
 
         System.out.println("Digite o valor a ser adicionado:");
@@ -84,10 +94,59 @@ public class MainAccount {
 
         double currentTotal = 0;
         for (int i = 0; i < payments.size(); i++) {
-            currentTotal -= payments.get(i).getRecordedMoney();
+            currentTotal += payments.get(i).getRecordedMoney();
         }
-        double newTotal = currentTotal + amount;
+        double newTotal = currentTotal - amount;
 
         payments.add(new Ledger(amount, newTotal, date));
     }
+
+    public static void receipts(ArrayList<Ledger> payments) {
+        int menu;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println();
+        System.out.println("1. Filtrar por data");
+        System.out.println("5. Voltar");
+
+        while (!sc.hasNextInt()) {
+            System.out.println("Escolha um NÚMERO entre 1 e 5.");
+            sc.next();
+        }
+        menu = sc.nextInt();
+
+        switch (menu) {
+            case 1:
+
+            break;
+            case 5:
+                sc.close();
+            return;
+            default:
+                System.out.println("Por favor digite um número entre 1 e 5.");
+        }
+    }
+
+    public static void quota() {
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
