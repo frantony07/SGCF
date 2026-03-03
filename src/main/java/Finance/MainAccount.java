@@ -3,6 +3,7 @@ package Finance;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class MainAccount {
@@ -34,10 +35,10 @@ public class MainAccount {
                     addMoney(Ledger.getPayments());
                 break;
                 case 2:
-                    subtractMoney(payments);
+                    subtractMoney(Ledger.getPayments());
                 break;
                 case 3:
-                    // receipts(payments);
+                    // receipts(Ledger.getPayments);
                 break;
                 case 4:
                     // quotas();
@@ -73,10 +74,7 @@ public class MainAccount {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = 0;
-        for (int i = 0; i < payments.size(); i++) {
-            currentTotal += payments.get(i).getRecordedMoney();
-        }
+        double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
         double newTotal = currentTotal + amount;
 
         payments.add(new Ledger(amount, newTotal, date));
@@ -95,10 +93,7 @@ public class MainAccount {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = 0;
-        for (int i = 0; i < payments.size(); i++) {
-            currentTotal += payments.get(i).getRecordedMoney();
-        }
+        double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
         double newTotal = currentTotal - amount;
 
         payments.add(new Ledger(amount, newTotal, date));
@@ -114,7 +109,7 @@ public class MainAccount {
         System.out.println("5. Voltar");
 
         while (!sc.hasNextInt()) {
-            System.out.println("Escolha um NÚMERO entre 1 e 5.");
+            System.out.println("Escolha um NÚMERO entre 1 ou 5.");
             sc.next();
         }
         menu = sc.nextInt();
@@ -127,7 +122,7 @@ public class MainAccount {
                 sc.close();
             return;
             default:
-                System.out.println("Por favor digite um número entre 1 e 5.");
+                System.out.println("Por favor digite um número entre 1 ou 5.");
         }
     }
 
