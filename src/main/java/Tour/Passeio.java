@@ -15,8 +15,8 @@ public class Passeio {
     private CountryTour countryTour;
     private String walk;
     private Date reservation;
-    private String nameOfTour;
-    private String locations;
+    private final String nameOfTour;
+    private final String locations;
 
     public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations) {
         this.price = price;

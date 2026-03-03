@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
-    ArrayList<Ledger> payments = new ArrayList<>();
+    private ArrayList<Ledger> payments = new ArrayList<>();
+
+
 
     public ArrayList<Ledger> getPayments() {
         return payments;
