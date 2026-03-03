@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class MainAccount {
     ArrayList<Ledger> payments = new ArrayList<>();
+    public ArrayList<Ledger> getPayments() {
+        return payments;
+    }
 
     public void mainPagamento(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -92,23 +95,3 @@ public class MainAccount {
         payments.add(new Ledger(amount, newTotal, date));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
