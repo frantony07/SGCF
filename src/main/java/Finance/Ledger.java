@@ -1,11 +1,17 @@
 package Finance;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Ledger {
     private double recordedMoney;
     private double totalMoney = 0;
     private LocalDate dateOfChange;
+    private static ArrayList<Ledger> payments = new ArrayList<>();
+
+    public static ArrayList<Ledger> getPayments() {
+        return payments;
+    }
 
     public Ledger(double tCash, double moneyChange, LocalDate dayOfRetrieval) {
         this.recordedMoney = moneyChange;
