@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class Cliente extends People {
 
     private ArrayList<Language> languageSpeak;
-    private ArrayList<Country> countryOfCostumer;
+    private ArrayList<CountryCostumer> countryOfCostumer;
 
 
-    public Cliente(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<Country> countryOfCostumer) {
-        super(acount, availableDays, cpfOrCnpj, id, name);
+    public Cliente(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languageSpeak, ArrayList<CountryCostumer> countryOfCostumer) {
+        super(acount, cpfOrCnpj, id, name);
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
     }
@@ -19,7 +19,7 @@ public class Cliente extends People {
         return languageSpeak;
     }
 
-    public ArrayList<Country> getCountryOfCostumer(){
+    public ArrayList<CountryCostumer> getCountryOfCostumer(){
         return countryOfCostumer;
     }
 

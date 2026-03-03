@@ -18,6 +18,7 @@ public abstract  class People implements IPeople {
         this.cpfOrCnpj = cpfOrCnpj;
         this.id = id;
         this.name = name;
+        this.availableDays = new ArrayList<>();
     }
 
     public double getAcount() {

@@ -1,5 +1,6 @@
 package People;
 
+import Functions.Reservations;
 import Functions.functionOfData;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Funcionario extends People {
 
 
     public Funcionario(double acount, ArrayList<LocalDate> availableDays, String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken) {
-        super(acount, availableDays, cpfOrCnpj, id, name);
+        super(acount, cpfOrCnpj, id, name);
         this.languagesSpoken = languagesSpoken;
     }
 
@@ -33,7 +34,7 @@ public class Funcionario extends People {
 
         functionOfData function = new functionOfData();
         LocalDate data = function.writeData();
-        addNewSchedule(data);
+        addNewSchedule(new Reservations(data, null));
 
     }
 

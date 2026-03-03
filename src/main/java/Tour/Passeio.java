@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
 
-public class Passeio {
+public class    Passeio {
 
     private double price;
     private Duration durationOftourInMinute;
