@@ -24,7 +24,6 @@ public class MainAccount {
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
             System.out.println("3. Voltar");
-            System.out.println("4. Sair");
 
             while (!sc.hasNextInt()) {
                 System.out.println("Escolha um NUMERO entre 1 e 4.");
@@ -40,9 +39,6 @@ public class MainAccount {
                     subtractMoney(payments);
                 break;
                 case 3:
-
-                break;
-                case 4:
                     sc.close();
                     return;
                 default:
