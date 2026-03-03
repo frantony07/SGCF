@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
-    ArrayList<Ledger> payments = new ArrayList<>();
-
-    public ArrayList<Ledger> getPayments() {
-        return payments;
-    }
 
     public void mainPagamento(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -18,7 +13,7 @@ public class MainAccount {
 
         while (true) {
             System.out.println("Menu do caixa: ");
-            for (Ledger c : payments) {
+            for (Ledger c : Ledger.getPayments()) {
                 System.out.println(c);
             }
 
@@ -36,7 +31,7 @@ public class MainAccount {
 
             switch (menu) {
                 case 1:
-                    addMoney(payments);
+                    addMoney(Ledger.getPayments());
                 break;
                 case 2:
                     subtractMoney(payments);
@@ -109,6 +104,7 @@ public class MainAccount {
         payments.add(new Ledger(amount, newTotal, date));
     }
 
+
     public static void receipts(ArrayList<Ledger> payments) {
         int menu;
         Scanner sc = new Scanner(System.in);
@@ -138,7 +134,6 @@ public class MainAccount {
     public static void quota() {
 
     }
-
 }
 
 
