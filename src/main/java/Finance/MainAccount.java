@@ -56,6 +56,14 @@ public class MainAccount {
         }
     }
 
+    public static double TotalCalculation(ArrayList<Ledger> payments, double calcNum) {
+        double currentTotal = 0;
+        for (int i = 0; i < payments.size(); i++) {
+            currentTotal += payments.get(i).getRecordedMoney();
+        }
+        return currentTotal;
+    }
+
     public static void addMoney(ArrayList<Ledger> payments) {
         LocalDate date = LocalDate.now();
         Scanner sc = new Scanner(System.in);
