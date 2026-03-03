@@ -19,10 +19,13 @@ public class People {
         this.name = name;
     }
 
-    public ArrayList<Double> getAcount() {
+    public ArrayList<Double> getAccount() {
         return account;
     }
 
+    public void setAccount(ArrayList<Double> account) {
+        this.account = account;
+    }
 
     public String getCpfOrCnpj() {
         return cpfOrCnpj;
