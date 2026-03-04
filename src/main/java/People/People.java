@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class People {
     private String name;
-    private  String cpfOrCnpj;
+    private String cpfOrCnpj;
     private ArrayList<Double> account ;
     private ArrayList<Reservations> availableDays;
 
