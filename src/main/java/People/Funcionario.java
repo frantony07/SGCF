@@ -11,7 +11,7 @@ public class Funcionario extends People {
     private ArrayList<Language> languagesSpoken;
 
     public Funcionario(String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken) {
-        super(cpfOrCnpj, name, username);
+        super(cpfOrCnpj, name);
         this.languagesSpoken = languagesSpoken;
     }
 

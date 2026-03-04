@@ -30,12 +30,17 @@ public class Gerente extends People {
         this.password = password;
     }
 
-    public void autoAddMoney(double reservations, MainAccount mainAccount){
+    public void autoAddMoney(double reservations , MainAccount mainAccount) {
         LocalDate date = LocalDate.now();
 
-        ArrayList<Ledger> payments = new ArrayList<>();
+        ArrayList<Ledger> payments = mainAccount.getPayments();
 
+        double currentTotal = 0;
+        for (Ledger payment : payments) {
+            currentTotal += payment.getRecordedMoney();
+        }
+        double newTotal = currentTotal + reservations;
 
+        payments.add(new Ledger(reservations, newTotal, date));
     }
-
 }
