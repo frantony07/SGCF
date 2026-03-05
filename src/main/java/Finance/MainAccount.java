@@ -14,7 +14,7 @@ public class MainAccount {
         return payments;
     }
 
-    public void mainPagamento(String[] args) {
+    public void mainPagamento() {
         Scanner sc = new Scanner(System.in);
         int menu = 0;
 

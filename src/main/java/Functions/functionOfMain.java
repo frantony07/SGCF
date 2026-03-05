@@ -3,7 +3,11 @@ package Functions;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import People.Cliente;
+import People.Funcionario;
 import Tour.Passeio;
+import Finance.MainAccount;
 
 public class functionOfMain {
     public  void authenticateUser(){
@@ -27,6 +31,10 @@ public class functionOfMain {
         Scanner sc = new Scanner(System.in);
         int opcaoMenu = 0;
         ArrayList<Passeio> passeio = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        MainAccount mainAccount = new MainAccount();
+
 
 
         System.out.println("bem vindo ao menu principal");
@@ -38,18 +46,19 @@ public class functionOfMain {
 
         switch(opcaoMenu){
             case 1:
-
+                register(clientes,funcionarios,passeio);
                 break;
 
             case 2:
                 Object ArrayList;
-                agendarReservas(passeio);
+                scheduleReservation(passeio);
                 break;
 
             case 3:
                 break;
 
             case 4:
+                mainAccount.mainPagamento();
                 break;
 
             default:
@@ -58,7 +67,7 @@ public class functionOfMain {
         }
     }
 
-    public void agendarReservas(ArrayList<Passeio> passeios) {
+    public void scheduleReservation(ArrayList<Passeio> passeios) {
         Scanner sc = new Scanner(System.in);
         int passeioEscolhido = 0;
 
@@ -70,7 +79,7 @@ public class functionOfMain {
         passeioEscolhido = sc.nextInt();
 
     }
-    public void register(){
+    public void register(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList){
         Scanner sc = new Scanner(System.in);
         boolean booleanMain = true;
         while (booleanMain){
@@ -78,9 +87,25 @@ public class functionOfMain {
             System.out.println("1.criar novo funcionario");
             System.out.println("2.criar novo cliente");
             System.out.println("3.criar novo passeio");
-            String opcaoMenu = sc.next();
+            System.out.println("4.voltar ao menu principal");
+            int menuOption = new functionOfData().validateNumber(3);
 
-            switch ()
+            switch (menuOption){
+                case 1:
+                    break;
+                case 2 :
+                    break;
+                case 3 :
+                    break;
+                case  4:
+                    booleanMain = false;
+                    System.out.println("voltando ao menu principal");
+                    sc.next();
+                    break;
+                default:
+                    System.out.println("opcao invalida");
+                    break;
+            }
 
             }catch (Exception e){
                 System.out.println("erro " + e);
