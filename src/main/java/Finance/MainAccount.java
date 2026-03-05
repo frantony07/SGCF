@@ -11,46 +11,7 @@ public class MainAccount {
     Scanner sc = new Scanner(System.in);
 
     public void mainPagamento(String[] args) {
-        int menu = 0;
 
-        while (true) {
-            System.out.println("Menu do caixa: ");
-            for (Ledger c : Ledger.getPayments()) {
-                System.out.println(c);
-            }
-
-            System.out.println("1. Adicionar");
-            System.out.println("2. Subtrair");
-            System.out.println("3. Recebimentos");
-            System.out.println("4. Metas");
-            System.out.println("5. Voltar");
-
-            while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NÚMERO entre 1 e 5.");
-                sc.next();
-            }
-            menu = sc.nextInt();
-
-            switch (menu) {
-                case 1:
-                    addMoney(Ledger.getPayments(), sc);
-                    break;
-                case 2:
-                    subtractMoney(Ledger.getPayments(), sc);
-                    break;
-                case 3:
-                    receipts(Ledger.getPayments(), sc);
-                    break;
-                case 4:
-                    quota(Ledger.getPayments(), sc);
-                    break;
-                case 5:
-                    sc.close();
-                    return;
-                default:
-                    System.out.println("Por favor digite um número entre 1 e 5.");
-            }
-        }
     }
 
     public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {

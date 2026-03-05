@@ -22,13 +22,13 @@ public class Funcionario extends People {
     public void autoAddMoney(double reservations , MainAccount mainAccount) {
         LocalDate date = LocalDate.now();
 
-        ArrayList<Ledger> payments = mainAccount.getPayments();
+        ArrayList<Ledger> payments = Ledger.getPayments();
 
         double currentTotal = 0;
         for (Ledger payment : payments) {
             currentTotal += payment.getRecordedMoney();
         }
         double newTotal = currentTotal + (reservations * 0.20);
-        payments.add(new Ledger(reservations, newTotal, date));
+        payments.add(new Ledger(reservations, date, newTotal));
     }
 }
