@@ -28,7 +28,8 @@ public class Funcionario extends People {
         for (Ledger payment : payments) {
             currentTotal += payment.getRecordedMoney();
         }
-        double newTotal = currentTotal + (reservations * 0.20);
-        payments.add(new Ledger(reservations, newTotal, date));
+        double commission = reservations * 0.20;
+        double newTotal = currentTotal + commission;
+        payments.add(new Ledger(commission, date, newTotal));
     }
 }

@@ -1,6 +1,7 @@
 package Finance;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ledger {
@@ -42,5 +43,12 @@ public class Ledger {
     }
     public LocalDate getDateOfChange() {
         return dateOfChange;
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return String.format("Data: %s | Movimento: R$%.2f | Saldo: R$%.2f",
+                dateOfChange.format(formatter), recordedMoney, totalMoney);
     }
 }

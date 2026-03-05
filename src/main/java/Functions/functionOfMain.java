@@ -34,36 +34,42 @@ public class functionOfMain {
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
+        boolean optionMainBoo = true;
 
+        while (optionMainBoo){
+            System.out.println("bem vindo ao menu principal");
+            System.out.println("1.cadastrastro");
+            System.out.println("2.agendar reserva");
+            System.out.println("3.mostrar reserva");
+            System.out.println("4.financas");
+            System.out.println("5.sair do sistema");
+            opcaoMenu = sc.nextInt();
 
+            switch(opcaoMenu){
+                case 1:
+                    register(clientes,funcionarios,passeio);
+                    break;
 
-        System.out.println("bem vindo ao menu principal");
-        System.out.println("1.cadastrastro");
-        System.out.println("2.agendar reserva");
-        System.out.println("3.mostrar reserva");
-        System.out.println("4.financas");
-        opcaoMenu = sc.nextInt();
+                case 2:
+                    Object ArrayList;
+                    scheduleReservation(passeio);
+                    break;
 
-        switch(opcaoMenu){
-            case 1:
-                register(clientes,funcionarios,passeio);
-                break;
+                case 3:
+                    break;
 
-            case 2:
-                Object ArrayList;
-                scheduleReservation(passeio);
-                break;
+                case 4:
+                    mainAccount.mainPagamento();
+                    break;
 
-            case 3:
-                break;
-
-            case 4:
-                mainAccount.mainPagamento();
-                break;
-
-            default:
-                System.out.println("Opção inválida, digite as opções existentes no menu");
-                break;
+                case 5:
+                    System.out.println("saindo do sistema");
+                    optionMainBoo = false;
+                    break;
+                default:
+                    System.out.println("Opção inválida, digite as opções existentes no menu");
+                    break;
+            }
         }
     }
 
@@ -88,7 +94,7 @@ public class functionOfMain {
             System.out.println("2.criar novo cliente");
             System.out.println("3.criar novo passeio");
             System.out.println("4.voltar ao menu principal");
-            int menuOption = new functionOfData().validateNumber(3);
+            int menuOption = new functionOfData().validateNumber(4);
 
             switch (menuOption){
                 case 1:
@@ -98,10 +104,10 @@ public class functionOfMain {
                 case 3 :
                     break;
                 case  4:
-                    booleanMain = false;
                     System.out.println("voltando ao menu principal");
-                    sc.next();
+                    booleanMain = false;
                     break;
+
                 default:
                     System.out.println("opcao invalida");
                     break;

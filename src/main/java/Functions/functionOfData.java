@@ -10,7 +10,7 @@ public class functionOfData {
         LocalDate data;
         try {
             System.out.println("Digite a data da reserva com o seguinte formato (2023-12-25)");
-            String dataInString = sc.toString();
+            String dataInString = sc.next();
             data = LocalDate.parse(dataInString);
 
         } catch (Exception e) {

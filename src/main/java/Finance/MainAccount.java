@@ -10,10 +10,11 @@ import java.util.Scanner;
 public class MainAccount {
     Scanner sc = new Scanner(System.in);
 
-    public void mainPagamento(String[] args) {
+    public void mainPagamento() {
         int menu = 0;
+        boolean mainOption = true;
 
-        while (true) {
+        while (mainOption) {
             System.out.println("Menu do caixa: ");
             for (Ledger c : Ledger.getPayments()) {
                 System.out.println(c);
@@ -45,12 +46,18 @@ public class MainAccount {
                     quota(Ledger.getPayments(), sc);
                 break;
                 case 5:
-                    sc.close();
-                    return;
+
+                    mainOption = false;
+                    System.out.println("saindo das finanças");
+                    break;
                 default:
                     System.out.println("Por favor digite um número entre 1 e 5.");
             }
         }
+    }
+
+    public ArrayList<Ledger> getPayments() {
+        return Ledger.getPayments();
     }
 
     public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {
