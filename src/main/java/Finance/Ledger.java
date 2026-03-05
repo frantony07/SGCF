@@ -2,7 +2,6 @@ package Finance;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Ledger {
     private double recordedMoney;
@@ -18,9 +17,7 @@ public class Ledger {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
     }
-    public void addRecordedInTotal(){
 
-    }
     public double getRecordedMoney() {
         return recordedMoney;
     }
@@ -33,6 +30,6 @@ public class Ledger {
 
     @Override
     public String toString() {
-        return "Data: " + dateOfChange + " | Valor: R$" + recordedMoney + " | Total: R$" + totalMoney;
+        return "Data: " + dateOfChange + " | Valor: R$%.2f%n" + recordedMoney + " | Total: R$%.2f%n" + totalMoney;
     }
 }
