@@ -161,7 +161,7 @@ public class MainAccount {
         }
     }
 
-    public static void quota() {
-
+    public static void quota(ArrayList<Ledger> payments) {
+        
     }
 }
