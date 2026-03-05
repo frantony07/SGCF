@@ -14,7 +14,7 @@ public class Ledger {
         return payments;
     }
 
-    public Ledger(double tCash, double moneyChange, LocalDate dayOfRetrieval) {
+    public Ledger(double moneyChange, LocalDate dayOfRetrieval) {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
     }
