@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainAccount {
+    Scanner sc = new Scanner(System.in);
 
     public void mainPagamento(String[] args) {
-        Scanner sc = new Scanner(System.in);
         int menu = 0;
 
         while (true) {
@@ -33,16 +33,16 @@ public class MainAccount {
 
             switch (menu) {
                 case 1:
-                    addMoney(Ledger.getPayments());
+                    addMoney(Ledger.getPayments(), sc);
                 break;
                 case 2:
-                    subtractMoney(Ledger.getPayments());
+                    subtractMoney(Ledger.getPayments(), sc);
                 break;
                 case 3:
-                    receipts(Ledger.getPayments());
+                    receipts(Ledger.getPayments(), sc);
                 break;
                 case 4:
-                    quota(Ledger.getPayments());
+                    quota(Ledger.getPayments(), sc);
                 break;
                 case 5:
                     sc.close();
@@ -55,16 +55,14 @@ public class MainAccount {
 
     public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {
         double currentTotal = 0;
-        for (int i = 0; i < payments.size(); i++) {
-            currentTotal += payments.get(i).getRecordedMoney();
+        if (!payments.isEmpty()) {
+            currentTotal = payments.get(payments.size() - 1).getTotalMoney();
         }
-        currentTotal += calcNum;
-        return currentTotal;
+        return currentTotal + calcNum;
     }
 
-    public static void addMoney(ArrayList<Ledger> payments) {
+    public static void addMoney(ArrayList<Ledger> payments, Scanner sc) {
         LocalDate date = LocalDate.now();
-        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("Data: " + date.format(formatter));
@@ -81,9 +79,8 @@ public class MainAccount {
         payments.add(new Ledger(amount, date, currentTotal));
     }
 
-    public static void subtractMoney(ArrayList<Ledger> payments) {
+    public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
         LocalDate date = LocalDate.now();
-        Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
@@ -99,12 +96,11 @@ public class MainAccount {
         payments.add(new Ledger(-amount, date, currentTotal));
     }
 
-    public static void receipts(ArrayList<Ledger> payments) {
+    public static void receipts(ArrayList<Ledger> payments, Scanner sc) {
         int menu;
         LocalDate startDate = null;
         LocalDate endDate = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        Scanner sc = new Scanner(System.in);
 
         System.out.println();
         System.out.println("1. Filtrar por data");
@@ -146,7 +142,7 @@ public class MainAccount {
                             System.out.println(entry);
                             total += entry.getRecordedMoney();
                         }
-                        System.out.println("Total no período: R$.2f%n" + total);
+                        System.out.println("Total no período: R$" + String.format("%.2f", total));
                     }
                 } catch (DateTimeParseException ex) {
                     System.out.println("Data inválida! Use o formato dd/MM/yyyy");
@@ -161,19 +157,32 @@ public class MainAccount {
         }
     }
 
-    public static void quota(ArrayList<Ledger> payments) {
-        Scanner sc = new Scanner(System.in);
+    public static void quota(ArrayList<Ledger> payments, Scanner sc) {
 
         if (Ledger.getQuotaStartIndex() == -1) {
             System.out.println("Você não possui uma meta ativa.");
             System.out.println("Deseja criar uma nova meta?");
             System.out.println("1. Sim");
-            System.out.println("2. Não");
+            System.out.println("2. Voltar");
 
-            while (!sc.hasNextInt()) {
-                System.out.println("Digite um NÚMERO entre 1 ou 2");
-                sc.next();
-            } return;
+            int choice = 0;
+            while (choice != 1 && choice != 2) {
+                while (!sc.hasNextInt()) {
+                    System.out.println("Digite um NÚMERO (1 ou 2).");
+                    sc.next();
+                }
+                choice = sc.nextInt();
+                if (choice != 1 && choice != 2) {
+                    System.out.println("Por favor, digite 1 ou 2.");
+                }
+            }
+
+            if (choice == 1) {
+                createQuota(sc, payments);
+            } else {
+                System.out.println("Retornando...");
+                return;
+            }
         }
 
         double accumulated = 0;
@@ -186,16 +195,23 @@ public class MainAccount {
         double remaining = Ledger.getQuotaTarget() - accumulated;
 
         if (remaining <= 0) {
-            System.out.printf("Parabéns! Sua meta de R$%.2f%n foi atingida!", Ledger.getQuotaTarget());
+            System.out.printf("Parabéns! Sua meta de R$%.2f foi atingida!%n", Ledger.getQuotaTarget());
             System.out.println("Você gotaria de criar uma nova meta?");
             System.out.println("1. Sim");
             System.out.println("2. Não");
 
-            while(!sc.hasNextInt()) {
-                System.out.println("Digite 1 ou 2.");
-                sc.next();
+            int choice = 0;
+            while (choice != 1 && choice != 2) {
+                while(!sc.hasNextInt()) {
+                    System.out.println("Digite 1 ou 2.");
+                    sc.next();
+                }
+                choice = sc.nextInt();
+                if (choice != 1 && choice != 2) {
+                    System.out.println("Por favor, digite 1 ou 2.");
+                }
             }
-            int choice = sc.nextInt();
+
             if (choice == 1) {
                 createQuota(sc, payments);
             } else {

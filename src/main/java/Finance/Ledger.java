@@ -15,7 +15,7 @@ public class Ledger {
         return quotaTarget;
     }
     public static void setQuotaTarget(double target) {
-        Ledger.quotaTarget = quotaTarget;
+        Ledger.quotaTarget = target;
     }
     public static int getQuotaStartIndex() {
         return quotaStartIndex;
@@ -31,9 +31,8 @@ public class Ledger {
     public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
-        this.totalMoney = totalMoney;
+        this.totalMoney = currentTotal;
     }
-
 
     public double getRecordedMoney() {
         return recordedMoney;
