@@ -58,6 +58,7 @@ public class MainAccount {
         for (int i = 0; i < payments.size(); i++) {
             currentTotal += payments.get(i).getRecordedMoney();
         }
+        currentTotal += calcNum;
         return currentTotal;
     }
 
@@ -77,7 +78,7 @@ public class MainAccount {
 
         double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
 
-        payments.add(new Ledger(amount, date));
+        payments.add(new Ledger(amount, date, currentTotal));
     }
 
     public static void subtractMoney(ArrayList<Ledger> payments) {
@@ -93,9 +94,9 @@ public class MainAccount {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
+        double currentTotal = TotalCalculation(Ledger.getPayments(), -amount);
 
-        payments.add(new Ledger(-amount, date));
+        payments.add(new Ledger(-amount, date, currentTotal));
     }
 
     public static void receipts(ArrayList<Ledger> payments) {
