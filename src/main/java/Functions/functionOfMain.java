@@ -1,6 +1,9 @@
 package Functions;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
+import Tour.Passeio;
 
 public class functionOfMain {
     public  void authenticateUser(){
@@ -23,6 +26,8 @@ public class functionOfMain {
     public void menu(){
         Scanner sc = new Scanner(System.in);
         int opcaoMenu = 0;
+        ArrayList<Passeio> passeio = new ArrayList<>();
+
 
         System.out.println("bem vindo ao menu principal");
         System.out.println("1.cadastrastro");
@@ -37,20 +42,35 @@ public class functionOfMain {
                 break;
 
             case 2:
+                Object ArrayList;
+                agendarReservas(passeio);
                 break;
 
             case 3:
+
                 break;
 
             case 4:
+
                 break;
 
             default:
                 System.out.println("Opção inválida, digite as opções existentes no menu");
                 break;
         }
+    }
 
+    public void agendarReservas(ArrayList<Passeio> passeios) {
+        Scanner sc = new Scanner(System.in);
+        int passeioEscolhido = 0;
+
+        System.out.println("--- Passeios disponiveis ---");
+        for (Passeio passeio: passeios) {
+            passeio.printInformationOfTour();
+        }
+        System.out.println("Escolha um passeio");
+        passeioEscolhido = sc.nextInt();
 
     }
-    public void
+
 }
