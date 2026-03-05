@@ -10,21 +10,23 @@ import java.time.LocalDate;
 
 public class Passeio {
 
+    private int id;
     private double price;
     private Duration durationOfTourInMinute;
     private CountryTour countryTour;
     private String walk;
     private Date reservation;
-    private String nameOfTour;
-    private String locations;
+    private final String nameOfTour;
+    private final String locations;
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations) {
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations, int id) {
         this.price = price;
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
         this.countryTour = countryTour;
         this.walk = walk;
         this.reservation = reservation;
         this.nameOfTour = nameOfTour;
+        this.id = id;
         this.locations = locations;
     }
 
@@ -66,6 +68,18 @@ public class Passeio {
     }
     public void setDurationOfTourInMinute(long durationOfTourInMinute) {
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIdTour(){
+
     }
 
     public void printInformationOfTour(){

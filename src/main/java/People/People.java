@@ -1,21 +1,18 @@
 package People;
 
 import Functions.Reservations;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class People {
-    private int id ;
     private String name;
-    private  String cpfOrCnpj;
+    private String cpfOrCnpj;
     private ArrayList<Double> account ;
     private ArrayList<Reservations> availableDays;
 
-    public People(String cpfOrCnpj, int id, String name) {
+    public People(String cpfOrCnpj, String name) {
         this.cpfOrCnpj = cpfOrCnpj;
-        this.id = id;
         this.name = name;
     }
 

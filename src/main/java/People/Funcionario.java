@@ -1,9 +1,8 @@
 package People;
 
 import Finance.Ledger;
-
+import Finance.MainAccount;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -12,7 +11,7 @@ public class Funcionario extends People {
     private ArrayList<Language> languagesSpoken;
 
     public Funcionario(String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken) {
-        super(cpfOrCnpj, id, name);
+        super(cpfOrCnpj, name);
         this.languagesSpoken = languagesSpoken;
     }
 
@@ -20,18 +19,16 @@ public class Funcionario extends People {
 
     public void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 
-    public void autoAddMoney(double reservations) {
+    public void autoAddMoney(double reservations , MainAccount mainAccount) {
         LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        ArrayList<Ledger> payments = Ledger.getPayments();
+        ArrayList<Ledger> payments = mainAccount.getPayments();
 
         double currentTotal = 0;
-        for (int i = 0; i < payments.size(); i++) {
-            currentTotal += payments.get(i).getRecordedMoney();
+        for (Ledger payment : payments) {
+            currentTotal += payment.getRecordedMoney();
         }
-        double newTotal = currentTotal + reservations;
-
+        double newTotal = currentTotal + (reservations * 0.20);
         payments.add(new Ledger(reservations, newTotal, date));
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Ledger {
     private double recordedMoney;
-    private double totalMoney = 0;
+    private double totalMoney ;
     private LocalDate dateOfChange;
     private static ArrayList<Ledger> payments = new ArrayList<>();
 

@@ -1,18 +1,13 @@
 package People;
 
-import Functions.Reservations;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Cliente extends People {
 
-    private Language languageSpeak;
-    private ArrayList<CountryCostumer> countryOfCostumer;
+    private final Language languageSpeak;
+    private final CountryCostumer countryOfCostumer;
 
 
-    public Cliente(String cpfOrCnpj, int id, String name, ArrayList<CountryCostumer> countryOfCostumer, Language languageSpeak) {
-        super(cpfOrCnpj, id, name);
+    public Cliente(String cpfOrCnpj, int id, String name, CountryCostumer countryOfCostumer, Language languageSpeak) {
+        super(cpfOrCnpj, name);
         this.countryOfCostumer = countryOfCostumer;
         this.languageSpeak = languageSpeak;
     }
@@ -21,7 +16,7 @@ public class Cliente extends People {
         return languageSpeak;
     }
 
-    public ArrayList<CountryCostumer> getCountryOfCostumer(){
+    public CountryCostumer getCountryOfCostumer(){
         return countryOfCostumer;
     }
 }
