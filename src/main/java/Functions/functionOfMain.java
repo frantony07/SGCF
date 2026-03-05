@@ -47,11 +47,9 @@ public class functionOfMain {
                 break;
 
             case 3:
-
                 break;
 
             case 4:
-
                 break;
 
             default:
@@ -70,6 +68,25 @@ public class functionOfMain {
         }
         System.out.println("Escolha um passeio");
         passeioEscolhido = sc.nextInt();
+
+    }
+    public void register(){
+        Scanner sc = new Scanner(System.in);
+        boolean booleanMain = true;
+        while (booleanMain){
+            try {
+            System.out.println("1.criar novo funcionario");
+            System.out.println("2.criar novo cliente");
+            System.out.println("3.criar novo passeio");
+            String opcaoMenu = sc.next();
+
+            switch ()
+
+            }catch (Exception e){
+                System.out.println("erro " + e);
+            }
+
+        }
 
     }
 
