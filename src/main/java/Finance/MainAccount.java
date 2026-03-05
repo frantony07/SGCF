@@ -34,16 +34,16 @@ public class MainAccount {
             switch (menu) {
                 case 1:
                     addMoney(Ledger.getPayments(), sc);
-                break;
+                    break;
                 case 2:
                     subtractMoney(Ledger.getPayments(), sc);
-                break;
+                    break;
                 case 3:
                     receipts(Ledger.getPayments(), sc);
-                break;
+                    break;
                 case 4:
                     quota(Ledger.getPayments(), sc);
-                break;
+                    break;
                 case 5:
                     sc.close();
                     return;
@@ -147,13 +147,13 @@ public class MainAccount {
                 } catch (DateTimeParseException ex) {
                     System.out.println("Data inválida! Use o formato dd/MM/yyyy");
                 }
-            break;
+                break;
             case 5:
                 System.out.println("Retornando...");
-            return;
+                return;
             default:
                 System.out.println("Por favor digite um número entre 1 ou 5.");
-            break;
+                break;
         }
     }
 
@@ -202,7 +202,7 @@ public class MainAccount {
 
             int choice = 0;
             while (choice != 1 && choice != 2) {
-                while(!sc.hasNextInt()) {
+                while (!sc.hasNextInt()) {
                     System.out.println("Digite 1 ou 2.");
                     sc.next();
                 }

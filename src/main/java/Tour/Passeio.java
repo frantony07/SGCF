@@ -91,4 +91,17 @@ public class Passeio {
         people.addNewSchedule(reservations);
         System.out.println("Reserva realizada.");
     }
+
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", price=" + price +
+                ", durationOfTourInMinute=" + durationOfTourInMinute +
+                ", countryTour=" + countryTour +
+                ", walk='" + walk + '\'' +
+                ", reservation=" + reservation +
+                ", nameOfTour='" + nameOfTour + '\'' +
+                ", locations='" + locations + '\'';
+    }
 }

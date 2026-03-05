@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import People.Cliente;
 import People.Funcionario;
+import Tour.CountryTour;
 import Tour.Passeio;
 import Finance.MainAccount;
 
@@ -14,6 +15,7 @@ public class functionOfMain {
         Scanner sc = new Scanner(System.in);
         String usernameDefine = "admin";
         String passwordDefine ="1234";
+
 
         while (true) {
             System.out.println("digite seu nome de usuario");
@@ -34,6 +36,9 @@ public class functionOfMain {
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
+        ArrayList<Passeio> passeios = new ArrayList<>();
+        passeios.add(new Passeio(150,120, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
+        passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2 ));
 
 
 
@@ -50,15 +55,14 @@ public class functionOfMain {
                 break;
 
             case 2:
-                Object ArrayList;
-                scheduleReservation(passeio);
+                scheduleReservation(passeios);
                 break;
 
             case 3:
                 break;
 
             case 4:
-                mainAccount.mainPagamento();
+
                 break;
 
             default:
@@ -72,11 +76,17 @@ public class functionOfMain {
         int passeioEscolhido = 0;
 
         System.out.println("--- Passeios disponiveis ---");
-        for (Passeio passeio: passeios) {
-            passeio.printInformationOfTour();
+        for (int i = 0; i<passeios.size(); i++) {
+            System.out.println((i+1) +" - ");
+            passeios.get(i).printInformationOfTour();
         }
         System.out.println("Escolha um passeio");
         passeioEscolhido = sc.nextInt();
+
+        Passeio passeioSelecionado = passeios.get(passeioEscolhido-1);
+
+        System.out.println("Voce escolheu o passeio -- ");
+        System.out.println(passeioSelecionado);
 
     }
     public void register(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList){
