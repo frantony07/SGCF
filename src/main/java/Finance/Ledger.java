@@ -13,9 +13,10 @@ public class Ledger {
         return payments;
     }
 
-    public Ledger(double moneyChange, LocalDate dayOfRetrieval) {
+    public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
+        this.totalMoney = totalMoney;
     }
 
     public double getRecordedMoney() {
