@@ -76,7 +76,6 @@ public class MainAccount {
         double amount = sc.nextDouble();
 
         double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
-        double newTotal = currentTotal + amount;
 
         payments.add(new Ledger(amount, date));
     }
@@ -95,9 +94,8 @@ public class MainAccount {
         double amount = sc.nextDouble();
 
         double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
-        double newTotal = currentTotal - amount;
 
-        payments.add(new Ledger(amount, date));
+        payments.add(new Ledger(-amount, date));
     }
 
     public static void receipts(ArrayList<Ledger> payments) {
