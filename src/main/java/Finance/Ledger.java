@@ -8,6 +8,21 @@ public class Ledger {
     private double totalMoney ;
     private LocalDate dateOfChange;
     private static ArrayList<Ledger> payments = new ArrayList<>();
+    private static double quotaTarget = 0;
+    private static int quotaStartIndex = -1;
+
+    public static double getQuotaTarget() {
+        return quotaTarget;
+    }
+    public static void setQuotaTarget(double target) {
+        Ledger.quotaTarget = quotaTarget;
+    }
+    public static int getQuotaStartIndex() {
+        return quotaStartIndex;
+    }
+    public static void setQuotaStartIndex(int quotaStartIndex) {
+        Ledger.quotaStartIndex = quotaStartIndex;
+    }
 
     public static ArrayList<Ledger> getPayments() {
         return payments;
@@ -18,6 +33,7 @@ public class Ledger {
         this.dateOfChange = dayOfRetrieval;
         this.totalMoney = totalMoney;
     }
+
 
     public double getRecordedMoney() {
         return recordedMoney;
