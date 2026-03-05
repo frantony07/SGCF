@@ -80,7 +80,7 @@ public class MainAccount {
         double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
         double newTotal = currentTotal + amount;
 
-        payments.add(new Ledger(amount, newTotal, date));
+        payments.add(new Ledger(amount, date));
     }
 
     public static void subtractMoney(ArrayList<Ledger> payments) {
@@ -99,7 +99,7 @@ public class MainAccount {
         double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
         double newTotal = currentTotal - amount;
 
-        payments.add(new Ledger(amount, newTotal, date));
+        payments.add(new Ledger(amount, date));
     }
 
 
