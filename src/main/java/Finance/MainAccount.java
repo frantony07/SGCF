@@ -119,10 +119,42 @@ public class MainAccount {
             sc.next();
         }
         menu = sc.nextInt();
+        sc.nextLine();
 
         switch (menu) {
             case 1:
+                System.out.println("Entre a data inicial no formato dd/MM/yyyy");
+                String startDateString = sc.nextLine();
+                System.out.println("Entre a data final no formato dd/MM/yyyy");
+                String endDateString = sc.nextLine();
 
+                try {
+                    startDate = LocalDate.parse(startDateString, formatter);
+                    endDate = LocalDate.parse(endDateString, formatter);
+
+                    LocalDate finalStartDate = startDate;
+                    LocalDate finalEndDate = endDate;
+                    List<Ledger> filtered = payments.stream()
+                            .filter(p -> !p.getDateOfChange().isBefore(finalStartDate)
+                            &&
+                            !p.getDateOfChange().isAfter(finalEndDate))
+                            .toList();
+
+                    if (filtered.isEmpty()) {
+                        System.out.println("Nenhum recebimento encontrado nesse período.");
+                    } else {
+                        double total = 0;
+                        System.out.println("Recebimentos de " + startDate.format(formatter)
+                                + " até " + endDate.format(formatter) + ":");
+                        for (Ledger entry : filtered) {
+                            System.out.println(entry);
+                            total += entry.getRecordedMoney();
+                        }
+                        System.out.println("Total no período: R$" + total);
+                    }
+                } catch (DateTimeParseException ex) {
+                    System.out.println("Data inválida! Use o formato dd/MM/yyyy");
+                }
             break;
             case 5:
                 sc.close();
