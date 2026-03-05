@@ -42,7 +42,7 @@ public class MainAccount {
                     receipts(Ledger.getPayments());
                 break;
                 case 4:
-                    // quotas();
+                    quota(Ledger.getPayments());
                 break;
                 case 5:
                     sc.close();
@@ -53,7 +53,7 @@ public class MainAccount {
         }
     }
 
-    public static double TotalCalculation(ArrayList<Ledger> payments, double calcNum) {
+    public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {
         double currentTotal = 0;
         for (int i = 0; i < payments.size(); i++) {
             currentTotal += payments.get(i).getRecordedMoney();
@@ -76,7 +76,7 @@ public class MainAccount {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = TotalCalculation(Ledger.getPayments(), amount);
+        double currentTotal = totalCalculation(Ledger.getPayments(), amount);
 
         payments.add(new Ledger(amount, date, currentTotal));
     }
@@ -94,7 +94,7 @@ public class MainAccount {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = TotalCalculation(Ledger.getPayments(), -amount);
+        double currentTotal = totalCalculation(Ledger.getPayments(), -amount);
 
         payments.add(new Ledger(-amount, date, currentTotal));
     }
