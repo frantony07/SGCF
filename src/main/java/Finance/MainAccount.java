@@ -162,6 +162,65 @@ public class MainAccount {
     }
 
     public static void quota(ArrayList<Ledger> payments) {
-        
+        Scanner sc = new Scanner(System.in);
+
+        if (Ledger.getQuotaStartIndex() == -1) {
+            System.out.println("Você não possui uma meta ativa.");
+            System.out.println("Deseja criar uma nova meta?");
+            System.out.println("1. Sim");
+            System.out.println("2. Não");
+
+            while (!sc.hasNextInt()) {
+                System.out.println("Digite um NÚMERO entre 1 ou 2");
+                sc.next();
+            } return;
+        }
+
+        double accumulated = 0;
+        for (int i = Ledger.getQuotaStartIndex(); i < payments.size(); i++) {
+            double recorded = payments.get(i).getRecordedMoney();
+            if (recorded > 0) {
+                accumulated += recorded;
+            }
+        }
+        double remaining = Ledger.getQuotaTarget() - accumulated;
+
+        if (remaining <= 0) {
+            System.out.printf("Parabéns! Sua meta de R$%.2f%n foi atingida!", Ledger.getQuotaTarget());
+            System.out.println("Você gotaria de criar uma nova meta?");
+            System.out.println("1. Sim");
+            System.out.println("2. Não");
+
+            while(!sc.hasNextInt()) {
+                System.out.println("Digite 1 ou 2.");
+                sc.next();
+            }
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                createQuota(sc, payments);
+            } else {
+                double resetQuota = 0;
+                Ledger.setQuotaTarget(resetQuota);
+                int resetQuotaIndex = -1;
+                Ledger.setQuotaStartIndex(resetQuotaIndex);
+            }
+        } else {
+            System.out.printf("Meta: R$%.2f%n", Ledger.getQuotaTarget());
+            System.out.printf("Acumulado: R$%.2f%n", accumulated);
+            System.out.printf("Faltam: R$%.2f%n", remaining);
+        }
+    }
+
+    private static void createQuota(Scanner sc, ArrayList<Ledger> payments) {
+        System.out.println("Digite o valor da meta:");
+        while (!sc.hasNextDouble()) {
+            System.out.println("Digite um número válido!");
+            sc.next();
+        }
+        double target = sc.nextDouble();
+        Ledger.setQuotaTarget(target);
+        int quotaStartIndex = payments.size();
+        Ledger.setQuotaStartIndex(quotaStartIndex);
+        System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
     }
 }
