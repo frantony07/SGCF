@@ -4,10 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class MainAccount {
 
@@ -101,7 +99,6 @@ public class MainAccount {
 
         payments.add(new Ledger(amount, date));
     }
-
 
     public static void receipts(ArrayList<Ledger> payments) {
         int menu;
