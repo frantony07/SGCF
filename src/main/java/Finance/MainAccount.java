@@ -131,8 +131,8 @@ public class MainAccount {
                     LocalDate finalEndDate = endDate;
                     List<Ledger> filtered = payments.stream()
                             .filter(p -> !p.getDateOfChange().isBefore(finalStartDate)
-                            &&
-                            !p.getDateOfChange().isAfter(finalEndDate))
+                                    && !p.getDateOfChange().isAfter(finalEndDate))
+                            .filter(p -> p.getRecordedMoney() > 0) // only income
                             .toList();
 
                     if (filtered.isEmpty()) {
@@ -145,17 +145,18 @@ public class MainAccount {
                             System.out.println(entry);
                             total += entry.getRecordedMoney();
                         }
-                        System.out.println("Total no período: R$" + total);
+                        System.out.println("Total no período: R$.2f%n" + total);
                     }
                 } catch (DateTimeParseException ex) {
                     System.out.println("Data inválida! Use o formato dd/MM/yyyy");
                 }
             break;
             case 5:
-                sc.close();
+                System.out.println("Retornando...");
             return;
             default:
                 System.out.println("Por favor digite um número entre 1 ou 5.");
+            break;
         }
     }
 
@@ -163,21 +164,3 @@ public class MainAccount {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
