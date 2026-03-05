@@ -28,9 +28,4 @@ public class Ledger {
     public LocalDate getDateOfChange() {
         return dateOfChange;
     }
-
-    @Override
-    public String toString() {
-        return "Data: " + dateOfChange + " | Valor: R$%.2f%n" + recordedMoney + " | Total: R$%.2f%n" + totalMoney;
-    }
 }
