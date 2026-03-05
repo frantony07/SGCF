@@ -105,6 +105,9 @@ public class MainAccount {
 
     public static void receipts(ArrayList<Ledger> payments) {
         int menu;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Scanner sc = new Scanner(System.in);
 
         System.out.println();
