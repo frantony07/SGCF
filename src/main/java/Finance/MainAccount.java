@@ -39,7 +39,7 @@ public class MainAccount {
                     subtractMoney(Ledger.getPayments());
                 break;
                 case 3:
-                    // receipts(Ledger.getPayments);
+                    receipts(Ledger.getPayments());
                 break;
                 case 4:
                     // quotas();
@@ -133,7 +133,7 @@ public class MainAccount {
                     List<Ledger> filtered = payments.stream()
                             .filter(p -> !p.getDateOfChange().isBefore(finalStartDate)
                                     && !p.getDateOfChange().isAfter(finalEndDate))
-                            .filter(p -> p.getRecordedMoney() > 0) // only income
+                            .filter(p -> p.getRecordedMoney() > 0)
                             .toList();
 
                     if (filtered.isEmpty()) {
