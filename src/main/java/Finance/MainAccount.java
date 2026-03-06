@@ -19,7 +19,6 @@ public class MainAccount {
             for (Ledger c : Ledger.getPayments()) {
                 System.out.println(c);
             }
-
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
             System.out.println("3. Recebimentos");

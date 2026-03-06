@@ -2,7 +2,7 @@ package Tour;
 
 import Functions.Reservations;
 import People.People;
-import Functions.functionOfData;
+import Functions.functionVarious;
 
 import java.sql.Date;
 import java.time.Duration;
@@ -83,10 +83,10 @@ public class Passeio {
     }
 
     public void printInformationOfTour(){
-        System.out.println("O passeio " + nameOfTour + " conta com " + walk + " de KM percorrido, com a duração de " + durationOfTourInMinute + " minutos, com o valor de  R$" + price);
+        System.out.println("O passeio " + nameOfTour + " conta com " + walk + "KM de percorrido e uma duração de " + durationOfTourInMinute.toMinutes() + " minutos, o valor é de  R$" + price);
     }
     public void makeReservation(People people){
-        LocalDate date = new functionOfData().writeData();
+        LocalDate date = new functionVarious().writeData();
         Reservations reservations = new Reservations(date,this);
         people.addNewSchedule(reservations);
         System.out.println("Reserva realizada.");

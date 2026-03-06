@@ -1,11 +1,12 @@
 package Functions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import People.Cliente;
 import People.Funcionario;
+import People.Language;
 import Tour.CountryTour;
 import Tour.Passeio;
 import Finance.MainAccount;
@@ -31,13 +32,12 @@ public class functionOfMain {
     public void menu(){
         Scanner sc = new Scanner(System.in);
         int opcaoMenu = 0;
-        ArrayList<Passeio> passeio = new ArrayList<>();
+        ArrayList<Passeio> passeios = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
         boolean optionMainBoo = true;
-        ArrayList<Passeio> passeios = new ArrayList<>();
-        passeios.add(new Passeio(150,120, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
+        passeios.add(new Passeio(150,90, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
         passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2 ));
 
 
@@ -52,17 +52,16 @@ public class functionOfMain {
 
             switch(opcaoMenu){
                 case 1:
-                    register(clientes,funcionarios,passeio);
+                    register(clientes,funcionarios,passeios);
                     break;
 
                 case 2:
                     Object ArrayList;
-                    scheduleReservation(passeio);
+                    scheduleReservation(passeios);
                     break;
 
-
-            case 3:
-                break;
+                case 3:
+                    break;
 
                 case 4:
                     mainAccount.mainPagamento();
@@ -81,11 +80,12 @@ public class functionOfMain {
 
     public void scheduleReservation(ArrayList<Passeio> passeios) {
         Scanner sc = new Scanner(System.in);
-        int passeioEscolhido = 0;
+        int passeioEscolhido ;
 
         System.out.println("--- Passeios disponiveis ---");
-        for (Passeio passeio: passeios) {
-            passeio.printInformationOfTour();
+        for (int i = 0; i<passeios.size(); i++) {
+            System.out.println((i+1) +" - ");
+            passeios.get(i).printInformationOfTour();
         }
         System.out.println("Escolha um passeio");
         passeioEscolhido = sc.nextInt();
@@ -105,10 +105,11 @@ public class functionOfMain {
             System.out.println("2.criar novo cliente");
             System.out.println("3.criar novo passeio");
             System.out.println("4.voltar ao menu principal");
-            int menuOption = new functionOfData().validateNumber(3);
+            int menuOption = new functionVarious().validateNumber(4);
 
             switch (menuOption){
                 case 1:
+                    createNewFuncionario(funcionarioArrayList);
                     break;
                 case 2 :
                     break;
@@ -117,7 +118,6 @@ public class functionOfMain {
                 case  4:
                     booleanMain = false;
                     System.out.println("voltando ao menu principal");
-                    sc.next();
                     break;
                 default:
                     System.out.println("opcao invalida");
@@ -131,5 +131,16 @@ public class functionOfMain {
         }
 
     }
+
+    public void createNewFuncionario(ArrayList<Funcionario> funcionarios){
+        Scanner sc = new Scanner(System.in);
+        String cpf = CPF.createCPF();
+        System.out.println("digite o nome do funcionario");
+        String name = sc.next();
+        ArrayList<Language> languages = new ArrayList<>();
+        new functionVarious().selectLanguageMain(languages);
+        funcionarios.add(new Funcionario(cpf, name, languages));
+    }
+
 
 }
