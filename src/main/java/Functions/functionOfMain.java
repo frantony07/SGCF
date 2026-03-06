@@ -32,14 +32,18 @@ public class functionOfMain {
     public void menu(){
         Scanner sc = new Scanner(System.in);
         int opcaoMenu = 0;
-        ArrayList<Passeio> passeio = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
         ArrayList<Passeio> passeios = new ArrayList<>();
-        passeios.add(new Passeio(150,120, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
-        passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2 ));
-
+        try {
+            passeios.add(new Passeio(150, 120, CountryTour.Brasil, "5", null, "Cataratas Tour", "Foz do iguacu", 1));
+            passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2));
+        } catch(NullPointerException e){
+            System.out.println("Lista nao inicializada");
+            passeios = new ArrayList<>();
+            System.out.println("Lista inicializada");
+        }
 
 
         System.out.println("bem vindo ao menu principal");
@@ -51,7 +55,7 @@ public class functionOfMain {
 
         switch(opcaoMenu){
             case 1:
-                register(clientes,funcionarios,passeio);
+                register(clientes,funcionarios,passeios);
                 break;
 
             case 2:
