@@ -1,7 +1,7 @@
 package Functions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import People.Cliente;
@@ -16,6 +16,7 @@ public class functionOfMain {
         Scanner sc = new Scanner(System.in);
         String usernameDefine = "admin";
         String passwordDefine ="1234";
+
 
         while (true) {
             System.out.println("digite seu nome de usuario");
@@ -32,55 +33,48 @@ public class functionOfMain {
     public void menu(){
         Scanner sc = new Scanner(System.in);
         int opcaoMenu = 0;
-        ArrayList<Passeio> passeios = new ArrayList<>();
+        ArrayList<Passeio> passeio = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
-        boolean optionMainBoo = true;
-        passeios.add(new Passeio(150,90, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
+        ArrayList<Passeio> passeios = new ArrayList<>();
+        passeios.add(new Passeio(150,120, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
         passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2 ));
 
 
-        while (optionMainBoo){
-            System.out.println("bem vindo ao menu principal");
-            System.out.println("1.cadastrastro");
-            System.out.println("2.agendar reserva");
-            System.out.println("3.mostrar reserva");
-            System.out.println("4.financas");
-            System.out.println("5.sair do sistema");
-            opcaoMenu = sc.nextInt();
 
-            switch(opcaoMenu){
-                case 1:
-                    register(clientes,funcionarios,passeios);
-                    break;
+        System.out.println("bem vindo ao menu principal");
+        System.out.println("1.cadastrastro");
+        System.out.println("2.agendar reserva");
+        System.out.println("3.mostrar reserva");
+        System.out.println("4.financas");
+        opcaoMenu = sc.nextInt();
 
-                case 2:
-                    Object ArrayList;
-                    scheduleReservation(passeios);
-                    break;
+        switch(opcaoMenu){
+            case 1:
+                register(clientes,funcionarios,passeio);
+                break;
 
-                case 3:
-                    break;
+            case 2:
+                scheduleReservation(passeios);
+                break;
 
-                case 4:
-                    mainAccount.mainPagamento();
-                    break;
+            case 3:
+                break;
 
-                case 5:
-                    System.out.println("saindo do sistema");
-                    optionMainBoo = false;
-                    break;
-                default:
-                    System.out.println("Opção inválida, digite as opções existentes no menu");
-                    break;
-            }
+            case 4:
+
+                break;
+
+            default:
+                System.out.println("Opção inválida, digite as opções existentes no menu");
+                break;
         }
     }
 
     public void scheduleReservation(ArrayList<Passeio> passeios) {
         Scanner sc = new Scanner(System.in);
-        int passeioEscolhido ;
+        int passeioEscolhido = 0;
 
         System.out.println("--- Passeios disponiveis ---");
         for (int i = 0; i<passeios.size(); i++) {
@@ -118,6 +112,7 @@ public class functionOfMain {
                 case  4:
                     booleanMain = false;
                     System.out.println("voltando ao menu principal");
+
                     break;
                 default:
                     System.out.println("opcao invalida");
