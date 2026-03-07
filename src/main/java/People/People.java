@@ -40,7 +40,7 @@ public class People {
         this.name = name;
     }
 
-    public void addNewSchedule(Reservations reservations){
+    public void addNewSchedule(Reservations reservations , String name){
         LocalDate date = reservations.getDate();
         AtomicBoolean dateDuplicate = new AtomicBoolean(false);
         this.availableDays.forEach(scheduled ->{
@@ -49,10 +49,10 @@ public class People {
             }
         });
         if (dateDuplicate.get()){
-            System.out.println("A data já tem  uma reserva");
+            System.out.println("O " + name + "data já tem  uma reserva");
             return;
         }
-        availableDays.add(reservations);
+        this.availableDays.add(reservations);
     }
 
     public ArrayList<Reservations> getAvailableDays() {
