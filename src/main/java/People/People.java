@@ -14,6 +14,7 @@ public class People {
     public People(String cpfOrCnpj, String name) {
         this.cpfOrCnpj = cpfOrCnpj;
         this.name = name;
+        this.availableDays = new ArrayList<>();
     }
 
     public ArrayList<Double> getAccount() {
