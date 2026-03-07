@@ -32,4 +32,7 @@ public class Funcionario extends People {
         double newTotal = currentTotal + commission;
         payments.add(new Ledger(commission, date, newTotal));
     }
+    public void printInformation(){
+        System.out.println("o funcionario " + this.getName() + "con o seguinte CPF: " + this.getCpfOrCnpj() + " fala as seguintes linguas: " + this.getLanguagesSpoken());
+    }
 }

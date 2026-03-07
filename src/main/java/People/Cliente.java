@@ -21,4 +21,8 @@ public class Cliente extends People {
     public CountryCostumer getCountryOfCostumer(){
         return countryOfCostumer;
     }
+    public void printInformation(){
+        System.out.println("o cliente " + this.getName() + "do pais " + this.getCountryOfCostumer() + "fala as seguintes linguas: " + this.getLanguageSpeak());
+
+    }
 }

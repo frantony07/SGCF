@@ -42,15 +42,15 @@ public class functionOfMain {
         ArrayList<Passeio> passeios = new ArrayList<>();
 
 
+        boolean booleanMain = true;
+        while (booleanMain){
         System.out.println("bem vindo ao menu principal");
         System.out.println("1.cadastrastro");
         System.out.println("2.agendar reserva");
-        System.out.println("3.mostrar reserva");
+        System.out.println("3.mostrar registros ");
         System.out.println("4.financas");
         System.out.println("5.sair do sistema");
         int opcaoMenu = new functionVarious().validateNumber(5);
-        boolean booleanMain = true;
-        while (booleanMain){
 
             switch(opcaoMenu){
                 case 1:
@@ -60,6 +60,7 @@ public class functionOfMain {
                     scheduleReservation(passeios);
                     break;
                 case 3:
+                    displayRecorde(clientes,funcionarios,passeio);
                     break;
                 case 4:
                     mainAccount.mainPagamento();
@@ -118,7 +119,7 @@ public class functionOfMain {
                     booleanMain = false;
                     System.out.println("voltando ao menu principal");
 
-                    break;
+                    return;
                 default:
                     System.out.println("opcao invalida");
                     break;
@@ -156,26 +157,63 @@ public class functionOfMain {
         Scanner sc = new Scanner(System.in);
         System.out.println("digite o nome do passeio");
         String name = sc.nextLine();
-
         System.out.println("digite o preço do passeio");
         double price = sc.nextDouble();
-
         System.out.println("digite a duração em minutos");
         long durationInMinute = sc.nextLong();
         sc.nextLine();
-
         System.out.println("digite a localização do tour");
         String location = sc.nextLine();
-
         System.out.println("digite os kilometros do passeio");
         String km = sc.nextLine();
-
         CountryTour countryTour = new functionVarious().selecteCountryTour();
         int idTour =passeios.size() + 1;
-
         passeios.add(new Passeio(price,durationInMinute,countryTour,km,null,name,location,idTour));
 
+    }
 
+    public void displayRecorde(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList){
+        System.out.println("1.mostrar funcionarios");
+        System.out.println("2.mostrar clientes");
+        System.out.println("3.mostrar passeios");
+        System.out.println("4.voltar ao menu");
+        int option = new functionVarious().validateNumber(4);
+        switch (option){
+            case 1:
+                if (funcionarioArrayList.isEmpty()){
+                    System.out.println("não se encontrou funcionarios ativos");
+                }
+                for (Funcionario funcionario : funcionarioArrayList){
+                    funcionario.printInformation();
+                }
+                break;
+            case 2:
+                if (clienteArrayList.isEmpty()){
+                    System.out.println("não se encontrou clientes ativos");
+                    break;
+                }
+                for (Cliente cliente : clienteArrayList){
+                    cliente.printInformation();
+                }
+                break;
+            case 3 :
+                if (funcionarioArrayList.isEmpty()){
+                    System.out.println("não se encontrou passeios ativos");
+                    break;
+                }
+                for (Passeio passeio :passeioArrayList){
+                    passeio.printInformationOfTour();
+                }
+
+                break;
+            case 4:
+                System.out.println("voltando ao menu");
+                return;
+
+            default:
+                System.out.println("opção invalida, voltando ao menu principal");
+                break;
+        }
     }
 
 
