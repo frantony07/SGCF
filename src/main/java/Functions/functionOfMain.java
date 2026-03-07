@@ -1,10 +1,12 @@
 package Functions;
 
 import java.lang.reflect.Array;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import People.Cliente;
+import People.CountryCostumer;
 import People.Funcionario;
 import People.Language;
 import Tour.CountryTour;
@@ -32,15 +34,12 @@ public class functionOfMain {
     }
     public void menu(){
         Scanner sc = new Scanner(System.in);
-        int opcaoMenu = 0;
+        int idTour = 1;
         ArrayList<Passeio> passeio = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         MainAccount mainAccount = new MainAccount();
         ArrayList<Passeio> passeios = new ArrayList<>();
-        passeios.add(new Passeio(150,120, CountryTour.Brasil,"5",null,"Cataratas Tour","Foz do iguacu",1));
-        passeios.add(new Passeio(100, 300, CountryTour.Brasil, "10", null, "Motel tour", "Foz do iguacu", 2 ));
-
 
 
         System.out.println("bem vindo ao menu principal");
@@ -48,27 +47,31 @@ public class functionOfMain {
         System.out.println("2.agendar reserva");
         System.out.println("3.mostrar reserva");
         System.out.println("4.financas");
-        opcaoMenu = sc.nextInt();
+        System.out.println("5.sair do sistema");
+        int opcaoMenu = new functionVarious().validateNumber(5);
+        boolean booleanMain = true;
+        while (booleanMain){
 
-        switch(opcaoMenu){
-            case 1:
-                register(clientes,funcionarios,passeio);
-                break;
-
-            case 2:
-                scheduleReservation(passeios);
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-
-                break;
-
-            default:
-                System.out.println("Opção inválida, digite as opções existentes no menu");
-                break;
+            switch(opcaoMenu){
+                case 1:
+                    register(clientes,funcionarios,passeio);
+                    break;
+                case 2:
+                    scheduleReservation(passeios);
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    mainAccount.mainPagamento();
+                    break;
+                case 5:
+                    System.out.println("saindo do sistema");
+                    booleanMain = false;
+                    break;
+                default:
+                    System.out.println("Opção inválida, digite as opções existentes no menu");
+                    break;
+            }
         }
     }
 
@@ -106,8 +109,10 @@ public class functionOfMain {
                     createNewFuncionario(funcionarioArrayList);
                     break;
                 case 2 :
+                    createNewCliente(clienteArrayList);
                     break;
                 case 3 :
+                    createNewPasseio(passeioArrayList);
                     break;
                 case  4:
                     booleanMain = false;
@@ -133,8 +138,44 @@ public class functionOfMain {
         System.out.println("digite o nome do funcionario");
         String name = sc.next();
         ArrayList<Language> languages = new ArrayList<>();
-        new functionVarious().selectLanguageMain(languages);
+        new functionVarious().selectLanguageMain(languages, "funcionario");
         funcionarios.add(new Funcionario(cpf, name, languages));
+    }
+    public void createNewCliente(ArrayList<Cliente>clientes){
+        Scanner sc = new Scanner(System.in);
+        String cpf = CPF.createCPF();
+        System.out.println("digite o nome do cliente");
+        String name = sc.next();
+        ArrayList<Language> languages = new ArrayList<>();
+        CountryCostumer countryCostumer = new functionVarious().SelectCountryOfCostumer();
+        new functionVarious().selectLanguageMain(languages, "cliente");
+        clientes.add(new Cliente(cpf ,name,countryCostumer,languages));
+
+    }
+    public void createNewPasseio(ArrayList<Passeio> passeios){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("digite o nome do passeio");
+        String name = sc.nextLine();
+
+        System.out.println("digite o preço do passeio");
+        double price = sc.nextDouble();
+
+        System.out.println("digite a duração em minutos");
+        long durationInMinute = sc.nextLong();
+        sc.nextLine();
+
+        System.out.println("digite a localização do tour");
+        String location = sc.nextLine();
+
+        System.out.println("digite os kilometros do passeio");
+        String km = sc.nextLine();
+
+        CountryTour countryTour = new functionVarious().selecteCountryTour();
+        int idTour =passeios.size() + 1;
+
+        passeios.add(new Passeio(price,durationInMinute,countryTour,km,null,name,location,idTour));
+
+
     }
 
 

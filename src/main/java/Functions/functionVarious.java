@@ -1,6 +1,8 @@
 package Functions;
 
+import People.CountryCostumer;
 import People.Language;
+import Tour.CountryTour;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class functionVarious {
 
         return 0;
     }
-    public void selectLanguageMain(ArrayList<Language> languages) {
+    public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 
         Scanner sc = new Scanner(System.in);
         int optionMain = 0;
@@ -54,7 +56,7 @@ public class functionVarious {
         while (true) {
             try {
 
-                System.out.println("O funcionario fala alguma lingua estrangeira?");
+                System.out.println("O" + classification  + " fala alguma lingua estrangeira?");
                 System.out.println("1. Sim");
                 System.out.println("2. Não");
 
@@ -75,18 +77,17 @@ public class functionVarious {
             } catch (Exception e) {
 
                 System.out.println("Erro: digite apenas números.");
-                sc.nextLine(); // limpa o buffer
+                sc.nextLine();
 
             }
         }
     }
     public void selectLanguageNotUsing(ArrayList<Language> languages){
-        Scanner sc = new Scanner(System.in);
         System.out.println("escolhe a lingua que o funcionario fala");
         System.out.println("1." + Language.ENGLISH);
         System.out.println("2." + Language.SPANISH);
         System.out.println("3.o funcionario fala as duas linguas");
-        int optionMain = sc.nextInt();
+        int optionMain = validateNumber(3);
         switch (optionMain){
             case 1:
                 languages.add(Language.ENGLISH);
@@ -101,6 +102,49 @@ public class functionVarious {
             default:
                 System.out.println("opçao invalida");
         }
+    }
+
+    public CountryCostumer SelectCountryOfCostumer(){
+        System.out.println("selecione o pais do cliente");
+        System.out.println("1." + CountryCostumer.BRAZIL);
+        System.out.println("2." + CountryCostumer.UNITED_STATES);
+        System.out.println("3." + CountryCostumer.INDIAN);
+        System.out.println("4." + CountryCostumer.EUROPE);
+        int optionMain = validateNumber(5);
+        switch (optionMain){
+            case 1 :
+                return CountryCostumer.BRAZIL;
+            case 2 :
+                return CountryCostumer.UNITED_STATES;
+            case 3 :
+                return CountryCostumer.INDIAN;
+            case 4 :
+                return CountryCostumer.EUROPE;
+            default:
+            System.out.println("opção invalida");
+        }
+
+        return CountryCostumer.UNITED_STATES;
+    }
+
+    public CountryTour selecteCountryTour(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("selecione o pais do passeio");
+        System.out.println("1." + CountryTour.Argentina);
+        System.out.println("2." + CountryTour.Brasil);
+        System.out.println("3." + CountryTour.Paraguay);
+        int optionMenu = validateNumber(3);
+        switch (optionMenu){
+            case 1:
+                return CountryTour.Argentina;
+            case 2:
+                return CountryTour.Brasil;
+            case 3 :
+                return CountryTour.Paraguay;
+            default:
+                System.out.println("opção invalida");
+        }
+        return CountryTour.Brasil;
     }
 
 }
