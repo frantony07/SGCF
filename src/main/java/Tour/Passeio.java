@@ -1,8 +1,8 @@
 package Tour;
 
 import Functions.Reservations;
-import People.People;
-import Functions.functionOfData;
+import People.*;
+import Functions.functionVarious;
 
 import java.sql.Date;
 import java.time.Duration;
@@ -10,21 +10,23 @@ import java.time.LocalDate;
 
 public class Passeio {
 
+    private int id;
     private double price;
     private Duration durationOfTourInMinute;
     private CountryTour countryTour;
     private String walk;
     private Date reservation;
-    private String nameOfTour;
-    private String locations;
+    private final String nameOfTour;
+    private final String locations;
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations) {
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String walk, Date reservation , String nameOfTour,String locations, int id) {
         this.price = price;
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
         this.countryTour = countryTour;
         this.walk = walk;
         this.reservation = reservation;
         this.nameOfTour = nameOfTour;
+        this.id = id;
         this.locations = locations;
     }
 
@@ -68,13 +70,39 @@ public class Passeio {
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
     }
 
-    public void printInformationOfTour(){
-        System.out.println("O passeio " + nameOfTour + " conta com " + walk + " de KM percorrido, com a duração de " + durationOfTourInMinute + " minutos, com o valor de  R$" + price);
+    public int getId() {
+        return id;
     }
-    public void makeReservation(People people){
-        LocalDate date = new functionOfData().writeData();
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIdTour(){
+
+    }
+
+    public void printInformationOfTour(){
+        System.out.println("O passeio " + nameOfTour + " conta com " + walk + "KM de percorrido e uma duração de " + durationOfTourInMinute.toMinutes() + " minutos, o valor é de  R$" + price);
+    }
+    public void makeReservation(Funcionario funcionario,Cliente cliente){
+        LocalDate date = new functionVarious().writeData();
         Reservations reservations = new Reservations(date,this);
-        people.addNewSchedule(reservations);
+        funcionario.addNewSchedule(reservations , "funcionario");
+        cliente.addNewSchedule(reservations,"cliente");
         System.out.println("Reserva realizada.");
+    }
+
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", price=" + price +
+                ", durationOfTourInMinute=" + durationOfTourInMinute +
+                ", countryTour=" + countryTour +
+                ", walk='" + walk + '\'' +
+                ", reservation=" + reservation +
+                ", nameOfTour='" + nameOfTour + '\'' +
+                ", locations='" + locations + '\'';
     }
 }

@@ -4,5 +4,6 @@ public enum CountryCostumer {
     BRAZIL,
     PARAGUAI,
     UNITED_STATES,
-    SPANISH
+    EUROPE,
+    INDIAN
 }

@@ -1,21 +1,18 @@
 package People;
 
 import Functions.Reservations;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class People {
-    private int id ;
     private String name;
-    private  String cpfOrCnpj;
+    private String cpfOrCnpj;
     private ArrayList<Double> account ;
     private ArrayList<Reservations> availableDays;
 
-    public People(String cpfOrCnpj, int id, String name) {
+    public People(String cpfOrCnpj, String name) {
         this.cpfOrCnpj = cpfOrCnpj;
-        this.id = id;
         this.name = name;
     }
 
@@ -43,7 +40,7 @@ public class People {
         this.name = name;
     }
 
-    public void addNewSchedule(Reservations reservations){
+    public void addNewSchedule(Reservations reservations , String name){
         LocalDate date = reservations.getDate();
         AtomicBoolean dateDuplicate = new AtomicBoolean(false);
         this.availableDays.forEach(scheduled ->{
@@ -52,10 +49,10 @@ public class People {
             }
         });
         if (dateDuplicate.get()){
-            System.out.println("A data já tem  uma reserva");
+            System.out.println("O " + name + "data já tem  uma reserva");
             return;
         }
-        availableDays.add(reservations);
+        this.availableDays.add(reservations);
     }
 
     public ArrayList<Reservations> getAvailableDays() {
