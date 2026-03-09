@@ -63,6 +63,8 @@ public class functionOfMain {
                             displayRecorde(clientes,funcionarios,passeio);
                             break;
                         case 4:
+                            printReservation(clientes,funcionarios);
+                            break;
 
                         case 5:
                             mainAccount.mainPagamento();
@@ -251,6 +253,26 @@ public class functionOfMain {
                 break;
         }
 
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+    }
+    public void printReservation(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList) {
+        try {
+            System.out.println("1.Reservas de funcionarios");
+            System.out.println("2.Reserva de cliente");
+            int optionReservation = new functionVarious().validateNumber(2);
+            switch (optionReservation){
+                case 1:
+                    for (Funcionario funcionario : funcionarioArrayList){
+                            funcionario.printReservation();
+
+                    }
+                case 2 :
+                    for (Cliente cliente : clienteArrayList){
+                        cliente.printReservation();
+                    }
+            }
         } catch (Exception e) {
             PrintError.printErro(e);
         }
