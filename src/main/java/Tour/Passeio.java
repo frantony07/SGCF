@@ -1,5 +1,6 @@
 package Tour;
 
+import Functions.PrintError;
 import Functions.Reservations;
 import People.*;
 import Functions.functionVarious;
@@ -86,11 +87,20 @@ public class Passeio {
         System.out.println("O passeio " + nameOfTour + " conta com " + walk + "KM percorrido e uma duração de " + durationOfTourInMinute.toMinutes() + " minutos, o valor é de  R$" + price);
     }
     public void makeReservation(Funcionario funcionario,Cliente cliente){
+        try {
+        if(funcionario == null || cliente == null){
+            System.out.println("Erro: cliente ou funcionario é null");
+            return;
+        }
         LocalDate date = new functionVarious().writeData();
         Reservations reservations = new Reservations(date,this);
         funcionario.addNewSchedule(reservations , "funcionario");
         cliente.addNewSchedule(reservations,"cliente");
         System.out.println("Reserva realizada.");
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
     }
 
     @Override

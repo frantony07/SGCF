@@ -152,18 +152,18 @@ public class functionVarious {
     }
 
     public Funcionario selectFuncionario(ArrayList<Funcionario> funcionarios){
-        if(funcionarios == null||funcionarios.isEmpty()){
+        if(funcionarios == null || funcionarios.isEmpty()){
             System.out.println("Não há funcionários cadastrados.");
             return null;
         }
         try{
             System.out.println("Seleciona o funcionário escolhido");
             for(int i = 0; i < funcionarios.size(); i++){
-                System.out.println(i + ". " + funcionarios.get(i).getName());
+                System.out.println((i+1) + ". " + funcionarios.get(i).getName());
             }
             functionVarious fv = new functionVarious();
             int funcionarioSelected = fv.validateNumber(funcionarios.size());
-            return funcionarios.get(funcionarioSelected);
+            return funcionarios.get(funcionarioSelected - 1);
         }catch(Exception e){
             PrintError.printErro(e);
         }
@@ -171,17 +171,14 @@ public class functionVarious {
     }
 
     public Cliente selectCliente(ArrayList<Cliente> clientes) {
-        if (clientes == null || clientes.isEmpty()) {
-            System.out.println("Não há clientes cadastrados.");
-            return null;
-        }
-        System.out.println("Selecione o cliente:");
-        for (int i = 0; i < clientes.size(); i++) {
-            System.out.println((i + 1) + ". " + clientes.get(i).getName());
-        }
-        functionVarious utils = new functionVarious();
-        int clienteSelecionado = utils.validateNumber(clientes.size());
+            System.out.println("Selecione o cliente:");
+            for (int i = 0; i < clientes.size(); i++) {
+                System.out.println((i + 1) + ". " + clientes.get(i).getName());
+            }
+            functionVarious utils = new functionVarious();
+            int clienteSelecionado = utils.validateNumber(clientes.size());
 
-        return clientes.get(clienteSelecionado - 1);
+            return clientes.get(clienteSelecionado - 1);
+
     }
 }

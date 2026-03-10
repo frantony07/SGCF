@@ -1,5 +1,7 @@
 package People;
 
+import Functions.Reservations;
+
 import java.util.ArrayList;
 
 public class Cliente extends People {
@@ -28,7 +30,10 @@ public class Cliente extends People {
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
             System.out.println("O cliente " + this.getName() + " não possui reservas realizadas.");
         }else {
-            System.out.println("O cliente " + this.getName() + " possui as seguintes reservas " + this.getAvailableDays());
+            for (Reservations data : this.getAvailableDays()){
+            System.out.println("o cliente " + this.getName() + " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
+
+            }
         }
     }
 }
