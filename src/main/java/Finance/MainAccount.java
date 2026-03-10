@@ -45,9 +45,8 @@ public class MainAccount {
                     quota(Ledger.getPayments(), sc);
                     break;
                 case 5:
-
                     mainOption = false;
-                    System.out.println("saindo das finanças");
+                    System.out.println("Saindo das finanças");
                     break;
                 default:
                     System.out.println("Por favor digite um número entre 1 e 5.");
@@ -73,7 +72,7 @@ public class MainAccount {
 
         System.out.println("Data: " + date.format(formatter));
 
-        System.out.println("Digite o valor a ser adicionado:");
+        System.out.println("Digite o valor a ser adicionado no formato xxx.xx:");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um número válido!");
             sc.next();
@@ -90,7 +89,7 @@ public class MainAccount {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
-        System.out.println("Digite o valor a ser subtraído:");
+        System.out.println("Digite o valor a ser subtraído no formato xxx.xx:");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um número válido!");
             sc.next();
