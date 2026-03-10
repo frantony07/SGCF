@@ -22,13 +22,13 @@ public class Cliente extends People {
         return countryOfCostumer;
     }
     public void printInformation(){
-        System.out.println("o cliente " + this.getName() + "do pais " + this.getCountryOfCostumer() + "fala as seguintes linguas: " + this.getLanguageSpeak());
+        System.out.println("O cliente " + this.getName() + " do pais " + this.getCountryOfCostumer() + " fala as seguintes línguas: " + this.getLanguageSpeak());
     }
     public void printReservation(){
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
-            System.out.println("o cliente " + this.getName() + " não possui reservas realizadas ");
+            System.out.println("O cliente " + this.getName() + " não possui reservas realizadas.");
         }else {
-            System.out.println("o cliente " + this.getName() + " possui as seguintes reservas " + this.getAvailableDays());
+            System.out.println("O cliente " + this.getName() + " possui as seguintes reservas " + this.getAvailableDays());
         }
     }
 }

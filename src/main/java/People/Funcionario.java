@@ -33,13 +33,13 @@ public class Funcionario extends People {
         payments.add(new Ledger(commission, date, newTotal));
     }
     public void printInformation(){
-        System.out.println("o funcionario " + this.getName() + " con o seguinte CPF: " + this.getCpfOrCnpj() + " fala as seguintes linguas: " + this.getLanguagesSpoken());
+        System.out.println("O funcionário " + this.getName() + " con o seguinte CPF: " + this.getCpfOrCnpj() + " fala as seguintes linguas: " + this.getLanguagesSpoken());
     }
     public void printReservation(){
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
-            System.out.println("O funcionario " + getName() + " não possui reservas ");
+            System.out.println("O funcionário " + getName() + " não possui reservas.");
         }else {
-        System.out.println("o funcionario " + this.getName() + " possui as seguintes reservas " + this.getAvailableDays());
+        System.out.println("O funcionário " + this.getName() + " possui as seguintes reservas: " + this.getAvailableDays());
 
         }
     }

@@ -14,7 +14,7 @@ public class TesteString {
                 "5",
                 Date.valueOf("2026-03-07"),
                 "Cataratas Tour",
-                "Foz do Iguacu",
+                "Foz do Iguaçu",
                 1
         );
 

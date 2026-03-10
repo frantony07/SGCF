@@ -54,7 +54,7 @@ public class People {
             }
         });
         if (dateDuplicate.get()){
-            System.out.println("O " + name + "data já tem  uma reserva");
+            System.out.println("O " + name + " já tem  uma reserva nesta data.");
             return;
         }
         this.availableDays.add(reservations);

@@ -76,10 +76,10 @@ public class functionVarious {
     }
     public void selectLanguageNotUsing(ArrayList<Language> languages){
         try {
-            System.out.println("escolhe a lingua que o funcionario fala");
-            System.out.println("1." + Language.ENGLISH);
-            System.out.println("2." + Language.SPANISH);
-            System.out.println("3.o funcionario fala as duas linguas");
+            System.out.println("Escolha a língua que o funcionário fala");
+            System.out.println("1. " + Language.ENGLISH);
+            System.out.println("2. " + Language.SPANISH);
+            System.out.println("3. O funcionario fala as duas lánguas");
             int optionMain = validateNumber(3);
             switch (optionMain){
                 case 1:
@@ -93,7 +93,7 @@ public class functionVarious {
                     languages.add(Language.ENGLISH);
                     break;
                 default:
-                    System.out.println("opçao invalida");
+                    System.out.println("Opção inválida");
                     }
                 } catch (Exception e) {
                  PrintError.printErro(e);
@@ -102,7 +102,7 @@ public class functionVarious {
 
     public CountryCostumer SelectCountryOfCostumer(){
         try {
-        System.out.println("selecione o pais do cliente");
+        System.out.println("Selecione o país do cliente");
         System.out.println("1." + CountryCostumer.BRAZIL);
         System.out.println("2." + CountryCostumer.UNITED_STATES);
         System.out.println("3." + CountryCostumer.INDIAN);
@@ -130,7 +130,7 @@ public class functionVarious {
     public CountryTour selecteCountryTour(){
         try {
             Scanner sc = new Scanner(System.in);
-            System.out.println("selecione o pais do passeio");
+            System.out.println("Selecione o país do passeio");
             System.out.println("1." + CountryTour.Argentina);
             System.out.println("2." + CountryTour.Brasil);
             System.out.println("3." + CountryTour.Paraguay);
@@ -143,7 +143,7 @@ public class functionVarious {
                 case 3 :
                     return CountryTour.Paraguay;
                 default:
-                    System.out.println("opção invalida");
+                    System.out.println("Opção inválida");
                 }
             } catch (Exception e) {
             PrintError.printErro(e);
@@ -153,11 +153,11 @@ public class functionVarious {
 
     public Funcionario selectFuncionario(ArrayList<Funcionario> funcionarios){
         if(funcionarios == null||funcionarios.isEmpty()){
-            System.out.println("Não há funcionarios cadastrados.");
+            System.out.println("Não há funcionários cadastrados.");
             return null;
         }
         try{
-            System.out.println("seleciona o funcionario escolhido");
+            System.out.println("Seleciona o funcionário escolhido");
             for(int i = 0; i < funcionarios.size(); i++){
                 System.out.println(i + ". " + funcionarios.get(i).getName());
             }

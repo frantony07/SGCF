@@ -10,21 +10,21 @@ public class PrintError {
 
         Map<Class<? extends Throwable>, String> mensagemDeErro = new HashMap<>();
 
-        mensagemDeErro.put(InputMismatchException.class, "tipo de dado inválido digitado");
-        mensagemDeErro.put(NumberFormatException.class, "erro na digitação de algum número");
-        mensagemDeErro.put(ArithmeticException.class, "erro na divisão, é impossível dividir por 0");
-        mensagemDeErro.put(NullPointerException.class, "alguma variável usada não foi definida");
-        mensagemDeErro.put(ClassCastException.class, "tipo de dado inserido não é válido");
+        mensagemDeErro.put(InputMismatchException.class, "Tipo de dado inválido digitado");
+        mensagemDeErro.put(NumberFormatException.class, "Erro na digitação de algum número");
+        mensagemDeErro.put(ArithmeticException.class, "Erro na divisão, é impossível dividir por 0");
+        mensagemDeErro.put(NullPointerException.class, "Alguma variável usada não foi definida");
+        mensagemDeErro.put(ClassCastException.class, "Tipo de dado inserido não é válido");
         mensagemDeErro.put(ArrayIndexOutOfBoundsException.class, "índice do array fora do limite");
         mensagemDeErro.put(StringIndexOutOfBoundsException.class, "índice da string fora do limite");
-        mensagemDeErro.put(IllegalArgumentException.class, "argumento inválido passado para o método");
-        mensagemDeErro.put(IllegalStateException.class, "estado ilegal do objeto");
-        mensagemDeErro.put(UnsupportedOperationException.class, "operação não suportada");
-        mensagemDeErro.put(DateTimeParseException.class, "formato de data inválido (use: AAAA-MM-DD)");
-        mensagemDeErro.put(OutOfMemoryError.class, "memória cheia");
-        mensagemDeErro.put(StackOverflowError.class, "estouro da pilha de memória");
-        mensagemDeErro.put(SecurityException.class, "violação de segurança");
-        mensagemDeErro.put(InterruptedException.class, "execução interrompida");
+        mensagemDeErro.put(IllegalArgumentException.class, "Argumento inválido passado para o método");
+        mensagemDeErro.put(IllegalStateException.class, "Estado ilegal do objeto");
+        mensagemDeErro.put(UnsupportedOperationException.class, "Operação não suportada");
+        mensagemDeErro.put(DateTimeParseException.class, "Formato de data inválido (use: AAAA-MM-DD)");
+        mensagemDeErro.put(OutOfMemoryError.class, "Memória cheia");
+        mensagemDeErro.put(StackOverflowError.class, "Estouro da pilha de memória");
+        mensagemDeErro.put(SecurityException.class, "Violação de segurança");
+        mensagemDeErro.put(InterruptedException.class, "Execução interrompida");
 
         for (Map.Entry<Class<? extends Throwable>, String> erroDetectado : mensagemDeErro.entrySet()) {
             if (erroDetectado.getKey().isInstance(e)) {
@@ -33,6 +33,6 @@ public class PrintError {
             }
         }
 
-        System.out.println("erro inesperado: " + e.getMessage());
+        System.out.println("Erro inesperado: " + e.getMessage());
     }
 }
