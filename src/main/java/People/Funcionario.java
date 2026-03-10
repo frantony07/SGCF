@@ -2,6 +2,8 @@ package People;
 
 import Finance.Ledger;
 import Finance.MainAccount;
+import Functions.Reservations;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -39,7 +41,10 @@ public class Funcionario extends People {
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
             System.out.println("O funcionario " + getName() + " não possui reservas ");
         }else {
-        System.out.println("o funcionario " + this.getName() + " possui as seguintes reservas " + this.getAvailableDays());
+            for (Reservations data : this.getAvailableDays()){
+            System.out.println("o funcionario " + this.getName() +  " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
+
+            }
 
         }
     }

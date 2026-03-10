@@ -110,7 +110,16 @@ public class functionOfMain {
 
         Passeio passeioSelecionado = passeioArrayList.get(passeioEscolhido-1);
 
+        if (clienteArrayList.isEmpty()){
+            System.out.println("nao existem clientes ");
+            return;
+        }
         Cliente cliente = new functionVarious().selectCliente(clienteArrayList);
+
+        if (funcionarioArrayList.isEmpty()){
+            System.out.println("nao existem funcionarios");
+            return;
+        }
 
         Funcionario funcionario = new functionVarious().selectFuncionario(funcionarioArrayList);
 
@@ -266,12 +275,13 @@ public class functionOfMain {
                 case 1:
                     for (Funcionario funcionario : funcionarioArrayList){
                             funcionario.printReservation();
-
                     }
+                    break;
                 case 2 :
                     for (Cliente cliente : clienteArrayList){
                         cliente.printReservation();
                     }
+                    break;
             }
         } catch (Exception e) {
             PrintError.printErro(e);
