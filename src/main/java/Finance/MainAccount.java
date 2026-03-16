@@ -12,18 +12,22 @@ public class MainAccount {
 
     public void mainPagamento() {
         int menu = 0;
+        int count = 0;
         boolean mainOption = true;
 
         while (mainOption) {
             System.out.println("Menu do caixa: ");
-            for (Ledger c : Ledger.getPayments()) {
-                System.out.println(c);
+            for (int i = Ledger.getPayments().size() - 1; i >= 0 && count < 10; i--) {
+                System.out.println(Ledger.getPayments().get(i));
+                count++;
             }
+
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
             System.out.println("3. Recebimentos");
             System.out.println("4. Metas");
-            System.out.println("5. Voltar");
+            System.out.println("5. Atualizar Informações");
+            System.out.println("0. Voltar");
 
             while (!sc.hasNextInt()) {
                 System.out.println("Escolha um NÚMERO entre 1 e 5.");
@@ -45,9 +49,12 @@ public class MainAccount {
                     quota(Ledger.getPayments(), sc);
                     break;
                 case 5:
+                    updateLedgerInfo(Ledger.getPayments(), sc);
+                    break;
+                case 0:
                     mainOption = false;
                     System.out.println("Saindo das finanças");
-                    break;
+                    return;
                 default:
                     System.out.println("Por favor digite um número entre 1 e 5.");
             }
@@ -80,8 +87,10 @@ public class MainAccount {
         double amount = sc.nextDouble();
 
         double currentTotal = totalCalculation(Ledger.getPayments(), amount);
+        int Identifier = payments.isEmpty() ? 1 :
+                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
 
-        payments.add(new Ledger(amount, date, currentTotal));
+        payments.add(new Ledger(amount, date, currentTotal, Identifier));
     }
 
     public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
@@ -97,8 +106,10 @@ public class MainAccount {
         double amount = sc.nextDouble();
 
         double currentTotal = totalCalculation(Ledger.getPayments(), -amount);
+        int Identifier = payments.isEmpty() ? 1 :
+                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
 
-        payments.add(new Ledger(-amount, date, currentTotal));
+        payments.add(new Ledger(-amount, date, currentTotal, Identifier));
     }
 
     public static void receipts(ArrayList<Ledger> payments, Scanner sc) {
@@ -109,10 +120,10 @@ public class MainAccount {
 
         System.out.println();
         System.out.println("1. Filtrar por data");
-        System.out.println("5. Voltar");
+        System.out.println("0. Voltar");
 
         while (!sc.hasNextInt()) {
-            System.out.println("Escolha um NÚMERO entre 1 ou 5.");
+            System.out.println("Digite um número.");
             sc.next();
         }
         menu = sc.nextInt();
@@ -153,12 +164,11 @@ public class MainAccount {
                     System.out.println("Data inválida! Use o formato dd/MM/yyyy");
                 }
                 break;
-            case 5:
+            case 0:
                 System.out.println("Retornando...");
                 return;
             default:
                 System.out.println("Por favor digite um número entre 1 ou 5.");
-                break;
         }
     }
 
@@ -243,5 +253,87 @@ public class MainAccount {
         int quotaStartIndex = payments.size();
         Ledger.setQuotaStartIndex(quotaStartIndex);
         System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
+    }
+
+    private static void recalculateTotals(ArrayList<Ledger> payments) {
+        double runningTotal = 0;
+        for (Ledger p : payments) {
+            runningTotal += p.getRecordedMoney();
+            Ledger.setTotalMoney(runningTotal);
+        }
+    }
+
+    private static void updateLedgerInfo(ArrayList<Ledger> payments, Scanner sc) {
+        int menu = 0;
+        System.out.println("Escolha uma ação: ");
+        System.out.println("1. Deletar um registro");
+        System.out.println("2. Atualizar um registro");
+        System.out.println("0. Voltar");
+        while (!sc.hasNextInt()) {
+            System.out.println("Digite um número válido!");
+            sc.next();
+        }
+        menu = sc.nextInt();
+
+        switch (menu) {
+            case 1:
+                int count = 0;
+                System.out.println("Os dez itens registrados mais recentes: ");
+                for (int i = payments.size() - 1; i >= 0 && count < 10; i--) {
+                    System.out.println(payments.get(i));
+                    count++;
+                }
+
+                System.out.println("\nDigite o ID do item a ser deletado:");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Digite um ID válido!");
+                    sc.next();
+                }
+                int deleteID = sc.nextInt();
+
+                boolean removed = payments.removeIf(p -> p.getIdentifier() == deleteID);
+                if (removed) {
+                    recalculateTotals(payments);
+                    System.out.println("Registro deletado com sucesso! Totais recalculados.");
+                } else {
+                    System.out.println("Nenhum registro encontrado com o ID fornecido.");
+                }
+            break;
+            case 2:
+                System.out.println("\nDigite o ID do item a ser atualizado:");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Digite um ID válido!");
+                    sc.next();
+                }
+                int updateID = sc.nextInt();
+
+                Ledger targetLedger = payments.stream()
+                        .filter(p -> p.getIdentifier() == updateID)
+                        .findFirst()
+                        .orElse(null);
+
+                if (targetLedger != null) {
+                    System.out.println("Valor atual: " + targetLedger.getRecordedMoney());
+                    System.out.println("Digite o novo valor no formato xxx.xx:");
+                    while (!sc.hasNextDouble()) {
+                        System.out.println("Digite um número válido!");
+                        sc.next();
+                    }
+                    double newAmount = sc.nextDouble();
+                    targetLedger.setRecordedMoney(newAmount);
+                    recalculateTotals(payments);
+                    System.out.println("Registro atualizado com sucesso! Totais recalculados.");
+                } else {
+                    System.out.println("Nenhum registro encontrado com o ID fornecido.");
+                }
+            break;
+
+            case 0:
+                System.out.println("Voltando...");
+            break;
+
+            default:
+                System.out.println("Digite um número válido.");
+        }
     }
 }
