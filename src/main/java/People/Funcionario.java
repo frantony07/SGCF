@@ -32,7 +32,10 @@ public class Funcionario extends People {
         }
         double commission = reservations * 0.20;
         double newTotal = currentTotal + commission;
-        payments.add(new Ledger(commission, date, newTotal));
+        int Identifier = payments.isEmpty() ? 1 :
+                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
+
+        payments.add(new Ledger(commission, date, newTotal, Identifier));
     }
     public void printInformation(){
         System.out.println("O funcionário " + this.getName() + " con o seguinte CPF: " + this.getCpfOrCnpj() + " fala as seguintes linguas: " + this.getLanguagesSpoken());

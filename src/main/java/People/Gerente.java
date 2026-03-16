@@ -3,7 +3,6 @@ package People;
 import Finance.Ledger;
 import Finance.MainAccount;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -41,6 +40,8 @@ public class Gerente extends People {
         }
         double commission = reservations * 0.20;
         double newTotal = currentTotal + commission;
-        payments.add(new Ledger(commission, date, newTotal));
+        int Identifier = payments.isEmpty() ? 1 :
+                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
+        payments.add(new Ledger(commission, date, newTotal, Identifier));
     }
 }
