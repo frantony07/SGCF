@@ -26,7 +26,8 @@ public class MainAccount {
             System.out.println("2. Subtrair");
             System.out.println("3. Recebimentos");
             System.out.println("4. Metas");
-            System.out.println("5. Atualizar Informações");
+            System.out.println("5. Deletar um registro");
+            System.out.println("6. Atualizar um registro");
             System.out.println("0. Voltar");
 
             while (!sc.hasNextInt()) {
@@ -49,7 +50,10 @@ public class MainAccount {
                     quota(Ledger.getPayments(), sc);
                     break;
                 case 5:
-                    updateLedgerInfo(Ledger.getPayments(), sc);
+                    deleteRegister(Ledger.getPayments(), sc);
+                    break;
+                case 6:
+                    updateRegister(Ledger.getPayments(), sc);
                     break;
                 case 0:
                     mainOption = false;
@@ -263,77 +267,56 @@ public class MainAccount {
         }
     }
 
-    private static void updateLedgerInfo(ArrayList<Ledger> payments, Scanner sc) {
-        int menu = 0;
-        System.out.println("Escolha uma ação: ");
-        System.out.println("1. Deletar um registro");
-        System.out.println("2. Atualizar um registro");
-        System.out.println("0. Voltar");
+    private static void deleteRegister(ArrayList<Ledger> payments, Scanner sc) {
+        int count = 0;
+        System.out.println("Os dez itens registrados mais recentes: ");
+        for (int i = payments.size() - 1; i >= 0 && count < 10; i--) {
+            System.out.println(payments.get(i));
+            count++;
+        }
+
+        System.out.println("\nDigite o ID do item a ser deletado:");
         while (!sc.hasNextInt()) {
-            System.out.println("Digite um número válido!");
+            System.out.println("Digite um ID válido!");
             sc.next();
         }
-        menu = sc.nextInt();
+        int deleteID = sc.nextInt();
 
-        switch (menu) {
-            case 1:
-                int count = 0;
-                System.out.println("Os dez itens registrados mais recentes: ");
-                for (int i = payments.size() - 1; i >= 0 && count < 10; i--) {
-                    System.out.println(payments.get(i));
-                    count++;
-                }
+        boolean removed = payments.removeIf(p -> p.getIdentifier() == deleteID);
+        if (removed) {
+            recalculateTotals(payments);
+            System.out.println("Registro deletado com sucesso! Totais recalculados.");
+        } else {
+            System.out.println("Nenhum registro encontrado com o ID fornecido.");
+        }
+    }
 
-                System.out.println("\nDigite o ID do item a ser deletado:");
-                while (!sc.hasNextInt()) {
-                    System.out.println("Digite um ID válido!");
-                    sc.next();
-                }
-                int deleteID = sc.nextInt();
+    private static void updateRegister(ArrayList<Ledger> payments, Scanner sc) {
+        System.out.println("\nDigite o ID do item a ser atualizado:");
+        while (!sc.hasNextInt()) {
+            System.out.println("Digite um ID válido!");
+            sc.next();
+        }
+        int updateID = sc.nextInt();
 
-                boolean removed = payments.removeIf(p -> p.getIdentifier() == deleteID);
-                if (removed) {
-                    recalculateTotals(payments);
-                    System.out.println("Registro deletado com sucesso! Totais recalculados.");
-                } else {
-                    System.out.println("Nenhum registro encontrado com o ID fornecido.");
-                }
-            break;
-            case 2:
-                System.out.println("\nDigite o ID do item a ser atualizado:");
-                while (!sc.hasNextInt()) {
-                    System.out.println("Digite um ID válido!");
-                    sc.next();
-                }
-                int updateID = sc.nextInt();
+        Ledger targetLedger = payments.stream()
+                .filter(p -> p.getIdentifier() == updateID)
+                .findFirst()
+                .orElse(null);
 
-                Ledger targetLedger = payments.stream()
-                        .filter(p -> p.getIdentifier() == updateID)
-                        .findFirst()
-                        .orElse(null);
-
-                if (targetLedger != null) {
-                    System.out.println("Valor atual: " + targetLedger.getRecordedMoney());
-                    System.out.println("Digite o novo valor no formato xxx.xx:");
-                    while (!sc.hasNextDouble()) {
-                        System.out.println("Digite um número válido!");
-                        sc.next();
-                    }
-                    double newAmount = sc.nextDouble();
-                    targetLedger.setRecordedMoney(newAmount);
-                    recalculateTotals(payments);
-                    System.out.println("Registro atualizado com sucesso! Totais recalculados.");
-                } else {
-                    System.out.println("Nenhum registro encontrado com o ID fornecido.");
-                }
-            break;
-
-            case 0:
-                System.out.println("Voltando...");
-            break;
-
-            default:
-                System.out.println("Digite um número válido.");
+        if (targetLedger != null) {
+            System.out.println("Valor atual: " + targetLedger.getRecordedMoney());
+            System.out.println("Digite o novo valor no formato xxx.xx:");
+            while (!sc.hasNextDouble()) {
+                System.out.println("Digite um número válido!");
+                sc.next();
+            }
+            double newAmount = sc.nextDouble();
+            targetLedger.setRecordedMoney(newAmount);
+            recalculateTotals(payments);
+            System.out.println("Registro atualizado com sucesso! Totais recalculados.");
+        } else {
+            System.out.println("Nenhum registro encontrado com o ID fornecido.");
         }
     }
 }
