@@ -1,4 +1,5 @@
 package org.ONE;
+import Functions.Authenticate;
 import Functions.functionOfMain;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        new functionOfMain().authenticateUser();
+        new Authenticate().authenticateUser();
         new functionOfMain().menu();
     }
 }

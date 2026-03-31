@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
-public class CreateReservationDate {
+public class CreateDate {
     Scanner sc = new Scanner(System.in);
 
     public LocalDate mainCreateResDate() {
@@ -26,6 +26,7 @@ public class CreateReservationDate {
                 if (!userResDate.isAfter(minimumResDate)) {
                     System.out.println("Data inválida, insira uma data após a data de hoje: "
                             + minimumResDate.format(formatter));
+                    userResDate = null;
                 }
             } catch (DateTimeException e) {
                 System.out.println(

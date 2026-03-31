@@ -29,7 +29,7 @@ public class PrintError {
         for (Map.Entry<Class<? extends Throwable>, String> erroDetectado : mensagemDeErro.entrySet()) {
             if (erroDetectado.getKey().isInstance(e)) {
                 System.out.println(erroDetectado.getValue());
-                return;
+                break;
             }
         }
 

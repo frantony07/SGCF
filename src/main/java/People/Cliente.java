@@ -23,13 +23,19 @@ public class Cliente extends People {
     public CountryCostumer getCountryOfCostumer(){
         return countryOfCostumer;
     }
+
+    @Override
     public void printInformation(){
         System.out.println("O cliente " + this.getName() + " do pais " + this.getCountryOfCostumer() + " fala as seguintes línguas: " + this.getLanguageSpeak());
     }
+
+    @Override
     public void printReservation(){
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
             System.out.println("O cliente " + this.getName() + " não possui reservas realizadas.");
+
         }else {
+
             for (Reservations data : this.getAvailableDays()){
             System.out.println("o cliente " + this.getName() + " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
 

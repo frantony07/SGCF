@@ -1,5 +1,8 @@
 package Finance;
 
+import Functions.Authenticate;
+import Functions.ValidateNumber;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,13 +31,9 @@ public class MainAccount {
             System.out.println("4. Metas");
             System.out.println("5. Deletar um registro");
             System.out.println("6. Atualizar um registro");
-            System.out.println("0. Voltar");
+            System.out.println("7. Voltar");
 
-            while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NÚMERO entre 1 e 5.");
-                sc.next();
-            }
-            menu = sc.nextInt();
+            menu = new ValidateNumber().validateNumber(7);
 
             switch (menu) {
                 case 1:
@@ -55,7 +54,7 @@ public class MainAccount {
                 case 6:
                     updateRegister(Ledger.getPayments(), sc);
                     break;
-                case 0:
+                case 7:
                     mainOption = false;
                     System.out.println("Saindo das finanças");
                     return;
@@ -120,7 +119,7 @@ public class MainAccount {
         int menu;
         LocalDate startDate = null;
         LocalDate endDate = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
         System.out.println();
         System.out.println("1. Filtrar por data");
@@ -135,39 +134,8 @@ public class MainAccount {
 
         switch (menu) {
             case 1:
-                System.out.println("Entre a data inicial no formato dd/MM/yyyy");
-                String startDateString = sc.nextLine();
-                System.out.println("Entre a data final no formato dd/MM/yyyy");
-                String endDateString = sc.nextLine();
-
-                try {
-                    startDate = LocalDate.parse(startDateString, formatter);
-                    endDate = LocalDate.parse(endDateString, formatter);
-
-                    LocalDate finalStartDate = startDate;
-                    LocalDate finalEndDate = endDate;
-                    List<Ledger> filtered = payments.stream()
-                            .filter(p -> !p.getDateOfChange().isBefore(finalStartDate)
-                                    && !p.getDateOfChange().isAfter(finalEndDate))
-                            .filter(p -> p.getRecordedMoney() > 0)
-                            .toList();
-
-                    if (filtered.isEmpty()) {
-                        System.out.println("Nenhum recebimento encontrado nesse período.");
-                    } else {
-                        double total = 0;
-                        System.out.println("Recebimentos de " + startDate.format(formatter)
-                                + " até " + endDate.format(formatter) + ":");
-                        for (Ledger entry : filtered) {
-                            System.out.println(entry);
-                            total += entry.getRecordedMoney();
-                        }
-                        System.out.println("Total no período: R$" + String.format("%.2f", total));
-                    }
-                } catch (DateTimeParseException ex) {
-                    System.out.println("Data inválida! Use o formato dd/MM/yyyy");
-                }
                 break;
+
             case 0:
                 System.out.println("Retornando...");
                 return;

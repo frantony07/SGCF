@@ -21,28 +21,16 @@ public class Funcionario extends People {
 
     public void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 
-    public void autoAddMoney(double reservations , MainAccount mainAccount) {
-        LocalDate date = LocalDate.now();
-
-        ArrayList<Ledger> payments = mainAccount.getPayments();
-
-        double currentTotal = 0;
-        for (Ledger payment : payments) {
-            currentTotal += payment.getRecordedMoney();
-        }
-        double commission = reservations * 0.20;
-        double newTotal = currentTotal + commission;
-        int Identifier = payments.isEmpty() ? 1 :
-                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
-
-        payments.add(new Ledger(commission, date, newTotal, Identifier));
-    }
+    @Override
     public void printInformation(){
         System.out.println("O funcionário " + this.getName() + " con o seguinte CPF: " + this.getCpfOrCnpj() + " fala as seguintes linguas: " + this.getLanguagesSpoken());
     }
+
+    @Override
     public void printReservation(){
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
             System.out.println("O funcionário " + getName() + " não possui reservas.");
+
         }else {
             for (Reservations data : this.getAvailableDays()){
             System.out.println("o funcionario " + this.getName() +  " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
