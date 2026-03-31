@@ -9,24 +9,30 @@ import java.util.Scanner;
 public class CreateReservationDate {
     Scanner sc = new Scanner(System.in);
 
-    public void mainCreateResDate() {
+    public LocalDate mainCreateResDate() {
         LocalDate minimumResDate = LocalDate.now();
         LocalDate userResDate = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
         System.out.println("Insira uma data após: " + minimumResDate.format(formatter));
         System.out.println("Com formato dd/MM/aaaa");
 
-        try {
-            String input = sc.next();
-            while (userResDate.isBefore(minimumResDate)) {
-                System.out.println("Data inválida! Insira uma data após ou igual à: "
-                        + minimumResDate.format(formatter));
-                sc.next();
+        while (userResDate == null) {
+            try {
+                String input = sc.next();
+                userResDate = LocalDate.parse(input, formatter);
+
+                if (!userResDate.isAfter(minimumResDate)) {
+                    System.out.println("Data inválida, insira uma data após a data de hoje: "
+                            + minimumResDate.format(formatter));
+                }
+            } catch (DateTimeException e) {
+                System.out.println(
+                        "Formato de data inválido! Por favor, insira uma data no formato dd/MM/aaaa"
+                );
             }
-
-
-        } catch (DateTimeException e) {
-            return;
-        };
+        }
+        return userResDate;
     }
 }
