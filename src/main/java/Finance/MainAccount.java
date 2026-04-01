@@ -39,7 +39,7 @@ public class MainAccount {
                     new Arithmetic().subtractMoney(Ledger.getPayments());
                     break;
                 case 3:
-                    new Receipts().main(Ledger.getPayments(), sc);
+                    new Filters().receipts(Ledger.getPayments());
                     break;
                 case 4:
                     new QuotasFunctions().quota(Ledger.getPayments(), sc);
@@ -62,7 +62,5 @@ public class MainAccount {
 
     public ArrayList<Ledger> getPayments() {
         return Ledger.getPayments();
-
     }
-
 }
