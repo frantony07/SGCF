@@ -1,6 +1,7 @@
 package Finance.Functions;
 
 import Finance.Ledger;
+import Functions.PrintError;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static Finance.Ledger.payments;
 
-public class Filters {
-    public void main(ArrayList<Ledger> payments, LocalDate startDate , LocalDate endDate){
+public  class Filters {
+    public void main(ArrayList<Ledger> payments){
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -36,16 +36,16 @@ public class Filters {
                 return;
             }
             double total = 0;
-            System.out.println("Recebimentos de " + startDate.format(formatter)
-                    + " até " + endDate.format(formatter) + ":");
+            System.out.println("Recebimentos de " + finalStartDate.format(formatter)
+                    + " até " + finalEndDate.format(formatter) + ":");
             for (Ledger entry : filtered) {
                 System.out.println(entry);
                 total += entry.getRecordedMoney();
             }
             System.out.println("Total no período: R$" + String.format("%.2f", total));
 
-        } catch (DateTimeParseException ex) {
-            System.out.println("Data inválida! Use o formato dd/MM/yyyy");
+        } catch (Exception e) {
+            PrintError.printErro(e);
         }
     }
 
