@@ -15,7 +15,8 @@ public class CreateReservationDate {
         DateTimeFormatter formatter = DateTimeFormatter
                 .ofPattern("dd/MM/uuuu")
                 .withResolverStyle(ResolverStyle.STRICT);
-        System.out.println("Insira uma data após: " + minimumResDate.format(formatter));
+        System.out.println("Insira uma data após: "
+                + minimumResDate.format(formatter));
         System.out.println("Com formato dd/MM/aaaa");
 
         while (userResDate == null) {
