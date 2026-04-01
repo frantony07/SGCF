@@ -10,9 +10,6 @@ public class People {
     private String name;
     private String cpfOrCnpj;
     private ArrayList<Double> account = new ArrayList<>();
-
-
-
     private ArrayList<Reservations> availableDays = new ArrayList<>();
 
     public People(String cpfOrCnpj, String name) {
@@ -39,8 +36,6 @@ public class People {
     public String getName() {
         return name;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -70,5 +65,9 @@ public class People {
         return availableDays;
 
     }
+
+    public void printInformation(){};
+
+    public void printReservation(){};
 
 }

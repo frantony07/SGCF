@@ -6,48 +6,11 @@ import People.Funcionario;
 import People.Language;
 import Tour.CountryTour;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class functionVarious {
-    Scanner sc = new Scanner(System.in);
-    public LocalDate writeData() {
-        while (true) {
-            try {
-                System.out.println("Digite a data da reserva (formato: 2023-12-25)");
-                String dataInString = sc.next();
-                return LocalDate.parse(dataInString);
-            } catch (Exception e) {
-                PrintError.printErro(e);
-            }
-        }
-    }
-    public int validateNumber(int limitOfNumber){
-        Scanner sc = new Scanner(System.in);
-        boolean accept = true;
-
-        while (accept){
-            try{
-                System.out.println("Digite um número de 1 até " + limitOfNumber);
-                int number = sc.nextInt();
-
-                if (number >= 1 && number <= limitOfNumber){
-                    return number;
-                }
-
-                System.out.println("Por favor digite um número válido.");
-
-            } catch (Exception e){
-                PrintError.printErro(e);
-                sc.next();
-            }
-        }
-
-        return 0;
-    }
+public class SelectFunctions {
     public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 
         Scanner sc = new Scanner(System.in);
@@ -74,13 +37,13 @@ public class functionVarious {
                 }
         }
     }
-    public void selectLanguageNotUsing(ArrayList<Language> languages){
+     private void selectLanguageNotUsing(ArrayList<Language> languages){
         try {
             System.out.println("Escolha a língua que o funcionário fala");
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
             System.out.println("3. O funcionario fala as duas lánguas");
-            int optionMain = validateNumber(3);
+            int optionMain = new ValidateNumber().validateNumber(3);
             switch (optionMain){
                 case 1:
                     languages.add(Language.ENGLISH);
@@ -107,7 +70,7 @@ public class functionVarious {
         System.out.println("2." + CountryCostumer.UNITED_STATES);
         System.out.println("3." + CountryCostumer.INDIAN);
         System.out.println("4." + CountryCostumer.EUROPE);
-        int optionMain = validateNumber(5);
+        int optionMain = new ValidateNumber().validateNumber(5);
         switch (optionMain){
             case 1 :
                 return CountryCostumer.BRAZIL;
@@ -129,12 +92,13 @@ public class functionVarious {
 
     public CountryTour selecteCountryTour(){
         try {
-            Scanner sc = new Scanner(System.in);
             System.out.println("Selecione o país do passeio");
             System.out.println("1." + CountryTour.Argentina);
             System.out.println("2." + CountryTour.Brasil);
             System.out.println("3." + CountryTour.Paraguay);
-            int optionMenu = validateNumber(3);
+
+            int optionMenu = new ValidateNumber().validateNumber(3);
+
             switch (optionMenu){
                 case 1:
                     return CountryTour.Argentina;
@@ -145,9 +109,12 @@ public class functionVarious {
                 default:
                     System.out.println("Opção inválida");
                 }
+
             } catch (Exception e) {
             PrintError.printErro(e);
-                }
+
+            }
+
         return CountryTour.Brasil;
     }
 
@@ -161,24 +128,33 @@ public class functionVarious {
             for(int i = 0; i < funcionarios.size(); i++){
                 System.out.println((i+1) + ". " + funcionarios.get(i).getName());
             }
-            functionVarious fv = new functionVarious();
-            int funcionarioSelected = fv.validateNumber(funcionarios.size());
+            int funcionarioSelected = new ValidateNumber().validateNumber(funcionarios.size());
             return funcionarios.get(funcionarioSelected - 1);
         }catch(Exception e){
             PrintError.printErro(e);
         }
+
         return null;
     }
 
     public Cliente selectCliente(ArrayList<Cliente> clientes) {
+        if(clientes == null || clientes.isEmpty()){
+            System.out.println("Não há clientes cadastrados.");
+            return null;
+        }
+        try {
             System.out.println("Selecione o cliente:");
             for (int i = 0; i < clientes.size(); i++) {
                 System.out.println((i + 1) + ". " + clientes.get(i).getName());
             }
-            functionVarious utils = new functionVarious();
-            int clienteSelecionado = utils.validateNumber(clientes.size());
+
+            int clienteSelecionado = new ValidateNumber().validateNumber(clientes.size());
 
             return clientes.get(clienteSelecionado - 1);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
 
+        return  null;
     }
 }
