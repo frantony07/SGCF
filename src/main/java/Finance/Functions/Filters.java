@@ -5,14 +5,13 @@ import Functions.PrintError;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
-public  class Filters {
-    public void main(ArrayList<Ledger> payments){
+public class Filters {
+    public void receipts(ArrayList<Ledger> payments){
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
