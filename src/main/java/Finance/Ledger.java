@@ -7,19 +7,12 @@ import java.util.ArrayList;
 public class Ledger {
 
     private static double recordedMoney;
-
     private static double totalMoney ;
-
     private LocalDate dateOfChange;
-
     private static int identifier;
-
     private static ArrayList<Ledger> payments = new ArrayList<>();
-
     private static double quotaTarget = 0;
-
     private static int quotaStartIndex = -1;
-
     private static int idCounter = 1;
 
     public static double getQuotaTarget() {
