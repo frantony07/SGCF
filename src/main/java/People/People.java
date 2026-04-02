@@ -1,6 +1,5 @@
 package People;
 
-import Functions.PrintError;
 import Functions.Reservations;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,8 +8,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class People {
     private String name;
     private String cpfOrCnpj;
-    private ArrayList<Double> account = new ArrayList<>();
-    private ArrayList<Reservations> availableDays = new ArrayList<>();
+    private ArrayList<Double> account ;
+    private ArrayList<Reservations> availableDays;
 
     public People(String cpfOrCnpj, String name) {
         this.cpfOrCnpj = cpfOrCnpj;
@@ -42,8 +41,6 @@ public class People {
     }
 
     public void addNewSchedule(Reservations reservations , String name){
-        try {
-
         LocalDate date = reservations.getDate();
         AtomicBoolean dateDuplicate = new AtomicBoolean(false);
         this.availableDays.forEach(scheduled ->{
@@ -56,9 +53,6 @@ public class People {
             return;
         }
         this.availableDays.add(reservations);
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
     }
 
     public ArrayList<Reservations> getAvailableDays() {

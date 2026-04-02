@@ -1,13 +1,31 @@
 package People;
 
 import Functions.Reservations;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
 
+@Entity(name = "clientes")
 public class Cliente extends People {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "language")
+    private String language;
 
     private final ArrayList<Language>  languageSpeak;
     private final CountryCostumer countryOfCostumer;
+
 
 
     public Cliente(String cpfOrCnpj, String name, CountryCostumer countryOfCostumer, ArrayList<Language>  languageSpeak) {
@@ -23,19 +41,13 @@ public class Cliente extends People {
     public CountryCostumer getCountryOfCostumer(){
         return countryOfCostumer;
     }
-
-    @Override
     public void printInformation(){
         System.out.println("O cliente " + this.getName() + " do pais " + this.getCountryOfCostumer() + " fala as seguintes línguas: " + this.getLanguageSpeak());
     }
-
-    @Override
     public void printReservation(){
         if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
             System.out.println("O cliente " + this.getName() + " não possui reservas realizadas.");
-
         }else {
-
             for (Reservations data : this.getAvailableDays()){
             System.out.println("o cliente " + this.getName() + " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
 
