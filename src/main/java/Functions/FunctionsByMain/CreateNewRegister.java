@@ -117,7 +117,7 @@ public class CreateNewRegister {
             CountryTour countryTour = new SelectFunctions().selecteCountryTour();
 
             int idTour =passeios.size() + 1;
-            passeios.add(new Passeio(price,durationInMinute,countryTour,km,null,name,location,idTour));
+            passeios.add(new Passeio(price,durationInMinute,countryTour,km,null,name,location));
 
         } catch (Exception e) {
             PrintError.printErro(e);

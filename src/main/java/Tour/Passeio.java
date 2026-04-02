@@ -4,30 +4,46 @@ import Functions.CreateDate;
 import Functions.PrintError;
 import Functions.Reservations;
 import People.*;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
 
+    @Entity(name = "passeio")
     public class Passeio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column (name = "price")
     private double price;
+
+    @Column (name = "durations")
     private Duration durationOfTourInMinute;
+
+    @Column (name = "country")
     private CountryTour countryTour;
+
+    @Column (name = "km_of_tour")
     private String kmOftour;
+
     private Date reservation;
+
+    @Column (name = "name")
     private final String nameOfTour;
+
+    @Column(name = "locations")
     private final String locations;
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, Date reservation , String nameOfTour, String locations, int id) {
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, Date reservation , String nameOfTour, String locations) {
         this.price = price;
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
         this.countryTour = countryTour;
         this.kmOftour = kmOftour;
         this.reservation = reservation;
         this.nameOfTour = nameOfTour;
-        this.id = id;
         this.locations = locations;
     }
 
