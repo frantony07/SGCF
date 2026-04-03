@@ -3,14 +3,14 @@ package Repositories;
 import People.Funcionario;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
+
 public class FuncionarioRepository {
 
     private EntityManager em;
 
     public FuncionarioRepository (EntityManager em) { this.em = em; }
-
-    public Funcionario findById(Long id) {return em.find(Funcionario.class, id); }
-    public Funcionario findByName(Long name) {return em.find(Funcionario.class, name); }
 
     public void create(Funcionario funcionario) {
         em.getTransaction().begin();
@@ -27,5 +27,15 @@ public class FuncionarioRepository {
     public void delete(Funcionario funcionario){
         em.getTransaction().begin();
         em.remove(em.contains(funcionario) ? funcionario : em.merge(funcionario) );
+    }
+
+    public List<Funcionario> findAll() { return em.createQuery( "select p from funcionarios p", Funcionario.class).getResultList();}
+
+    public Funcionario findById(Long id) {return em.find(Funcionario.class, id); }
+    public List<Funcionario> findByName(String prefixo){
+
+        return em.createQuery("select p from funcionarios p where p.nome like :prefixo", Funcionario.class)
+                .setParameter("prefixo", prefixo + "%")
+                .getResultList();
     }
 }
