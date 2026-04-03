@@ -1,4 +1,4 @@
-package org.ONE.models;
+package org.ONE.models.ENUM;
 
 public enum Language {
     SPANISH,

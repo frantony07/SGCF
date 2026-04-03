@@ -5,11 +5,11 @@ import Functions.PrintError;
 import Functions.ValidateNumber;
 import Functions.SelectFunctions;
 import org.ONE.models.Cliente;
-import org.ONE.models.CountryCostumer;
+import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Language;
-import Tour.CountryTour;
-import Tour.Passeio;
+import org.ONE.models.ENUM.Language;
+import org.ONE.models.ENUM.CountryTour;
+import org.ONE.models.Passeio;
 
 import java.util.ArrayList;
 import java.util.Scanner;

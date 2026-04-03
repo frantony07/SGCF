@@ -1,10 +1,10 @@
 package Functions;
 
 import org.ONE.models.Cliente;
-import org.ONE.models.CountryCostumer;
+import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Language;
-import Tour.CountryTour;
+import org.ONE.models.ENUM.Language;
+import org.ONE.models.ENUM.CountryTour;
 
 
 import java.util.ArrayList;

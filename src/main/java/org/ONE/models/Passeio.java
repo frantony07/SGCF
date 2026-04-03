@@ -1,16 +1,12 @@
-package Tour;
+package org.ONE.models;
 
-import Functions.CreateDate;
-import Functions.PrintError;
-import Functions.Reservations;
-import org.ONE.models.*;
 import jakarta.persistence.*;
+import org.ONE.models.ENUM.CountryTour;
 
 import java.sql.Date;
 import java.time.Duration;
-import java.time.LocalDate;
 
-    @Entity(name = "passeio")
+@Entity(name = "tour")
     public class Passeio {
 
     @Id
@@ -115,20 +111,5 @@ import java.time.LocalDate;
         System.out.println("O passeio " + nameOfTour + " conta com " + kmOftour + "KM percorrido e uma duração de " + durationOfTourInMinute.toMinutes() + " minutos, o valor é de  R$" + price);
     }
 
-    public void makeReservation(Funcionario funcionario,Cliente cliente){
-        try {
-        if(funcionario == null || cliente == null){
-            System.out.println("Erro: cliente ou funcionario é null");
-            return;
-        }
-        LocalDate date = new CreateDate().mainCreateResDate();
-        Reservations reservations = new Reservations(date,this);
-        funcionario.addNewSchedule(reservations , "funcionario");
-        cliente.addNewSchedule(reservations,"cliente");
-        System.out.println("Reserva realizada.");
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
 }

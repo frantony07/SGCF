@@ -2,6 +2,8 @@ package org.ONE.repositories;
 
 import org.ONE.models.Funcionario;
 import jakarta.persistence.EntityManager;
+import org.ONE.models.Passeio;
+import org.ONE.models.PersonalAccount;
 
 import java.util.List;
 
@@ -16,23 +18,30 @@ public class PasseioRepository {
             em.getTransaction().commit();
         }
 
-        public void update(Funcionario funcionario){
+        public void addNewData(Passeio passeio){
             em.getTransaction().begin();
-            em.persist(funcionario);
+            em.persist(passeio);
             em.getTransaction().commit();
         }
 
-        public void delete(Funcionario funcionario){
+        public void update(Passeio passeio){
             em.getTransaction().begin();
-            em.remove(em.contains(funcionario) ? funcionario : em.merge(funcionario) );
+            em.merge(passeio);
+            em.getTransaction().commit();
+    }
+
+        public void delete(Passeio passeio){
+            em.getTransaction().begin();
+            em.remove(em.contains(passeio) ? passeio : em.merge(passeio) );
+            em.getTransaction().commit();
         }
 
-        public List<Funcionario> findAll() { return em.createQuery( "select p from funcionarios p", Funcionario.class).getResultList();}
+        public List<Passeio> findAll() { return em.createQuery( "select t from tour t", Passeio.class).getResultList();}
 
-        public Funcionario findById(Long id) {return em.find(Funcionario.class, id); }
-        public List<Funcionario> findByName(String prefixo){
+        public Passeio findById(Long id) {return em.find(Passeio.class, id); }
+        public List<Passeio> findByName(String prefixo){
 
-            return em.createQuery("select p from funcionarios p where p.nome like :prefixo", Funcionario.class)
+            return em.createQuery("select p from tour p where p.nome like :prefixo", Passeio.class)
                     .setParameter("prefixo", prefixo + "%")
                     .getResultList();
         }

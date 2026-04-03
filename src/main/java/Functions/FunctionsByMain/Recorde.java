@@ -4,7 +4,7 @@ import Functions.PrintError;
 import Functions.ValidateNumber;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
-import Tour.Passeio;
+import org.ONE.models.Passeio;
 
 import java.util.ArrayList;
 
