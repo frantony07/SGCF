@@ -3,12 +3,27 @@ package People;
 import Finance.Ledger;
 import Finance.MainAccount;
 import Functions.Reservations;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
+@Entity(name = "funcionarios")
 public class Funcionario extends People {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "cpf", nullable = true)
+    private String cpf;
+
+    @Column(name = "name", nullable = true)
+    private String name;
+
+    @Column(name = "language", nullable = true)
+    private String language;
+
+    @Column(name = "")
 
     private ArrayList<Language> languagesSpoken;
 
