@@ -7,10 +7,6 @@ import java.util.ArrayList;
 @Entity(name = "clientes")
 public class Cliente{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "cpf")
     private String cpf;
 
@@ -23,7 +19,10 @@ public class Cliente{
     @Column(name = "language")
     private String language;
 
+    @Column (name = "language_spoke")
     private final ArrayList<Language>  languageSpeak;
+
+    @Column (name = "country_of_costumer")
     private final CountryCostumer countryOfCostumer;
 
 
@@ -44,14 +43,5 @@ public class Cliente{
     public void printInformation(){
         System.out.println("O cliente " + this.getName() + " do pais " + this.getCountryOfCostumer() + " fala as seguintes línguas: " + this.getLanguageSpeak());
     }
-    public void printReservation(){
-        if (this.getAvailableDays().isEmpty() || this.getAvailableDays() == null){
-            System.out.println("O cliente " + this.getName() + " não possui reservas realizadas.");
-        }else {
-            for (Reservations data : this.getAvailableDays()){
-            System.out.println("o cliente " + this.getName() + " possui uma reserva no dia  " + data.getDate() + " para o passeio: " + data.getTour().getNameOfTour());
 
-            }
-        }
-    }
 }

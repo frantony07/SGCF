@@ -1,8 +1,11 @@
-package org.ONE.models;
+package People;
 
+import Finance.Ledger;
+import Finance.MainAccount;
 import Functions.Reservations;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Entity(name = "funcionarios")
