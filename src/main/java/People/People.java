@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import jakarta.persistence.*;
 
-@Entity(name)
-
 public class People {
     private String name;
     private String cpfOrCnpj;
