@@ -1,11 +1,11 @@
-package People;
+package org.ONE.models;
 
 import Functions.Reservations;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 
 @Entity(name = "clientes")
-public class Cliente extends People {
+public class Cliente{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

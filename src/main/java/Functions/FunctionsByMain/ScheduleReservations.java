@@ -1,8 +1,8 @@
 package Functions.FunctionsByMain;
 
 import Functions.SelectFunctions;
-import People.Cliente;
-import People.Funcionario;
+import org.ONE.models.Cliente;
+import org.ONE.models.Funcionario;
 import Tour.Passeio;
 
 import java.util.ArrayList;

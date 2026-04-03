@@ -4,10 +4,10 @@ import Functions.CPF;
 import Functions.PrintError;
 import Functions.ValidateNumber;
 import Functions.SelectFunctions;
-import People.Cliente;
-import People.CountryCostumer;
-import People.Funcionario;
-import People.Language;
+import org.ONE.models.Cliente;
+import org.ONE.models.CountryCostumer;
+import org.ONE.models.Funcionario;
+import org.ONE.models.Language;
 import Tour.CountryTour;
 import Tour.Passeio;
 

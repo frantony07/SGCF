@@ -1,9 +1,9 @@
 package Functions;
 
-import People.Cliente;
-import People.CountryCostumer;
-import People.Funcionario;
-import People.Language;
+import org.ONE.models.Cliente;
+import org.ONE.models.CountryCostumer;
+import org.ONE.models.Funcionario;
+import org.ONE.models.Language;
 import Tour.CountryTour;
 
 

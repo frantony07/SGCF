@@ -1,14 +1,12 @@
 package Functions;
 
-import java.lang.reflect.Array;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import People.Cliente;
-import People.CountryCostumer;
-import People.Funcionario;
-import People.Language;
+import org.ONE.models.Cliente;
+import org.ONE.models.CountryCostumer;
+import org.ONE.models.Funcionario;
+import org.ONE.models.Language;
 import Tour.CountryTour;
 import Tour.Passeio;
 import Finance.MainAccount;

@@ -1,14 +1,12 @@
-package People;
+package org.ONE.models;
 
-import Finance.Ledger;
-import Finance.MainAccount;
 import Functions.Reservations;
 import jakarta.persistence.*;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 @Entity(name = "funcionarios")
-public class Funcionario extends People {
+public class Funcionario{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

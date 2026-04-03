@@ -3,7 +3,7 @@ package Tour;
 import Functions.CreateDate;
 import Functions.PrintError;
 import Functions.Reservations;
-import People.*;
+import org.ONE.models.*;
 import jakarta.persistence.*;
 
 import java.sql.Date;

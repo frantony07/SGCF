@@ -1,4 +1,4 @@
-package People;
+package org.ONE.models;
 
 public enum CountryCostumer {
     BRAZIL,

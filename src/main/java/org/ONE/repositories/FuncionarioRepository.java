@@ -1,6 +1,6 @@
-package Repositories;
+package org.ONE.repositories;
 
-import People.Funcionario;
+import org.ONE.models.Funcionario;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;

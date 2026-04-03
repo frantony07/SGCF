@@ -1,4 +1,4 @@
-package People;
+package org.ONE.models;
 
 import Finance.Ledger;
 import Finance.MainAccount;
@@ -6,7 +6,7 @@ import Finance.MainAccount;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Gerente extends People {
+public class Gerente{
 
     final String username;
     private String password;
