@@ -29,7 +29,7 @@ public class MainAccount {
             System.out.println("6. Atualizar um registro");
             System.out.println("7. Voltar");
 
-            menu = new ValidateNumber().validateNumber(7);
+            menu = new ValidateNumber().validateINT(7);
 
             switch (menu) {
                 case 1:

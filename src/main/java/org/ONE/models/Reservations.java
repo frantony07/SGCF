@@ -18,34 +18,31 @@ public class Reservations {
 
     @ManyToOne
     @JoinColumn(name = "fk_passeio_id", nullable = false)
-    private long tour;
+    private Passeio tour;
 
     @ManyToOne
-    @JoinColumn(name = "fk_cliente_id" , nullable = false )
-    private long cliente;
+    @JoinColumn(name = "fk_cliente_id", nullable = false)
+    private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "fk_funcionario_id" , nullable = false)
-    private long funcionario;
+    @JoinColumn(name = "fk_funcionario_id", nullable = false)
+    private Funcionario funcionario;
 
     @Column (name = "value" , nullable = false)
     private double value;
 
-    @Transient
-    DateTimeFormatter formatter = DateTimeFormatter
-            .ofPattern("dd/MM/uuuu");
 
 
-    public Reservations(long cliente, String date, long funcionario, long tour, double value) {
+    public Reservations() {}
+
+    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio tour, double value) {
         this.cliente = cliente;
-        this.date = LocalDate.parse(date , formatter);
+        this.date = date;
         this.funcionario = funcionario;
         this.tour = tour;
         this.value = value;
     }
 
-    public Reservations() {
-    }
 
     public LocalDate getDate() {
         return date;
@@ -63,11 +60,11 @@ public class Reservations {
         this.value = value;
     }
 
-    public long getTour() {
+    public Passeio getTour() {
         return tour;
     }
 
-    public void setTour(long tour) {
+    public void setTour(Passeio tour) {
         this.tour = tour;
     }
 
@@ -81,19 +78,31 @@ public class Reservations {
         this.id = id;
     }
 
-    public long getFuncionario() {
+    public Funcionario getFuncionario() {
         return funcionario;
     }
 
-    public void setFuncionario(long funcionario) {
+    public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
 
-    public long getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(long cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "\n-----------------------" +
+                "\nReservations{" +
+                "\ncliente=" + cliente +
+                "\nid=" + id +
+                "\ndate=" + date +
+                "\ntour=" + tour +
+                "\nfuncionario=" + funcionario +
+                "\nvalue=" + value ;
     }
 }

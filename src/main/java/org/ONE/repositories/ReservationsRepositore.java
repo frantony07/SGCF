@@ -1,7 +1,8 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Pay;
+import org.ONE.models.Cliente;
+import org.ONE.models.Funcionario;
 import org.ONE.models.Reservations;
 
 import java.util.List;
@@ -43,6 +44,23 @@ public class ReservationsRepositore {
         return em.createQuery("select r from reservations r where  lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
     }
     public List<Reservations> findAll (){return em.createQuery("select r from reservations r " , Reservations.class).getResultList();}
+
+    public long getCount(){
+        return em.createQuery("select count(r.ID) from reservations r" , long.class).getSingleResult();
+    }
+
+    public List<Reservations> getFuncionarioReservations(long idFuncionario){
+        return  em.createQuery(
+                "select r from reservations r where r.funcionario.id = :idFuncionario",
+                Reservations.class).setParameter("idFuncionario",idFuncionario)
+                .getResultList();
+    }
+    public List<Reservations> getClienteReservations(long idCliente){
+        return  em.createQuery(
+                        "select r from reservations r where r.cliente.id = :idCliente",
+                        Reservations.class).setParameter("idCliente", idCliente)
+                .getResultList();
+    }
 
 }
 

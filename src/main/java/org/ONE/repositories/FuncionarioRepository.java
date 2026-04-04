@@ -2,7 +2,6 @@ package org.ONE.repositories;
 
 import org.ONE.models.Funcionario;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.PersonalAccount;
 
 import java.util.List;
 
@@ -40,8 +39,12 @@ public class FuncionarioRepository {
     }
 
     public List<Funcionario> findByName(String name){
-        return em.createQuery("select f from fruncionario f where  lower(c.name) like lower(:name)" , Funcionario.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select f from funcionarios f where  lower(c.name) like lower(:name)" , Funcionario.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Funcionario> findAll (){return em.createQuery("select f from funcionario f " , Funcionario.class).getResultList();}
+    public List<Funcionario> findAll (){return em.createQuery("select f from funcionarios f " , Funcionario.class).getResultList();}
+
+    public long getSize(){
+        return em.createQuery("select count(f.ID) from funcionarios f" , long.class).getSingleResult();
+    }
 
 }

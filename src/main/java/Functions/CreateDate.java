@@ -37,4 +37,22 @@ public class CreateDate {
         }
         return userResDate;
     }
+    public LocalDate createNewData(){
+        try {
+            Scanner sc = new Scanner(System.in);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+            while (true){
+                System.out.println("digite uma data no formato (dd/mm/aaa)");
+                String dataString = sc.nextLine();
+                LocalDate date = LocalDate.parse(dataString , formatter);
+                if (date.isAfter(LocalDate.now())){
+                    return date;
+                }
+                System.out.println("a data deve ser uma data valida");
+            }
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return LocalDate.now();
+    }
 }

@@ -19,15 +19,15 @@ public class Funcionario{
     @Column(name = "name", nullable = true)
     private String name;
 
-
-    @ElementCollection(targetClass = Language.class)
+    @ElementCollection
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "language_spoken",
-            joinColumns = @JoinColumn(name = "funcionario_id"))
+    @CollectionTable(
+            name = "languages" , joinColumns = @JoinColumn(name = "fk_funcionario_id")
+    )
     @Column(name = "language")
     private List<Language> languagesSpoken = new ArrayList<>();
 
-    public Funcionario(String cpf, String name, List<Language> languagesSpoken) {
+    public Funcionario(String cpf, String name,  List<Language> languagesSpoken) {
         this.cpf = cpf;
         this.name = name;
         this.languagesSpoken = languagesSpoken;
@@ -40,5 +40,13 @@ public class Funcionario{
 
     public void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 
-
+    @Override
+    public String toString() {
+        return "\n------------------------" +
+                "\nFuncionario" +
+                "\ncpf='" + cpf + '\'' +
+                "\nid=" + id +
+                "\nname='" + name + '\'' +
+                "\nlanguagesSpoken=" + languagesSpoken ;
+    }
 }

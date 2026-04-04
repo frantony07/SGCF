@@ -2,9 +2,11 @@ package Functions;
 
 import org.ONE.models.Cliente;
 import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.Funcionario;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.ENUM.CountryTour;
+import org.ONE.models.Funcionario;
+import org.ONE.repositories.ClienteRepository;
+import org.ONE.repositories.FuncionarioRepository;
 
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class SelectFunctions {
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
             System.out.println("3. O funcionario fala as duas lánguas");
-            int optionMain = new ValidateNumber().validateNumber(3);
+            int optionMain = new ValidateNumber().validateINT(3);
             switch (optionMain){
                 case 1:
                     languages.add(Language.ENGLISH);
@@ -70,7 +72,7 @@ public class SelectFunctions {
         System.out.println("2." + CountryCostumer.UNITED_STATES);
         System.out.println("3." + CountryCostumer.INDIAN);
         System.out.println("4." + CountryCostumer.EUROPE);
-        int optionMain = new ValidateNumber().validateNumber(5);
+        int optionMain = new ValidateNumber().validateINT(5);
         switch (optionMain){
             case 1 :
                 return CountryCostumer.BRAZIL;
@@ -97,7 +99,7 @@ public class SelectFunctions {
             System.out.println("2." + CountryTour.Brasil);
             System.out.println("3." + CountryTour.Paraguay);
 
-            int optionMenu = new ValidateNumber().validateNumber(3);
+            int optionMenu = new ValidateNumber().validateINT(3);
 
             switch (optionMenu){
                 case 1:
@@ -118,43 +120,29 @@ public class SelectFunctions {
         return CountryTour.Brasil;
     }
 
-    public Funcionario selectFuncionario(ArrayList<Funcionario> funcionarios){
-        if(funcionarios == null || funcionarios.isEmpty()){
-            System.out.println("Não há funcionários cadastrados.");
-            return null;
-        }
+    public long selectFuncionario(FuncionarioRepository funcionarios){
         try{
-            System.out.println("Seleciona o funcionário escolhido");
-            for(int i = 0; i < funcionarios.size(); i++){
-                System.out.println((i+1) + ". " + funcionarios.get(i).getName());
-            }
-            int funcionarioSelected = new ValidateNumber().validateNumber(funcionarios.size());
-            return funcionarios.get(funcionarioSelected - 1);
+            System.out.println("Seleciona o id do  funcionário escolhido");
+            funcionarios.findAll().forEach(System.out::println);
+            return   new ValidateNumber().validateLong(funcionarios.getSize());
+
         }catch(Exception e){
             PrintError.printErro(e);
         }
 
-        return null;
+        return 0;
     }
 
-    public Cliente selectCliente(ArrayList<Cliente> clientes) {
-        if(clientes == null || clientes.isEmpty()){
-            System.out.println("Não há clientes cadastrados.");
-            return null;
-        }
+    public long selectCliente(ClienteRepository clientes) {
         try {
             System.out.println("Selecione o cliente:");
-            for (int i = 0; i < clientes.size(); i++) {
-                System.out.println((i + 1) + ". " + clientes.get(i).getName());
-            }
+            clientes.findAll().forEach(System.out::println);
+            return  new ValidateNumber().validateLong(clientes.getSize());
 
-            int clienteSelecionado = new ValidateNumber().validateNumber(clientes.size());
-
-            return clientes.get(clienteSelecionado - 1);
         } catch (Exception e) {
             PrintError.printErro(e);
         }
 
-        return  null;
+        return  0;
     }
 }

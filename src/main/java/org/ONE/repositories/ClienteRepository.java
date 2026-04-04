@@ -2,7 +2,6 @@ package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
-import org.ONE.models.PersonalAccount;
 
 import java.util.List;
 
@@ -41,5 +40,9 @@ public class ClienteRepository {
         return em.createQuery("select c from clientes c where  lower(c.name) like lower(:name)" , Cliente.class).setParameter("name" , name +"%").getResultList();
     }
     public List<Cliente> findAll (){return em.createQuery("select c from clientes c " , Cliente.class).getResultList();}
+
+    public long getSize(){
+        return em.createQuery("select count(c.ID) from clientes c" , long.class).getSingleResult();
+    }
 
 }

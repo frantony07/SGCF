@@ -45,4 +45,10 @@ public class PasseioRepository {
                     .setParameter("prefixo", prefixo + "%")
                     .getResultList();
         }
+    public long getCount(){
+        return em.createQuery("select count(t.ID) from Passeio t" , long.class).getSingleResult();
+    }
+    public double getPrice(long id ){
+            return em.createQuery("select t.price from Passeio t where t.id = :id" , Double.class).setParameter("id" , id).getSingleResult();
+    }
     }

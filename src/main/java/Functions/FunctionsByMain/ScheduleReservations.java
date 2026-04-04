@@ -4,49 +4,36 @@ import Functions.SelectFunctions;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
+import org.ONE.repositories.ClienteRepository;
+import org.ONE.repositories.FuncionarioRepository;
+import org.ONE.repositories.PasseioRepository;
+import org.ONE.repositories.ReservationsRepositore;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScheduleReservations {
-    public void scheduleReservation(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList) {
+    public void scheduleReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository , ReservationsRepositore reservationsRepositore) {
         Scanner sc = new Scanner(System.in);
-        int passeioEscolhido = 0;
-
-        boolean allValidateIsTrue = validateAllInstance(clienteArrayList,funcionarioArrayList,passeioArrayList);
-        if(!allValidateIsTrue) {return;}
+        long passeioId = 0;
 
         System.out.println("--- Passeios disponiveis ---");
-        for (int i = 0; i<passeioArrayList.size(); i++) {
-            System.out.println((i+1) +" - ");
-            passeioArrayList.get(i).printInformationOfTour();
-        }
-        System.out.println("Escolha um passeio");
-        passeioEscolhido = sc.nextInt();
+        passeioRepository.findAll().forEach(System.out::println);
 
-        Passeio passeioSelecionado = passeioArrayList.get(passeioEscolhido-1);
+        System.out.println("Digite o ID do passeio escolhido");
+        passeioId = sc.nextLong();
 
-        Cliente cliente = new SelectFunctions().selectCliente(clienteArrayList);
+        Passeio passeio = passeioRepository.findById(passeioId);
 
-        Funcionario funcionario = new SelectFunctions().selectFuncionario(funcionarioArrayList);
+        long clienteId = new SelectFunctions().selectCliente(clienteRepository);
 
-        passeioSelecionado.makeReservation(funcionario,cliente);
+        Cliente cliente = clienteRepository.finById(clienteId);
 
-    }
-    public boolean validateAllInstance(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList){
+        long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
 
-        if (clienteArrayList == null ||clienteArrayList.isEmpty()){
-            System.out.println("Não existe cliente ativo, por favor crie um novo cliente");
-            return false;
-        }
-        if (funcionarioArrayList == null||funcionarioArrayList.isEmpty()){
-            System.out.println("Não foi encontrado funcionário ativo, por favor crie um novo funcionário");
-            return false;
-        }
-        if (passeioArrayList == null ||passeioArrayList.isEmpty()){
-            System.out.println("Não foi encontrado passeio ativo, por favor crie um novo");
-            return false;
-        }
-        return true;
+        Funcionario funcionario = funcionarioRepository.finById(funcionarioId);
+
+
+        new CreateNewRegister().createNewReservations(reservationsRepositore ,cliente , funcionario , passeio, passeio.getPrice());
     }
 }

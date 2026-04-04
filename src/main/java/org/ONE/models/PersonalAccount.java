@@ -1,6 +1,7 @@
 package org.ONE.models;
 
 import jakarta.persistence.*;
+import org.ONE.repositories.ClienteRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +14,9 @@ public class  PersonalAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "fk_cliente_id" , nullable = false)
-    private long cliente;
+    @ManyToOne
+    @JoinColumn(name = "fk_cliente_id" , nullable = false)
+    private Cliente cliente;
 
     @Column(name = "additional_reserve" ,nullable = false)
     private long additionalReserve;
@@ -29,7 +31,7 @@ public class  PersonalAccount {
     DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("dd/MM/uuuu");
 
-    public PersonalAccount(long additionalReserve, long cliente, String date, double value) {
+    public PersonalAccount(long additionalReserve, Cliente cliente, String date, double value) {
         this.additionalReserve = additionalReserve;
         this.cliente = cliente;
         this.date = LocalDate.parse(date , formatter);
@@ -37,5 +39,16 @@ public class  PersonalAccount {
     }
 
     public PersonalAccount() {
+    }
+
+    @Override
+    public String toString() {
+        return "\n--------------------------" +
+                "\nPersonalAccount{" +
+                "\nadditionalReserve=" + additionalReserve +
+                "\nid=" + id +
+                "\ncliente=" + cliente +
+                "\nvalue=" + value +
+                "\ndate=" + date ;
     }
 }

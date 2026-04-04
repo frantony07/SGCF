@@ -6,6 +6,8 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/SGCF</property>
+        <property name="hibernate.default_schema">sgcf</property>
+
         <property name="hibernate.connection.username">frantony07</property>
         <property name="hibernate.connection.password">santi14072005</property>
 

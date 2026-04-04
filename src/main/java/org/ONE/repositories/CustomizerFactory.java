@@ -10,11 +10,14 @@ public class CustomizerFactory {
     private static final EntityManagerFactory emf;
 
     static {
-        try (SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory()) {
+        try  {
+            SessionFactory sessionFactory = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .buildSessionFactory();
 
             emf = sessionFactory.unwrap(EntityManagerFactory.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

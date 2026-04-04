@@ -45,4 +45,8 @@ public class PayRepository {
     }
     public List<Pay> findAll (){return em.createQuery("select p from pay p " , Pay.class).getResultList();}
 
+    public long getCount(){
+        return em.createQuery("select count(p.ID) from pay p" , long.class).getSingleResult();
+    }
+
 }

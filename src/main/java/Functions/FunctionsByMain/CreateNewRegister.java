@@ -1,21 +1,24 @@
 package Functions.FunctionsByMain;
 
-import Functions.CPF;
-import Functions.PrintError;
-import Functions.ValidateNumber;
-import Functions.SelectFunctions;
+import Functions.*;
 import org.ONE.models.Cliente;
 import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.Funcionario;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.ENUM.CountryTour;
 import org.ONE.models.Passeio;
+import org.ONE.models.Reservations;
+import org.ONE.repositories.ClienteRepository;
+import org.ONE.repositories.FuncionarioRepository;
+import org.ONE.repositories.PasseioRepository;
+import org.ONE.repositories.ReservationsRepositore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CreateNewRegister {
-    public void register(ArrayList<Cliente> clienteArrayList , ArrayList<Funcionario> funcionarioArrayList, ArrayList<Passeio> passeioArrayList){
+    public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepositore reservationsRepositore){
         Scanner sc = new Scanner(System.in);
         boolean booleanMain = true;
 
@@ -25,19 +28,20 @@ public class CreateNewRegister {
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. Voltar ao menu principal");
-                int menuOption = new ValidateNumber().validateNumber(4);
+                int menuOption = new ValidateNumber().validateINT(4);
 
                 switch (menuOption){
                     case 1:
-                        createNewFuncionario(funcionarioArrayList);
+                        createNewFuncionario(funcionarioRepository);
                         break;
                     case 2 :
-                        createNewCliente(clienteArrayList);
+                        createNewCliente(clienteRepository);
                         break;
                     case 3 :
-                        createNewPasseio(passeioArrayList);
+                        createNewPasseio(passeioRepository);
                         break;
-                    case  4:
+                    case 4 :
+                    case  5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
 
@@ -51,7 +55,7 @@ public class CreateNewRegister {
             }
         }
     }
-    public void createNewFuncionario(ArrayList<Funcionario> funcionarios){
+    public void createNewFuncionario(FuncionarioRepository  funcionarios){
         try {
 
             Scanner sc = new Scanner(System.in);
@@ -65,13 +69,13 @@ public class CreateNewRegister {
 
             new SelectFunctions().selectLanguageMain(languages, "funcionario");
 
-            funcionarios.add(new Funcionario(cpf, name, languages));
+            funcionarios.create(new Funcionario(cpf, name, languages));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void createNewCliente(ArrayList<Cliente>clientes){
+    public void createNewCliente(ClienteRepository clientes){
         try {
             Scanner sc = new Scanner(System.in);
 
@@ -87,14 +91,14 @@ public class CreateNewRegister {
 
             new SelectFunctions().selectLanguageMain(languages, "cliente");
 
-            clientes.add(new Cliente(cpf ,name,countryCostumer,languages));
+            clientes.create(new Cliente(languages , countryCostumer ,cpf ,name));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
 
     }
-    public void createNewPasseio(ArrayList<Passeio> passeios){
+    public void createNewPasseio(PasseioRepository passeios){
         try {
             Scanner sc = new Scanner(System.in);
 
@@ -116,13 +120,19 @@ public class CreateNewRegister {
 
             CountryTour countryTour = new SelectFunctions().selecteCountryTour();
 
-            int idTour =passeios.size() + 1;
-            passeios.add(new Passeio(price,durationInMinute,countryTour,km,null,name,location));
+
+            passeios.create(new Passeio(price,durationInMinute,countryTour,km,name,location));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
 
+    }
+
+    public void createNewReservations(ReservationsRepositore reservationsRepositore , Cliente cliente , Funcionario funcionario , Passeio passeio , double price ){
+        LocalDate data = new CreateDate().createNewData();
+        Reservations reservations = new Reservations(cliente, data, funcionario , passeio, price);
+        reservationsRepositore.create(reservations);
     }
 
 }

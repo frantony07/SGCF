@@ -3,48 +3,49 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.CountryTour;
 
-import java.sql.Date;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Entity(name = "tour")
     public class Passeio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column (name = "price")
     private double price;
 
     @Column (name = "durations")
-    private Duration durationOfTourInMinute;
+    private Long durationOfTourInMinute;
 
-    @Column (name = "country")
+    @Enumerated(EnumType.STRING)
+    @Column (name = "country_of_tour")
     private CountryTour countryTour;
 
     @Column (name = "km_of_tour")
     private String kmOftour;
 
-
-
     @Column (name = "name")
-    private final String nameOfTour;
+    private  String nameOfTour;
 
     @Column(name = "locations")
-    private final String locations;
+    private  String locations;
 
 
 
 
     public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, String nameOfTour, String locations) {
         this.price = price;
-        this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
+        this.durationOfTourInMinute = durationOfTourInMinute;
         this.countryTour = countryTour;
         this.kmOftour = kmOftour;
-        this.nameOfTour = nameOfTour;
         this.locations = locations;
+        this.nameOfTour = nameOfTour;
+
+
+    }
+
+    public Passeio() {
     }
 
     public CountryTour getCountryTour() {
@@ -70,7 +71,7 @@ import java.time.format.DateTimeFormatter;
     }
 
     public long getDurationOfTourInMinute() {
-        return durationOfTourInMinute.toMinutes() / 60;
+        return durationOfTourInMinute ;
     }
 
     public CountryTour getCountry() {
@@ -92,10 +93,10 @@ import java.time.format.DateTimeFormatter;
     }
 
     public void setDurationOfTourInMinute(long durationOfTourInMinute) {
-        this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
+        this.durationOfTourInMinute = durationOfTourInMinute;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -108,8 +109,19 @@ import java.time.format.DateTimeFormatter;
     }
 
     public void printInformationOfTour(){
-        System.out.println("O passeio " + nameOfTour + " conta com " + kmOftour + "KM percorrido e uma duração de " + durationOfTourInMinute.toMinutes() + " minutos, o valor é de  R$" + price);
+        System.out.println("O passeio " + nameOfTour + " conta com " + kmOftour + "KM percorrido e uma duração de " + durationOfTourInMinute + " minutos, o valor é de  R$" + price);
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "\n--------------------"+
+                "\ncountryTour=" + countryTour +
+                "\nid=" + id +
+                "\npreço=" + price +
+                "\nminutos=" + durationOfTourInMinute +
+                "\nkilometros='" + kmOftour + '\'' +
+                "\nnome do passeio ='" + nameOfTour + '\'' +
+                "\nlocalização='" + locations + '\'';
+    }
 }
