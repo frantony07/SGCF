@@ -10,9 +10,11 @@ import java.util.List;
 public class PayRepository {
     private EntityManager em ;
 
-    public void payRepository(EntityManager em ){ this.em = em;}
+    public PayRepository(EntityManager em) {
+        this.em = em;
+    }
 
-   public Pay finById (Long id){ return em.find(Pay.class,id);}
+    public Pay finById (Long id){ return em.find(Pay.class,id);}
 
     public void create(Pay pay){
         em.getTransaction().begin();

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Entity(name = "reservations")
@@ -30,11 +31,20 @@ public class Reservations {
     @Column (name = "value" , nullable = false)
     private double value;
 
+    @Transient
+    DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("dd/MM/uuuu");
 
 
-    public Reservations(LocalDate date, long tour) {
-        this.date = date;
+    public Reservations(long cliente, String date, long funcionario, long tour, double value) {
+        this.cliente = cliente;
+        this.date = LocalDate.parse(date , formatter);
+        this.funcionario = funcionario;
         this.tour = tour;
+        this.value = value;
+    }
+
+    public Reservations() {
     }
 
     public LocalDate getDate() {

@@ -5,6 +5,8 @@ import org.ONE.models.ENUM.CountryTour;
 
 import java.sql.Date;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity(name = "tour")
     public class Passeio {
@@ -25,7 +27,7 @@ import java.time.Duration;
     @Column (name = "km_of_tour")
     private String kmOftour;
 
-    private Date reservation;
+
 
     @Column (name = "name")
     private final String nameOfTour;
@@ -33,12 +35,14 @@ import java.time.Duration;
     @Column(name = "locations")
     private final String locations;
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, Date reservation , String nameOfTour, String locations) {
+
+
+
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, String nameOfTour, String locations) {
         this.price = price;
         this.durationOfTourInMinute = Duration.ofMinutes(durationOfTourInMinute);
         this.countryTour = countryTour;
         this.kmOftour = kmOftour;
-        this.reservation = reservation;
         this.nameOfTour = nameOfTour;
         this.locations = locations;
     }
@@ -55,9 +59,7 @@ import java.time.Duration;
         return nameOfTour;
     }
 
-    public Date getReservation() {
-        return reservation;
-    }
+
 
     public String getKmOftour() {
         return kmOftour;
@@ -83,9 +85,7 @@ import java.time.Duration;
         this.kmOftour = kmOftour;
     }
 
-    public void setReservation(Date reservation) {
-        this.reservation = reservation;
-    }
+
 
     public void setPrice(double price) {
         this.price = price;

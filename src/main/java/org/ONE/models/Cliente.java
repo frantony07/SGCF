@@ -21,28 +21,29 @@ public class Cliente{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "country")
-    private String country;
+
 
     @Column (name = "language_spoke")
-    private final ArrayList<Language>  languageSpeak;
+    private  Language  languageSpeak;
 
     @Column (name = "country_of_costumer")
-    private final CountryCostumer countryOfCostumer;
+    private  CountryCostumer countryOfCostumer;
 
     @OneToMany(mappedBy = "personal_account",  cascade = CascadeType.ALL , orphanRemoval = true)
     private ArrayList<Double> personalAccount = new ArrayList<>();
 
 
-    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String country, String cpf,  String name) {
+
+    public Cliente(Language languageSpeak, CountryCostumer countryOfCostumer,  String cpf, String name) {
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
-        this.country = country;
         this.cpf = cpf;
         this.name = name;
     }
 
-    public ArrayList<Language> getLanguageSpeak() {
+    public Cliente() {
+    }
+    public Language getLanguageSpeak() {
         return languageSpeak;
     }
 

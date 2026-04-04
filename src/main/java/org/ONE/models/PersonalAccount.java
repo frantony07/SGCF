@@ -3,10 +3,11 @@ package org.ONE.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity(name = "personal_account")
-public class PersonalAccount {
+public class  PersonalAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,22 @@ public class PersonalAccount {
     private long additionalReserve;
 
     @Column(name = "value")
-    private Double value ;
+    private double value ;
 
     @Column(name = "date")
     private LocalDate date ;
 
+    @Transient
+    DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("dd/MM/uuuu");
+
+    public PersonalAccount(long additionalReserve, long cliente, String date, double value) {
+        this.additionalReserve = additionalReserve;
+        this.cliente = cliente;
+        this.date = LocalDate.parse(date , formatter);
+        this.value = value;
+    }
+
+    public PersonalAccount() {
+    }
 }

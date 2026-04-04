@@ -10,11 +10,12 @@ public class CustomizerFactory {
     private static final EntityManagerFactory emf;
 
     static {
-        SessionFactory sessionFactory = new Configuration()
+        try (SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
+                .buildSessionFactory()) {
 
-        emf = sessionFactory.unwrap(EntityManagerFactory.class);
+            emf = sessionFactory.unwrap(EntityManagerFactory.class);
+        }
     }
 
     public static EntityManager getEntityManager() {
@@ -24,5 +25,6 @@ public class CustomizerFactory {
     public static void fechar() {
         emf.close();
     }
+
 
 }

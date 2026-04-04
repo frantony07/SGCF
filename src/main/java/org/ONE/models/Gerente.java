@@ -12,8 +12,8 @@ public class Gerente{
     final String username;
     private String password;
 
-    public Gerente(String cpfOrCnpj, int id, String name, ArrayList<Language> languagesSpoken, ArrayList<Double> accounts, String username, String password){
-        super(cpfOrCnpj, name);
+    public Gerente( int id, String name, ArrayList<Language> languagesSpoken, ArrayList<Double> accounts, String username, String password){
+
         this.username = username;
         this.password = password;
     }

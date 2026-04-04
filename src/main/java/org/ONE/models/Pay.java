@@ -3,6 +3,7 @@ package org.ONE.models;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "pay")
 public class Pay {
@@ -12,12 +13,20 @@ public class Pay {
 
     @ManyToOne
     @JoinColumn(name = "fk_personal_account_id" , nullable = false)
-    ArrayList<Long> personalAccount = new ArrayList<>();
+    List<Long> personalAccount = new ArrayList<>();
 
     @Column(name = "fk_reservatins_id")
     private long reservations;
 
     @Column(name = "total_account")
-    private Double totalAccount ;
+    private double totalAccount ;
 
+    public Pay(List<Long> personalAccount, long reservations, double totalAccount) {
+        this.personalAccount = personalAccount;
+        this.reservations = reservations;
+        this.totalAccount = totalAccount;
+    }
+
+    public Pay() {
+    }
 }

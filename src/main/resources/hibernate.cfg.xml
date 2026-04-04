@@ -13,6 +13,11 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="org.example.models.Produto"/>
+        <mapping class="org.ONE.models.Cliente"/>
+        <mapping class="org.ONE.models.Funcionario"/>
+        <mapping class="org.ONE.models.Passeio"/>
+        <mapping class="org.ONE.models.Pay"/>
+        <mapping class="org.ONE.models.PersonalAccount"/>
+        <mapping class="org.ONE.models.Reservations"/>
     </session-factory>
 </hibernate-configuration>

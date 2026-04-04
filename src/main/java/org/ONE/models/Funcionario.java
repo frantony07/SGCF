@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.ONE.models.ENUM.Language;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "funcionarios")
 public class Funcionario{
@@ -18,21 +19,24 @@ public class Funcionario{
     @Column(name = "name", nullable = true)
     private String name;
 
-    @Column(name = "language", nullable = true)
-    private String language;
 
-    @Column(name = "")
+    @ElementCollection(targetClass = Language.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "language_spoken",
+            joinColumns = @JoinColumn(name = "funcionario_id"))
+    @Column(name = "language")
+    private List<Language> languagesSpoken = new ArrayList<>();
 
-    private ArrayList<Language> languagesSpoken;
-
-    public Funcionario(String cpf, String name, ArrayList<Language> languagesSpoken, String language) {
+    public Funcionario(String cpf, String name, List<Language> languagesSpoken) {
         this.cpf = cpf;
         this.name = name;
         this.languagesSpoken = languagesSpoken;
-        this.language = language;
     }
 
-    public ArrayList<Language> getLanguagesSpoken() {return languagesSpoken;}
+    public Funcionario() {
+    }
+
+    public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}
 
     public void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 

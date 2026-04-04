@@ -12,9 +12,9 @@ public class PasseioRepository {
         private EntityManager em;
         public PasseioRepository (EntityManager em) { this.em = em; }
 
-        public void create(Funcionario funcionario) {
+        public void create(Passeio passeio) {
             em.getTransaction().begin();
-            em.persist(funcionario);
+            em.persist(passeio);
             em.getTransaction().commit();
         }
 
@@ -41,7 +41,7 @@ public class PasseioRepository {
         public Passeio findById(Long id) {return em.find(Passeio.class, id); }
         public List<Passeio> findByName(String prefixo){
 
-            return em.createQuery("select p from tour p where p.nome like :prefixo", Passeio.class)
+            return em.createQuery("select p from tour p where lower(p.nome) like lower(:prefixo)", Passeio.class)
                     .setParameter("prefixo", prefixo + "%")
                     .getResultList();
         }
