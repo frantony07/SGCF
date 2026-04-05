@@ -17,6 +17,7 @@ public class Ledger {
     private double totalMoney ;
     @Column(name = "Data")
     private LocalDate dateOfChange;
+    private static ArrayList<Ledger> payments = new ArrayList<>();
     private static double quotaTarget = 0;
     private static int quotaStartIndex = -1;
 
@@ -34,6 +35,10 @@ public class Ledger {
 
     public static void setQuotaStartIndex(int quotaStartIndex) {
         Ledger.quotaStartIndex = quotaStartIndex;
+    }
+
+    public static ArrayList<Ledger> getPayments() {
+        return payments;
     }
 
     public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
