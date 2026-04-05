@@ -19,12 +19,6 @@ public class ClienteRepository {
         em.getTransaction().commit();
     }
 
-    public void addNewData(Cliente cliente){
-        em.getTransaction().begin();
-        em.persist(cliente);
-        em.getTransaction().commit();
-    }
-
     public void update(Cliente cliente){
         em.getTransaction().begin();
         em.merge(cliente);

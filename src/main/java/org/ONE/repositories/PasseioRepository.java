@@ -18,11 +18,7 @@ public class PasseioRepository {
             em.getTransaction().commit();
         }
 
-        public void addNewData(Passeio passeio){
-            em.getTransaction().begin();
-            em.persist(passeio);
-            em.getTransaction().commit();
-        }
+
 
         public void update(Passeio passeio){
             em.getTransaction().begin();
