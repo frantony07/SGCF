@@ -12,9 +12,9 @@ public class Ledger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     @Column(name = "Dinheiro")
-    private static double recordedMoney;
+    private double recordedMoney;
     @Column(name = "Total")
-    private static double totalMoney ;
+    private double totalMoney ;
     @Column(name = "Data")
     private LocalDate dateOfChange;
     private static ArrayList<Ledger> payments = new ArrayList<>();
@@ -41,15 +41,10 @@ public class Ledger {
         return payments;
     }
 
-    public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal, int idCounter) {
+    public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
         this.recordedMoney = moneyChange;
         this.dateOfChange = dayOfRetrieval;
         this.totalMoney = currentTotal;
-        this.idCounter = idCounter;
-    }
-
-    public int getIdentifier() {
-        return identifier;
     }
 
     public double getRecordedMoney() {

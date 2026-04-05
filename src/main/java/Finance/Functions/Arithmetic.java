@@ -23,10 +23,8 @@ public class Arithmetic {
         double amount = sc.nextDouble();
 
         double currentTotal = totalCalculation(Ledger.getPayments(), amount);
-        int Identifier = payments.isEmpty() ? 1 :
-                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
 
-        payments.add(new Ledger(amount, date, currentTotal, Identifier));
+        payments.add(new Ledger(amount, date, currentTotal));
     }
 
     public  void subtractMoney(ArrayList<Ledger> payments) {
@@ -43,10 +41,8 @@ public class Arithmetic {
         double amount = sc.nextDouble();
 
         double currentTotal = totalCalculation(Ledger.getPayments(), -amount);
-        int Identifier = payments.isEmpty() ? 1 :
-                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
 
-        payments.add(new Ledger(-amount, date, currentTotal, Identifier));
+        payments.add(new Ledger(-amount, date, currentTotal));
     }
 
     public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {

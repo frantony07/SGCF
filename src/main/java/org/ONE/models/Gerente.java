@@ -41,8 +41,7 @@ public class Gerente{
         }
         double commission = reservations * 0.20;
         double newTotal = currentTotal + commission;
-        int Identifier = payments.isEmpty() ? 1 :
-                payments.stream().mapToInt(Ledger::getIdentifier).max().getAsInt() + 1;
-        payments.add(new Ledger(commission, date, newTotal, Identifier));
+
+        payments.add(new Ledger(commission, date, newTotal));
     }
 }
