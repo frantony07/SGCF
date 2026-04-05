@@ -1,19 +1,25 @@
 package Finance;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ledger {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long ID;
+    @Column(name = "Dinheiro")
     private static double recordedMoney;
+    @Column(name = "Total")
     private static double totalMoney ;
+    @Column(name = "Data")
     private LocalDate dateOfChange;
-    private static int identifier;
     private static ArrayList<Ledger> payments = new ArrayList<>();
     private static double quotaTarget = 0;
     private static int quotaStartIndex = -1;
-    private static int idCounter = 1;
 
     public static double getQuotaTarget() {
         return quotaTarget;
