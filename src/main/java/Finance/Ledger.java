@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "ledger")
 public class Ledger {
 
     @Id
