@@ -1,4 +1,4 @@
-package Finance.Functions;
+package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
 import Functions.PrintError;
