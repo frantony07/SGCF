@@ -28,6 +28,4 @@ public class CustomizerFactory {
     public static void fechar() {
         emf.close();
     }
-
-
 }
