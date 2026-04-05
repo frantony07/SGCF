@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class QuotasFunctions {
     public  void quota(ArrayList<Ledger> payments, Scanner sc) {
 
-        if (Ledger.getQuotaStartIndex() == -1) {
+        if (Ledger.getQuotaStatusValue() == -1) {
             System.out.println("Você não possui uma meta ativa.");
             System.out.println("Deseja criar uma nova meta?");
             System.out.println("1. Sim");
@@ -35,7 +35,7 @@ public class QuotasFunctions {
         }
 
         double accumulated = 0;
-        for (int i = Ledger.getQuotaStartIndex(); i < payments.size(); i++) {
+        for (int i = Ledger.getQuotaStatusValue(); i < payments.size(); i++) {
             double recorded = payments.get(i).getRecordedMoney();
             if (recorded > 0) {
                 accumulated += recorded;
@@ -67,7 +67,7 @@ public class QuotasFunctions {
                 double resetQuota = 0;
                 Ledger.setQuotaTarget(resetQuota);
                 int resetQuotaIndex = -1;
-                Ledger.setQuotaStartIndex(resetQuotaIndex);
+                Ledger.setQuotaStatusValue(resetQuotaIndex);
             }
         } else {
             System.out.printf("Meta: R$%.2f%n", Ledger.getQuotaTarget());
@@ -85,7 +85,7 @@ public class QuotasFunctions {
         double target = sc.nextDouble();
         Ledger.setQuotaTarget(target);
         int quotaStartIndex = payments.size();
-        Ledger.setQuotaStartIndex(quotaStartIndex);
+        Ledger.setQuotaStatusValue(quotaStartIndex);
         System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
     }
 }

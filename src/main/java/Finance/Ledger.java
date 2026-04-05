@@ -11,15 +11,19 @@ public class Ledger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
+
     @Column(name = "Dinheiro")
     private double recordedMoney;
+
     @Column(name = "Total")
-    private double totalMoney ;
+    private double totalMoney;
+
     @Column(name = "Data")
     private LocalDate dateOfChange;
+
     private static ArrayList<Ledger> payments = new ArrayList<>();
     private static double quotaTarget = 0;
-    private static int quotaStartIndex = -1;
+    private static int quotaStatusValue = -1;
 
     public static double getQuotaTarget() {
         return quotaTarget;
@@ -29,12 +33,12 @@ public class Ledger {
         Ledger.quotaTarget = target;
     }
 
-    public static int getQuotaStartIndex() {
-        return quotaStartIndex;
+    public static int getQuotaStatusValue() {
+        return quotaStatusValue;
     }
 
-    public static void setQuotaStartIndex(int quotaStartIndex) {
-        Ledger.quotaStartIndex = quotaStartIndex;
+    public static void setQuotaStatusValue(int quotaStatusValue) {
+        Ledger.quotaStatusValue = quotaStatusValue;
     }
 
     public static ArrayList<Ledger> getPayments() {
@@ -51,16 +55,16 @@ public class Ledger {
         return recordedMoney;
     }
 
-    public static void setRecordedMoney(double newTotal) {
-        Ledger.recordedMoney = newTotal;
+    public void setRecordedMoney(double newTotal) {
+        this.recordedMoney = newTotal;
     }
 
     public double getTotalMoney() {
         return totalMoney;
     }
 
-    public static void setTotalMoney(double runningTotal) {
-        Ledger.totalMoney = runningTotal;
+    public void setTotalMoney(double runningTotal) {
+        this.totalMoney = runningTotal;
     }
 
     public LocalDate getDateOfChange() {
@@ -71,6 +75,6 @@ public class Ledger {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return String.format("ID: %d | Data: %s | Movimento: R$%.2f | Saldo: R$%.2f",
-                identifier, dateOfChange.format(formatter), recordedMoney, totalMoney);
+                ID, dateOfChange.format(formatter), recordedMoney, totalMoney);
     }
 }
