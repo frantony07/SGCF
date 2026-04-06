@@ -25,7 +25,7 @@ public class ScheduleReservations {
 
         Passeio passeio = passeioRepository.findById(passeioId);
 
-        long clienteId = new SelectFunctions().selectCliente(clienteRepository);
+        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
 
         Cliente cliente = clienteRepository.finById(clienteId);
 

@@ -40,17 +40,17 @@ public class ReservationsRepositore {
     }
     public List<Reservations> findAll (){return em.createQuery("select r from reservations r " , Reservations.class).getResultList();}
 
-    public long getCount(){
-        return em.createQuery("select count(r.ID) from reservations r" , long.class).getSingleResult();
+    public Long getCount(){
+        return em.createQuery("select count(r.ID) from reservations r" , Long.class).getSingleResult();
     }
 
-    public List<Reservations> getFuncionarioReservations(long idFuncionario){
+    public List<Reservations> getFuncionarioReservations(Long idFuncionario){
         return  em.createQuery(
                 "select r from reservations r where r.funcionario.id = :idFuncionario",
                 Reservations.class).setParameter("idFuncionario",idFuncionario)
                 .getResultList();
     }
-    public List<Reservations> getClienteReservations(long idCliente){
+    public List<Reservations> getClienteReservations(Long idCliente){
         return  em.createQuery(
                         "select r from reservations r where r.cliente.id = :idCliente",
                         Reservations.class).setParameter("idCliente", idCliente)

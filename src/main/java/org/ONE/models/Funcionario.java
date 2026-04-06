@@ -10,7 +10,7 @@ import java.util.List;
 public class Funcionario{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "cpf", nullable = false , length = 11)
@@ -28,7 +28,7 @@ public class Funcionario{
     private List<Language> languagesSpoken = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name="user_id", unique = true)
+    @JoinColumn(name="fk_user_id", unique = true)
     private User user;
 
     public Funcionario(String cpf, String name,  List<Language> languagesSpoken) {

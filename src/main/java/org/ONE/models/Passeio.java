@@ -9,8 +9,8 @@ import java.time.Duration;
     public class Passeio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column (name = "price")
     private double price;
@@ -34,7 +34,7 @@ import java.time.Duration;
 
 
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, String nameOfTour, String locations) {
+    public Passeio(double price, Long durationOfTourInMinute, CountryTour countryTour, String kmOftour, String nameOfTour, String locations) {
         this.price = price;
         this.durationOfTourInMinute = durationOfTourInMinute;
         this.countryTour = countryTour;
@@ -70,7 +70,7 @@ import java.time.Duration;
         return price;
     }
 
-    public long getDurationOfTourInMinute() {
+    public Long getDurationOfTourInMinute() {
         return durationOfTourInMinute ;
     }
 
@@ -92,15 +92,15 @@ import java.time.Duration;
         this.price = price;
     }
 
-    public void setDurationOfTourInMinute(long durationOfTourInMinute) {
+    public void setDurationOfTourInMinute(Long durationOfTourInMinute) {
         this.durationOfTourInMinute = durationOfTourInMinute;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

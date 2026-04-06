@@ -10,8 +10,8 @@ import java.util.List;
 @Entity(name = "clientes")
 public class Cliente{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id ;
 
     @Column(name = "cnpj" , length = 15)
     private String cnpj;

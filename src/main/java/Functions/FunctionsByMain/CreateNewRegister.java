@@ -109,7 +109,7 @@ public class CreateNewRegister {
             double price = sc.nextDouble();
 
             System.out.println("Digite a duração em minutos");
-            long durationInMinute = sc.nextLong();
+            Long durationInMinute = sc.nextLong();
             sc.nextLine();
 
             System.out.println("Digite a localização do tour");

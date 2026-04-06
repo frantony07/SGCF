@@ -34,14 +34,14 @@ public class PrintReservations {
 
         funcionarioRepository.findAll().forEach(System.out::println);
 
-        long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
+        Long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
         reservationsRepositore.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
 
     }
     public  void showReservationsClientes(ClienteRepository clienteRepository , ReservationsRepositore reservationsRepositore){
         clienteRepository.findAll().forEach(System.out::println);
 
-        long clienteId = new SelectFunctions().selectCliente(clienteRepository);
+        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
         reservationsRepositore.getClienteReservations(clienteId).forEach(System.out::println);
 
 

@@ -8,8 +8,8 @@ import java.util.List;
 @Entity(name = "pay")
 public class Pay {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id ;
 
     @ManyToOne
     @JoinColumn(name = "fk_personal_account_id", nullable = false)

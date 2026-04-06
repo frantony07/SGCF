@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Gerente{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -22,10 +22,10 @@ public class Gerente{
     private String cpf;
 
     @OneToOne
-    @JoinColumn(name="user_id", unique = true)
+    @JoinColumn(name="fk_user_id", unique = true)
     private User user;
 
-    public Gerente(long id, String nome, String cpf, User user){
+    public Gerente(Long id, String nome, String cpf, User user){
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -36,11 +36,11 @@ public class Gerente{
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

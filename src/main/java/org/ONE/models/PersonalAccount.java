@@ -11,15 +11,15 @@ import java.util.Date;
 public class  PersonalAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id" , nullable = false)
     private Cliente cliente;
 
     @Column(name = "additional_reserve" ,nullable = false)
-    private long additionalReserve;
+    private Long additionalReserve;
 
     @Column(name = "value")
     private double value ;
@@ -31,7 +31,7 @@ public class  PersonalAccount {
     DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("dd/MM/uuuu");
 
-    public PersonalAccount(long additionalReserve, Cliente cliente, String date, double value) {
+    public PersonalAccount(Long additionalReserve, Cliente cliente, String date, double value) {
         this.additionalReserve = additionalReserve;
         this.cliente = cliente;
         this.date = LocalDate.parse(date , formatter);

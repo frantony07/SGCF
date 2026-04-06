@@ -10,8 +10,8 @@ import java.util.ArrayList;
 @Entity(name = "reservations")
 public class Reservations {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id ;
 
     @Column(name = "date")
     private LocalDate date;
@@ -70,11 +70,11 @@ public class Reservations {
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

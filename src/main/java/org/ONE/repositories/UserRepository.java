@@ -48,7 +48,7 @@ public class UserRepository {
 
     public List<User> findAll (){return em.createQuery("select u from user_account u " , User.class).getResultList();}
 
-    public long getSize(){
-        return em.createQuery("select count(u.id) from user_account u" , long.class).getSingleResult();
+    public Long getSize(){
+        return em.createQuery("select count(u.id) from user_account u" , Long.class).getSingleResult();
     }
 }
