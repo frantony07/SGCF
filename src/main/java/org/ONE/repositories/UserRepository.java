@@ -10,7 +10,7 @@ public class UserRepository {
 
     private EntityManager em ;
 
-    public  UserRepository(EntityManager em ){ this.em = em;}
+    public UserRepository(EntityManager em ){ this.em = em;}
 
     public User finById (Long id){ return em.find(User.class,id);}
 

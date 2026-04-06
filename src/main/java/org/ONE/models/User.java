@@ -1,6 +1,7 @@
 package org.ONE.models;
 
 import jakarta.persistence.*;
+import org.ONE.models.ENUM.Permission;
 
 @Entity(name = "user_account")
 public class User {
@@ -13,30 +14,34 @@ public class User {
     @Column(name = "user_password" , nullable = false , length = 35)
     private String userPassword;
 
-     @OneToOne
-     @JoinColumn(name = "fk_funcionario_id")
-     private Funcionario funcionarioId;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "permission", nullable = false)
+    private Permission permission;
 
-
-
-    public User(Funcionario funcionarioId, String userName, String userPassword) {
-        this.funcionarioId = funcionarioId;
-
+    public User(String userName, String userPassword, Permission permission) {
         this.userName = userName;
         this.userPassword = userPassword;
+        this.permission = permission;
     }
 
     public User() {
     }
 
-    public Funcionario getFuncionarioId() {
-        return funcionarioId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setFuncionarioId(Funcionario funcionarioId) {
-        this.funcionarioId = funcionarioId;
+    public long getId() {
+        return id;
     }
 
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
+    }
 
     public String getUserName() {
         return userName;
@@ -46,7 +51,6 @@ public class User {
         this.userName = userName;
     }
     
-
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }

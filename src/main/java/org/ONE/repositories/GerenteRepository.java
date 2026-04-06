@@ -10,17 +10,17 @@ public class GerenteRepository {
 
     public  GerenteRepository(EntityManager em ){ this.em = em;}
 
-    public Gerente finById (Long id){ return em.find(Gerente.class,id);}
+    public Gerente findById (Long id){ return em.find(Gerente.class,id);}
 
-    public void create(Gerente cliente){
+    public void create(Gerente gerente){
         em.getTransaction().begin();
-        em.persist(cliente);
+        em.persist(gerente);
         em.getTransaction().commit();
     }
 
     public void update(Gerente gerente){
         em.getTransaction().begin();
-        em.persist(gerente);
+        em.merge(gerente);
         em.getTransaction().commit();
     }
 
@@ -31,8 +31,8 @@ public class GerenteRepository {
     }
 
     public List<Gerente> findByName(String name){
-        return em.createQuery("select c from clientes c where  lower(c.name) like lower(:name)" , Gerente.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select c from gerentes c where  lower(c.name) like lower(:name)" , Gerente.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Gerente> findAll (){return em.createQuery("select c from clientes c " , Gerente.class).getResultList();}
+    public List<Gerente> findAll (){return em.createQuery("select c from gerentes c " , Gerente.class).getResultList();}
 
 }
