@@ -3,6 +3,7 @@ package org.ONE;
 import Functions.Authenticate;
 import Functions.functionOfMain;
 import jakarta.persistence.EntityManager;
+import org.ONE.config.FlyWayconfig;
 import org.ONE.models.*;
 import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.ENUM.CountryTour;
@@ -18,9 +19,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        FlyWayconfig.migrate();
         new Authenticate().authenticateUser();
         new functionOfMain().menu();
-
 
     }
 }
