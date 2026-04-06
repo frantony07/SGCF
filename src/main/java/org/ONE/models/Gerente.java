@@ -2,32 +2,70 @@ package org.ONE.models;
 
 import Finance.Ledger;
 import Finance.MainAccount;
+import jakarta.persistence.*;
 import org.ONE.models.ENUM.Language;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Entity (name = "gerentes")
 public class Gerente{
 
-    final String username;
-    private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Gerente( int id, String name, ArrayList<Language> languagesSpoken, ArrayList<Double> accounts, String username, String password){
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
-        this.username = username;
-        this.password = password;
+    @Column(name = "cpf", nullable = false, length = 11)
+    private String cpf;
+
+    @OneToOne
+    @JoinColumn(name="user_id", unique = true)
+    private User user;
+
+    public Gerente(long id, String nome, String cpf, User user){
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.user = user;
     }
 
-    public String getUsername() {
-        return username;
+    public Gerente(){
+
     }
 
-    public String getPassword() {
-        return password;
+    public long getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void autoAddMoney(double reservations , MainAccount mainAccount) {

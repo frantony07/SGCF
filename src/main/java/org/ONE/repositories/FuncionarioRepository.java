@@ -20,12 +20,6 @@ public class FuncionarioRepository {
         em.getTransaction().commit();
     }
 
-    public void addNewData(Funcionario funcionario){
-        em.getTransaction().begin();
-        em.persist(funcionario);
-        em.getTransaction().commit();
-    }
-
     public void update(Funcionario funcionario){
         em.getTransaction().begin();
         em.merge(funcionario);

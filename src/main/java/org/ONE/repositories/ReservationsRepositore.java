@@ -22,11 +22,6 @@ public class ReservationsRepositore {
         em.getTransaction().commit();
     }
 
-    public void addNewData(Reservations reservations){
-        em.getTransaction().begin();
-        em.persist(reservations);
-        em.getTransaction().commit();
-    }
 
     public void update(Reservations reservations){
         em.getTransaction().begin();

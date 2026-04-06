@@ -25,6 +25,8 @@ public class functionOfMain {
 
         PayRepository payRepository = new PayRepository(entityManager);
 
+        GerenteRepository gerenteRepository = new GerenteRepository(entityManager);
+
         try {
             boolean booleanMain = true;
             while (booleanMain){

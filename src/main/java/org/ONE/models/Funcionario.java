@@ -13,10 +13,10 @@ public class Funcionario{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cpf", nullable = true , length = 11)
+    @Column(name = "cpf", nullable = false , length = 11)
     private String cpf;
 
-    @Column(name = "name", nullable = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ElementCollection
@@ -27,6 +27,10 @@ public class Funcionario{
     @Column(name = "language")
     private List<Language> languagesSpoken = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name="user_id", unique = true)
+    private User user;
+
     public Funcionario(String cpf, String name,  List<Language> languagesSpoken) {
         this.cpf = cpf;
         this.name = name;
@@ -34,6 +38,38 @@ public class Funcionario{
     }
 
     public Funcionario() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}

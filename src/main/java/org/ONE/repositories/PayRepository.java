@@ -22,11 +22,7 @@ public class PayRepository {
         em.getTransaction().commit();
     }
 
-    public void addNewData(Pay pay){
-        em.getTransaction().begin();
-        em.persist(pay);
-        em.getTransaction().commit();
-    }
+
 
     public void update(Pay pay){
         em.getTransaction().begin();

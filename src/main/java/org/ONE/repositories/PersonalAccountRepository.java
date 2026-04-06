@@ -19,11 +19,7 @@ public class PersonalAccountRepository {
         em.getTransaction().commit();
     }
 
-    public void addNewData(PersonalAccount pa){
-        em.getTransaction().begin();
-        em.persist(pa);
-        em.getTransaction().commit();
-    }
+
 
     public void update(PersonalAccount pa){
         em.getTransaction().begin();
