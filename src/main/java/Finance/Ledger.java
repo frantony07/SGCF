@@ -15,10 +15,10 @@ public class Ledger {
     private long ID;
 
     @Column(name = "Dinheiro")
-    private double recordedMoney;
+    private static double recordedMoney;
 
     @Column(name = "Total")
-    private double totalMoney;
+    private static double totalMoney;
 
     @Column(name = "Data")
     private LocalDate dateOfChange;
@@ -57,16 +57,16 @@ public class Ledger {
         return recordedMoney;
     }
 
-    public void setRecordedMoney(double newTotal) {
-        this.recordedMoney = newTotal;
+    public static void setRecordedMoney(double newTotal) {
+        Ledger.recordedMoney = newTotal;
     }
 
     public double getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(double runningTotal) {
-        this.totalMoney = runningTotal;
+    public static void setTotalMoney(double runningTotal) {
+        Ledger.totalMoney = runningTotal;
     }
 
     public LocalDate getDateOfChange() {
@@ -78,5 +78,9 @@ public class Ledger {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return String.format("ID: %d | Data: %s | Movimento: R$%.2f | Saldo: R$%.2f",
                 ID, dateOfChange.format(formatter), recordedMoney, totalMoney);
+    }
+
+    public long getIdentifier() {
+        return ID;
     }
 }
