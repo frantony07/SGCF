@@ -1,7 +1,6 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
 import org.ONE.models.User;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class UserRepository {
     }
 
     public User findByName(String name){
-        return em.createQuery("select u from user_account u where  lower(u.name) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+        return em.createQuery("select u from user_account u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
     }
     public Boolean authenticate(String login, String password) {
 
@@ -47,9 +46,9 @@ public class UserRepository {
     }
 
 
-    public List<User> findAll (){return em.createQuery("select u from user u " , User.class).getResultList();}
+    public List<User> findAll (){return em.createQuery("select u from user_account u " , User.class).getResultList();}
 
     public long getSize(){
-        return em.createQuery("select count(u.ID) from user u" , long.class).getSingleResult();
+        return em.createQuery("select count(u.id) from user_account u" , long.class).getSingleResult();
     }
 }
