@@ -20,7 +20,7 @@ public class PrintError {
         mensagemDeErro.put(IllegalArgumentException.class, "Argumento inválido passado para o método");
         mensagemDeErro.put(IllegalStateException.class, "Estado ilegal do objeto");
         mensagemDeErro.put(UnsupportedOperationException.class, "Operação não suportada");
-        mensagemDeErro.put(DateTimeParseException.class, "Formato de data inválido (use: AAAA-MM-DD)");
+        mensagemDeErro.put(DateTimeParseException.class, "Formato de data inválido (use: dd/mm/aaaa)");
         mensagemDeErro.put(OutOfMemoryError.class, "Memória cheia");
         mensagemDeErro.put(StackOverflowError.class, "Estouro da pilha de memória");
         mensagemDeErro.put(SecurityException.class, "Violação de segurança");

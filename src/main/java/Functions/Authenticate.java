@@ -19,7 +19,7 @@ public class Authenticate {
 
         while (true) {
             System.out.println("Digite 1 para criar uma conta");
-            System.out.println("Digite 2 para entrar em uma conta");
+            System.out.println("Digite 2 para entrar no sistema");
             result = sc.nextInt();
 
             switch(result){
@@ -30,8 +30,8 @@ public class Authenticate {
                     System.out.println("Digite a senha");
                     String newSenha = sc.next();
 
-                    System.out.println("Digite seu cpf");
-                    String newCpf = sc.next();
+
+                    String newCpf = CPF.createCPF();
 
                     System.out.println("1.Conta Gerente");
                     System.out.println("2.Conta Funcionario");
@@ -74,12 +74,15 @@ public class Authenticate {
                     break;
 
                 case 2:
+                    while (true){
+
                     System.out.println("Digite seu nome de usuário");
                     String userName = sc.next();
                     System.out.println("Digite sua senha");
                     String password = sc.next();
-                    if(userRepository.authenticate(userName,password)){return;}
+                    if(userRepository.authenticate(userName,password)){break;}
                     System.out.println("Usuário ou senha incorreta, tente novamente");
+                    }
                     break;
 
                 default:

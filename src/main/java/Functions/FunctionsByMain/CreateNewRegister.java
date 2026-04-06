@@ -19,7 +19,6 @@ import java.util.Scanner;
 
 public class CreateNewRegister {
     public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepositore reservationsRepositore){
-        Scanner sc = new Scanner(System.in);
         boolean booleanMain = true;
 
         while (booleanMain){

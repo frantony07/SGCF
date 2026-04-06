@@ -36,7 +36,8 @@ public class functionOfMain {
                 System.out.println("3. Mostrar registros ");
                 System.out.println("4. Mostrar reservas ativas ");
                 System.out.println("5. Finanças");
-                System.out.println("6. Sair do sistema");
+                System.out.println("6. Alterar registro");
+                System.out.println("7. Sair do sistema");
                 int opcaoMenu = new ValidateNumber().validateINT(6);
 
                     switch(opcaoMenu){
@@ -56,7 +57,10 @@ public class functionOfMain {
                         case 5:
                             new MainAccount().mainPagamento();
                             break;
-                        case 6:
+                        case 6 :
+
+                            break;
+                        case 7:
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
                             break;

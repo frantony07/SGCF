@@ -20,7 +20,7 @@ public class SelectFunctions {
 
         while (true) {
             try {
-                System.out.println("O" + classification  + " fala alguma lingua estrangeira?");
+                System.out.println("O " + classification  + " fala alguma lingua estrangeira?");
                 System.out.println("1. Sim");
                 System.out.println("2. Não");
                 optionMain = sc.nextInt();
@@ -32,7 +32,7 @@ public class SelectFunctions {
                     languages.add(Language.PORTUGUESE);
                     break;
                     }
-                System.out.println("Opção inválida.");
+                System.out.println(" Opção inválida.");
                 } catch (Exception e) {
                     PrintError.printErro(e);
                     sc.nextLine();

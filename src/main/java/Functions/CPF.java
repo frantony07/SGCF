@@ -3,8 +3,6 @@ package Functions;
 import java.util.Scanner;
 
 public class CPF {
-
-
     public static String createCPF() {
 
         Scanner sc = new Scanner(System.in);
