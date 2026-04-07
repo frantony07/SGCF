@@ -10,9 +10,7 @@ import java.util.List;
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
-
-
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "fk_reservations_id" , nullable = false)
