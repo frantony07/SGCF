@@ -21,7 +21,6 @@ public class functionOfMain {
 
         ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
-        PersonalAccountRepository personalAccountRepository = new PersonalAccountRepository(entityManager);
 
         LedgerRepository ledgerRepository = new LedgerRepository(entityManager);
 

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ledger")
-public class ModelLedger {
+public class Ledger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

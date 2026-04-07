@@ -1,93 +1,27 @@
 package Functions;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.ENUM.Permission;
-import org.ONE.models.Funcionario;
-import org.ONE.models.Gerente;
-import org.ONE.models.User;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.UserRepository;
 
 import java.util.Scanner;
 
+
 public class Authenticate {
-    public void authenticateUser() {
+    public  void authenticateUser(){
         Scanner sc = new Scanner(System.in);
         EntityManager entityManager = CustomizerFactory.getEntityManager();
         UserRepository userRepository = new UserRepository(entityManager);
-        int result;
 
         while (true) {
-            System.out.println("Digite 1 para criar uma conta");
-            System.out.println("Digite 2 para entrar no sistema");
-            result = sc.nextInt();
+            System.out.println("Digite seu nome de usuário");
+            String userName = sc.next();
+            System.out.println("Digite sua senha");
+            String password = sc.next();
+            if(userRepository.authenticate(userName,password)){return;}
+            System.out.println("Usuário ou senha incorreta, tente novamente");
 
-            switch (result) {
-                case 1:
-                    System.out.println("Digite o usuário");
-                    String newUsuario = sc.next();
-
-                    System.out.println("Digite a senha");
-                    String newSenha = sc.next();
-
-
-                    String newCpf = CPF.createCPF();
-
-                    System.out.println("1.Conta Gerente");
-                    System.out.println("2.Conta Funcionario");
-                    Integer newPermissao = sc.nextInt();
-
-                    User user = new User();
-                    user.setUserName(newUsuario);
-                    user.setUserPassword(newSenha);
-
-                    if (newPermissao == 1) {
-                        user.setPermission(Permission.GERENTE);
-                    } else {
-                        user.setPermission(Permission.FUNCIONARIO);
-                    }
-
-
-                    if (newPermissao == 1) {
-                        Gerente gerente = new Gerente();
-                        gerente.setCpf(newCpf);
-                        gerente.setNome(newUsuario);
-                        gerente.setUser(user);
-                        userRepository.create(user);
-
-                    } else {
-                        Funcionario funcionario = new Funcionario();
-                        funcionario.setCpf(newCpf);
-                        funcionario.setName(newUsuario);
-                        funcionario.setUser(user);
-                        userRepository.create(user);
-
-
-                    }
-
-
-                    System.out.println("Conta criada com sucesso!");
-                    break;
-
-                case 2:
-
-
-                    System.out.println("Digite seu nome de usuário");
-                    String userName = sc.next();
-                    System.out.println("Digite sua senha");
-                    String userPassword = sc.next();
-                    if (userRepository.authenticate(userName, userPassword)) {
-                        System.out.println("Login realizado com sucesso");
-                        return;
-                    }
-                    System.out.println("Usuário ou senha incorreta, tente novamente");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida, tente novamente");
-                    break;
-
-            }
         }
     }
 }
+

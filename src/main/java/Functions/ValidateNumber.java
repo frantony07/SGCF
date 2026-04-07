@@ -3,7 +3,7 @@ package Functions;
 import java.util.Scanner;
 
 public class ValidateNumber {
-    public int validateINT(int limitOfNumber){
+    public  static int validateINT(int limitOfNumber){
         Scanner sc = new Scanner(System.in);
 
         while (true){
