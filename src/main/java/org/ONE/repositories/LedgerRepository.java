@@ -7,35 +7,35 @@ import org.ONE.models.ModelLedger;
 import java.util.List;
 
 public class LedgerRepository {
-    private EntityManager em ;
+    private EntityManager em;
 
     public LedgerRepository(EntityManager em) {
         this.em = em;
     }
 
-    public ModelLedger finById (Long id){
+    public ModelLedger findById(Long id) {
         return em.find(ModelLedger.class,id);
     }
 
-    public void create(ModelLedger ledger){
+    public void create(ModelLedger ledger) {
         em.getTransaction().begin();
         em.persist(ledger);
         em.getTransaction().commit();
     }
 
-    public void update(ModelLedger ledger){
+    public void update(ModelLedger ledger) {
         em.getTransaction().begin();
         em.merge(ledger);
         em.getTransaction().commit();
     }
 
-    public  void delete(ModelLedger ledger){
+    public  void delete(ModelLedger ledger) {
         em.getTransaction().begin();
         em.remove(em.contains(ledger) ? ledger : em.merge(ledger));
         em.getTransaction().commit();
     }
 
-    public List<ModelLedger> findByName(String name){
+    public List<ModelLedger> findByName(String name) {
         return em.createQuery(
                 "select p from ModelLedger p where lower(p.name)" +
                         "like lower(:name)",
@@ -43,7 +43,7 @@ public class LedgerRepository {
                 .setParameter("name" , name +"%")
                 .getResultList();
     }
-    public List<ModelLedger> findAll (){
+    public List<ModelLedger> findAll () {
         return em.createQuery(
                 "select p from Ledger p ",
                 ModelLedger.class)
