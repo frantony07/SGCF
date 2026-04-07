@@ -42,7 +42,7 @@ public class PasseioRepository {
                     .getResultList();
         }
     public Long getCount(){
-        return em.createQuery("select count(t.ID) from Passeio t" , Long.class).getSingleResult();
+        return em.createQuery("select count(t.id) from Passeio t" , Long.class).getSingleResult();
     }
     public double getPrice(Long id ){
             return em.createQuery("select t.price from Passeio t where t.id = :id" , Double.class).setParameter("id" , id).getSingleResult();

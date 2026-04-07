@@ -39,7 +39,7 @@ public class PersonalAccountRepository {
     public List<PersonalAccount> findAll (){return em.createQuery("select pa from personal_account pa " , PersonalAccount.class).getResultList();}
 
     public Long getCount(){
-        return em.createQuery("select count(pa.ID) from personal_account pa" , Long.class).getSingleResult();
+        return em.createQuery("select count(pa.id) from personal_account pa" , Long.class).getSingleResult();
     }
 
 }

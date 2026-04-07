@@ -11,14 +11,14 @@ import org.ONE.models.Reservations;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
 import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepositore;
+import org.ONE.repositories.ReservationsRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CreateNewRegister {
-    public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepositore reservationsRepositore){
+    public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepository){
         Scanner sc = new Scanner(System.in);
         boolean booleanMain = true;
 
@@ -129,10 +129,10 @@ public class CreateNewRegister {
 
     }
 
-    public void createNewReservations(ReservationsRepositore reservationsRepositore , Cliente cliente , Funcionario funcionario , Passeio passeio , double price ){
+    public void createNewReservations(ReservationsRepository reservationsRepository, Cliente cliente , Funcionario funcionario , Passeio passeio , double price ){
         LocalDate data = new CreateDate().createNewData();
         Reservations reservations = new Reservations(cliente, data, funcionario , passeio, price);
-        reservationsRepositore.create(reservations);
+        reservationsRepository.create(reservations);
     }
 
 }

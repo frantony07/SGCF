@@ -38,7 +38,7 @@ public class FuncionarioRepository {
     public List<Funcionario> findAll (){return em.createQuery("select f from funcionarios f " , Funcionario.class).getResultList();}
 
     public Long getSize(){
-        return em.createQuery("select count(f.ID) from funcionarios f" , Long.class).getSingleResult();
+        return em.createQuery("select count(f.id) from funcionarios f" , Long.class).getSingleResult();
     }
 
 }

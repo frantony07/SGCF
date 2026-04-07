@@ -42,7 +42,7 @@ public class PayRepository {
     public List<Pay> findAll (){return em.createQuery("select p from pay p " , Pay.class).getResultList();}
 
     public Long getCount(){
-        return em.createQuery("select count(p.ID) from pay p" , Long.class).getSingleResult();
+        return em.createQuery("select count(p.id) from pay p" , Long.class).getSingleResult();
     }
 
 }
