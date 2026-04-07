@@ -17,7 +17,7 @@ public class Ledger {
     @Column(name = "Data")
     private LocalDateTime dateOfChange;
 
-    public ModelLedger(double recordedMoney, double totalMoney, LocalDateTime dateOfChange) {
+    public void ModelLedger(double recordedMoney, double totalMoney, LocalDateTime dateOfChange) {
         this.recordedMoney = recordedMoney;
         this.dateOfChange = dateOfChange;
         this.totalMoney = totalMoney;

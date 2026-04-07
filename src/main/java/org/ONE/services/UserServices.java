@@ -23,16 +23,7 @@ public class UserServices {
 
         em.getTransaction().begin();
 
-        if(permissao == 1){
-            user.setPermission(Permission.GERENTE);
-            Gerente gerente = new Gerente();
-            gerente.setCpf(newCpf);
-            gerente.setNome(newUsuario);
-            gerente.setUser(user);
-
-            em.persist(user);
-            em.persist(gerente);
-        } else{
+           if(permissao == 2){
             user.setPermission(Permission.FUNCIONARIO);
             Funcionario funcionario = new Funcionario();
             funcionario.setCpf(newCpf);
@@ -44,8 +35,4 @@ public class UserServices {
         }
         em.getTransaction().commit();
     }
-
-    public User login(String userName, String userPassword){
-       return userRepository.findByLogin(userName, userPassword);
-        }
 }
