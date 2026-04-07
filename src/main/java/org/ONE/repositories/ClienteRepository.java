@@ -32,12 +32,12 @@ public class ClienteRepository {
     }
 
     public List<Cliente> findByName(String name){
-        return em.createQuery("select c from clientes c where  lower(c.name) like lower(:name)" , Cliente.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select c from Cliente c where  lower(c.name) like lower(:name)" , Cliente.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Cliente> findAll (){return em.createQuery("select c from clientes c " , Cliente.class).getResultList();}
+    public List<Cliente> findAll (){return em.createQuery("select c from Cliente c " , Cliente.class).getResultList();}
 
     public Long getSize(){
-        return em.createQuery("select count(c.id) from clientes c" , Long.class).getSingleResult();
+        return em.createQuery("select count(c.id) from Cliente c" , Long.class).getSingleResult();
     }
 
 }

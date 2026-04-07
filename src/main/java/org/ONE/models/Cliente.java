@@ -7,7 +7,8 @@ import org.ONE.models.ENUM.Language;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "clientes")
+@Entity
+@Table(name = "clientes")
 public class Cliente{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -31,8 +31,8 @@ public class GerenteRepository {
     }
 
     public List<Gerente> findByName(String name){
-        return em.createQuery("select c from gerentes c where  lower(c.name) like lower(:name)" , Gerente.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select c from Gerente c where  lower(c.name) like lower(:name)" , Gerente.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Gerente> findAll (){return em.createQuery("select c from gerentes c " , Gerente.class).getResultList();}
+    public List<Gerente> findAll (){return em.createQuery("select c from Gerente c " , Gerente.class).getResultList();}
 
 }

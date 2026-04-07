@@ -3,7 +3,8 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.Permission;
 
-@Entity(name = "user_account")
+@Entity
+@Table(name = "user_account")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

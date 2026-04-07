@@ -8,7 +8,8 @@ import org.ONE.models.ENUM.Language;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-@Entity (name = "gerentes")
+@Entity
+@Table(name = "gerentes")
 public class Gerente{
 
     @Id

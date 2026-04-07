@@ -1,9 +1,7 @@
 package org.ONE.repositories;
 
-import org.ONE.models.Funcionario;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Passeio;
-import org.ONE.models.PersonalAccount;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class PasseioRepository {
         public Passeio findById(Long id) {return em.find(Passeio.class, id); }
         public List<Passeio> findByName(String prefixo){
 
-            return em.createQuery("select p from tour p where lower(p.nome) like lower(:prefixo)", Passeio.class)
+            return em.createQuery("select p from Passeio p where lower(p.nome) like lower(:prefixo)", Passeio.class)
                     .setParameter("prefixo", prefixo + "%")
                     .getResultList();
         }
