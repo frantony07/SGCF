@@ -16,8 +16,7 @@ import java.util.Scanner;
 public class CreateNewRegister {
     public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepositore){
         boolean booleanMain = true;
-        E
-        UserRepository userRepository = new UserRepository()
+        UserRepository userRepository = new UserRepository();
 
         while (booleanMain){
             try {
@@ -25,7 +24,7 @@ public class CreateNewRegister {
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. criar novo usuario ");
-                System.out.println("4. Voltar ao menu principal");
+                System.out.println("5. Voltar ao menu principal");
                 int menuOption = new ValidateNumber().validateINT(4);
 
                 switch (menuOption){
@@ -39,7 +38,7 @@ public class CreateNewRegister {
                         createNewPasseio(passeioRepository);
                         break;
                     case 4 :
-                        createNewUser()
+                        createNewUser();
                     case  5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
