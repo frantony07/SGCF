@@ -29,25 +29,26 @@ public class UserRepository {
         em.getTransaction().commit();
     }
 
-    public User findByName(String name){
-        return em.createQuery("select u from user_account u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+    public List<User> findByName(String name){
+        return em.createQuery("select u from user_account u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getResultList();
     }
-    public Boolean authenticate(String login, String password) {
-
-        List<User> result = em.createQuery(
-                        "select u from user_account u where u. userName = :login and u.userPassword = :password", User.class)
-                .setParameter("login", login)
-                .setParameter("password", password)
-                .setMaxResults(1)
-                .getResultList();
-
-        return !result.isEmpty();
-    }
-
 
     public List<User> findAll (){return em.createQuery("select u from user_account u " , User.class).getResultList();}
 
     public Long getSize(){
         return em.createQuery("select count(u.id) from user_account u" , Long.class).getSingleResult();
+    }
+
+    public User findByLogin(String userName, String userPassword){
+        try{
+            return em.createQuery(
+                    "select u from user_account u where u.userName = :username AND u.userPassword = :password",User.class)
+                    .setParameter("username", userName)
+                    .setParameter("password", userPassword)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 }
