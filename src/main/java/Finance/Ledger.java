@@ -12,13 +12,13 @@ public class Ledger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
+    private Long ID;
 
     @Column(name = "Dinheiro")
-    private double recordedMoney;
+    private static double recordedMoney;
 
     @Column(name = "Total")
-    private double totalMoney;
+    private static double totalMoney;
 
     @Column(name = "Data")
     private LocalDate dateOfChange;
@@ -26,6 +26,12 @@ public class Ledger {
     private static ArrayList<Ledger> payments = new ArrayList<>();
     private static double quotaTarget = 0;
     private static int quotaStatusValue = -1;
+
+    public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
+        this.recordedMoney = moneyChange;
+        this.dateOfChange = dayOfRetrieval;
+        this.totalMoney = currentTotal;
+    }
 
     public static double getQuotaTarget() {
         return quotaTarget;
@@ -47,26 +53,20 @@ public class Ledger {
         return payments;
     }
 
-    public Ledger(double moneyChange, LocalDate dayOfRetrieval, double currentTotal) {
-        this.recordedMoney = moneyChange;
-        this.dateOfChange = dayOfRetrieval;
-        this.totalMoney = currentTotal;
-    }
-
     public double getRecordedMoney() {
         return recordedMoney;
     }
 
-    public void setRecordedMoney(double newTotal) {
-        this.recordedMoney = newTotal;
+    public static void setRecordedMoney(double newTotal) {
+        Ledger.recordedMoney = newTotal;
     }
 
     public double getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(double runningTotal) {
-        this.totalMoney = runningTotal;
+    public static void setTotalMoney(double runningTotal) {
+        Ledger.totalMoney = runningTotal;
     }
 
     public LocalDate getDateOfChange() {
@@ -80,7 +80,7 @@ public class Ledger {
                 ID, dateOfChange.format(formatter), recordedMoney, totalMoney);
     }
 
-    public int getIdentifier() {
-        return 0;
+    public Long getIdentifier() {
+        return ID;
     }
 }
