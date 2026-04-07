@@ -1,3 +1,7 @@
+/*
+
+DEPRECATED
+
 package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
@@ -89,3 +93,4 @@ public class QuotasFunctions {
         System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
     }
 }
+ */

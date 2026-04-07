@@ -1,3 +1,7 @@
+/*
+
+DEPRECATED
+
 package Finance;
 
 import jakarta.persistence.*;
@@ -83,3 +87,4 @@ public class Ledger {
         return ID;
     }
 }
+ */

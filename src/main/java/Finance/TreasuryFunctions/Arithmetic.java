@@ -1,3 +1,9 @@
+/*
+
+
+DEPRECATED UNTIL FURTHER NOTICE
+
+
 package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
@@ -10,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Arithmetic {
@@ -28,7 +35,7 @@ public class Arithmetic {
         }
         double amount = sc.nextDouble();
 
-        double currentTotal = totalCalculation(Ledger.getPayments(), amount);
+        ModelLedger currentTotal = (ModelLedger) new LedgerRepository(em).findAllTotals();
 
         ModelLedger ledger = new ModelLedger(amount, currentTotal, date);
 
@@ -43,7 +50,7 @@ public class Arithmetic {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Data: " + date.format(formatter));
 
-        System.out.println("Digite o valor a ser subtraído no formato xxx.xx:");
+        System.out.println("Digite um valor positivo a ser subtraído no formato xxx.xx:");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um número válido!");
             sc.next();
@@ -64,3 +71,4 @@ public class Arithmetic {
     }
 
 }
+ */
