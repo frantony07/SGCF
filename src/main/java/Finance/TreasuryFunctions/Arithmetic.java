@@ -1,17 +1,23 @@
 package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
+import jakarta.persistence.EntityManager;
+import org.ONE.models.ModelLedger;
+import org.ONE.repositories.CustomizerFactory;
+import org.ONE.repositories.LedgerRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Arithmetic {
-    public  void addMoney(ArrayList<Ledger> payments) {
+    public void addMoney(ArrayList<Ledger> payments) {
         Scanner sc = new Scanner(System.in);
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        EntityManager em = CustomizerFactory.getEntityManager();
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         System.out.println("Data: " + date.format(formatter));
 
@@ -24,10 +30,14 @@ public class Arithmetic {
 
         double currentTotal = totalCalculation(Ledger.getPayments(), amount);
 
-        payments.add(new Ledger(amount, date, currentTotal));
+        ModelLedger ledger = new ModelLedger(amount, currentTotal, date);
+
+        LedgerRepository ledgerRepository = new LedgerRepository(em);
+        ledgerRepository.create(ledger);
+        em.close();
     }
 
-    public  void subtractMoney(ArrayList<Ledger> payments) {
+    public void subtractMoney(ArrayList<Ledger> payments) {
         Scanner sc = new Scanner(System.in);
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
