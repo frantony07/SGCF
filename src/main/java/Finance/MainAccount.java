@@ -1,6 +1,5 @@
 package Finance;
 
-import Finance.TreasuryFunctions.*;
 import Functions.ValidateNumber;
 
 import java.util.ArrayList;
@@ -33,29 +32,29 @@ public class MainAccount {
 
             switch (menu) {
                 case 1:
-                    new Arithmetic().addMoney(Ledger.getPayments());
+                    // new Arithmetic().addMoney(Ledger.getPayments());
                     break;
                 case 2:
-                    new Arithmetic().subtractMoney(Ledger.getPayments());
+                    // new Arithmetic().subtractMoney(Ledger.getPayments());
                     break;
                 case 3:
-                    new Filters().receipts(Ledger.getPayments());
+                    // new Filters().receipts(Ledger.getPayments());
                     break;
                 case 4:
-                    new QuotasFunctions().quota(Ledger.getPayments(), sc);
+                    // new QuotasFunctions().quota(Ledger.getPayments(), sc);
                     break;
                 case 5:
-                    new SCRUDofRegister().deleteRegister(Ledger.getPayments(), sc);
+                    // new SCRUDofRegister().deleteRegister(Ledger.getPayments(), sc);
                     break;
                 case 6:
-                    new SCRUDofRegister().updateRegister(Ledger.getPayments(), sc);
+                    // new SCRUDofRegister().updateRegister(Ledger.getPayments(), sc);
                     break;
                 case 7:
                     mainOption = false;
                     System.out.println("Saindo das finanças");
                     return;
                 default:
-                    System.out.println("Por favor digite um número entre 1 e 5.");
+                    System.out.println("Por favor digite um número entre 1 e 7.");
             }
         }
     }
