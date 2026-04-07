@@ -50,7 +50,7 @@ public class LedgerRepository {
                 .getResultList();
     }
 
-    public List<ModelLedger> findTotal() {
+    public List<ModelLedger> findTotalMoney() {
         return em.createQuery(
                 "select recordedMoney from ledger",
                 ModelLedger.class)
