@@ -36,8 +36,8 @@ public class ClienteRepository {
     }
     public List<Cliente> findAll (){return em.createQuery("select c from clientes c " , Cliente.class).getResultList();}
 
-    public long getSize(){
-        return em.createQuery("select count(c.ID) from clientes c" , long.class).getSingleResult();
+    public Long getSize(){
+        return em.createQuery("select count(c.id) from clientes c" , Long.class).getSingleResult();
     }
 
 }

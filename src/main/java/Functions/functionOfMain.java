@@ -19,7 +19,7 @@ public class functionOfMain {
 
         PasseioRepository passeioRepository = new PasseioRepository(entityManager);
 
-        ReservationsRepositore reservationsRepositore = new ReservationsRepositore(entityManager);
+        ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
         PersonalAccountRepository personalAccountRepository = new PersonalAccountRepository(entityManager);
 
@@ -42,16 +42,16 @@ public class functionOfMain {
 
                     switch(opcaoMenu){
                         case 1:
-                            new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepositore);
+                            new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
                             break;
                         case 2:
-                            new ScheduleReservations().scheduleReservation(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepositore);
+                            new ScheduleReservations().scheduleReservation(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
                             break;
                         case 3:
                             new Recorde().displayRecorde(clienteRepository,funcionarioRepository,passeioRepository);
                             break;
                         case 4:
-                             new PrintReservations().printReservation(clienteRepository,funcionarioRepository, reservationsRepositore);
+                             new PrintReservations().printReservation(clienteRepository,funcionarioRepository, reservationsRepository);
                             break;
 
                         case 5:

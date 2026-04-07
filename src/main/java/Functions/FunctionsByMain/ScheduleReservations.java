@@ -7,13 +7,12 @@ import org.ONE.models.Passeio;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
 import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepositore;
+import org.ONE.repositories.ReservationsRepository;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScheduleReservations {
-    public void scheduleReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository , ReservationsRepositore reservationsRepositore) {
+    public void scheduleReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository , ReservationsRepository reservationsRepository) {
         Scanner sc = new Scanner(System.in);
         long passeioId = 0;
 
@@ -25,7 +24,7 @@ public class ScheduleReservations {
 
         Passeio passeio = passeioRepository.findById(passeioId);
 
-        long clienteId = new SelectFunctions().selectCliente(clienteRepository);
+        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
 
         Cliente cliente = clienteRepository.finById(clienteId);
 
@@ -34,6 +33,6 @@ public class ScheduleReservations {
         Funcionario funcionario = funcionarioRepository.finById(funcionarioId);
 
 
-        new CreateNewRegister().createNewReservations(reservationsRepositore ,cliente , funcionario , passeio, passeio.getPrice());
+        new CreateNewRegister().createNewReservations(reservationsRepository,cliente , funcionario , passeio, passeio.getPrice());
     }
 }

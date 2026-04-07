@@ -1,16 +1,14 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
-import org.ONE.models.Funcionario;
 import org.ONE.models.Reservations;
 
 import java.util.List;
 
-public class ReservationsRepositore {
+public class ReservationsRepository {
     private EntityManager em ;
 
-    public ReservationsRepositore(EntityManager em) {
+    public ReservationsRepository(EntityManager em) {
         this.em = em;
     }
 
@@ -40,17 +38,17 @@ public class ReservationsRepositore {
     }
     public List<Reservations> findAll (){return em.createQuery("select r from reservations r " , Reservations.class).getResultList();}
 
-    public long getCount(){
-        return em.createQuery("select count(r.ID) from reservations r" , long.class).getSingleResult();
+    public Long getCount(){
+        return em.createQuery("select count(r.id) from reservations r" , Long.class).getSingleResult();
     }
 
-    public List<Reservations> getFuncionarioReservations(long idFuncionario){
+    public List<Reservations> getFuncionarioReservations(Long idFuncionario){
         return  em.createQuery(
                 "select r from reservations r where r.funcionario.id = :idFuncionario",
                 Reservations.class).setParameter("idFuncionario",idFuncionario)
                 .getResultList();
     }
-    public List<Reservations> getClienteReservations(long idCliente){
+    public List<Reservations> getClienteReservations(Long idCliente){
         return  em.createQuery(
                         "select r from reservations r where r.cliente.id = :idCliente",
                         Reservations.class).setParameter("idCliente", idCliente)
