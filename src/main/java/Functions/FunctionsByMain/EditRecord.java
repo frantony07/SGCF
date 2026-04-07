@@ -15,8 +15,26 @@ public class EditRecord {
                 System.out.println("1. Editar funcionário");
                 System.out.println("2. Editar cliente");
                 System.out.println("3. Editar passeio");
-                System.out.println("4. Voltar ao menu principal");
-                int menuOption = new ValidateNumber().validateINT(4);
+                System.out.println("4. Editar estado da reserva ");
+                System.out.println("5. Voltar ao menu principal");
+
+                int menuOption = ValidateNumber.validateINT(5);
+
+                switch (menuOption){
+                    case 1:
+
+
+                    case 2:
+
+                    case 3:
+
+                    case 4:
+
+                    case 5:
+
+                    default:
+
+                }
 
             } catch (Exception e) {
                 PrintError.printErro(e);
@@ -24,4 +42,5 @@ public class EditRecord {
         }
 
     }
+
 }

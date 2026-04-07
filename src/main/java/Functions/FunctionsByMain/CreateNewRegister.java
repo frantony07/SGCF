@@ -14,11 +14,23 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CreateNewRegister{
-    public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepositore){
-        boolean booleanMain = true;
+public class CreateNewRegister {
+    public void register(){
         EntityManager entityManager = CustomizerFactory.getEntityManager();
+
+        ClienteRepository clienteRepository = new ClienteRepository(entityManager);
+
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+
+        PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+
+        ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
+
+        PayRepository payRepository = new PayRepository(entityManager);
+
         UserRepository userRepository = new UserRepository(entityManager);
+        boolean booleanMain = true;
+
 
         while (booleanMain){
             try {
@@ -26,8 +38,8 @@ public class CreateNewRegister{
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. criar novo usuario ");
-                System.out.println("4. Voltar ao menu principal");
-                int menuOption = new ValidateNumber().validateINT(4);
+                System.out.println("5. Voltar ao menu principal");
+                int menuOption = ValidateNumber.validateINT(5);
 
                 switch (menuOption){
                     case 1:
@@ -41,7 +53,7 @@ public class CreateNewRegister{
                         break;
                     case 4 :
                         createNewUser(userRepository);
-                    case  5:
+                    case  6:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
 
@@ -155,7 +167,10 @@ public class CreateNewRegister{
         newUser.setUserName(userName);
         newUser.setUserPassword(senha1);
         newUser.setPermission(permission);
+
+        userRepository.create(newUser);
     }
+
     public Permission selctedCategoryOfUser(){
         try {
 

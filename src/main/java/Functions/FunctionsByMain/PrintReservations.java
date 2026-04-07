@@ -3,16 +3,29 @@ package Functions.FunctionsByMain;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.ReservationsRepository;
+import jakarta.persistence.EntityManager;
+import org.ONE.repositories.*;
 
 public class PrintReservations {
-    public void printReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository , ReservationsRepository reservationsRepository) {
+
+    EntityManager entityManager = CustomizerFactory.getEntityManager();
+
+    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
+
+    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+
+    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+
+    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
+
+    PayRepository payRepository = new PayRepository(entityManager);
+
+    UserRepository userRepository = new UserRepository(entityManager);
+    public void printReservation() {
         try {
             System.out.println("1. Reservas de funcionários");
             System.out.println("2. Reserva de cliente");
-            int optionReservation = new ValidateNumber().validateINT(2);
+            int optionReservation = ValidateNumber.validateINT(2);
             switch (optionReservation){
                 case 1:
                     showReservationsFuncionario(funcionarioRepository , reservationsRepository);

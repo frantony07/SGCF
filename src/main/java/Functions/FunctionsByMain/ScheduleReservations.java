@@ -1,18 +1,29 @@
 package Functions.FunctionsByMain;
 
 import Functions.SelectFunctions;
+import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepository;
+import org.ONE.repositories.*;
 
 import java.util.Scanner;
 
 public class ScheduleReservations {
-    public void scheduleReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository , ReservationsRepository reservationsRepository) {
+    EntityManager entityManager = CustomizerFactory.getEntityManager();
+
+    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
+
+    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+
+    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+
+    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
+
+    PayRepository payRepository = new PayRepository(entityManager);
+
+    UserRepository userRepository = new UserRepository(entityManager);
+    public void scheduleReservation() {
         Scanner sc = new Scanner(System.in);
         long passeioId = 0;
 

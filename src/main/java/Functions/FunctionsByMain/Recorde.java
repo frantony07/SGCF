@@ -2,23 +2,35 @@ package Functions.FunctionsByMain;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
+import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.PasseioRepository;
+import org.ONE.repositories.*;
 
 import java.util.ArrayList;
 
 public class Recorde {
-    public void displayRecorde(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository){
+    EntityManager entityManager = CustomizerFactory.getEntityManager();
+
+    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
+
+    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+
+    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+
+    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
+
+    PayRepository payRepository = new PayRepository(entityManager);
+
+    UserRepository userRepository = new UserRepository(entityManager);
+    public void displayRecorde(){
         try {
             System.out.println("1. Mostrar funcionarios");
             System.out.println("2. Mostrar clientes");
             System.out.println("3. Mostrar passeios");
             System.out.println("4. Voltar ao menu");
-            int option = new ValidateNumber().validateINT(4);
+            int option =  ValidateNumber.validateINT(4);
             switch (option){
                 case 1:
                     funcionarioRepository.findAll().forEach(System.out::println);

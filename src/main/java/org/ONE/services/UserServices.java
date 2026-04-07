@@ -11,28 +11,10 @@ public class UserServices {
     private EntityManager em;
     private UserRepository userRepository;
 
-    public UserServices(EntityManager em){
-        this.em = em;
+    public UserServices(){
+
         this.userRepository = new UserRepository(em);
     }
 
-    public void createUser(String newUsuario, String newSenha, String newCpf, int permissao){
-        User user = new User();
-        user.setUserName(newUsuario);
-        user.setUserPassword(newSenha);
 
-        em.getTransaction().begin();
-
-           if(permissao == 2){
-            user.setPermission(Permission.FUNCIONARIO);
-            Funcionario funcionario = new Funcionario();
-            funcionario.setCpf(newCpf);
-            funcionario.setName(newUsuario);
-            funcionario.setUser(user);
-
-            em.persist(user);
-            em.persist(funcionario);
-        }
-        em.getTransaction().commit();
-    }
 }
