@@ -21,8 +21,7 @@ public class functionOfMain {
 
         ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
-
-        LedgerRepository ledgerRepository = new LedgerRepository(entityManager);
+        PayRepository payRepository = new PayRepository(entityManager);
 
         try {
             boolean booleanMain = true;

@@ -1,4 +1,4 @@
-package Finance.TreasuryFunctions;
+/*package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
 
@@ -88,4 +88,4 @@ public class QuotasFunctions {
         Ledger.setQuotaStatusValue(quotaStartIndex);
         System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
     }
-}
+}*/
