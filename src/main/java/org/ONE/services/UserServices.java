@@ -1,10 +1,8 @@
 package org.ONE.services;
 
-import Functions.CPF;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.ENUM.Permission;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Gerente;
 import org.ONE.models.User;
 import org.ONE.repositories.UserRepository;
 

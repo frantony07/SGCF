@@ -1,31 +1,30 @@
 package Functions.FunctionsByMain;
 
 import Functions.*;
-import org.ONE.models.Cliente;
+import org.ONE.models.*;
 import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.Funcionario;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.Passeio;
-import org.ONE.models.Reservations;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepository;
+import org.ONE.models.ENUM.Permission;
+import org.ONE.repositories.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CreateNewRegister {
     public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepositore){
         boolean booleanMain = true;
+        E
+        UserRepository userRepository = new UserRepository()
 
         while (booleanMain){
             try {
                 System.out.println("1. Criar novo funcionário");
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
+                System.out.println("4. criar novo usuario ");
                 System.out.println("4. Voltar ao menu principal");
                 int menuOption = new ValidateNumber().validateINT(4);
 
@@ -40,6 +39,7 @@ public class CreateNewRegister {
                         createNewPasseio(passeioRepository);
                         break;
                     case 4 :
+                        createNewUser()
                     case  5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
@@ -132,6 +132,46 @@ public class CreateNewRegister {
         LocalDate data = new CreateDate().createNewData();
         Reservations reservations = new Reservations(cliente, data, funcionario , passeio, price);
         reservationsRepository.create(reservations);
+    }
+
+    public void createNewUser(UserRepository userRepository){
+        Scanner sc = new Scanner(System.in);
+        User newUser = new User();
+        System.out.println("Digite o nome do usuario");
+        String userName = sc.next();
+        //is unique
+        System.out.println("Digite sua senha");
+        String senha1 = sc.next();
+
+        System.out.println("Confirma sua senha");
+        String senha2 = sc.next();
+
+        if(!Objects.equals(senha1, senha2)){
+            System.out.println("senhas incorretas");
+            return;
+        }
+        Permission permission = selctedCategoryOfUser();
+        newUser.setUserName(userName);
+        newUser.setUserPassword(senha1);
+        newUser.setPermission(permission);
+    }
+    public Permission selctedCategoryOfUser(){
+        try {
+
+            System.out.println("digite a categoria do usuario");
+            System.out.println("1." + Permission.FUNCIONARIO);
+            System.out.println("2." + Permission.GERENTE);
+            int value = ValidateNumber.validateINT(2);
+            return switch (value) {
+                case 1 -> Permission.FUNCIONARIO;
+                case 2 -> Permission.GERENTE;
+                default -> throw new IllegalStateException("Unexpected value: " + value);
+            };
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+
+        return null;
     }
 
 }
