@@ -24,8 +24,6 @@ public class functionOfMain {
 
         LedgerRepository ledgerRepository = new LedgerRepository(entityManager);
 
-        GerenteRepository gerenteRepository = new GerenteRepository(entityManager);
-
         try {
             boolean booleanMain = true;
             while (booleanMain){
