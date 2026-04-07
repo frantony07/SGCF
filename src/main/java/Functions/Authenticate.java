@@ -49,26 +49,25 @@ public class Authenticate {
                         user.setPermission(Permission.FUNCIONARIO);
                     }
 
-                    entityManager.persist(user);
-                    entityManager.flush();
 
                     if(newPermissao == 1){
                         Gerente gerente = new Gerente();
                         gerente.setCpf(newCpf);
                         gerente.setNome(newUsuario);
                         gerente.setUser(user);
+                        userRepository.create(user);
 
-                        entityManager.persist(gerente);
                     } else {
                         Funcionario funcionario = new Funcionario();
                         funcionario.setCpf(newCpf);
                         funcionario.setName(newUsuario);
                         funcionario.setUser(user);
+                        userRepository.create(user);
 
-                        entityManager.persist(funcionario);
+
                     }
 
-                    entityManager.getTransaction().commit();
+
 
                     System.out.println("Conta criada com sucesso!");
                     break;

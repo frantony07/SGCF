@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SCRUDofRegister {
-    public void deleteRegister(ArrayList<Ledger> payments, Scanner sc) {
+    public static void  deleteRegister(ArrayList<Ledger> payments, Scanner sc) {
         int count = 0;
         System.out.println("Os dez itens registrados mais recentes: ");
         for (int i = payments.size() - 1; i >= 0 && count < 10; i--) {
@@ -51,7 +51,7 @@ public class SCRUDofRegister {
                 sc.next();
             }
             double newAmount = sc.nextDouble();
-            Ledger.setRecordedMoney(newAmount);
+
             recalculateTotals(payments);
             System.out.println("Registro atualizado com sucesso! Totais recalculados.");
         } else {
@@ -63,7 +63,7 @@ public class SCRUDofRegister {
         double runningTotal = 0;
         for (Ledger p : payments) {
             runningTotal += p.getRecordedMoney();
-            Ledger.setTotalMoney(runningTotal);
+
         }
     }
 }

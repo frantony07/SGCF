@@ -22,13 +22,13 @@ public class Funcionario{
     @ElementCollection
     @Enumerated(EnumType.STRING)
     @CollectionTable(
-            name = "languages" , joinColumns = @JoinColumn(name = "fk_funcionario_id")
+            name = "languages_funcionario" , joinColumns = @JoinColumn(name = "fk_funcionario_id")
     )
     @Column(name = "language")
     private List<Language> languagesSpoken = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name="user_id", unique = true)
+    @JoinColumn(name="fk_user_id", unique = true)
     private User user;
 
     public Funcionario(String cpf, String name,  List<Language> languagesSpoken) {

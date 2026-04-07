@@ -79,4 +79,8 @@ public class Ledger {
         return String.format("ID: %d | Data: %s | Movimento: R$%.2f | Saldo: R$%.2f",
                 ID, dateOfChange.format(formatter), recordedMoney, totalMoney);
     }
+
+    public int getIdentifier() {
+        return 0;
+    }
 }

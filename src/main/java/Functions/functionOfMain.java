@@ -63,6 +63,7 @@ public class functionOfMain {
                         case 7:
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
+                            entityManager.close();
                             break;
                         default:
                             System.out.println("Opção inválida, digite as opções existentes no menu");

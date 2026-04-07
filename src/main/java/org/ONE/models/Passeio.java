@@ -15,7 +15,7 @@ import java.time.Duration;
     @Column (name = "price")
     private double price;
 
-    @Column (name = "durations")
+    @Column (name = "durations_in_minute")
     private Long durationOfTourInMinute;
 
     @Enumerated(EnumType.STRING)
@@ -23,7 +23,7 @@ import java.time.Duration;
     private CountryTour countryTour;
 
     @Column (name = "km_of_tour")
-    private String kmOftour;
+    private Long kmOftour;
 
     @Column (name = "name")
     private  String nameOfTour;
@@ -34,7 +34,7 @@ import java.time.Duration;
 
 
 
-    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, String kmOftour, String nameOfTour, String locations) {
+    public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, Long kmOftour, String nameOfTour, String locations) {
         this.price = price;
         this.durationOfTourInMinute = durationOfTourInMinute;
         this.countryTour = countryTour;
@@ -62,7 +62,7 @@ import java.time.Duration;
 
 
 
-    public String getKmOftour() {
+    public Long getKmOftour() {
         return kmOftour;
     }
 
@@ -82,7 +82,7 @@ import java.time.Duration;
         this.countryTour = countryTour;
     }
 
-    public void setKmOftour(String kmOftour) {
+    public void setKmOftour(long kmOftour) {
         this.kmOftour = kmOftour;
     }
 

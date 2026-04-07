@@ -115,7 +115,7 @@ public class CreateNewRegister {
             String location = sc.nextLine();
 
             System.out.println("Digite a distância em kilômetros do passeio");
-            String km = sc.nextLine();
+            Long km = sc.nextLong();
 
             CountryTour countryTour = new SelectFunctions().selecteCountryTour();
 
