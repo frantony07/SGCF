@@ -5,7 +5,8 @@ import org.ONE.models.ENUM.CountryTour;
 
 import java.time.Duration;
 
-@Entity(name = "tour")
+@Entity
+@Table(name = "tour")
     public class Passeio {
 
     @Id

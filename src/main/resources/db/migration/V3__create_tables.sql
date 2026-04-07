@@ -13,14 +13,6 @@ create table if not exists funcionario(
     foreign key (fk_user_id) references user_account(id)
 );
 
-create table if not exists gerentes(
-    id serial not null primary key,
-    nome varchar(50) not null,
-    cpf varchar(11) not null,
-    fk_user_id bigint,
-    foreign key(fk_user_id) references user_account(id)
-);
-
 create table if not exists languages_funcionario(
     fk_funcionario_id bigint not null,
     language varchar(50),

@@ -33,12 +33,12 @@ public class FuncionarioRepository {
     }
 
     public List<Funcionario> findByName(String name){
-        return em.createQuery("select f from funcionarios f where  lower(c.name) like lower(:name)" , Funcionario.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select f from Funcionario f where  lower(c.name) like lower(:name)" , Funcionario.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Funcionario> findAll (){return em.createQuery("select f from funcionarios f " , Funcionario.class).getResultList();}
+    public List<Funcionario> findAll (){return em.createQuery("select f from Funcionario f " , Funcionario.class).getResultList();}
 
     public Long getSize(){
-        return em.createQuery("select count(f.id) from funcionarios f" , Long.class).getSingleResult();
+        return em.createQuery("select count(f.id) from Funcionario f" , Long.class).getSingleResult();
     }
 
 }

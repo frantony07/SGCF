@@ -2,7 +2,6 @@ package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Pay;
-import org.ONE.models.PersonalAccount;
 
 
 import java.util.List;
@@ -22,8 +21,6 @@ public class PayRepository {
         em.getTransaction().commit();
     }
 
-
-
     public void update(Pay pay){
         em.getTransaction().begin();
         em.merge(pay);
@@ -37,12 +34,22 @@ public class PayRepository {
     }
 
     public List<Pay> findByName(String name){
-        return em.createQuery("select p from pay p where  lower(p.name) like lower(:name)" , Pay.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery(
+                "select p from Pay p where lower(p.name)" +
+                        "like lower(:name)",
+                Pay.class)
+                .setParameter("name" , name +"%")
+                .getResultList();
     }
-    public List<Pay> findAll (){return em.createQuery("select p from pay p " , Pay.class).getResultList();}
+    public List<Pay> findAll (){
+        return em.createQuery(
+                "select p from Pay p ",
+                Pay.class)
+                .getResultList();
+    }
 
     public Long getCount(){
-        return em.createQuery("select count(p.id) from pay p" , Long.class).getSingleResult();
+        return em.createQuery("select count(p.id) from Pay p" , Long.class).getSingleResult();
     }
 
 }

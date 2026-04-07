@@ -33,23 +33,23 @@ public class ReservationsRepository {
     }
 
     public List<Reservations> findByName(String name){
-        return em.createQuery("select r from reservations r where  lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select r from Reservations r where  lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Reservations> findAll (){return em.createQuery("select r from reservations r " , Reservations.class).getResultList();}
+    public List<Reservations> findAll (){return em.createQuery("select r from Reservations r " , Reservations.class).getResultList();}
 
     public Long getCount(){
-        return em.createQuery("select count(r.id) from reservations r" , Long.class).getSingleResult();
+        return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
 
     public List<Reservations> getFuncionarioReservations(Long idFuncionario){
         return  em.createQuery(
-                "select r from reservations r where r.funcionario.id = :idFuncionario",
+                "select r from Reservations r where r.Funcionario.id = :idFuncionario",
                 Reservations.class).setParameter("idFuncionario",idFuncionario)
                 .getResultList();
     }
     public List<Reservations> getClienteReservations(Long idCliente){
         return  em.createQuery(
-                        "select r from reservations r where r.cliente.id = :idCliente",
+                        "select r from Reservations r where r.Cliente.id = :idCliente",
                         Reservations.class).setParameter("idCliente", idCliente)
                 .getResultList();
     }

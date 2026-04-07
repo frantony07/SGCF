@@ -6,7 +6,7 @@ import org.ONE.models.ENUM.Language;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "funcionario")
+@Entity(name = "funcionarios")
 public class Funcionario{
 
     @Id

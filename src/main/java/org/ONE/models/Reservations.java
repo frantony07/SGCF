@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-@Entity(name = "reservations")
+@Entity
+@Table(name = "reservations")
 public class Reservations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
