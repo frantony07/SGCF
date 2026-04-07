@@ -16,7 +16,7 @@ public class MainAccount {
 
         while (mainOption) {
             System.out.println("Menu do caixa: ");
-            for (int i = Ledger.getPayments().size() - 1; i >= 0 && count < 10; i--) {
+            for (int i = Ledger.getPayments().size() - 1; i >= 0 && count < 5; i--) {
                 System.out.println(Ledger.getPayments().get(i));
                 count++;
             }
