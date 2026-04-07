@@ -23,7 +23,7 @@ public class functionOfMain {
 
         PersonalAccountRepository personalAccountRepository = new PersonalAccountRepository(entityManager);
 
-        PayRepository payRepository = new PayRepository(entityManager);
+        LedgerRepository ledgerRepository = new LedgerRepository(entityManager);
 
         GerenteRepository gerenteRepository = new GerenteRepository(entityManager);
 
