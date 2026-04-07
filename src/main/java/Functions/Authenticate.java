@@ -11,7 +11,7 @@ import org.ONE.repositories.UserRepository;
 import java.util.Scanner;
 
 public class Authenticate {
-    public  void authenticateUser(){
+    public void authenticateUser() {
         Scanner sc = new Scanner(System.in);
         EntityManager entityManager = CustomizerFactory.getEntityManager();
         UserRepository userRepository = new UserRepository(entityManager);
@@ -22,7 +22,7 @@ public class Authenticate {
             System.out.println("Digite 2 para entrar no sistema");
             result = sc.nextInt();
 
-            switch(result){
+            switch (result) {
                 case 1:
                     System.out.println("Digite o usuário");
                     String newUsuario = sc.next();
@@ -37,20 +37,18 @@ public class Authenticate {
                     System.out.println("2.Conta Funcionario");
                     Integer newPermissao = sc.nextInt();
 
-                    entityManager.getTransaction().begin();
-
                     User user = new User();
                     user.setUserName(newUsuario);
                     user.setUserPassword(newSenha);
 
-                    if(newPermissao == 1){
+                    if (newPermissao == 1) {
                         user.setPermission(Permission.GERENTE);
                     } else {
                         user.setPermission(Permission.FUNCIONARIO);
                     }
 
 
-                    if(newPermissao == 1){
+                    if (newPermissao == 1) {
                         Gerente gerente = new Gerente();
                         gerente.setCpf(newCpf);
                         gerente.setNome(newUsuario);
@@ -68,27 +66,28 @@ public class Authenticate {
                     }
 
 
-
                     System.out.println("Conta criada com sucesso!");
                     break;
 
                 case 2:
-                    while (true){
+
 
                     System.out.println("Digite seu nome de usuário");
                     String userName = sc.next();
                     System.out.println("Digite sua senha");
-                    String password = sc.next();
-                    if(userRepository.authenticate(userName,password)){break;}
-                    System.out.println("Usuário ou senha incorreta, tente novamente");
+                    String userPassword = sc.next();
+                    if (userRepository.authenticate(userName, userPassword)) {
+                        System.out.println("Login realizado com sucesso");
+                        return;
                     }
+                    System.out.println("Usuário ou senha incorreta, tente novamente");
                     break;
 
                 default:
                     System.out.println("Opção inválida, tente novamente");
                     break;
-            }
 
+            }
         }
     }
 }

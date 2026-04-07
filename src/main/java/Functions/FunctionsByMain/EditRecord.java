@@ -5,10 +5,10 @@ import Functions.ValidateNumber;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
 import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepositore;
+import org.ONE.repositories.ReservationsRepository;
 
 public class EditRecord {
-    public void main(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepositore reservationsRepositore){
+    public void main(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepository){
         boolean booleanMain = true;
         while (booleanMain){
             try {

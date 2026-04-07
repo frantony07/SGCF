@@ -20,7 +20,6 @@ public class ReservationsRepository {
         em.getTransaction().commit();
     }
 
-
     public void update(Reservations reservations){
         em.getTransaction().begin();
         em.merge(reservations);

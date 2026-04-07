@@ -5,7 +5,8 @@ import org.ONE.models.ENUM.Permission;
 
 @Entity(name = "user_account")
 public class User {
-    @Id@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
     @Column(name = "user_name" , nullable = false , length = 35 , unique = true)

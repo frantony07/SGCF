@@ -16,7 +16,6 @@ public class UserRepository {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-        em.close();
     }
 
     public void update(User user){

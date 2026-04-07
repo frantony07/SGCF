@@ -8,7 +8,7 @@ import java.util.List;
 @Entity(name = "pay")
 public class Pay {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
     @ManyToOne
