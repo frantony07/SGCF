@@ -64,7 +64,7 @@ create table if not exists pay (
 
 create table if not exists ledger (
     id serial not null primary key,
-    recordedMoney long not null,
-    totalMoney long not null,
+    recordedMoney double precision not null,
+    totalMoney double precision not null,
     dateOfChange timestamp not null
 );
