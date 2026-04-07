@@ -54,6 +54,7 @@ create table if not exists reservations(
     foreign key (fk_funcionario_id) references funcionario(id),
     foreign key (fk_clientes_id) references clientes(id)
 );
+
 create table if not exists pay (
     id serial not null primary key,
     total_account double precision,
