@@ -6,10 +6,10 @@ import org.ONE.models.ModelLedger;
 
 import java.util.List;
 
-public class LedgerRepository {
-    private EntityManager em;
+public class PayRepository {
+    private EntityManager em ;
 
-    public LedgerRepository(EntityManager em) {
+    public PayRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -11,7 +11,7 @@ public class ClienteRepository {
 
     public  ClienteRepository(EntityManager em ){ this.em = em;}
 
-    public Cliente finById (Long id){ return em.find(Cliente.class,id);}
+    public Cliente findById (Long id){ return em.find(Cliente.class,id);}
 
     public void create(Cliente cliente){
         em.getTransaction().begin();

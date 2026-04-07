@@ -1,6 +1,7 @@
 package Functions.FunctionsByMain;
 
 import Functions.*;
+import jakarta.persistence.EntityManager;
 import org.ONE.models.*;
 import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.ENUM.Language;
@@ -13,10 +14,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CreateNewRegister {
+public class CreateNewRegister{
     public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepositore){
         boolean booleanMain = true;
-        UserRepository userRepository = new UserRepository();
+        EntityManager entityManager = CustomizerFactory.getEntityManager();
+        UserRepository userRepository = new UserRepository(entityManager);
 
         while (booleanMain){
             try {
@@ -24,7 +26,7 @@ public class CreateNewRegister {
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. criar novo usuario ");
-                System.out.println("5. Voltar ao menu principal");
+                System.out.println("4. Voltar ao menu principal");
                 int menuOption = new ValidateNumber().validateINT(4);
 
                 switch (menuOption){
@@ -38,7 +40,7 @@ public class CreateNewRegister {
                         createNewPasseio(passeioRepository);
                         break;
                     case 4 :
-                        createNewUser();
+                        createNewUser(userRepository);
                     case  5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");

@@ -7,8 +7,4 @@ import org.ONE.repositories.UserRepository;
 import org.hibernate.service.spi.InjectService;
 
 public class ClienteServices {
-
-    private EntityManager em;
-    private ClienteRepository ClienteRepository;
-
 }

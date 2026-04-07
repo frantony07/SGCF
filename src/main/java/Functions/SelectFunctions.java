@@ -44,7 +44,7 @@ public class SelectFunctions {
             System.out.println("Escolha a língua que o funcionário fala");
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
-            System.out.println("3. O funcionario fala as duas lánguas");
+            System.out.println("3. O funcionario fala as duas linguas");
             int optionMain = new ValidateNumber().validateINT(3);
             switch (optionMain){
                 case 1:

@@ -12,7 +12,7 @@ public class FuncionarioRepository {
 
     public FuncionarioRepository(EntityManager em ){ this.em = em;}
 
-    public Funcionario finById (Long id){ return em.find(Funcionario.class,id);}
+    public Funcionario findById (Long id){ return em.find(Funcionario.class,id);}
 
     public void create(Funcionario funcionario){
         em.getTransaction().begin();

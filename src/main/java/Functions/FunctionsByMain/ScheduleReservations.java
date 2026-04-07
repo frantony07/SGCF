@@ -26,11 +26,11 @@ public class ScheduleReservations {
 
         Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
 
-        Cliente cliente = clienteRepository.finById(clienteId);
+        Cliente cliente = clienteRepository.findById(clienteId);
 
         long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
 
-        Funcionario funcionario = funcionarioRepository.finById(funcionarioId);
+        Funcionario funcionario = funcionarioRepository.findById(funcionarioId);
 
 
         new CreateNewRegister().createNewReservations(reservationsRepository,cliente , funcionario , passeio, passeio.getPrice());

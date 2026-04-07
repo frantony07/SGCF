@@ -21,8 +21,7 @@ public class functionOfMain {
 
         ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
-
-        LedgerRepository ledgerRepository = new LedgerRepository(entityManager);
+        PayRepository payRepository = new PayRepository(entityManager);
 
         try {
             boolean booleanMain = true;
@@ -35,7 +34,7 @@ public class functionOfMain {
                 System.out.println("5. Finanças");
                 System.out.println("6. Alterar registro");
                 System.out.println("7. Sair do sistema");
-                int opcaoMenu = new ValidateNumber().validateINT(6);
+                int opcaoMenu = new ValidateNumber().validateINT(7);
 
                     switch(opcaoMenu){
                         case 1:
@@ -61,7 +60,7 @@ public class functionOfMain {
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
                             entityManager.close();
-                            break;
+                            return;
                         default:
                             System.out.println("Opção inválida, digite as opções existentes no menu");
                             break;

@@ -44,7 +44,6 @@ public class UserRepository {
         return !result.isEmpty();
     }
 
-
     public List<User> findAll (){return em.createQuery("select u from user_account u " , User.class).getResultList();}
 
     public Long getSize(){
