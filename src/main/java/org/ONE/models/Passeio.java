@@ -6,7 +6,7 @@ import org.ONE.models.ENUM.CountryTour;
 import java.time.Duration;
 
 @Entity
-@Table(name = "tour")
+@Table(name = "passeio")
     public class Passeio {
 
     @Id
@@ -31,8 +31,6 @@ import java.time.Duration;
 
     @Column(name = "locations")
     private  String locations;
-
-
 
 
     public Passeio(double price, long durationOfTourInMinute, CountryTour countryTour, Long kmOftour, String nameOfTour, String locations) {

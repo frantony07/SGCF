@@ -1,4 +1,4 @@
-package Finance.TreasuryFunctions;
+/*package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
 import Functions.PrintError;
@@ -56,4 +56,4 @@ public class Filters {
                 .filter(p -> p.getRecordedMoney() > 0)
                 .toList();
     }
-}
+}*/

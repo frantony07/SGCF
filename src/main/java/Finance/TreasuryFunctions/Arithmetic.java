@@ -1,4 +1,4 @@
-package Finance.TreasuryFunctions;
+/*package Finance.TreasuryFunctions;
 
 import Finance.Ledger;
 import jakarta.persistence.EntityManager;
@@ -63,4 +63,4 @@ public class Arithmetic {
         return currentTotal + calcNum;
     }
 
-}
+}*/

@@ -26,24 +26,26 @@ public class ScheduleReservations {
     public void scheduleReservation() {
         Scanner sc = new Scanner(System.in);
         long passeioId = 0;
+        {
+            System.out.println("--- Passeios disponiveis ---");
+            passeioRepository.findAll().forEach(System.out::println);
 
-        System.out.println("--- Passeios disponiveis ---");
-        passeioRepository.findAll().forEach(System.out::println);
+            System.out.println("Digite o ID do passeio escolhido");
+            passeioId = sc.nextLong();
 
-        System.out.println("Digite o ID do passeio escolhido");
-        passeioId = sc.nextLong();
+            Passeio passeio = passeioRepository.findById(passeioId);
 
-        Passeio passeio = passeioRepository.findById(passeioId);
+            Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
 
-        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
+            Cliente cliente = clienteRepository.findById(clienteId);
 
-        Cliente cliente = clienteRepository.findById(clienteId);
+            long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
 
-        long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
-
-        Funcionario funcionario = funcionarioRepository.findById(funcionarioId);
+            Funcionario funcionario = funcionarioRepository.findById(funcionarioId);
 
 
-        new CreateNewRegister().createNewReservations(reservationsRepository,cliente , funcionario , passeio, passeio.getPrice());
+            new CreateNewRegister().createNewReservations(reservationsRepository, cliente, funcionario, passeio, passeio.getPrice());
+        }
+        }
     }
-}
+

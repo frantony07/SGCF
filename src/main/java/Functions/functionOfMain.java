@@ -21,9 +21,6 @@ public class functionOfMain {
 
         ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
-        PayRepository payRepository = new PayRepository(entityManager);
-
-       UserRepository userRepository = new UserRepository(entityManager);
 
         try {
             boolean booleanMain = true;
@@ -36,15 +33,23 @@ public class functionOfMain {
                 System.out.println("5. Finanças");
                 System.out.println("6. Alterar registro");
                 System.out.println("7. Sair do sistema");
-                int opcaoMenu = ValidateNumber.validateINT(6);
+                int opcaoMenu = ValidateNumber.validateINT(7);
 
                     switch(opcaoMenu){
                         case 1:
-                            new CreateNewRegister().register();
+                            new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
                             break;
                         case 2:
                             new ScheduleReservations().scheduleReservation();
                             break;
+                            var passeios = passeioRepository.findAll();
+                                    if(passeios.isEmpty()){
+                                        System.out.println("Nenhum passeio cadastrado");
+                                    }else {
+                                        new ScheduleReservations().scheduleReservation();
+                                    }
+                                        break;
+
                         case 3:
                             new Recorde().displayRecorde();
                             break;
@@ -62,7 +67,7 @@ public class functionOfMain {
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
                             entityManager.close();
-                            break;
+                            return;
                         default:
                             System.out.println("Opção inválida, digite as opções existentes no menu");
                             break;
