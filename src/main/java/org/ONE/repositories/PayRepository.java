@@ -1,7 +1,7 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.ModelLedger;
+import org.ONE.models.PayModel;
 
 
 import java.util.List;
@@ -13,53 +13,53 @@ public class PayRepository {
         this.em = em;
     }
 
-    public ModelLedger findById(Long id) {
-        return em.find(ModelLedger.class,id);
+    public PayModel findById(Long id) {
+        return em.find(PayModel.class,id);
     }
 
-    public void create(ModelLedger ledger) {
+    public void create(PayModel pay) {
         em.getTransaction().begin();
-        em.persist(ledger);
+        em.persist(pay);
         em.getTransaction().commit();
     }
 
-    public void update(ModelLedger ledger) {
+    public void update(PayModel pay) {
         em.getTransaction().begin();
-        em.merge(ledger);
+        em.merge(pay);
         em.getTransaction().commit();
     }
 
-    public  void delete(ModelLedger ledger) {
+    public  void delete(PayModel pay) {
         em.getTransaction().begin();
-        em.remove(em.contains(ledger) ? ledger : em.merge(ledger));
+        em.remove(em.contains(pay) ? pay : em.merge(pay));
         em.getTransaction().commit();
     }
 
-    public List<ModelLedger> findByName(String name) {
+    public List<PayModel> findByName(String name) {
         return em.createQuery(
-                "select p from ModelLedger p where lower(p.name)" +
+                "select p from PayModel p where lower(p.name)" +
                         "like lower(:name)",
-                ModelLedger.class)
+                PayModel.class)
                 .setParameter("name" , name +"%")
                 .getResultList();
     }
-    public List<ModelLedger> findAll () {
+    public List<PayModel> findAll () {
         return em.createQuery(
-                "select p from Ledger p ",
-                ModelLedger.class)
+                "select p from Pay p ",
+                PayModel.class)
                 .getResultList();
     }
 
-    public List<ModelLedger> findTotalMoney() {
+    public List<PayModel> findTotalMoney() {
         return em.createQuery(
-                "select recordedMoney from ledger",
-                ModelLedger.class)
+                "select recordedMoney from pay",
+                PayModel.class)
                 .getResultList();
     }
 
     public Long getCount(){
         return em.createQuery(
-                "select count(p.id) from ModelLedger p",
+                "select count(p.id) from PayModel p",
                 Long.class)
                 .getSingleResult();
     }
