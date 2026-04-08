@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public class Reservations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
     @Column(name = "date")
     private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "fk_passeio_id", nullable = false)
-    private Passeio tour;
+    private Passeio passeio;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id", nullable = false)
@@ -32,15 +32,13 @@ public class Reservations {
     @Column (name = "value" , nullable = false)
     private double value;
 
-
-
     public Reservations() {}
 
-    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio tour, double value) {
+    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio passeio, double value) {
         this.cliente = cliente;
         this.date = date;
         this.funcionario = funcionario;
-        this.tour = tour;
+        this.passeio = passeio;
         this.value = value;
     }
 
@@ -62,11 +60,11 @@ public class Reservations {
     }
 
     public Passeio getTour() {
-        return tour;
+        return passeio;
     }
 
     public void setTour(Passeio tour) {
-        this.tour = tour;
+        this.passeio = tour;
     }
 
 
@@ -102,7 +100,7 @@ public class Reservations {
                 "\ncliente=" + cliente +
                 "\nid=" + id +
                 "\ndate=" + date +
-                "\ntour=" + tour +
+                "\ntour=" + passeio +
                 "\nfuncionario=" + funcionario +
                 "\nvalue=" + value ;
     }

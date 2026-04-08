@@ -41,7 +41,7 @@ create table if not exists clientes_languages(
     foreign key (fk_clientes_id) references clientes(id)
 );
 
-create table if not exists tour(
+create table if not exists passeio(
     id serial not null primary key,
     price double precision not null,
     durations_in_minute bigint,
@@ -54,11 +54,11 @@ create table if not exists tour(
 create table if not exists reservations(
     id serial not null primary key,
     date time not null,
-    fk_tour_id bigint not null,
+    fk_passeio_id bigint not null,
     fk_funcionario_id bigint not null,
     fk_clientes_id bigint not null,
     value double precision not null,
-    foreign key (fk_tour_id) references tour(id),
+    foreign key (fk_passeio_id) references passeio(id),
     foreign key (fk_funcionario_id) references funcionario(id),
     foreign key (fk_clientes_id) references clientes(id)
 );

@@ -30,7 +30,7 @@ public class PasseioRepository {
             em.getTransaction().commit();
         }
 
-        public List<Passeio> findAll() { return em.createQuery( "select t from tour t", Passeio.class).getResultList();}
+        public List<Passeio> findAll() { return em.createQuery( "select t from Passeio t", Passeio.class).getResultList();}
 
         public Passeio findById(Long id) {return em.find(Passeio.class, id); }
         public List<Passeio> findByName(String prefixo){

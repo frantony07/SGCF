@@ -26,8 +26,8 @@ public class CreateNewRegister{
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. criar novo usuario ");
-                System.out.println("4. Voltar ao menu principal");
-                int menuOption = new ValidateNumber().validateINT(4);
+                System.out.println("5. Voltar ao menu principal");
+                int menuOption = new ValidateNumber().validateINT(5);
 
                 switch (menuOption){
                     case 1:
@@ -44,7 +44,6 @@ public class CreateNewRegister{
                     case  5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
-
                         return;
                     default:
                         System.out.println("Opção inválida");
