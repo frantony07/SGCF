@@ -43,9 +43,10 @@ create table if not exists passeio(
     locations varchar(255)
 );
 
+drop table reservations;
 create table if not exists reservations(
     id serial not null primary key,
-    date time not null,
+    date date not null,
     fk_passeio_id bigint not null,
     fk_funcionario_id bigint not null,
     fk_clientes_id bigint not null,
