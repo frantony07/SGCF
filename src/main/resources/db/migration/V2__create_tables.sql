@@ -25,7 +25,7 @@ create table if not exists gerentes(
     cpf varchar(11) not null,
     fk_user_id bigint,
     foreign key(fk_user_id) references user_account(id)
-    );
+);
 
 create table if not exists clientes(
     id serial not null primary key ,
@@ -65,7 +65,7 @@ create table if not exists reservations(
 
 create table if not exists pay (
     id serial not null primary key,
-    total_account double precision,
+    status varchar(15),
     fk_reservations_id bigint not null,
     foreign key (fk_reservations_id) references reservations(id)
 );
