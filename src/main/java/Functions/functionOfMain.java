@@ -41,8 +41,14 @@ public class functionOfMain {
                             new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
                             break;
                         case 2:
-                            new ScheduleReservations().scheduleReservation(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
-                            break;
+                            var passeios = passeioRepository.findAll();
+                                    if(passeios.isEmpty()){
+                                        System.out.println("Nenhum passeio cadastrado");
+                                    }else {
+                                        new ScheduleReservations().scheduleReservation(clienteRepository, funcionarioRepository, passeioRepository, reservationsRepository);
+                                    }
+                                        break;
+
                         case 3:
                             new Recorde().displayRecorde(clienteRepository,funcionarioRepository,passeioRepository);
                             break;
