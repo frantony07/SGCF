@@ -1,14 +1,23 @@
 package Functions.FunctionsByMain;
 
 import Functions.PrintError;
+import Functions.SelectFunctions;
 import Functions.ValidateNumber;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
 import org.ONE.repositories.PasseioRepository;
 import org.ONE.repositories.ReservationsRepository;
+import org.ONE.services.*;
 
 public class EditRecord {
-    public void main(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepository){
+
+    ClienteServices clientes = new ClienteServices();
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    PasseioService passeios = new PasseioService();
+    UserServices userServices = new UserServices();
+    ReservationsServices reservations = new ReservationsServices();
+
+    public void main(){
         boolean booleanMain = true;
         while (booleanMain){
             try {
@@ -41,6 +50,9 @@ public class EditRecord {
             }
         }
 
+    }
+    public void AddNewLanguage(){
+        long funcionario = new SelectFunctions().selectFuncionario();
     }
 
 }

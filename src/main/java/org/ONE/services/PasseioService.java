@@ -2,71 +2,69 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.ENUM.Permission;
-import org.ONE.models.Funcionario;
-import org.ONE.models.ModelLedger;
-import org.ONE.models.User;
+import org.ONE.models.Cliente;
+import org.ONE.models.Passeio;
+import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.LedgerRepository;
-import org.ONE.repositories.UserRepository;
+import org.ONE.repositories.PasseioRepository;
 
 import java.util.List;
 
-public class UserServices {
-
+public class PasseioService {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private UserRepository userRepository = new UserRepository(entityManager);
+    private PasseioRepository passeioRepository = new PasseioRepository(entityManager);
 
-    public UserServices() {
+    public PasseioService() {
     }
 
-    public  void createNewRecorde(User user){
+    public  void createNewRecorde(Passeio passeio){
         try {
-            if(user == null){
+            if(passeio == null){
                 throw new RuntimeException("o cliente nao pode ser nulo ");
             }
-            userRepository.create(user);
+            passeioRepository.create(passeio);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void updateRecorde(User user){
+    public void updateRecorde(Passeio passeio){
         try {
-            if(user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            userRepository.update(user);
+            passeioRepository.update(passeio);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public  void delete(User user){
+    public  void delete(Passeio passeio){
         try {
-            if (user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            userRepository.delete(user);
+            passeioRepository.delete(passeio);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public User findByName(String name){
+    public List<Passeio> findByName(String name){
         try {
             if (name.matches("\\d+")) {
                 throw new RuntimeException("o  nome nao pode ser um numero");
             }
 
+            return passeioRepository.findByName(name);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-            return userRepository.findByName(name);
 
+        return List.of();
     }
-    public List<User> findAll (){
+    public List<Passeio> findAll (){
         try {
-            return  userRepository.findAll();
+            return  passeioRepository.findAll();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -75,15 +73,15 @@ public class UserServices {
         return List.of();
     }
 
+    public Passeio findById(Long id) {return passeioRepository.findById(id); }
+
     public Long getSize(){
         try {
-            return userRepository.getSize();
+            return passeioRepository.getSize();
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return 0L;
     }
-
-
 }

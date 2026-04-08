@@ -1,8 +1,11 @@
 package org.ONE.services;
 
+import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
+import org.ONE.models.Passeio;
 import org.ONE.repositories.ClienteRepository;
+import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.UserRepository;
 import org.hibernate.service.spi.InjectService;
 
@@ -12,6 +15,9 @@ public class ClienteServices {
 
     private  EntityManager entityManager = CustomizerFactory.getEntityManager();
     private ClienteRepository clienteRepository = new ClienteRepository(entityManager);
+
+    public ClienteServices() {
+    }
 
     public  void createNewRecorde(Cliente cliente){
         try {
@@ -68,6 +74,8 @@ public class ClienteServices {
 
         return List.of();
     }
+
+    public Cliente findById(Long id) {return clienteRepository.findById(id); }
 
     public Long getSize(){
         try {

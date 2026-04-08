@@ -4,6 +4,7 @@ import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
+import org.ONE.models.Passeio;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.FuncionarioRepository;
@@ -13,6 +14,9 @@ import java.util.List;
 public class FuncionarioServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
     private FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+
+    public FuncionarioServices() {
+    }
 
     public  void createNewRecorde(Funcionario funcionario){
         try {
@@ -69,6 +73,7 @@ public class FuncionarioServices {
 
         return List.of();
     }
+    public Funcionario findById(Long id) {return funcionarioRepository.findById(id); }
 
     public Long getSize(){
         try {

@@ -7,23 +7,16 @@ import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
 import org.ONE.repositories.*;
+import org.ONE.services.*;
 
 import java.util.ArrayList;
 
 public class Recorde {
-    EntityManager entityManager = CustomizerFactory.getEntityManager();
-
-    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
-
-    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
-
-    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
-
-    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
-
-    PayRepository payRepository = new PayRepository(entityManager);
-
-    UserRepository userRepository = new UserRepository(entityManager);
+    ClienteServices clientes = new ClienteServices();
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    PasseioService passeios = new PasseioService();
+    UserServices userServices = new UserServices();
+    ReservationsServices reservations = new ReservationsServices();
     public void displayRecorde(){
         try {
             System.out.println("1. Mostrar funcionarios");
@@ -33,13 +26,13 @@ public class Recorde {
             int option =  ValidateNumber.validateINT(4);
             switch (option){
                 case 1:
-                    funcionarioRepository.findAll().forEach(System.out::println);
+                    funcionarios.findAll().forEach(System.out::println);
                     break;
                 case 2:
-                    clienteRepository.findAll().forEach(System.out::println);
+                    clientes.findAll().forEach(System.out::println);
                     break;
                 case 3 :
-                    passeioRepository.findAll().forEach(System.out::println);
+                    passeios.findAll().forEach(System.out::println);
 
                     break;
                 case 4:

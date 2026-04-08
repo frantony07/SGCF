@@ -8,17 +8,23 @@ import org.ONE.models.ENUM.Language;
 import org.ONE.models.ENUM.CountryTour;
 import org.ONE.models.ENUM.Permission;
 import org.ONE.repositories.*;
+import org.ONE.services.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CreateNewRegister{
-    public void register(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository, PasseioRepository passeioRepository, ReservationsRepository reservationsRepositore){
+public class CreateNewRegister {
+        ClienteServices clientes = new ClienteServices();
+        FuncionarioServices funcionarios = new FuncionarioServices();
+        PasseioService passeios = new PasseioService();
+        UserServices userServices = new UserServices();
+        ReservationsServices reservations = new ReservationsServices();
+
+    public void register(){
         boolean booleanMain = true;
-        EntityManager entityManager = CustomizerFactory.getEntityManager();
-        UserRepository userRepository = new UserRepository(entityManager);
+
 
         while (booleanMain){
             try {
@@ -26,23 +32,22 @@ public class CreateNewRegister{
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
                 System.out.println("4. criar novo usuario ");
-
                 System.out.println("5. Voltar ao menu principal");
                 int menuOption = ValidateNumber.validateINT(5);
 
                 switch (menuOption){
                     case 1:
-                        createNewFuncionario(funcionarioRepository);
+                        createNewFuncionario();
                         break;
                     case 2 :
-                        createNewCliente(clienteRepository);
+                        createNewCliente();
                         break;
                     case 3 :
-                        createNewPasseio(passeioRepository);
+                        createNewPasseio();
                         break;
                     case 4 :
-                        createNewUser(userRepository);
-                    case  5:
+                        createNewUser();
+                    case  6:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
 
@@ -56,7 +61,7 @@ public class CreateNewRegister{
             }
         }
     }
-    public void createNewFuncionario(FuncionarioRepository  funcionarios){
+    public void createNewFuncionario(){
         try {
 
             Scanner sc = new Scanner(System.in);
@@ -70,13 +75,13 @@ public class CreateNewRegister{
 
             new SelectFunctions().selectLanguageMain(languages, "funcionario");
 
-            funcionarios.create(new Funcionario(cpf, name, languages));
+            funcionarios.createNewRecorde(new Funcionario(cpf, name, languages));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void createNewCliente(ClienteRepository clientes){
+    public void createNewCliente(){
         try {
             Scanner sc = new Scanner(System.in);
 
@@ -92,14 +97,14 @@ public class CreateNewRegister{
 
             new SelectFunctions().selectLanguageMain(languages, "cliente");
 
-            clientes.create(new Cliente(languages , countryCostumer ,cpf ,name));
+            clientes.createNewRecorde(new Cliente(languages , countryCostumer ,cpf ,name));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
 
     }
-    public void createNewPasseio(PasseioRepository passeios){
+    public void createNewPasseio(){
         try {
             Scanner sc = new Scanner(System.in);
 
@@ -122,7 +127,7 @@ public class CreateNewRegister{
             CountryTour countryTour = new SelectFunctions().selecteCountryTour();
 
 
-            passeios.create(new Passeio(price,durationInMinute,countryTour,km,name,location));
+            passeios.createNewRecorde(new Passeio(price,durationInMinute,countryTour,km,name,location));
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -130,13 +135,13 @@ public class CreateNewRegister{
 
     }
 
-    public void createNewReservations(ReservationsRepository reservationsRepository , Cliente cliente , Funcionario funcionario , Passeio passeio , double price ){
+    public void createNewReservations( Cliente cliente , Funcionario funcionario , Passeio passeio  ){
         LocalDate data = new CreateDate().createNewData();
-        Reservations reservations = new Reservations(cliente, data, funcionario , passeio, price);
-        reservationsRepository.create(reservations);
+        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice());
+        reservations.createNewRecorde(reservation);
     }
 
-    public void createNewUser(UserRepository userRepository){
+    public void createNewUser(){
         Scanner sc = new Scanner(System.in);
         User newUser = new User();
         System.out.println("Digite o nome do usuario");
@@ -157,7 +162,7 @@ public class CreateNewRegister{
         newUser.setUserPassword(senha1);
         newUser.setPermission(permission);
 
-        userRepository.create(newUser);
+        userServices.createNewRecorde(newUser);
     }
 
     public Permission selctedCategoryOfUser(){

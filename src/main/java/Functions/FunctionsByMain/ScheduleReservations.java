@@ -6,46 +6,37 @@ import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
 import org.ONE.repositories.*;
+import org.ONE.services.*;
 
 import java.util.Scanner;
 
 public class ScheduleReservations {
-    EntityManager entityManager = CustomizerFactory.getEntityManager();
-
-    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
-
-    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
-
-    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
-
-    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
-
-    PayRepository payRepository = new PayRepository(entityManager);
-
-    UserRepository userRepository = new UserRepository(entityManager);
+    ClienteServices clientes = new ClienteServices();
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    PasseioService passeios = new PasseioService();
+    UserServices userServices = new UserServices();
+    ReservationsServices reservations = new ReservationsServices();
     public void scheduleReservation() {
         Scanner sc = new Scanner(System.in);
         long passeioId = 0;
-        {
-            System.out.println("--- Passeios disponiveis ---");
-            passeioRepository.findAll().forEach(System.out::println);
 
-            System.out.println("Digite o ID do passeio escolhido");
-            passeioId = sc.nextLong();
+        System.out.println("--- Passeios disponiveis ---");
+        passeios.findAll().forEach(System.out::println);
 
-            Passeio passeio = passeioRepository.findById(passeioId);
+        System.out.println("Digite o ID do passeio escolhido");
+        passeioId = sc.nextLong();
 
-            Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
+        Passeio passeio = passeios.findById(passeioId);
 
-            Cliente cliente = clienteRepository.findById(clienteId);
+        Long clienteId = new SelectFunctions().selectCliente();
 
-            long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
+        Cliente cliente = clientes.findById(clienteId);
 
-            Funcionario funcionario = funcionarioRepository.findById(funcionarioId);
+        long funcionarioId = new SelectFunctions().selectFuncionario();
+
+        Funcionario funcionario = funcionarios.findById(funcionarioId);
 
 
-            new CreateNewRegister().createNewReservations(reservationsRepository, cliente, funcionario, passeio, passeio.getPrice());
-        }
-        }
+        new CreateNewRegister().createNewReservations(cliente , funcionario , passeio);
     }
-
+}

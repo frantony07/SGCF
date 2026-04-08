@@ -7,12 +7,17 @@ import org.ONE.models.ENUM.CountryTour;
 import org.ONE.models.Funcionario;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
+import org.ONE.services.ClienteServices;
+import org.ONE.services.FuncionarioServices;
 
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SelectFunctions {
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    ClienteServices clientes = new ClienteServices();
+
     public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 
         Scanner sc = new Scanner(System.in);
@@ -45,7 +50,7 @@ public class SelectFunctions {
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
             System.out.println("3. O funcionario fala as duas linguas");
-            int optionMain = new ValidateNumber().validateINT(3);
+            int optionMain =  ValidateNumber.validateINT(3);
             switch (optionMain){
                 case 1:
                     languages.add(Language.ENGLISH);
@@ -72,7 +77,7 @@ public class SelectFunctions {
         System.out.println("2." + CountryCostumer.UNITED_STATES);
         System.out.println("3." + CountryCostumer.INDIAN);
         System.out.println("4." + CountryCostumer.EUROPE);
-        int optionMain = new ValidateNumber().validateINT(5);
+        int optionMain = ValidateNumber.validateINT(5);
         switch (optionMain){
             case 1 :
                 return CountryCostumer.BRAZIL;
@@ -99,7 +104,7 @@ public class SelectFunctions {
             System.out.println("2." + CountryTour.Brasil);
             System.out.println("3." + CountryTour.Paraguay);
 
-            int optionMenu = new ValidateNumber().validateINT(3);
+            int optionMenu = ValidateNumber.validateINT(3);
 
             switch (optionMenu){
                 case 1:
@@ -120,7 +125,7 @@ public class SelectFunctions {
         return CountryTour.Brasil;
     }
 
-    public long selectFuncionario(FuncionarioRepository funcionarios){
+    public long selectFuncionario(){
         try{
             System.out.println("Seleciona o id do  funcionário escolhido");
             funcionarios.findAll().forEach(System.out::println);
@@ -133,7 +138,7 @@ public class SelectFunctions {
         return 0;
     }
 
-    public long selectCliente(ClienteRepository clientes) {
+    public long selectCliente() {
         try {
             System.out.println("Selecione o cliente:");
             clientes.findAll().forEach(System.out::println);

@@ -5,22 +5,16 @@ import Functions.SelectFunctions;
 import Functions.ValidateNumber;
 import jakarta.persistence.EntityManager;
 import org.ONE.repositories.*;
+import org.ONE.services.*;
 
 public class PrintReservations {
 
-    EntityManager entityManager = CustomizerFactory.getEntityManager();
+    ClienteServices clientes = new ClienteServices();
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    PasseioService passeios = new PasseioService();
+    UserServices userServices = new UserServices();
+    ReservationsServices reservations = new ReservationsServices();
 
-    ClienteRepository clienteRepository = new ClienteRepository(entityManager);
-
-    FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
-
-    PasseioRepository passeioRepository = new PasseioRepository(entityManager);
-
-    ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
-
-    PayRepository payRepository = new PayRepository(entityManager);
-
-    UserRepository userRepository = new UserRepository(entityManager);
     public void printReservation() {
         try {
             System.out.println("1. Reservas de funcionários");
@@ -28,29 +22,29 @@ public class PrintReservations {
             int optionReservation = ValidateNumber.validateINT(2);
             switch (optionReservation){
                 case 1:
-                    showReservationsFuncionario(funcionarioRepository , reservationsRepository);
+                    showReservationsFuncionario();
                     break;
                 case 2 :
-                    showReservationsClientes(clienteRepository, reservationsRepository);
+                    showReservationsClientes();
                     break;
             }
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void showReservationsFuncionario(FuncionarioRepository funcionarioRepository , ReservationsRepository reservationsRepository){
+    public void showReservationsFuncionario(){
 
-        funcionarioRepository.findAll().forEach(System.out::println);
+        funcionarios.findAll().forEach(System.out::println);
 
-        Long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
-        reservationsRepository.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
+        Long funcionarioId = new SelectFunctions().selectFuncionario();
+        reservations.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
 
     }
-    public  void showReservationsClientes(ClienteRepository clienteRepository , ReservationsRepository reservationsRepository){
-        clienteRepository.findAll().forEach(System.out::println);
+    public  void showReservationsClientes(){
+        clientes.findAll().forEach(System.out::println);
 
-        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
-        reservationsRepository.getClienteReservations(clienteId).forEach(System.out::println);
+        Long clienteId = new SelectFunctions().selectCliente();
+        reservations.getClienteReservations(clienteId).forEach(System.out::println);
 
 
     }
