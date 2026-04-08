@@ -5,17 +5,12 @@ import Functions.FunctionsByMain.*;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.User;
 import org.ONE.repositories.*;
-import org.ONE.services.ClienteServices;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.PasseioServices;
-import org.ONE.services.ReservationsServices;
+import org.ONE.services.*;
 
 public class functionOfMain {
 
 
     public void menu(User user){
-
-
         try {
             boolean booleanMain = true;
             while (booleanMain){
@@ -31,12 +26,15 @@ public class functionOfMain {
 
                     switch(opcaoMenu){
                         case 1:
+                            Authenticate.isManager(user);
                             new CreateNewRegister().register();
                             break;
                         case 2:
+                            Authenticate.isManager(user);
                             new ScheduleReservations().scheduleReservation();
                             break;
                         case 3:
+                            Authenticate.isManager(user);
                             new Recorde().displayRecorde();
                             break;
                         case 4:
@@ -44,9 +42,11 @@ public class functionOfMain {
                             break;
 
                         case 5:
+                            Authenticate.isManager(user);
                             new MainAccount().mainPagamento();
                             break;
                         case 6 :
+                            Authenticate.isManager(user);
                             new EditRecord().main();
                             break;
                         case 7:

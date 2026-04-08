@@ -29,7 +29,7 @@ public class Authenticate {
         }
     }
 
-    public  boolean isManager(User user){
+    public static boolean isManager(User user){
         if (user.getPermission() == Permission.GERENTE ){
             return true;
         }
