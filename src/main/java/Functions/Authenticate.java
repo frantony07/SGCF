@@ -12,20 +12,29 @@ import java.util.Scanner;
 
 public class Authenticate {
     public  User authenticateUser(){
-        Scanner sc = new Scanner(System.in);
-        EntityManager entityManager = CustomizerFactory.getEntityManager();
-        UserServices userServices = new UserServices();
+        try {
+            Scanner sc = new Scanner(System.in);
+            EntityManager entityManager = CustomizerFactory.getEntityManager();
+            UserServices userServices = new UserServices();
 
-        while (true) {
-            System.out.println("Digite seu nome de usuário");
-            String userName = sc.next();
-            System.out.println("Digite sua senha");
-            String password = sc.next();
-            User user = new UserServices().authenticate(userName,password);
-            if(user != null) {return user;}
+            while (true) {
+                System.out.println("Digite seu nome de usuário");
+                String userName = sc.next();
+                System.out.println("Digite sua senha");
+                String password = sc.next();
+                User user = new UserServices().authenticate(userName,password);
+                if(user != null) {
+                    System.out.println("Login realizado com sucesso!");
+                    return user;
+                }
 
-            System.out.println("Usuário ou senha incorreta, tente novamente");
+                System.out.println("Usuário ou senha incorreta, tente novamente");
 
+            }
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+            throw new RuntimeException("Falha crítica no sistema de autenticação.", e);
         }
     }
 

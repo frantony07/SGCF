@@ -11,6 +11,7 @@ public class FlyWayconfig {
                         "santi14072005"
                 )
                 .baselineOnMigrate(true).load();
+        flyway.repair();
         flyway.migrate();
     }
 

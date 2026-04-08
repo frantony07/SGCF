@@ -14,6 +14,7 @@ public class functionOfMain {
         try {
             boolean booleanMain = true;
             while (booleanMain){
+
                 System.out.println("Bem-vindo ao menu principal");
                 System.out.println("1. Cadastro");
                 System.out.println("2. Agendar reserva");
@@ -26,15 +27,20 @@ public class functionOfMain {
 
                     switch(opcaoMenu){
                         case 1:
-                            Authenticate.isManager(user);
-                            new CreateNewRegister().register();
+                            if (Authenticate.isManager(user)){
+                                new CreateNewRegister().register();
+                                break;
+                            }
+                            System.out.println("voce nao tem autorizacao para usar esta funcao");
                             break;
                         case 2:
-                            Authenticate.isManager(user);
-                            new ScheduleReservations().scheduleReservation();
+                            if (Authenticate.isManager(user)){
+                                new ScheduleReservations().scheduleReservation();
+                                break;
+                            }
+                            System.out.println("voce nao tem autorizacao para usar esta funcao");
                             break;
                         case 3:
-                            Authenticate.isManager(user);
                             new Recorde().displayRecorde();
                             break;
                         case 4:
@@ -42,12 +48,18 @@ public class functionOfMain {
                             break;
 
                         case 5:
-                            Authenticate.isManager(user);
-                            new MainAccount().mainPagamento();
+                            if (Authenticate.isManager(user)){
+                                new MainAccount().mainPagamento();
+                                break;
+                            }
+                            System.out.println("voce nao tem autorizacao para usar esta funcao");
                             break;
                         case 6 :
-                            Authenticate.isManager(user);
-                            new EditRecord().main();
+                           if (Authenticate.isManager(user)){
+                               new EditRecord().main();
+                               break;
+                           }
+                            System.out.println("voce nao tem autorizacao para usar esta funcao");
                             break;
                         case 7:
                             System.out.println("Saindo do sistema");

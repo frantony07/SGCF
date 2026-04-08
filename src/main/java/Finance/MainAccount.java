@@ -2,7 +2,6 @@ package Finance;
 
 import Functions.ValidateNumber;
 import org.ONE.services.PayServices;
-
 import java.util.Scanner;
 
 public class MainAccount {

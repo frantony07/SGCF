@@ -8,9 +8,7 @@ create table if not exists user_account(
 create table if not exists funcionario(
     id serial primary key not null,
     name varchar(50) not null,
-    cpf varchar(11) not null,
-    fk_user_id bigint,
-    foreign key (fk_user_id) references user_account(id)
+    cpf varchar(11) not null
 );
 
 create table if not exists languages_funcionario(
@@ -19,13 +17,6 @@ create table if not exists languages_funcionario(
     foreign key (fk_funcionario_id) references funcionario(id)
 );
 
-create table if not exists gerentes(
-    id serial not null primary key,
-    nome varchar(50) not null,
-    cpf varchar(11) not null,
-    fk_user_id bigint,
-    foreign key(fk_user_id) references user_account(id)
-);
 
 create table if not exists clientes(
     id serial not null primary key ,

@@ -15,14 +15,8 @@ public class ScheduleReservations {
     UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
     public void scheduleReservation() {
-        Scanner sc = new Scanner(System.in);
-        long passeioId = 0;
 
-        System.out.println("--- Passeios disponiveis ---");
-        passeios.findAll().forEach(System.out::println);
-
-        System.out.println("Digite o ID do passeio escolhido");
-        passeioId = sc.nextLong();
+        long passeioId = new SelectFunctions().selectPasseio();
 
         Passeio passeio = passeios.findById(passeioId);
 
