@@ -35,7 +35,7 @@ public class UserRepository {
     public User authenticate(String login, String password) {
         try {
             return   em.createQuery(
-                            "select u from User u where u. userName = :login and u.userPassword = :password", User.class)
+                            "select u from User u where u.userName = :login and u.userPassword = :password", User.class)
                     .setParameter("login", login)
                     .setParameter("password", password)
                     .getSingleResult();

@@ -12,7 +12,7 @@ public class PayServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
     private PayRepository payServices = new PayRepository(entityManager);
 
-    public  void createNewRecorde(PayModel payModel){
+    public void createNewRecorde(PayModel payModel){
         try {
             if(payModel == null){
                 throw new RuntimeException("O cliente não pode ser nulo ");
@@ -33,7 +33,7 @@ public class PayServices {
             PrintError.printErro(e);
         }
     }
-    public  void delete(PayModel payModel){
+    public void delete(PayModel payModel){
         try {
             if (payModel == null) {
                 throw new RuntimeException(
@@ -45,6 +45,7 @@ public class PayServices {
             PrintError.printErro(e);
         }
     }
+
     public List<PayModel> findByName(String name){
         try {
             if (name.matches("\\d+")) {
@@ -61,6 +62,7 @@ public class PayServices {
 
         return List.of();
     }
+
     public List<PayModel> findAll (){
         try {
             return  payServices.findAll();
