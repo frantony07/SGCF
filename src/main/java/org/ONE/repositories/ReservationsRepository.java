@@ -43,13 +43,13 @@ public class ReservationsRepository {
 
     public List<Reservations> getFuncionarioReservations(Long idFuncionario){
         return  em.createQuery(
-                "select r from Reservations r where r.Funcionario.id = :idFuncionario",
+                "select r from Reservations r where r.funcionario.id = :idFuncionario",
                 Reservations.class).setParameter("idFuncionario",idFuncionario)
                 .getResultList();
     }
     public List<Reservations> getClienteReservations(Long idCliente){
         return  em.createQuery(
-                        "select r from Reservations r where r.Cliente.id = :idCliente",
+                        "select r from Reservations r where r.cliente.id = :idCliente",
                         Reservations.class).setParameter("idCliente", idCliente)
                 .getResultList();
     }

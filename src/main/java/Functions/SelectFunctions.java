@@ -9,6 +9,7 @@ import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.FuncionarioRepository;
 import org.ONE.services.ClienteServices;
 import org.ONE.services.FuncionarioServices;
+import org.ONE.services.PasseioServices;
 
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Scanner;
 public class SelectFunctions {
     FuncionarioServices funcionarios = new FuncionarioServices();
     ClienteServices clientes = new ClienteServices();
+    PasseioServices paseios = new PasseioServices();
 
     public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 
@@ -149,5 +151,16 @@ public class SelectFunctions {
         }
 
         return  0;
+    }
+
+    public Long selectPasseio(){
+        try {
+            System.out.println("selecione o passeio.");
+            paseios.findAll().forEach(System.out::println);
+            return new ValidateNumber().validateLong(paseios.getSize());
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return 0L;
     }
 }

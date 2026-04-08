@@ -22,7 +22,7 @@ public class Reservations {
     private Passeio passeio;
 
     @ManyToOne
-    @JoinColumn(name = "fk_cliente_id", nullable = false)
+    @JoinColumn(name = "fk_clientes_id", nullable = false)
     private Cliente cliente;
 
     @ManyToOne

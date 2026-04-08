@@ -30,20 +30,23 @@ public class UserRepository {
     }
 
     public User findByName(String name){
-        return em.createQuery("select u from user_account u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+        return em.createQuery("select u from User u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
     }
     public User authenticate(String login, String password) {
-
-        return   em.createQuery(
-                        "select u from user_account u where u. userName = :login and u.userPassword = :password", User.class)
-                .setParameter("login", login)
-                .setParameter("password", password)
-                .getSingleResult();
+        try {
+            return   em.createQuery(
+                            "select u from User u where u. userName = :login and u.userPassword = :password", User.class)
+                    .setParameter("login", login)
+                    .setParameter("password", password)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public List<User> findAll (){return em.createQuery("select u from user_account u " , User.class).getResultList();}
+    public List<User> findAll (){return em.createQuery("select u from User u " , User.class).getResultList();}
 
     public Long getSize(){
-        return em.createQuery("select count(u.id) from user_account u" , Long.class).getSingleResult();
+        return em.createQuery("select count(u.id) from User u" , Long.class).getSingleResult();
     }
 }

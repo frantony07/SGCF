@@ -14,12 +14,6 @@ public class MainAccount {
         boolean mainOption = true;
 
         while (mainOption) {
-            System.out.println("Menu do caixa: ");
-            for (int i = Ledger.getPayments().size() - 1; i >= 0 && count < 5; i--) {
-                System.out.println(Ledger.getPayments().get(i));
-                count++;
-            }
-
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
             System.out.println("3. Recebimentos");
@@ -57,9 +51,5 @@ public class MainAccount {
                     System.out.println("Por favor digite um número entre 1 e 7.");
             }
         }
-    }
-
-    public ArrayList<Ledger> getPayments() {
-        return Ledger.getPayments();
     }
 }

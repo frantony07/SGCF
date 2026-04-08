@@ -28,9 +28,6 @@ public class Funcionario{
     @Column(name = "language")
     private List<Language> languagesSpoken = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name="fk_user_id", unique = true)
-    private User user;
 
     public Funcionario(String cpf, String name,  List<Language> languagesSpoken) {
         this.cpf = cpf;
@@ -65,18 +62,12 @@ public class Funcionario{
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
-    }
 
 
     public void setLanguagesSpoken(List<Language> languagesSpoken) {
         this.languagesSpoken = languagesSpoken;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}
 
