@@ -84,5 +84,10 @@ public class UserServices {
         return 0L;
     }
 
-
+    public User  authenticate(String login, String password) {
+        if(login.isEmpty() || login.matches("\\d+") || password.isEmpty() ){
+            throw new RuntimeException("usuario ou senha incorreta ");
+        }
+        return userRepository.authenticate(login,password);
+    }
 }

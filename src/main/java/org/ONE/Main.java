@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         FlyWayconfig.migrate();
-        //new Authenticate().authenticateUser();
-        new functionOfMain().menu();
+        User user = new Authenticate().authenticateUser();
+        new functionOfMain().menu(user);
     }
 }

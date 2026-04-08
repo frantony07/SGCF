@@ -20,7 +20,7 @@ public class CreateNewRegister {
         UserServices userServices = new UserServices();
         ReservationsServices reservations = new ReservationsServices();
 
-    public void register(ClienteServices clienteServices, FuncionarioServices funcionarioServices, PasseioServices passeioServices, ReservationsServices reservationsServices){
+    public void register(){
         boolean booleanMain = true;
         while (booleanMain){
             try {

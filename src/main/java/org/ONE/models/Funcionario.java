@@ -69,6 +69,11 @@ public class Funcionario{
         return user;
     }
 
+
+    public void setLanguagesSpoken(List<Language> languagesSpoken) {
+        this.languagesSpoken = languagesSpoken;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

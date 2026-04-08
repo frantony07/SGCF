@@ -1,11 +1,9 @@
 package Functions;
 
 import Finance.MainAccount;
-import Functions.FunctionsByMain.CreateNewRegister;
-import Functions.FunctionsByMain.PrintReservations;
-import Functions.FunctionsByMain.Recorde;
-import Functions.FunctionsByMain.ScheduleReservations;
+import Functions.FunctionsByMain.*;
 import jakarta.persistence.EntityManager;
+import org.ONE.models.User;
 import org.ONE.repositories.*;
 import org.ONE.services.ClienteServices;
 import org.ONE.services.FuncionarioServices;
@@ -14,12 +12,8 @@ import org.ONE.services.ReservationsServices;
 
 public class functionOfMain {
 
-    public void menu(){
-        EntityManager entityManager = CustomizerFactory.getEntityManager();
-        ClienteServices clienteServices = new ClienteServices();
-        FuncionarioServices funcionarioServices = new FuncionarioServices();
-        PasseioServices passeioServices = new PasseioServices();
-        ReservationsServices reservationsServices = new ReservationsServices();
+
+    public void menu(User user){
 
 
         try {
@@ -37,15 +31,10 @@ public class functionOfMain {
 
                     switch(opcaoMenu){
                         case 1:
-                            new CreateNewRegister().register(clienteServices,funcionarioServices,passeioServices,reservationsServices);
+                            new CreateNewRegister().register();
                             break;
                         case 2:
-                            var passeios = passeioServices.findAll();
-                            if(passeios.isEmpty()){
-                                System.out.println("Nenhum passeio cadastrado");
-                            }else {
-                                new ScheduleReservations().scheduleReservation();
-                            }
+                            new ScheduleReservations().scheduleReservation();
                             break;
                         case 3:
                             new Recorde().displayRecorde();
@@ -58,12 +47,12 @@ public class functionOfMain {
                             new MainAccount().mainPagamento();
                             break;
                         case 6 :
-
+                            new EditRecord().main();
                             break;
                         case 7:
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
-                            entityManager.close();
+
                             return;
                         default:
                             System.out.println("Opção inválida, digite as opções existentes no menu");

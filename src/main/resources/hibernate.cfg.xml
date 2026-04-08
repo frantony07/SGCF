@@ -19,9 +19,7 @@
         <mapping class="org.ONE.models.Funcionario"/>
         <mapping class="org.ONE.models.Passeio"/>
         <mapping class="org.ONE.models.Pay"/>
-        <mapping class="org.ONE.models.PersonalAccount"/>
         <mapping class="org.ONE.models.Reservations"/>
         <mapping class="org.ONE.models.User"/>
-        <mapping class="org.ONE.models.Gerente"/>
     </session-factory>
 </hibernate-configuration>

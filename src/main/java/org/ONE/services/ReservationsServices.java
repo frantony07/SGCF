@@ -48,20 +48,6 @@ public class ReservationsServices {
             PrintError.printErro(e);
         }
     }
-    public List<Reservations> findByName(String name){
-        try {
-            if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
-            }
-
-            return reservationsRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
-    }
     public List<Reservations> findAll (){
         try {
             return  reservationsRepository.findAll();
@@ -74,11 +60,29 @@ public class ReservationsServices {
     }
 
     public List<Reservations> getFuncionarioReservations(Long idFuncionario){
-        return  reservationsRepository.getFuncionarioReservations(idFuncionario);
+        try {
+            return  reservationsRepository.getFuncionarioReservations(idFuncionario);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return List.of();
     }
     public List<Reservations> getClienteReservations(Long idCliente){
-        return  reservationsRepository.getClienteReservations(idCliente);
+       try {
+           return  reservationsRepository.getClienteReservations(idCliente);
+       } catch (Exception e) {
+           PrintError.printErro(e);
+       }
+       return List.of();
     }
 
+    public Long getSize(){
+        try {
+            return reservationsRepository.getSize();
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return 0L;
+    }
 
 }
