@@ -53,6 +53,9 @@ public class ReservationsRepository {
                         Reservations.class).setParameter("idCliente", idCliente)
                 .getResultList();
     }
+    public Long getSize(){
+        return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
+    }
 
 }
 

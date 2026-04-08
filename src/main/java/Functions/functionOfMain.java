@@ -1,28 +1,16 @@
 package Functions;
 
 import Finance.MainAccount;
-import Functions.FunctionsByMain.CreateNewRegister;
-import Functions.FunctionsByMain.PrintReservations;
-import Functions.FunctionsByMain.Recorde;
-import Functions.FunctionsByMain.ScheduleReservations;
+import Functions.FunctionsByMain.*;
 import jakarta.persistence.EntityManager;
+import org.ONE.models.User;
 import org.ONE.repositories.*;
+import org.ONE.services.*;
 
 public class functionOfMain {
 
-    public void menu(){
-        EntityManager entityManager = CustomizerFactory.getEntityManager();
 
-        ClienteRepository clienteRepository = new ClienteRepository(entityManager);
-
-        FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
-
-        PasseioRepository passeioRepository = new PasseioRepository(entityManager);
-
-        ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
-
-        PayRepository payRepository = new PayRepository(entityManager);
-
+    public void menu(User user){
         try {
             boolean booleanMain = true;
             while (booleanMain){
@@ -34,38 +22,37 @@ public class functionOfMain {
                 System.out.println("5. Finanças");
                 System.out.println("6. Alterar registro");
                 System.out.println("7. Sair do sistema");
-                int opcaoMenu = new ValidateNumber().validateINT(7);
+                int opcaoMenu = ValidateNumber.validateINT(7);
 
                     switch(opcaoMenu){
                         case 1:
-                            new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
+                            Authenticate.isManager(user);
+                            new CreateNewRegister().register();
                             break;
                         case 2:
-                            var passeios = passeioRepository.findAll();
-                                    if(passeios.isEmpty()){
-                                        System.out.println("Nenhum passeio cadastrado");
-                                    }else {
-                                        new ScheduleReservations().scheduleReservation(clienteRepository, funcionarioRepository, passeioRepository, reservationsRepository);
-                                    }
-                                        break;
-
+                            Authenticate.isManager(user);
+                            new ScheduleReservations().scheduleReservation();
+                            break;
                         case 3:
-                            new Recorde().displayRecorde(clienteRepository,funcionarioRepository,passeioRepository);
+                            Authenticate.isManager(user);
+                            new Recorde().displayRecorde();
                             break;
                         case 4:
-                             new PrintReservations().printReservation(clienteRepository,funcionarioRepository, reservationsRepository);
+                             new PrintReservations().printReservation();
                             break;
 
                         case 5:
+                            Authenticate.isManager(user);
                             new MainAccount().mainPagamento();
                             break;
                         case 6 :
-
+                            Authenticate.isManager(user);
+                            new EditRecord().main();
                             break;
                         case 7:
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
-                            entityManager.close();
+
                             return;
                         default:
                             System.out.println("Opção inválida, digite as opções existentes no menu");

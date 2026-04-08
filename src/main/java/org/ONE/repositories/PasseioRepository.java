@@ -45,4 +45,9 @@ public class PasseioRepository {
     public double getPrice(Long id ){
             return em.createQuery("select t.price from Passeio t where t.id = :id" , Double.class).setParameter("id" , id).getSingleResult();
     }
+
+    public Long getSize(){
+        return em.createQuery("select count(c.id) from Passeio c" , Long.class).getSingleResult();
     }
+
+}

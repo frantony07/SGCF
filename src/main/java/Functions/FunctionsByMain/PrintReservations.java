@@ -3,41 +3,46 @@ package Functions.FunctionsByMain;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.ReservationsRepository;
+import org.ONE.services.*;
 
 public class PrintReservations {
-    public void printReservation(ClienteRepository clienteRepository , FuncionarioRepository funcionarioRepository , ReservationsRepository reservationsRepository) {
+
+    ClienteServices clientes = new ClienteServices();
+    FuncionarioServices funcionarios = new FuncionarioServices();
+    PasseioServices passeios = new PasseioServices();
+    UserServices userServices = new UserServices();
+    ReservationsServices reservations = new ReservationsServices();
+
+    public void printReservation() {
         try {
             System.out.println("1. Reservas de funcionários");
             System.out.println("2. Reserva de cliente");
-            int optionReservation = new ValidateNumber().validateINT(2);
+            int optionReservation = ValidateNumber.validateINT(2);
             switch (optionReservation){
                 case 1:
-                    showReservationsFuncionario(funcionarioRepository , reservationsRepository);
+                    showReservationsFuncionario();
                     break;
                 case 2 :
-                    showReservationsClientes(clienteRepository, reservationsRepository);
+                    showReservationsClientes();
                     break;
             }
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void showReservationsFuncionario(FuncionarioRepository funcionarioRepository , ReservationsRepository reservationsRepository){
+    public void showReservationsFuncionario(){
 
-        funcionarioRepository.findAll().forEach(System.out::println);
+        funcionarios.findAll().forEach(System.out::println);
 
-        Long funcionarioId = new SelectFunctions().selectFuncionario(funcionarioRepository);
-        reservationsRepository.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
+        Long funcionarioId = new SelectFunctions().selectFuncionario();
+        reservations.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
 
     }
-    public  void showReservationsClientes(ClienteRepository clienteRepository , ReservationsRepository reservationsRepository){
-        clienteRepository.findAll().forEach(System.out::println);
+    public  void showReservationsClientes(){
+        clientes.findAll().forEach(System.out::println);
 
-        Long clienteId = new SelectFunctions().selectCliente(clienteRepository);
-        reservationsRepository.getClienteReservations(clienteId).forEach(System.out::println);
+        Long clienteId = new SelectFunctions().selectCliente();
+        reservations.getClienteReservations(clienteId).forEach(System.out::println);
 
 
     }

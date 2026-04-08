@@ -1,38 +1,93 @@
 package org.ONE.services;
 
+import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.ENUM.Permission;
 import org.ONE.models.Funcionario;
+import org.ONE.models.ModelLedger;
 import org.ONE.models.User;
+import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.UserRepository;
+
+import java.util.List;
 
 public class UserServices {
 
-    private EntityManager em;
-    private UserRepository userRepository;
+    private EntityManager entityManager = CustomizerFactory.getEntityManager();
+    private UserRepository userRepository = new UserRepository(entityManager);
 
-    public UserServices(EntityManager em){
-        this.em = em;
-        this.userRepository = new UserRepository(em);
+    public UserServices() {
     }
 
-    public void createUser(String newUsuario, String newSenha, String newCpf, int permissao){
-        User user = new User();
-        user.setUserName(newUsuario);
-        user.setUserPassword(newSenha);
+    public  void createNewRecorde(User user){
+        try {
+            if(user == null){
+                throw new RuntimeException("o cliente nao pode ser nulo ");
+            }
+            userRepository.create(user);
 
-        em.getTransaction().begin();
-
-           if(permissao == 2){
-            user.setPermission(Permission.FUNCIONARIO);
-            Funcionario funcionario = new Funcionario();
-            funcionario.setCpf(newCpf);
-            funcionario.setName(newUsuario);
-            funcionario.setUser(user);
-
-            em.persist(user);
-            em.persist(funcionario);
+        } catch (Exception e) {
+            PrintError.printErro(e);
         }
-        em.getTransaction().commit();
+    }
+    public void updateRecorde(User user){
+        try {
+            if(user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+
+            userRepository.update(user);
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+    }
+    public  void delete(User user){
+        try {
+            if (user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+
+            userRepository.delete(user);
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+    }
+    public User findByName(String name){
+        try {
+            if (name.matches("\\d+")) {
+                throw new RuntimeException("o  nome nao pode ser um numero");
+            }
+
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+            return userRepository.findByName(name);
+
+    }
+    public List<User> findAll (){
+        try {
+            return  userRepository.findAll();
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+
+        return List.of();
+    }
+
+    public Long getSize(){
+        try {
+            return userRepository.getSize();
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return 0L;
+    }
+
+    public User  authenticate(String login, String password) {
+        if(login.isEmpty() || login.matches("\\d+") || password.isEmpty() ){
+            throw new RuntimeException("usuario ou senha incorreta ");
+        }
+        return userRepository.authenticate(login,password);
     }
 }

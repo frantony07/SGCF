@@ -25,7 +25,7 @@ public class Cliente{
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "clientes_languages", joinColumns = @JoinColumn(name = "fk_cliente_id"))
+    @CollectionTable(name = "clientes_languages", joinColumns = @JoinColumn(name = "fk_clientes_id"))
     @Column(name = "language")
     private List<Language> languageSpeak = new ArrayList<>();
 

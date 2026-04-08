@@ -2,57 +2,60 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Passeio;
+import org.ONE.models.Funcionario;
+//import org.ONE.models.Ledger;
+import org.ONE.models.ModelLedger;
 import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.PasseioRepository;
+import org.ONE.repositories.FuncionarioRepository;
+//import org.ONE.repositories.LedgerRepository;
 
 import java.util.List;
 
-public class PasseioServices {
+/*public class PayServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+    private LedgerRepository payServices = new LedgerRepository(entityManager);
 
-    public PasseioServices() {
+    public PayServices() {
     }
 
-    public  void createNewRecorde(Passeio passeio){
+    public  void createNewRecorde(ModelLedger ledger){
         try {
-            if(passeio == null){
+            if(ledger == null){
                 throw new RuntimeException("o cliente nao pode ser nulo ");
             }
-            passeioRepository.create(passeio);
+            payServices.create(ledger);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void updateRecorde(Passeio passeio){
+    public void updateRecorde(ModelLedger ledger){
         try {
-            if(passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(ledger == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            passeioRepository.update(passeio);
+            payServices.update(ledger);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public  void delete(Passeio passeio){
+    public  void delete(ModelLedger ledger){
         try {
-            if (passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (ledger == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            passeioRepository.delete(passeio);
+            payServices.delete(ledger);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public List<Passeio> findByName(String name){
+    public List<ModelLedger> findByName(String name){
         try {
             if (name.matches("\\d+")) {
                 throw new RuntimeException("o  nome nao pode ser um numero");
             }
 
-            return passeioRepository.findByName(name);
+            return payServices.findByName(name);
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -60,25 +63,24 @@ public class PasseioServices {
 
         return List.of();
     }
-    public List<Passeio> findAll (){
+    public List<ModelLedger> findAll (){
         try {
-            return  passeioRepository.findAll();
+            return  payServices.findAll();
+
         } catch (Exception e) {
             PrintError.printErro(e);
         }
 
         return List.of();
     }
-
-    public Passeio findById(Long id) {return passeioRepository.findById(id); }
 
     public Long getSize(){
         try {
-            return passeioRepository.getSize();
+            return payServices.getSize();
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return 0L;
     }
-}
+}*/
