@@ -1,8 +1,8 @@
 package Finance;
 
 import Functions.ValidateNumber;
+import org.ONE.services.PayServices;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainAccount {
@@ -15,10 +15,7 @@ public class MainAccount {
 
         while (mainOption) {
             System.out.println("Menu do caixa: ");
-            for (int i = Ledger.getPayments().size() - 1; i >= 0 && count < 5; i--) {
-                System.out.println(Ledger.getPayments().get(i));
-                count++;
-            }
+            new PayServices().quickGetPay();
 
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
@@ -57,9 +54,5 @@ public class MainAccount {
                     System.out.println("Por favor digite um número entre 1 e 7.");
             }
         }
-    }
-
-    public ArrayList<Ledger> getPayments() {
-        return Ledger.getPayments();
     }
 }
