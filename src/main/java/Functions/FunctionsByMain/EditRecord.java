@@ -3,17 +3,13 @@ package Functions.FunctionsByMain;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.PasseioRepository;
-import org.ONE.repositories.ReservationsRepository;
 import org.ONE.services.*;
 
 public class EditRecord {
 
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioService passeios = new PasseioService();
+    PasseioServices passeios = new PasseioServices();
     UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 

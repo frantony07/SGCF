@@ -2,19 +2,17 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
 import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.PasseioRepository;
 
 import java.util.List;
 
-public class PasseioService {
+public class PasseioServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
     private PasseioRepository passeioRepository = new PasseioRepository(entityManager);
 
-    public PasseioService() {
+    public PasseioServices() {
     }
 
     public  void createNewRecorde(Passeio passeio){
@@ -65,7 +63,6 @@ public class PasseioService {
     public List<Passeio> findAll (){
         try {
             return  passeioRepository.findAll();
-
         } catch (Exception e) {
             PrintError.printErro(e);
         }

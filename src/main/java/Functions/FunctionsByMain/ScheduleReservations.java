@@ -1,11 +1,9 @@
 package Functions.FunctionsByMain;
 
 import Functions.SelectFunctions;
-import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
-import org.ONE.repositories.*;
 import org.ONE.services.*;
 
 import java.util.Scanner;
@@ -13,7 +11,7 @@ import java.util.Scanner;
 public class ScheduleReservations {
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioService passeios = new PasseioService();
+    PasseioServices passeios = new PasseioServices();
     UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
     public void scheduleReservation() {

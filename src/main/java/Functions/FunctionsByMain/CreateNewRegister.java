@@ -1,13 +1,11 @@
 package Functions.FunctionsByMain;
 
 import Functions.*;
-import jakarta.persistence.EntityManager;
 import org.ONE.models.*;
 import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.ENUM.CountryTour;
 import org.ONE.models.ENUM.Permission;
-import org.ONE.repositories.*;
 import org.ONE.services.*;
 
 import java.time.LocalDate;
@@ -18,14 +16,12 @@ import java.util.Scanner;
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();
         FuncionarioServices funcionarios = new FuncionarioServices();
-        PasseioService passeios = new PasseioService();
+        PasseioServices passeios = new PasseioServices();
         UserServices userServices = new UserServices();
         ReservationsServices reservations = new ReservationsServices();
 
-    public void register(){
+    public void register(ClienteServices clienteServices, FuncionarioServices funcionarioServices, PasseioServices passeioServices, ReservationsServices reservationsServices){
         boolean booleanMain = true;
-
-
         while (booleanMain){
             try {
                 System.out.println("1. Criar novo funcionário");
@@ -39,15 +35,15 @@ public class CreateNewRegister {
                     case 1:
                         createNewFuncionario();
                         break;
-                    case 2 :
+                    case 2:
                         createNewCliente();
                         break;
-                    case 3 :
+                    case 3:
                         createNewPasseio();
                         break;
-                    case 4 :
+                    case 4:
                         createNewUser();
-                    case  6:
+                    case 5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
 
@@ -125,8 +121,6 @@ public class CreateNewRegister {
             Long km = sc.nextLong();
 
             CountryTour countryTour = new SelectFunctions().selecteCountryTour();
-
-
             passeios.createNewRecorde(new Passeio(price,durationInMinute,countryTour,km,name,location));
 
         } catch (Exception e) {

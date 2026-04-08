@@ -30,7 +30,7 @@ public class SelectFunctions {
                 System.out.println("2. Não");
                 optionMain = sc.nextInt();
                 if (optionMain == 1) {
-                    selectLanguageNotUsing(languages);
+                    selectLanguageNotUsing(languages, classification);
                     break;
                     }
                 if (optionMain == 2) {
@@ -44,12 +44,12 @@ public class SelectFunctions {
                 }
         }
     }
-     private void selectLanguageNotUsing(ArrayList<Language> languages){
+     private void selectLanguageNotUsing(ArrayList<Language> languages, String classification){
         try {
-            System.out.println("Escolha a língua que o funcionário fala");
+            System.out.println("Escolha a língua que o " + classification + " fala:");
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
-            System.out.println("3. O funcionario fala as duas linguas");
+            System.out.println("3. O " + classification +" fala as duas linguas");
             int optionMain =  ValidateNumber.validateINT(3);
             switch (optionMain){
                 case 1:

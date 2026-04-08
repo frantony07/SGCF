@@ -7,19 +7,19 @@ import Functions.FunctionsByMain.Recorde;
 import Functions.FunctionsByMain.ScheduleReservations;
 import jakarta.persistence.EntityManager;
 import org.ONE.repositories.*;
+import org.ONE.services.ClienteServices;
+import org.ONE.services.FuncionarioServices;
+import org.ONE.services.PasseioServices;
+import org.ONE.services.ReservationsServices;
 
 public class functionOfMain {
 
     public void menu(){
         EntityManager entityManager = CustomizerFactory.getEntityManager();
-
-        ClienteRepository clienteRepository = new ClienteRepository(entityManager);
-
-        FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
-
-        PasseioRepository passeioRepository = new PasseioRepository(entityManager);
-
-        ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
+        ClienteServices clienteServices = new ClienteServices();
+        FuncionarioServices funcionarioServices = new FuncionarioServices();
+        PasseioServices passeioServices = new PasseioServices();
+        ReservationsServices reservationsServices = new ReservationsServices();
 
 
         try {
@@ -37,19 +37,16 @@ public class functionOfMain {
 
                     switch(opcaoMenu){
                         case 1:
-                            new CreateNewRegister().register(clienteRepository,funcionarioRepository,passeioRepository , reservationsRepository);
+                            new CreateNewRegister().register(clienteServices,funcionarioServices,passeioServices,reservationsServices);
                             break;
                         case 2:
-                            new ScheduleReservations().scheduleReservation();
+                            var passeios = passeioServices.findAll();
+                            if(passeios.isEmpty()){
+                                System.out.println("Nenhum passeio cadastrado");
+                            }else {
+                                new ScheduleReservations().scheduleReservation();
+                            }
                             break;
-                            var passeios = passeioRepository.findAll();
-                                    if(passeios.isEmpty()){
-                                        System.out.println("Nenhum passeio cadastrado");
-                                    }else {
-                                        new ScheduleReservations().scheduleReservation();
-                                    }
-                                        break;
-
                         case 3:
                             new Recorde().displayRecorde();
                             break;

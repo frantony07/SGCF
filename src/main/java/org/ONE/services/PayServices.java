@@ -3,15 +3,15 @@ package org.ONE.services;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Ledger;
+//import org.ONE.models.Ledger;
 import org.ONE.models.ModelLedger;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.repositories.LedgerRepository;
+//import org.ONE.repositories.LedgerRepository;
 
 import java.util.List;
 
-public class PayServices {
+/*public class PayServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
     private LedgerRepository payServices = new LedgerRepository(entityManager);
 
@@ -83,4 +83,4 @@ public class PayServices {
         }
         return 0L;
     }
-}
+}*/

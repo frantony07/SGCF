@@ -7,7 +7,6 @@ import org.ONE.models.Funcionario;
 import org.ONE.models.ModelLedger;
 import org.ONE.models.User;
 import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.LedgerRepository;
 import org.ONE.repositories.UserRepository;
 
 import java.util.List;

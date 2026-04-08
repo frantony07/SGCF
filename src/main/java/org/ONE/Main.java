@@ -22,6 +22,5 @@ public class Main {
         FlyWayconfig.migrate();
         //new Authenticate().authenticateUser();
         new functionOfMain().menu();
-
     }
 }

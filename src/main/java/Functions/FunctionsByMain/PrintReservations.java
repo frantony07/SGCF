@@ -3,15 +3,13 @@ package Functions.FunctionsByMain;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import jakarta.persistence.EntityManager;
-import org.ONE.repositories.*;
 import org.ONE.services.*;
 
 public class PrintReservations {
 
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioService passeios = new PasseioService();
+    PasseioServices passeios = new PasseioServices();
     UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 
