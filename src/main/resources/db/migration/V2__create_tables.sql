@@ -6,7 +6,7 @@ create table if not exists user_account(
 );
 
 create table if not exists funcionario(
-    id serial primary key not null,
+    id serial primary key not nul,
     name varchar(50) not null,
     cpf varchar(11) not null
 );
