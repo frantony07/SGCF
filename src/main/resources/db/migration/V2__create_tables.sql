@@ -1,12 +1,12 @@
 create table if not exists user_account(
     id serial not null primary key,
     user_name varchar(35) unique not null,
-    user_password varchar(35)  not null,
+    user_password varchar(35) not null,
     permission varchar(30) not null
 );
 
 create table if not exists funcionario(
-    id serial primary key not nul,
+    id serial primary key not null,
     name varchar(50) not null,
     cpf varchar(11) not null
 );
