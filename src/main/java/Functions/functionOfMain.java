@@ -56,7 +56,7 @@ public class functionOfMain {
                             break;
                         case 6 :
                            if (Authenticate.isManager(user)){
-                               new EditRecord().main();
+                               new EditRecord().main(user);
                                break;
                            }
                             System.out.println("voce nao tem autorizacao para usar esta funcao");

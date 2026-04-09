@@ -56,4 +56,8 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    public boolean isEqualPassword(String senha){
+        return senha.equals(this.userPassword);
+    }
 }

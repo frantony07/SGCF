@@ -5,10 +5,12 @@ import Functions.SelectFunctions;
 import Functions.ValidateNumber;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.Funcionario;
+import org.ONE.models.User;
 import org.ONE.services.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EditRecord {
 
@@ -18,15 +20,14 @@ public class EditRecord {
     UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 
-    public void main(){
+    public void main(User user){
         boolean booleanMain = true;
         while (booleanMain){
             try {
                 System.out.println("1. Editar funcionário");
-                System.out.println("2. Editar usuario");
+                System.out.println("2. Trocar senha de usuario");
                 System.out.println("3. Editar passeio");
-                System.out.println("4. Editar estado da reserva ");
-                System.out.println("5. Voltar ao menu principal");
+                System.out.println("4. Voltar ao menu principal");
 
                 int menuOption = ValidateNumber.validateINT(5);
 
@@ -39,12 +40,15 @@ public class EditRecord {
 
 
                     case 2:
+                        editPasswordUser(user);
 
+                        break;
                     case 3:
 
                     case 4:
-
-                    case 5:
+                        System.out.println("voltando ao menu principal");
+                        booleanMain = false;
+                        break;
 
                     default:
 
@@ -59,20 +63,42 @@ public class EditRecord {
     public void addNewLanguage(){
         try {
             long funcionario = new SelectFunctions().selectFuncionario();
+
             ArrayList<Language> languages = new ArrayList<>();
             new SelectFunctions().selectLanguageMain(languages,"funcionario");
+
             Funcionario funcionario1 = funcionarios.findById(funcionario);
             funcionario1.setLanguagesSpoken(languages);
+
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
 
-    public void editUser(){
-        System.out.println("1.Editar nome de usuario");
-        System.out.println("2.Editar senha do usuario");
-        int optionMain = ValidateNumber.validateINT(3);
+    public void editPasswordUser(User user){
+        try {
 
+            Scanner sc = new Scanner(System.in);
+            System.out.println("digite sua senha atual");
+            String senha = sc.next();
+
+            if(!user.isEqualPassword(senha)){
+                throw new RuntimeException("senha incorreta");
+            }
+            System.out.println("digite sua nova senha");
+            String newPassword = sc.next();
+            System.out.println("confirme sua senha ");
+            String newPasswordConfirmations = sc.next();
+
+            if(!newPassword.equals(newPasswordConfirmations)){
+                throw new RuntimeException("senha incorreta");
+            }
+            user.setUserPassword(newPassword);
+            System.out.println("senha trocada com sucesso");
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
     }
 
 }
