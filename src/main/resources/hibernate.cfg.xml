@@ -18,7 +18,7 @@
         <mapping class="org.ONE.models.Cliente"/>
         <mapping class="org.ONE.models.Funcionario"/>
         <mapping class="org.ONE.models.Passeio"/>
-        <mapping class="org.ONE.models.Pay"/>
+        <mapping class="org.ONE.models.PayModel"/>
         <mapping class="org.ONE.models.Reservations"/>
         <mapping class="org.ONE.models.User"/>
     </session-factory>
