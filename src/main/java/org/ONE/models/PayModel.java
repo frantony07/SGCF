@@ -13,7 +13,7 @@ public class PayModel {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "fk_reservations_id")
+    @JoinColumn(name = "fk_reservation_id")
     private Reservations reservation;
 
     @Column(name = "total_account")
