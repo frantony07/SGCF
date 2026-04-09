@@ -23,9 +23,9 @@ public class MainAccount {
             System.out.println("2. Histórico de tours pendentes");
             System.out.println("3. Histórico de tours cancelados ");
             System.out.println("4. Metas");
-            System.out.println("0. Voltar");
+            System.out.println("5. Voltar");
 
-            menu = ValidateNumber.validateINT(7);
+            menu = ValidateNumber.validateINT(5);
 
             switch (menu) {
                 case 1:
@@ -47,6 +47,7 @@ public class MainAccount {
                     return;
                 default:
                     System.out.println("Por favor digite um número entre 1 e 5.");
+                    break;
             }
         }
     }
