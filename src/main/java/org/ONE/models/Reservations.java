@@ -1,6 +1,7 @@
 package org.ONE.models;
 
 import jakarta.persistence.*;
+import org.ONE.models.ENUM.Status;
 
 import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
@@ -31,6 +32,9 @@ public class Reservations {
 
     @Column (name = "value" , nullable = false)
     private double value;
+
+    @Column(name = "status", nullable = false)
+    private Status status;
 
     public Reservations() {}
 
