@@ -7,7 +7,7 @@ import java.time.Duration;
 
 @Entity
 @Table(name = "passeio")
-    public class Passeio {
+public class Passeio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

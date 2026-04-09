@@ -2,57 +2,56 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Funcionario;
-//import org.ONE.models.Ledger;
-import org.ONE.models.ModelLedger;
+import org.ONE.models.PayModel;
 import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.FuncionarioRepository;
-//import org.ONE.repositories.LedgerRepository;
+import org.ONE.repositories.PayRepository;
 
 import java.util.List;
 
-/*public class PayServices {
+public class PayServices {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private LedgerRepository payServices = new LedgerRepository(entityManager);
+    private PayRepository payServices = new PayRepository(entityManager);
 
-    public PayServices() {
-    }
-
-    public  void createNewRecorde(ModelLedger ledger){
+    public void createNewRecorde(PayModel payModel){
         try {
-            if(ledger == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+            if(payModel == null){
+                throw new RuntimeException("O cliente não pode ser nulo ");
             }
-            payServices.create(ledger);
+            payServices.create(payModel);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public void updateRecorde(ModelLedger ledger){
+    public void updateRecords(PayModel payModel){
         try {
-            if(ledger == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(payModel == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
-            payServices.update(ledger);
+            payServices.update(payModel);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public  void delete(ModelLedger ledger){
+    public void delete(PayModel payModel){
         try {
-            if (ledger == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
-
-            payServices.delete(ledger);
-
+            if (payModel == null) {
+                throw new RuntimeException(
+                        "O cliente não pode ser nulo"
+                );
+            }
+            payServices.delete(payModel);
         } catch (Exception e) {
             PrintError.printErro(e);
         }
     }
-    public List<ModelLedger> findByName(String name){
+
+    public List<PayModel> findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException(
+                        "O nome não pode ser um numero"
+                );
             }
 
             return payServices.findByName(name);
@@ -63,7 +62,8 @@ import java.util.List;
 
         return List.of();
     }
-    public List<ModelLedger> findAll (){
+
+    public List<PayModel> findAll (){
         try {
             return  payServices.findAll();
 
@@ -74,13 +74,30 @@ import java.util.List;
         return List.of();
     }
 
-    public Long getSize(){
+    public Long getCount(){
         try {
-            return payServices.getSize();
+            return payServices.getCount();
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return 0L;
     }
-}*/
+
+    public void quickGetPay() {
+        EntityManager em = CustomizerFactory.getEntityManager();
+        int count = 0;
+        try {
+            if (new PayRepository(em).getCount() != null) {
+                for (long i = new PayRepository(em).getCount() - 1;
+                     i >= 0 && count < 5;
+                     i--) {
+                    new PayRepository(em).findAll().get((int) i);
+                    count++;
+                }
+            }
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+    }
+}

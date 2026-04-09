@@ -1,8 +1,7 @@
 package Finance;
 
 import Functions.ValidateNumber;
-
-import java.util.ArrayList;
+import org.ONE.services.PayServices;
 import java.util.Scanner;
 
 public class MainAccount {
@@ -14,6 +13,9 @@ public class MainAccount {
         boolean mainOption = true;
 
         while (mainOption) {
+            System.out.println("Menu do caixa: ");
+            new PayServices().quickGetPay();
+
             System.out.println("1. Adicionar");
             System.out.println("2. Subtrair");
             System.out.println("3. Recebimentos");

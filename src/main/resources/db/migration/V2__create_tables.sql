@@ -17,7 +17,6 @@ create table if not exists languages_funcionario(
     foreign key (fk_funcionario_id) references funcionario(id)
 );
 
-
 create table if not exists clientes(
     id serial not null primary key ,
     cnpj varchar(15) unique,
