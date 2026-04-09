@@ -2,7 +2,6 @@ package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Reservations;
-
 import java.util.List;
 
 public class ReservationsRepository {
@@ -33,7 +32,7 @@ public class ReservationsRepository {
     }
 
     public List<Reservations> findByName(String name){
-        return em.createQuery("select r from Reservations r where  lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
+        return em.createQuery("select r from Reservations r where lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
     }
     public List<Reservations> findAll (){return em.createQuery("select r from Reservations r " , Reservations.class).getResultList();}
 
@@ -57,6 +56,12 @@ public class ReservationsRepository {
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
 
+    public List<Reservations> getReceipts(String pStatus) {
+        return em.createQuery(
+                "select p.reservation from PayModel p where p.status = :pStatus",
+                Reservations.class
+        ).setParameter("pStatus", pStatus).getResultList();
+    }
 }
 
 
