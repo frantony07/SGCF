@@ -33,6 +33,7 @@ public class Reservations {
     @Column (name = "value" , nullable = false)
     private double value;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
 
@@ -106,6 +107,8 @@ public class Reservations {
                 "\ndate=" + date +
                 "\ntour=" + passeio +
                 "\nfuncionario=" + funcionario +
-                "\nvalue=" + value ;
+                "\nvalue=" + value  +
+                "\nestatus=" + status;
+
     }
 }

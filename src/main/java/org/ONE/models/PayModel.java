@@ -16,6 +16,9 @@ public class PayModel {
     @JoinColumn(name = "fk_reservations_id")
     private Reservations reservation;
 
+    @Column(name = "total_account")
+    private double total_account ;
+
     public void ModelLedger(Long ID, String status, Reservations reservation) {
         this.ID = ID;
         this.status = status;

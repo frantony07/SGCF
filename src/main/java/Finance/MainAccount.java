@@ -32,7 +32,7 @@ public class MainAccount {
                     reservationsServices.printReceipt(Status.CONFIRMADA.name());
                 break;
                 case 2:
-                    reservationsServices.printReceipt(Status.PENDENTE.name());
+                    reservationsServices.printReceipt(Status.pendente.name());
                 break;
                 case 3:
                     reservationsServices.printReceipt(Status.CANCELADA.name());

@@ -1,7 +1,7 @@
 package org.ONE.models.ENUM;
 
 public enum Status {
-    PENDENTE,
+    pendente,
     CANCELADA,
     CONFIRMADA
 }

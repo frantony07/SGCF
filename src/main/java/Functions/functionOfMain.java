@@ -22,7 +22,8 @@ public class functionOfMain {
                 System.out.println("4. Mostrar reservas ativas ");
                 System.out.println("5. Finanças");
                 System.out.println("6. Alterar registro");
-                System.out.println("7. Sair do sistema");
+                System.out.println("7. alterar reserva");
+                System.out.println("8. Sair do sistema");
                 int opcaoMenu = ValidateNumber.validateINT(7);
 
                     switch(opcaoMenu){
@@ -62,6 +63,8 @@ public class functionOfMain {
                             System.out.println("voce nao tem autorizacao para usar esta funcao");
                             break;
                         case 7:
+                            System.out.println("alterar reserva");
+                        case 8:
                             System.out.println("Saindo do sistema");
                             booleanMain = false;
 

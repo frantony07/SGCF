@@ -6,6 +6,7 @@ import org.ONE.models.PayModel;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.PayRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PayServices {
@@ -85,13 +86,11 @@ public class PayServices {
 
     public void quickGetPay() {
         EntityManager em = CustomizerFactory.getEntityManager();
-        int count = 0;
         try {
+            long i = new PayRepository(em).getCount() - 1;
             if (new PayRepository(em).getCount() != null) {
-                for (long i = new PayRepository(em).getCount() - 1;
-                     i >= 0 && count < 5;
-                     i--) {
-                    new PayRepository(em).findAll().get((int) i);
+                for (int count = 0; count < 5 && i>=0; i--) {
+                    new PayRepository(em).findAll().forEach(System.out::println);
                     count++;
                 }
             }
