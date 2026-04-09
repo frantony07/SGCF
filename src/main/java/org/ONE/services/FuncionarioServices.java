@@ -1,87 +1,61 @@
 package org.ONE.services;
 
-import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.FuncionarioRepository;
-
-import java.util.List;
+import org.ONE.models.User;
+import org.ONE.models.ENUM.Permission;
 
 public class FuncionarioServices {
-    private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
 
-    public FuncionarioServices() {
+    private final EntityManager em;
+
+    public FuncionarioServices(EntityManager em){
+        this.em = em;
     }
 
-    public  void createNewRecorde(Funcionario funcionario){
-        try {
-            if(funcionario == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
-            }
-            funcionarioRepository.create(funcionario);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+    // 🔍 Buscar funcionário
+    public Funcionario getFuncionario(User userLogado) {
+        if (userLogado.getPermission() != Permission.FUNCIONARIO) {
+            throw new RuntimeException("Acesso negado! Apenas funcionarios.");
         }
+
+        return em.createQuery(
+                        "SELECT f FROM Funcionario f WHERE f.user = :user", Funcionario.class)
+                .setParameter("user", userLogado)
+                .getSingleResult();
     }
-    public void updateRecorde(Funcionario funcionario){
-        try {
-            if(funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            funcionarioRepository.update(funcionario);
+    // ✏️ Atualizar nome
+    public void atualizarNome(User userLogado, String novoNome){
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (userLogado.getPermission() != Permission.FUNCIONARIO) {
+            throw new RuntimeException("Acesso negado!");
         }
+
+        if(novoNome == null || novoNome.trim().isEmpty()){
+            throw new RuntimeException("Nome invalido!");
+        }
+
+        em.getTransaction().begin();
+
+        Funcionario funcionario = getFuncionario(userLogado);
+        funcionario.setName(novoNome);
+
+        em.merge(funcionario);
+
+        em.getTransaction().commit();
     }
-    public  void delete(Funcionario funcionario){
-        try {
-            if (funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
 
-            funcionarioRepository.delete(funcionario);
+    // 👀 Visualizar dados
+    public void visualizarDados(User userLogado) {
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
-    public List<Funcionario> findByName(String name){
-        try {
-            if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
-            }
-
-            return funcionarioRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (userLogado.getPermission() != Permission.FUNCIONARIO) {
+            throw new RuntimeException("Acesso negado!");
         }
 
-        return List.of();
-    }
-    public List<Funcionario> findAll (){
-        try {
-            return  funcionarioRepository.findAll();
+        Funcionario f = getFuncionario(userLogado);
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
-    }
-    public Funcionario findById(Long id) {return funcionarioRepository.findById(id); }
-
-    public Long getSize(){
-        try {
-            return funcionarioRepository.getSize();
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-        return 0L;
+        System.out.println("Nome: " + f.getName());
+        System.out.println("CPF: " + f.getCpf());
     }
 }

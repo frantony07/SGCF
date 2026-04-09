@@ -29,7 +29,7 @@ public class PayRepository {
         em.getTransaction().commit();
     }
 
-    public  void delete(PayModel pay) {
+    public void delete(PayModel pay) {
         em.getTransaction().begin();
         em.remove(em.contains(pay) ? pay : em.merge(pay));
         em.getTransaction().commit();
@@ -43,6 +43,7 @@ public class PayRepository {
                 .setParameter("name" , name +"%")
                 .getResultList();
     }
+
     public List<PayModel> findAll () {
         return em.createQuery(
                 "select p from Pay p ",
