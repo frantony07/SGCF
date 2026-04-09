@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class SelectFunctions {
     FuncionarioServices funcionarios = new FuncionarioServices();
     ClienteServices clientes = new ClienteServices();
-    PasseioServices paseios = new PasseioServices();
+    PasseioServices passeios = new PasseioServices();
 
     public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 
@@ -156,8 +156,8 @@ public class SelectFunctions {
     public Long selectPasseio(){
         try {
             System.out.println("selecione o passeio.");
-            paseios.findAll().forEach(System.out::println);
-            return new ValidateNumber().validateLong(paseios.getSize());
+            passeios.findAll().forEach(System.out::println);
+            return new ValidateNumber().validateLong(passeios.getSize());
         } catch (Exception e) {
             PrintError.printErro(e);
         }

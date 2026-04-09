@@ -16,8 +16,6 @@ public class PasseioRepository {
             em.getTransaction().commit();
         }
 
-
-
         public void update(Passeio passeio){
             em.getTransaction().begin();
             em.merge(passeio);
