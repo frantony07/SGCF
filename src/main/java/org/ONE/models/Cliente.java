@@ -34,11 +34,12 @@ public class Cliente{
     private CountryCostumer countryOfCostumer;
 
 
-    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String cpf, String name) {
+    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String cnpj, String cpf, String name) {
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
         this.cpf = cpf;
         this.name = name;
+        this.cnpj = cnpj;
     }
 
     public Cliente() {
