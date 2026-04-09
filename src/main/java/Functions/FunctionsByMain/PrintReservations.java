@@ -32,15 +32,17 @@ public class PrintReservations {
     }
     public void showReservationsFuncionario(){
 
-        Long funcionarioId = new SelectFunctions().selectFuncionario();
-        reservations.getFuncionarioReservations(funcionarioId).forEach(System.out::println);
+        Long funcionarioId = new SelectFunctions()
+                .selectFuncionario();
+        reservations.getFuncionarioReservations(funcionarioId)
+                .forEach(System.out::println);
 
     }
     public  void showReservationsClientes(){
 
-        Long clienteId = new SelectFunctions().selectCliente();
-        reservations.getClienteReservations(clienteId).forEach(System.out::println);
-
-
+        Long clienteId = new SelectFunctions()
+                .selectCliente();
+        reservations.getClienteReservations(clienteId)
+                .forEach(System.out::println);
     }
 }

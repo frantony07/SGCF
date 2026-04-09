@@ -7,7 +7,7 @@ import org.ONE.models.PayModel;
 import java.util.List;
 
 public class PayRepository {
-    private EntityManager em ;
+    private EntityManager em;
 
     public PayRepository(EntityManager em) {
         this.em = em;

@@ -59,7 +59,6 @@ public class PayServices {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-
         return List.of();
     }
 
