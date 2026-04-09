@@ -13,7 +13,7 @@ public class PayModel {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "fk_reservation_id")
+    @JoinColumn(name = "fk_reservations_id")
     private Reservations reservation;
 
     public void ModelLedger(Long ID, String status, Reservations reservation) {
