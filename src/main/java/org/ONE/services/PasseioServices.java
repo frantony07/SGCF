@@ -2,6 +2,7 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
+import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.PasseioRepository;
@@ -28,7 +29,7 @@ public class PasseioServices {
     }
     public void updateRecorde(Passeio passeio){
         try {
-            if(passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(passeio == null){throw new RuntimeException("o passeio nao pode ser nulo ");}
 
             passeioRepository.update(passeio);
 
@@ -60,15 +61,8 @@ public class PasseioServices {
 
         return List.of();
     }
-    public List<Passeio> findAll (){
-        try {
-            return  passeioRepository.findAll();
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
 
-        return List.of();
-    }
+    public List<Passeio> findAll (){return entityManager.createQuery("select f from Passeio f " , Passeio.class).getResultList();}
 
     public Passeio findById(Long id) {return passeioRepository.findById(id); }
 
