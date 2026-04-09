@@ -25,7 +25,7 @@ public class MainAccount {
             System.out.println("4. Metas");
             System.out.println("0. Voltar");
 
-            menu = new ValidateNumber().validateINT(7);
+            menu = ValidateNumber.validateINT(7);
 
             switch (menu) {
                 case 1:
@@ -41,12 +41,12 @@ public class MainAccount {
                     // To be added
                     System.out.println("To be added");
                 break;
-                case 0:
+                case 5:
                     mainOption = false;
                     System.out.println("Saindo das finanças");
                     return;
                 default:
-                    System.out.println("Por favor digite um número entre 1 e 7.");
+                    System.out.println("Por favor digite um número entre 1 e 5.");
             }
         }
     }
