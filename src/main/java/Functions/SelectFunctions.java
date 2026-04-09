@@ -27,7 +27,7 @@ public class SelectFunctions {
 
         while (true) {
             try {
-                System.out.println("O " + classification  + " fala alguma lingua estrangeira?");
+                System.out.println("O " + classification  + " fala alguma língua estrangeira?");
                 System.out.println("1. Sim");
                 System.out.println("2. Não");
                 optionMain = sc.nextInt();
@@ -39,7 +39,7 @@ public class SelectFunctions {
                     languages.add(Language.PORTUGUESE);
                     break;
                     }
-                System.out.println(" Opção inválida.");
+                System.out.println("Opção inválida.");
                 } catch (Exception e) {
                     PrintError.printErro(e);
                     sc.nextLine();
@@ -51,7 +51,7 @@ public class SelectFunctions {
             System.out.println("Escolha a língua que o " + classification + " fala:");
             System.out.println("1. " + Language.ENGLISH);
             System.out.println("2. " + Language.SPANISH);
-            System.out.println("3. O " + classification +" fala as duas linguas");
+            System.out.println("3. O " + classification +" fala as duas línguas");
             int optionMain =  ValidateNumber.validateINT(3);
             switch (optionMain){
                 case 1:
@@ -90,7 +90,7 @@ public class SelectFunctions {
             case 4 :
                 return CountryCostumer.EUROPE;
             default:
-            System.out.println("opção invalida");
+            System.out.println("Opção inválida");
                 }
 
             } catch (Exception e) {
@@ -129,7 +129,7 @@ public class SelectFunctions {
 
     public long selectFuncionario(){
         try{
-            System.out.println("Seleciona o id do  funcionário escolhido");
+            System.out.println("Selecione o ID do funcionário escolhido");
             funcionarios.findAll().forEach(System.out::println);
             return   new ValidateNumber().validateLong(funcionarios.getSize());
 
@@ -155,7 +155,7 @@ public class SelectFunctions {
 
     public Long selectPasseio(){
         try {
-            System.out.println("selecione o passeio.");
+            System.out.println("Selecione o passeio.");
             passeios.findAll().forEach(System.out::println);
             return new ValidateNumber().validateLong(passeios.getSize());
         } catch (Exception e) {

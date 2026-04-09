@@ -42,13 +42,13 @@ public class CreateDate {
             Scanner sc = new Scanner(System.in);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
             while (true){
-                System.out.println("digite uma data no formato (dd/mm/aaa)");
+                System.out.println("Digite uma data no formato (dd/MM/aaa)");
                 String dataString = sc.nextLine();
                 LocalDate date = LocalDate.parse(dataString , formatter);
                 if (date.isAfter(LocalDate.now())){
                     return date;
                 }
-                System.out.println("a data deve ser uma data valida");
+                System.out.println("A data deve ser uma data válida");
             }
         } catch (Exception e) {
             PrintError.printErro(e);

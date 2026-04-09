@@ -15,12 +15,12 @@ public class PrintError {
         mensagemDeErro.put(ArithmeticException.class, "Erro na divisão, é impossível dividir por 0");
         mensagemDeErro.put(NullPointerException.class, "Alguma variável usada não foi definida");
         mensagemDeErro.put(ClassCastException.class, "Tipo de dado inserido não é válido");
-        mensagemDeErro.put(ArrayIndexOutOfBoundsException.class, "índice do array fora do limite");
-        mensagemDeErro.put(StringIndexOutOfBoundsException.class, "índice da string fora do limite");
+        mensagemDeErro.put(ArrayIndexOutOfBoundsException.class, "Índice do array fora do limite");
+        mensagemDeErro.put(StringIndexOutOfBoundsException.class, "Índice da string fora do limite");
         mensagemDeErro.put(IllegalArgumentException.class, "Argumento inválido passado para o método");
         mensagemDeErro.put(IllegalStateException.class, "Estado ilegal do objeto");
         mensagemDeErro.put(UnsupportedOperationException.class, "Operação não suportada");
-        mensagemDeErro.put(DateTimeParseException.class, "Formato de data inválido (use: dd/mm/aaaa)");
+        mensagemDeErro.put(DateTimeParseException.class, "Formato de data inválido (use: dd/MM/aaaa)");
         mensagemDeErro.put(OutOfMemoryError.class, "Memória cheia");
         mensagemDeErro.put(StackOverflowError.class, "Estouro da pilha de memória");
         mensagemDeErro.put(SecurityException.class, "Violação de segurança");

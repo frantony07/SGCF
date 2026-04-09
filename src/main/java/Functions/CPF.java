@@ -11,7 +11,6 @@ public class CPF {
         while (true) {
 
             try {
-
                 System.out.print("Digite o CPF (apenas números): ");
                 cpf = sc.nextLine();
 
@@ -26,14 +25,10 @@ public class CPF {
                 if (!isValidCPF(cpf)) {
                     throw new Exception("CPF inválido.");
                 }
-
                 return cpf;
-
             } catch (Exception e) {
-
                 System.out.println("Erro: " + e.getMessage());
                 System.out.println("Tente novamente.\n");
-
             }
         }
     }
