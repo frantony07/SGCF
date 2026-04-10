@@ -24,4 +24,36 @@ public class PayModel {
         this.status = status;
         this.reservation = reservation;
     }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    public Reservations getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservations reservation) {
+        this.reservation = reservation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getTotal_account() {
+        return total_account;
+    }
+
+    public void setTotal_account(double total_account) {
+        this.total_account = total_account;
+    }
 }

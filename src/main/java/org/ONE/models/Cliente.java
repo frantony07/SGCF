@@ -43,12 +43,53 @@ public class Cliente{
 
     public Cliente() {
     }
-    public ArrayList<Language> getLanguageSpeak() {
-        return (ArrayList<Language>) this.languageSpeak;
+
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public CountryCostumer getCountryOfCostumer(){
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public CountryCostumer getCountryOfCostumer() {
         return countryOfCostumer;
+    }
+
+    public void setCountryOfCostumer(CountryCostumer countryOfCostumer) {
+        this.countryOfCostumer = countryOfCostumer;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<Language> getLanguageSpeak() {
+        return languageSpeak;
+    }
+
+    public void setLanguageSpeak(List<Language> languageSpeak) {
+        this.languageSpeak = languageSpeak;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

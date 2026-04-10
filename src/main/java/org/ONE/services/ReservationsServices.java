@@ -84,7 +84,36 @@ public class ReservationsServices {
         return 0L;
     }
 
-    public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
+    public List printReservationsForFuncionario(){
+        try {
+            return reservationsRepository.getFullJoinReservationsFuncionarios();
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+            return List.of();
+    }
+
+    public List<Object[]> getReservationsWithPaymentStatus(){
+        try {
+            reservationsRepository.getReservationsWithPaymentStatus();
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return List.of();
+    }
+
+    public List<Object[]> getClientesWithReservations() {
+        try {
+            reservationsRepository.getClientesWithReservations();
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return List.of();
+    }
+
+
+        public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
     }
 
     public ReceiptSummary processReceipts(String payStatus) {

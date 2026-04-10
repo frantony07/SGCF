@@ -2,6 +2,8 @@ package Functions.FunctionsByMain;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
+import org.ONE.models.Cliente;
+import org.ONE.models.Reservations;
 import org.ONE.services.*;
 
 public class Recorde {
@@ -15,7 +17,9 @@ public class Recorde {
             System.out.println("1. Mostrar funcionarios");
             System.out.println("2. Mostrar clientes");
             System.out.println("3. Mostrar passeios");
-            System.out.println("4. Voltar ao menu");
+            System.out.println("4. Mostrar todas as reservas de funcionario");
+            System.out.println("5. Mostrar clientes com reservas ativas");
+            System.out.println("6. Voltar ao menu");
             int option =  ValidateNumber.validateINT(4);
             switch (option){
                 case 1:
@@ -28,7 +32,27 @@ public class Recorde {
                     passeios.findAll().forEach(System.out::println);
 
                     break;
-                case 4:
+                case 4 :
+                    reservations.printReservationsForFuncionario().forEach(row -> {
+                        Object[] columnas = (Object[]) row;
+
+                        System.out.println("Reserva ID: " + columnas[0] + " | Funcionario: " + columnas[8]);
+                    });
+                    break;
+                case 5:
+                    reservations.getClientesWithReservations().forEach(row -> {
+                        Object[] col = (Object[]) row;
+                        Cliente c = (Cliente) col[0];
+                        Reservations r = (Reservations) col[1];
+
+                        System.out.println(
+                                "Cliente: " + c.getName() +
+                                        " | CPF: " + c.getCpf() +
+                                        " | Reserva ID: " + (r != null ? r.getId() : "Sem reserva") +
+                                        " | Valor: " + (r != null ? "R$ " + r.getValue() : "---")
+                        );
+                    });
+                case 6:
                     System.out.println("Voltando ao menu");
                     return;
 

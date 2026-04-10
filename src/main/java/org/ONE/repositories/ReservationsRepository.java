@@ -55,35 +55,30 @@ public class ReservationsRepository {
     public Long getSize(){
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
-
-    // Faz requisição de reservas com o pStatus indicado em MainAccount
     public List<Reservations> getReceipts(String pStatus) {
         return em.createQuery(
-                "select r from Reservations r inner join PayModel p on p.reservation = r where p.status = :pStatus",
+                "select r from Reservations r inner join PayModel p on p.cliente = r.cliente where p.status = :pStatus",
                 Reservations.class
         ).setParameter("pStatus", pStatus).getResultList();
     }
 
-    // Retorna todos os clientes E suas reservas (pode retornar clientes nulos/sem reservas)
     public List<Object[]> getClientesWithReservations() {
         return em.createQuery(
-                "select c, r from Clientes c left join Reservations r on r.cliente = c",
+                "select c, r from Cliente c left join Reservations r on r.cliente = c",
                 Object[].class
         ).getResultList();
     }
 
-    // Retorna TODAS as reservas e os status de pagamento
     public List<Object[]> getReservationsWithPaymentStatus() {
         return em.createQuery(
-                "select r, p from Reservations r right join PayModel p on p.reservation = r",
+                "select r, p from Reservations r right join PayModel p on p.cliente = r.cliente",
                 Object[].class
         ).getResultList();
     }
 
-    // Retorna TUDO de reservations (mesmo sem o ID de um funcionario) e funcionarios (mesmo sem nenhuma reserva)
-    public List<Object[]> getFullJoinReservationsFuncionarios() {
+    public List getFullJoinReservationsFuncionarios() {
         return em.createNativeQuery(
-                "select r.*, f.* from reservations r full join funcionarios f on r.funcionario_id = f.id;"
+                "select r.*, f.* from reservations r full join funcionario f on r.fk_funcionario_id = f.id"
         ).getResultList();
     }
 }

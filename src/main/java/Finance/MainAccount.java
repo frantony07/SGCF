@@ -2,6 +2,8 @@ package Finance;
 
 import Functions.ValidateNumber;
 import org.ONE.models.ENUM.Status;
+import org.ONE.models.PayModel;
+import org.ONE.models.Reservations;
 import org.ONE.services.PayServices;
 import org.ONE.services.ReservationsServices;
 import java.util.Scanner;
@@ -23,7 +25,9 @@ public class MainAccount {
             System.out.println("2. Histórico de tours pendentes");
             System.out.println("3. Histórico de tours cancelados ");
             System.out.println("4. Metas");
-            System.out.println("5. Voltar");
+            System.out.println("5. Mostrar todas as reservas");
+
+            System.out.println("6. Voltar");
 
             menu = ValidateNumber.validateINT(5);
 
@@ -42,6 +46,19 @@ public class MainAccount {
                     System.out.println("To be added");
                 break;
                 case 5:
+                    reservationsServices.getReservationsWithPaymentStatus().forEach(row -> {
+                        Object[] col = (Object[]) row;
+                        Reservations r = (Reservations) col[0];
+                        PayModel p = (PayModel) col[1];
+
+                        System.out.println(
+                                "Reserva ID: " + (r != null ? r.getId() : "N/A") +
+                                        " | Data: " + (r != null ? r.getDate() : "----------") +
+                                        " | Total: R$ " + p.getTotal_account() +
+                                        " | Status: " + p.getStatus()
+                        );
+                    });
+                case 6:
                     mainOption = false;
                     System.out.println("Saindo das finanças");
                     return;
