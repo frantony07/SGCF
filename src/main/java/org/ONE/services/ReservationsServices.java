@@ -95,7 +95,7 @@ public class ReservationsServices {
 
     public List<Object[]> getReservationsWithPaymentStatus(){
         try {
-            reservationsRepository.getReservationsWithPaymentStatus();
+            return reservationsRepository.getReservationsWithPaymentStatus();
         } catch (Exception e) {
             PrintError.printErro(e);
         }
@@ -104,7 +104,7 @@ public class ReservationsServices {
 
     public List<Object[]> getClientesWithReservations() {
         try {
-            reservationsRepository.getClientesWithReservations();
+            return reservationsRepository.getClientesWithReservations();
 
         } catch (Exception e) {
             PrintError.printErro(e);

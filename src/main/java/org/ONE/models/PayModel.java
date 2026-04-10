@@ -7,38 +7,38 @@ import jakarta.persistence.*;
 public class PayModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    private Long id;
 
     @Column(name = "status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "fk_reservation_id")
-    private Reservations reservation;
+    @JoinColumn(name = "fk_cliente_id")
+    private Cliente cliente;
 
     @Column(name = "total_account")
     private double total_account ;
 
-    public void ModelLedger(Long ID, String status, Reservations reservation) {
-        this.ID = ID;
+    public void ModelLedger(Long ID, String status, Cliente cliente) {
+        this.id = ID;
         this.status = status;
-        this.reservation = reservation;
+        this.cliente = cliente;
     }
 
     public Long getID() {
-        return ID;
+        return id;
     }
 
     public void setID(Long ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
-    public Reservations getReservation() {
-        return reservation;
+    public Cliente getReservation() {
+        return cliente;
     }
 
-    public void setReservation(Reservations reservation) {
-        this.reservation = reservation;
+    public void setReservation(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getStatus() {

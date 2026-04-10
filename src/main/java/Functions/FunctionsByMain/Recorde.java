@@ -6,6 +6,8 @@ import org.ONE.models.Cliente;
 import org.ONE.models.Reservations;
 import org.ONE.services.*;
 
+import java.util.List;
+
 public class Recorde {
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
@@ -20,7 +22,7 @@ public class Recorde {
             System.out.println("4. Mostrar todas as reservas de funcionario");
             System.out.println("5. Mostrar clientes com reservas ativas");
             System.out.println("6. Voltar ao menu");
-            int option =  ValidateNumber.validateINT(4);
+            int option =  ValidateNumber.validateINT(6);
             switch (option){
                 case 1:
                     funcionarios.findAll().forEach(System.out::println);
@@ -40,18 +42,16 @@ public class Recorde {
                     });
                     break;
                 case 5:
-                    reservations.getClientesWithReservations().forEach(row -> {
-                        Object[] col = (Object[]) row;
-                        Cliente c = (Cliente) col[0];
-                        Reservations r = (Reservations) col[1];
+                    List<Object[]> listaFinal = reservations.getClientesWithReservations();
 
-                        System.out.println(
-                                "Cliente: " + c.getName() +
-                                        " | CPF: " + c.getCpf() +
-                                        " | Reserva ID: " + (r != null ? r.getId() : "Sem reserva") +
-                                        " | Valor: " + (r != null ? "R$ " + r.getValue() : "---")
-                        );
-                    });
+                    if (listaFinal != null && !listaFinal.isEmpty()) {
+                        for (Object[] col : listaFinal) {
+                            Cliente c = (Cliente) col[0];
+                            Reservations r = (Reservations) col[1];
+
+                            System.out.println(" Cliente: " + c.getName() + " | Reserva: " + (r != null ? r.getId() : "Nula"));
+                        }
+                    }
                 case 6:
                     System.out.println("Voltando ao menu");
                     return;

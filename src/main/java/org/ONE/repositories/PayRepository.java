@@ -46,22 +46,22 @@ public class PayRepository {
 
     public List<PayModel> findAll () {
         return em.createQuery(
-                "select p from Pay p ",
+                "select p from PayModel p ",
                 PayModel.class)
                 .getResultList();
     }
 
     public List<PayModel> findTotalMoney() {
         return em.createQuery(
-                "select recordedMoney from pay",
+                "select recordedMoney from PayModel p",
                 PayModel.class)
                 .getResultList();
     }
 
-    public Long getCount(){
+    public Long getCount() {
         return em.createQuery(
-                "select count(p.id) from PayModel p",
-                Long.class)
+                        "SELECT COUNT(p.ID) FROM PayModel p",
+                        Long.class)
                 .getSingleResult();
     }
 }

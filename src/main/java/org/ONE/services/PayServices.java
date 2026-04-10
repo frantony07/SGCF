@@ -87,15 +87,30 @@ public class PayServices {
     public void quickGetPay() {
         EntityManager em = CustomizerFactory.getEntityManager();
         try {
-            long i = new PayRepository(em).getCount() - 1;
-            if (new PayRepository(em).getCount() != null) {
-                for (int count = 0; count < 5 && i>=0; i--) {
-                    new PayRepository(em).findAll().forEach(System.out::println);
-                    count++;
-                }
+            PayRepository repo = new PayRepository(em);
+            Long total = repo.getCount();
+
+            if (total != null && total > 0) {
+                List<PayModel> pagamentos = repo.findAll();
+
+                System.out.println("--- ÚLTIMOS 5 PAGAMENTOS ---");
+                pagamentos.stream()
+                        .skip(Math.max(0, pagamentos.size() - 5))
+                        .forEach(p -> System.out.println(
+                                "ID: " + p.getID() +
+                                        " | Status: " + p.getStatus() +
+                                        " | Valor: R$ " + p.getTotal_account()
+                        ));
+            } else {
+                System.out.println("Nenhum pagamento encontrado.");
             }
-        } catch (Exception err) {
-            PrintError.printErro(err);
+        } catch (Exception e) {
+            // PrintError.printErro(e); // Use seu logger aqui
+            e.printStackTrace();
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
         }
     }
 }

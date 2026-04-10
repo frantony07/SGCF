@@ -1,7 +1,10 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
+import org.ONE.models.Cliente;
 import org.ONE.models.Reservations;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationsRepository {
@@ -64,9 +67,10 @@ public class ReservationsRepository {
 
     public List<Object[]> getClientesWithReservations() {
         return em.createQuery(
-                "select c, r from Cliente c left join Reservations r on r.cliente = c",
+                "SELECT c, r FROM Cliente c LEFT JOIN Reservations r ON r.cliente = c",
                 Object[].class
         ).getResultList();
+
     }
 
     public List<Object[]> getReservationsWithPaymentStatus() {

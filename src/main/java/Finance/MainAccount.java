@@ -29,7 +29,7 @@ public class MainAccount {
 
             System.out.println("6. Voltar");
 
-            menu = ValidateNumber.validateINT(5);
+            menu = ValidateNumber.validateINT(6);
 
             switch (menu) {
                 case 1:
