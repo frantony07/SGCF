@@ -63,7 +63,7 @@ public class functionOfMain {
                             System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 7:
-                            System.out.println("alterar reserva");
+                            System.out.println("Alterar reserva");
                             break;
                         case 8:
                             System.out.println("Saindo do sistema");

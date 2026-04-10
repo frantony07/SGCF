@@ -55,13 +55,31 @@ public class ReservationsRepository {
     public Long getSize(){
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
-
     public List<Reservations> getReceipts(String pStatus) {
         return em.createQuery(
-                "select p.reservation from PayModel p where p.status = :pStatus",
+                "select r from Reservations r inner join PayModel p on p.cliente = r.cliente where p.status = :pStatus",
                 Reservations.class
         ).setParameter("pStatus", pStatus).getResultList();
     }
-}
 
+    public List<Object[]> getClientesWithReservations() {
+        return em.createQuery(
+                "select c, r from Cliente c left join Reservations r on r.cliente = c",
+                Object[].class
+        ).getResultList();
+    }
+
+    public List<Object[]> getReservationsWithPaymentStatus() {
+        return em.createQuery(
+                "select r, p from Reservations r right join PayModel p on p.cliente = r.cliente",
+                Object[].class
+        ).getResultList();
+    }
+
+    public List getFullJoinReservationsFuncionarios() {
+        return em.createNativeQuery(
+                "select r.*, f.* from reservations r full join funcionario f on r.fk_funcionario_id = f.id"
+        ).getResultList();
+    }
+}
 
