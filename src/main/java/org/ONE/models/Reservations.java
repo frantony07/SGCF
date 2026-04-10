@@ -101,14 +101,13 @@ public class Reservations {
     @Override
     public String toString() {
         return "\n-----------------------" +
-                "\nReservations{" +
-                "\ncliente=" + cliente +
-                "\nid=" + id +
-                "\ndate=" + date +
-                "\ntour=" + passeio +
-                "\nfuncionario=" + funcionario +
-                "\nvalue=" + value  +
-                "\nestatus=" + status;
+                "\nReserva agendada pelo cliente " + cliente +
+                "\nFuncionario responsável pela reserva = " + funcionario +
+                "\nPasseio escolhido " + passeio +
+                "\nId da reserva = " + id +
+                "\nData da reserva = " + date +
+                "\nValor da reserva = " + value +
+                "\nEstatus da reserva = " + status;
 
     }
 }

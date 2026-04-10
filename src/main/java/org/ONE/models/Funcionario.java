@@ -76,10 +76,9 @@ public class Funcionario{
     @Override
     public String toString() {
         return "\n------------------------" +
-                "\nFuncionario" +
-                "\ncpf='" + cpf + '\'' +
-                "\nid=" + id +
-                "\nname='" + name + '\'' +
-                "\nlanguagesSpoken=" + languagesSpoken ;
+                "\nFuncionario " + name +
+                "\nCpf do funcionario = " + cpf +
+                "\nId do funcionario = " + id +
+                "\nLínguas que o funcionario fala = " + languagesSpoken;
     }
 }

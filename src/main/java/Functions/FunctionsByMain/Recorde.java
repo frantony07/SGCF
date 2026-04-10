@@ -20,7 +20,7 @@ public class Recorde {
             System.out.println("4. Mostrar todas as reservas de funcionario");
             System.out.println("5. Mostrar clientes com reservas ativas");
             System.out.println("6. Voltar ao menu");
-            int option =  ValidateNumber.validateINT(4);
+            int option =  ValidateNumber.validateINT(6);
             switch (option){
                 case 1:
                     funcionarios.findAll().forEach(System.out::println);
@@ -52,6 +52,7 @@ public class Recorde {
                                         " | Valor: " + (r != null ? "R$ " + r.getValue() : "---")
                         );
                     });
+                    break;
                 case 6:
                     System.out.println("Voltando ao menu");
                     return;
