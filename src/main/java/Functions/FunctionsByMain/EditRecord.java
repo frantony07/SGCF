@@ -51,7 +51,7 @@ public class EditRecord {
                         }
                         break;
                     case 4:
-                        System.out.println("voltando ao menu principal");
+                        System.out.println("Voltando ao menu principal");
                         booleanMain = false;
                         break;
 
@@ -81,22 +81,22 @@ public class EditRecord {
         try {
 
             Scanner sc = new Scanner(System.in);
-            System.out.println("digite sua senha atual");
+            System.out.println("Digite sua senha atual");
             String senha = sc.next();
 
             if (!user.isEqualPassword(senha)) {
-                throw new RuntimeException("senha incorreta");
+                throw new RuntimeException("Senha incorreta");
             }
-            System.out.println("digite sua nova senha");
+            System.out.println("Digite sua nova senha");
             String newPassword = sc.next();
-            System.out.println("confirme sua senha ");
+            System.out.println("Confirme sua senha ");
             String newPasswordConfirmations = sc.next();
 
             if (!newPassword.equals(newPasswordConfirmations)) {
-                throw new RuntimeException("senha incorreta");
+                throw new RuntimeException("Senha incorreta");
             }
             user.setUserPassword(newPassword);
-            System.out.println("senha trocada com sucesso");
+            System.out.println("Senha trocada com sucesso");
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -105,7 +105,7 @@ public class EditRecord {
 
         public void editPrice(){
         try {
-            System.out.println("Selecione o ID do passeio que deseja alterar:");
+            System.out.println("Selecione o ID do passeio que deseja alterar: ");
             Long passeiosSelect = new SelectFunctions().selectPasseio();
             Passeio passeios1 = passeios.findById(passeiosSelect);
             System.out.println(passeios1);
@@ -114,7 +114,7 @@ public class EditRecord {
             Double novoPreco = sc.nextDouble();
             passeios1.setPrice(novoPreco);
             passeios.updateRecorde(passeios1);
-            System.out.println("Passeio atualizado com novo preco");
+            System.out.println("Passeio atualizado com novo preço");
             System.out.println(passeios1);
         } catch (Exception e){
             PrintError.printErro(e);

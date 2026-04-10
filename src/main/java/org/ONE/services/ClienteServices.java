@@ -22,7 +22,7 @@ public class ClienteServices {
     public  void createNewRecorde(Cliente cliente){
         try {
             if(cliente == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo");
             }
             clienteRepository.create(cliente);
 
@@ -32,7 +32,7 @@ public class ClienteServices {
     }
     public void updateRecorde(Cliente cliente){
         try {
-            if(cliente == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             clienteRepository.update(cliente);
 
@@ -42,7 +42,7 @@ public class ClienteServices {
     }
     public  void delete(Cliente cliente){
         try {
-            if (cliente == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             clienteRepository.delete(cliente);
 
@@ -53,7 +53,7 @@ public class ClienteServices {
     public List<Cliente> findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException("O nome não pode ser um número");
             }
 
             return clienteRepository.findByName(name);
@@ -66,7 +66,7 @@ public class ClienteServices {
     }
     public List<Cliente> findAll (){
         try {
-            return  clienteRepository.findAll();
+            return clienteRepository.findAll();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -86,7 +86,4 @@ public class ClienteServices {
         }
         return 0L;
     }
-
-
-
 }

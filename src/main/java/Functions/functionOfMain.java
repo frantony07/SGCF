@@ -32,14 +32,14 @@ public class functionOfMain {
                                 new CreateNewRegister().register();
                                 break;
                             }
-                            System.out.println("voce nao tem autorizacao para usar esta funcao");
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 2:
                             if (Authenticate.isManager(user)){
                                 new ScheduleReservations().scheduleReservation();
                                 break;
                             }
-                            System.out.println("voce nao tem autorizacao para usar esta funcao");
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 3:
                             new Recorde().displayRecorde();
@@ -53,14 +53,14 @@ public class functionOfMain {
                                 new MainAccount().mainPagamento();
                                 break;
                             }
-                            System.out.println("voce nao tem autorizacao para usar esta funcao");
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 6 :
                            if (Authenticate.isManager(user)){
                                new EditRecord().main(user);
                                break;
                            }
-                            System.out.println("voce nao tem autorizacao para usar esta funcao");
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 7:
                             System.out.println("alterar reserva");

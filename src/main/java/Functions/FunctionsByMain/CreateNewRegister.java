@@ -156,7 +156,7 @@ public class CreateNewRegister {
         String senha2 = sc.next();
 
         if(!Objects.equals(senha1, senha2)){
-            System.out.println("senhas incorretas");
+            System.out.println("Senhas incorretas");
             return;
         }
         Permission permission = selctedCategoryOfUser();
@@ -170,14 +170,14 @@ public class CreateNewRegister {
     public Permission selctedCategoryOfUser(){
         try {
 
-            System.out.println("digite a categoria do usuario");
+            System.out.println("Digite a categoria do usuário");
             System.out.println("1." + Permission.FUNCIONARIO);
             System.out.println("2." + Permission.GERENTE);
             int value = ValidateNumber.validateINT(2);
             return switch (value) {
                 case 1 -> Permission.FUNCIONARIO;
                 case 2 -> Permission.GERENTE;
-                default -> throw new IllegalStateException("Unexpected value: " + value);
+                default -> throw new IllegalStateException("Valor inesperado: " + value);
             };
         } catch (Exception e) {
             PrintError.printErro(e);

@@ -19,7 +19,7 @@ public class PasseioServices {
     public  void createNewRecorde(Passeio passeio){
         try {
             if(passeio == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo ");
             }
             passeioRepository.create(passeio);
 
@@ -29,7 +29,7 @@ public class PasseioServices {
     }
     public void updateRecorde(Passeio passeio){
         try {
-            if(passeio == null){throw new RuntimeException("o passeio nao pode ser nulo ");}
+            if(passeio == null){throw new RuntimeException("O passeio não pode ser nulo ");}
 
             passeioRepository.update(passeio);
 
@@ -39,7 +39,7 @@ public class PasseioServices {
     }
     public  void delete(Passeio passeio){
         try {
-            if (passeio == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (passeio == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
             passeioRepository.delete(passeio);
 
@@ -50,7 +50,7 @@ public class PasseioServices {
     public List<Passeio> findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException("O nome não pode ser um número");
             }
 
             return passeioRepository.findByName(name);

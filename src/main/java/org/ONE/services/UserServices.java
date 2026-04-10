@@ -21,7 +21,7 @@ public class UserServices {
     public  void createNewRecorde(User user){
         try {
             if(user == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo ");
             }
             userRepository.create(user);
 
@@ -31,7 +31,7 @@ public class UserServices {
     }
     public void updateRecorde(User user){
         try {
-            if(user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(user == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
             userRepository.update(user);
 
@@ -41,7 +41,7 @@ public class UserServices {
     }
     public  void delete(User user){
         try {
-            if (user == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (user == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
             userRepository.delete(user);
 
@@ -52,7 +52,7 @@ public class UserServices {
     public User findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException("O nome não pode ser um número");
             }
 
 
@@ -85,7 +85,7 @@ public class UserServices {
 
     public User  authenticate(String login, String password) {
         if(login.isEmpty() || login.matches("\\d+") || password.isEmpty() ){
-            throw new RuntimeException("usuario ou senha incorreta ");
+            throw new RuntimeException("Usuário ou senha incorreta");
         }
         return userRepository.authenticate(login,password);
     }
