@@ -49,4 +49,8 @@ public class UserRepository {
     public Long getSize(){
         return em.createQuery("select count(u.id) from User u" , Long.class).getSingleResult();
     }
+
+    public User findById(String userName, String userPassword) {
+        return null;
+    }
 }
