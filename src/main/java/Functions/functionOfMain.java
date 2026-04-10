@@ -24,7 +24,7 @@ public class functionOfMain {
                 System.out.println("6. Alterar registro");
                 System.out.println("7. Alterar estado reserva");
                 System.out.println("8. Sair do sistema");
-                int opcaoMenu = ValidateNumber.validateINT(7);
+                int opcaoMenu = ValidateNumber.validateINT(8);
 
                     switch(opcaoMenu){
                         case 1:
