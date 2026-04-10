@@ -62,6 +62,30 @@ public class ReservationsRepository {
                 Reservations.class
         ).setParameter("pStatus", pStatus).getResultList();
     }
-}
 
+    public List<Reservations> getAllReservationsLeftJoinPayments() {
+        return em.createQuery(
+                "select distinct r from Reservations r left join PayModel p on p.reservation.id = r.id",
+                Reservations.class
+        ).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> getReservationsRightJoinPayments() {
+        return em.createNativeQuery(
+                "SELECT r.*, p.* " +
+                        "FROM reservations r " +
+                        "RIGHT JOIN pay_model p ON r.id = p.reservation_id"
+        ).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> getReservationsFullJoinPayments() {
+        return em.createNativeQuery(
+                "SELECT r.*, p.* " +
+                        "FROM reservations r " +
+                        "FULL OUTER JOIN pay_model p ON r.id = p.reservation_id"
+        ).getResultList();
+    }
+}
 

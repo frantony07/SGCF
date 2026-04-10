@@ -102,22 +102,24 @@ public class ReservationsServices {
             ReceiptSummary summary = processReceipts(payStatus);
 
             System.out.println("RECIBOS:");
-            System.out.println("Date/Time: " + java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            System.out.println("Status Filter: " + payStatus);
+            System.out.println("Data/Horário: " + java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            System.out.println("Filtro de Status: " + payStatus);
             System.out.println("\n");
 
             if (summary.reservations().isEmpty()) {
-                System.out.println("No reservations found for this status.");
+                System.out.println("Não há reservas para este status.");
             } else {
                 for (Reservations res : summary.reservations()) {
-                    System.out.printf("Reservation ID: %d | Trip Date: %s | Value: R$ %.2f%n",
+                    System.out.printf("ID de Reservas: %d | Data do tour: %s | Valor: R$ %.2f%n",
                             res.getId(), res.getDate(), res.getValue());
                 }
             }
 
-            System.out.printf("\nTotal Value: R$ %.2f%n", summary.totalValue());
+            System.out.printf("\nValor Total: R$ %.2f%n", summary.totalValue());
         } catch (Exception err) {
             PrintError.printErro(err);
         }
     }
 }
+
+//
