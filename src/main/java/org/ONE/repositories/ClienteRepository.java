@@ -17,7 +17,6 @@ public class ClienteRepository {
         em.getTransaction().begin();
         em.persist(cliente);
         em.getTransaction().commit();
-        em.close();
     }
 
     public void update(Cliente cliente){

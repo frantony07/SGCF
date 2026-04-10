@@ -34,11 +34,12 @@ public class Cliente{
     private CountryCostumer countryOfCostumer;
 
 
-    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String cpf, String name) {
+    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String cnpj, String cpf, String name) {
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
         this.cpf = cpf;
         this.name = name;
+        this.cnpj = cnpj;
     }
 
     public Cliente() {
@@ -95,12 +96,11 @@ public class Cliente{
     @Override
     public String toString() {
         return "\n--------------------"+
-                "\nCliente" +
-                "\ncnpj='" + cnpj + '\'' +
-                "\nid=" + id +
-                "\ncpf='" + cpf + '\'' +
-                "\nnome='" + name + '\'' +
-                "\nlanguageSpeak=" + languageSpeak +
-                "\ncountryOfCostumer=" + countryOfCostumer ;
+                "\nCliente " + name +
+                "\nId do cliente = " + id +
+                "\nCnpj do cliente = " + cnpj +
+                "\nCpf do cliente = " + cpf +
+                "\nLínguas que o cliente fala = " + languageSpeak +
+                "\nPaís do cliente = " + countryOfCostumer;
     }
 }

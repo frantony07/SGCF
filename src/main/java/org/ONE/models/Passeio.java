@@ -115,12 +115,11 @@ public class Passeio {
     public String toString() {
         return
                 "\n--------------------"+
-                "\ncountryTour=" + countryTour +
-                "\nid=" + id +
-                "\npreço=" + price +
-                "\nminutos=" + durationOfTourInMinute +
-                "\nkilometros='" + kmOftour + '\'' +
-                "\nnome do passeio ='" + nameOfTour + '\'' +
-                "\nlocalização='" + locations + '\'';
+                "\nPasseio " + nameOfTour +
+                "\nId do passeio = " + id +
+                "\nPreço do passeio = " + price +
+                "\nDuração do passeio em minutos = " + durationOfTourInMinute +
+                "\nKm do passeio = " + kmOftour +
+                "\nLocalização do passeio = " + locations;
     }
 }

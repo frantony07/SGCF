@@ -63,7 +63,6 @@ public class CreateNewRegister {
             Scanner sc = new Scanner(System.in);
 
             String cpf = CPF.createCPF();
-
             System.out.println("Digite o nome do funcionário");
             String name = sc.next();
 
@@ -81,8 +80,17 @@ public class CreateNewRegister {
         try {
             Scanner sc = new Scanner(System.in);
 
-            String cpf = CPF.createCPF();
-
+            System.out.println("Escolha");
+            System.out.println("1.Atribuir CPF ao cliente");
+            System.out.println("2.Atribuir CNPJ ao cliente");
+            int escolha = sc.nextInt();
+            String cnpj = null;
+            String cpf = null;
+            if (escolha == 1) {
+                cpf = CPF.createCPF();
+            } else if (escolha == 2) {
+                cnpj = CNPJ.createCNPJ();
+            }
             System.out.println("Digite o nome do cliente");
 
             String name = sc.next();
@@ -93,7 +101,7 @@ public class CreateNewRegister {
 
             new SelectFunctions().selectLanguageMain(languages, "cliente");
 
-            clientes.createNewRecorde(new Cliente(languages , countryCostumer ,cpf ,name));
+            clientes.createNewRecorde(new Cliente(languages, countryCostumer, cnpj, cpf, name));
 
         } catch (Exception e) {
             PrintError.printErro(e);
