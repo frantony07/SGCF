@@ -56,35 +56,34 @@ public class ReservationsRepository {
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
 
+    // Faz requisição de reservas com o pStatus indicado em MainAccount
     public List<Reservations> getReceipts(String pStatus) {
         return em.createQuery(
-                "select p.reservation from PayModel p where p.status = :pStatus",
+                "select r from Reservations r inner join PayModel p on p.reservation = r where p.status = :pStatus",
                 Reservations.class
         ).setParameter("pStatus", pStatus).getResultList();
     }
 
-    public List<Reservations> getAllReservationsLeftJoinPayments() {
+    // Retorna todos os clientes E suas reservas (pode retornar clientes nulos/sem reservas)
+    public List<Object[]> getClientesWithReservations() {
         return em.createQuery(
-                "select distinct r from Reservations r left join PayModel p on p.reservation.id = r.id",
-                Reservations.class
+                "select c, r from Clientes c left join Reservations r on r.cliente = c",
+                Object[].class
         ).getResultList();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Object[]> getReservationsRightJoinPayments() {
-        return em.createNativeQuery(
-                "SELECT r.*, p.* " +
-                        "FROM reservations r " +
-                        "RIGHT JOIN pay_model p ON r.id = p.reservation_id"
+    // Retorna TODAS as reservas e os status de pagamento
+    public List<Object[]> getReservationsWithPaymentStatus() {
+        return em.createQuery(
+                "select r, p from Reservations r right join PayModel p on p.reservation = r",
+                Object[].class
         ).getResultList();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Object[]> getReservationsFullJoinPayments() {
+    // Retorna TUDO de reservations (mesmo sem o ID de um funcionario) e funcionarios (mesmo sem nenhuma reserva)
+    public List<Object[]> getFullJoinReservationsFuncionarios() {
         return em.createNativeQuery(
-                "SELECT r.*, p.* " +
-                        "FROM reservations r " +
-                        "FULL OUTER JOIN pay_model p ON r.id = p.reservation_id"
+                "select r.*, f.* from reservations r full join funcionarios f on r.funcionario_id = f.id;"
         ).getResultList();
     }
 }
