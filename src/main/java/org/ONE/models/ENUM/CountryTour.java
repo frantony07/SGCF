@@ -1,4 +1,4 @@
-package Tour;
+package org.ONE.models.ENUM;
 
 public enum CountryTour {
     Argentina,

@@ -1,248 +1,71 @@
 package Finance;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+import Functions.ValidateNumber;
+import org.ONE.models.ENUM.Status;
+import org.ONE.models.PayModel;
+import org.ONE.models.Reservations;
+import org.ONE.services.PayServices;
+import org.ONE.services.ReservationsServices;
 import java.util.Scanner;
 
 public class MainAccount {
     Scanner sc = new Scanner(System.in);
+    private final ReservationsServices reservationsServices = new ReservationsServices();
 
     public void mainPagamento() {
         int menu = 0;
+        int count = 0;
         boolean mainOption = true;
 
         while (mainOption) {
             System.out.println("Menu do caixa: ");
-            for (Ledger c : Ledger.getPayments()) {
-                System.out.println(c);
-            }
-            System.out.println("1. Adicionar");
-            System.out.println("2. Subtrair");
-            System.out.println("3. Recebimentos");
-            System.out.println("4. Metas");
-            System.out.println("5. Voltar");
+            new PayServices().quickGetPay();
 
-            while (!sc.hasNextInt()) {
-                System.out.println("Escolha um NÚMERO entre 1 e 5.");
-                sc.next();
-            }
-            menu = sc.nextInt();
+            System.out.println("1. Recibos de tours confirmados");
+            System.out.println("2. Histórico de tours pendentes");
+            System.out.println("3. Histórico de tours cancelados ");
+            System.out.println("4. Metas");
+            System.out.println("5. Mostrar todas as reservas");
+
+            System.out.println("6. Voltar");
+
+            menu = ValidateNumber.validateINT(6);
 
             switch (menu) {
                 case 1:
-                    addMoney(Ledger.getPayments(), sc);
-                    break;
+                    reservationsServices.printReceipt(Status.CONFIRMADA.name());
+                break;
                 case 2:
-                    subtractMoney(Ledger.getPayments(), sc);
-                    break;
+                    reservationsServices.printReceipt(Status.pendente.name());
+                break;
                 case 3:
-                    receipts(Ledger.getPayments(), sc);
-                    break;
+                    reservationsServices.printReceipt(Status.CANCELADA.name());
+                break;
                 case 4:
-                    quota(Ledger.getPayments(), sc);
-                    break;
+                    // To be added
+                    System.out.println("To be added");
+                break;
                 case 5:
+                    reservationsServices.getReservationsWithPaymentStatus().forEach(row -> {
+                        Object[] col = (Object[]) row;
+                        Reservations r = (Reservations) col[0];
+                        PayModel p = (PayModel) col[1];
 
+                        System.out.println(
+                                "Reserva ID: " + (r != null ? r.getId() : "N/A") +
+                                        " | Data: " + (r != null ? r.getDate() : "----------") +
+                                        " | Total: R$ " + p.getTotal_account() +
+                                        " | Status: " + p.getStatus()
+                        );
+                    });
+                case 6:
                     mainOption = false;
-                    System.out.println("saindo das finanças");
-                    break;
+                    System.out.println("Saindo das finanças");
+                    return;
                 default:
                     System.out.println("Por favor digite um número entre 1 e 5.");
+                    break;
             }
         }
-    }
-
-    public ArrayList<Ledger> getPayments() {
-        return Ledger.getPayments();
-    }
-
-    public static double totalCalculation(ArrayList<Ledger> payments, double calcNum) {
-        double currentTotal = 0;
-        if (!payments.isEmpty()) {
-            currentTotal = payments.get(payments.size() - 1).getTotalMoney();
-        }
-        return currentTotal + calcNum;
-    }
-
-    public static void addMoney(ArrayList<Ledger> payments, Scanner sc) {
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        System.out.println("Data: " + date.format(formatter));
-
-        System.out.println("Digite o valor a ser adicionado:");
-        while (!sc.hasNextDouble()) {
-            System.out.println("Digite um número válido!");
-            sc.next();
-        }
-        double amount = sc.nextDouble();
-
-        double currentTotal = totalCalculation(Ledger.getPayments(), amount);
-
-        payments.add(new Ledger(amount, date, currentTotal));
-    }
-
-    public static void subtractMoney(ArrayList<Ledger> payments, Scanner sc) {
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println("Data: " + date.format(formatter));
-
-        System.out.println("Digite o valor a ser subtraído:");
-        while (!sc.hasNextDouble()) {
-            System.out.println("Digite um número válido!");
-            sc.next();
-        }
-        double amount = sc.nextDouble();
-
-        double currentTotal = totalCalculation(Ledger.getPayments(), -amount);
-
-        payments.add(new Ledger(-amount, date, currentTotal));
-    }
-
-    public static void receipts(ArrayList<Ledger> payments, Scanner sc) {
-        int menu;
-        LocalDate startDate = null;
-        LocalDate endDate = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        System.out.println();
-        System.out.println("1. Filtrar por data");
-        System.out.println("5. Voltar");
-
-        while (!sc.hasNextInt()) {
-            System.out.println("Escolha um NÚMERO entre 1 ou 5.");
-            sc.next();
-        }
-        menu = sc.nextInt();
-        sc.nextLine();
-
-        switch (menu) {
-            case 1:
-                System.out.println("Entre a data inicial no formato dd/MM/yyyy");
-                String startDateString = sc.nextLine();
-                System.out.println("Entre a data final no formato dd/MM/yyyy");
-                String endDateString = sc.nextLine();
-
-                try {
-                    startDate = LocalDate.parse(startDateString, formatter);
-                    endDate = LocalDate.parse(endDateString, formatter);
-
-                    LocalDate finalStartDate = startDate;
-                    LocalDate finalEndDate = endDate;
-                    List<Ledger> filtered = payments.stream()
-                            .filter(p -> !p.getDateOfChange().isBefore(finalStartDate)
-                                    && !p.getDateOfChange().isAfter(finalEndDate))
-                            .filter(p -> p.getRecordedMoney() > 0)
-                            .toList();
-
-                    if (filtered.isEmpty()) {
-                        System.out.println("Nenhum recebimento encontrado nesse período.");
-                    } else {
-                        double total = 0;
-                        System.out.println("Recebimentos de " + startDate.format(formatter)
-                                + " até " + endDate.format(formatter) + ":");
-                        for (Ledger entry : filtered) {
-                            System.out.println(entry);
-                            total += entry.getRecordedMoney();
-                        }
-                        System.out.println("Total no período: R$" + String.format("%.2f", total));
-                    }
-                } catch (DateTimeParseException ex) {
-                    System.out.println("Data inválida! Use o formato dd/MM/yyyy");
-                }
-                break;
-            case 5:
-                System.out.println("Retornando...");
-                return;
-            default:
-                System.out.println("Por favor digite um número entre 1 ou 5.");
-                break;
-        }
-    }
-
-    public static void quota(ArrayList<Ledger> payments, Scanner sc) {
-
-        if (Ledger.getQuotaStartIndex() == -1) {
-            System.out.println("Você não possui uma meta ativa.");
-            System.out.println("Deseja criar uma nova meta?");
-            System.out.println("1. Sim");
-            System.out.println("2. Voltar");
-
-            int choice = 0;
-            while (choice != 1 && choice != 2) {
-                while (!sc.hasNextInt()) {
-                    System.out.println("Digite um NÚMERO (1 ou 2).");
-                    sc.next();
-                }
-                choice = sc.nextInt();
-                if (choice != 1 && choice != 2) {
-                    System.out.println("Por favor, digite 1 ou 2.");
-                }
-            }
-
-            if (choice == 1) {
-                createQuota(sc, payments);
-            } else {
-                System.out.println("Retornando...");
-                return;
-            }
-        }
-
-        double accumulated = 0;
-        for (int i = Ledger.getQuotaStartIndex(); i < payments.size(); i++) {
-            double recorded = payments.get(i).getRecordedMoney();
-            if (recorded > 0) {
-                accumulated += recorded;
-            }
-        }
-        double remaining = Ledger.getQuotaTarget() - accumulated;
-
-        if (remaining <= 0) {
-            System.out.printf("Parabéns! Sua meta de R$%.2f foi atingida!%n", Ledger.getQuotaTarget());
-            System.out.println("Você gotaria de criar uma nova meta?");
-            System.out.println("1. Sim");
-            System.out.println("2. Não");
-
-            int choice = 0;
-            while (choice != 1 && choice != 2) {
-                while (!sc.hasNextInt()) {
-                    System.out.println("Digite 1 ou 2.");
-                    sc.next();
-                }
-                choice = sc.nextInt();
-                if (choice != 1 && choice != 2) {
-                    System.out.println("Por favor, digite 1 ou 2.");
-                }
-            }
-
-            if (choice == 1) {
-                createQuota(sc, payments);
-            } else {
-                double resetQuota = 0;
-                Ledger.setQuotaTarget(resetQuota);
-                int resetQuotaIndex = -1;
-                Ledger.setQuotaStartIndex(resetQuotaIndex);
-            }
-        } else {
-            System.out.printf("Meta: R$%.2f%n", Ledger.getQuotaTarget());
-            System.out.printf("Acumulado: R$%.2f%n", accumulated);
-            System.out.printf("Faltam: R$%.2f%n", remaining);
-        }
-    }
-
-    private static void createQuota(Scanner sc, ArrayList<Ledger> payments) {
-        System.out.println("Digite o valor da meta:");
-        while (!sc.hasNextDouble()) {
-            System.out.println("Digite um número válido!");
-            sc.next();
-        }
-        double target = sc.nextDouble();
-        Ledger.setQuotaTarget(target);
-        int quotaStartIndex = payments.size();
-        Ledger.setQuotaStartIndex(quotaStartIndex);
-        System.out.printf("Meta de R$%.2f criada com sucesso!%n", Ledger.getQuotaTarget());
     }
 }
