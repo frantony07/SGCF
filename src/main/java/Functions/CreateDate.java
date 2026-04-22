@@ -48,7 +48,7 @@ public class CreateDate {
                 if (date.isAfter(LocalDate.now())){
                     return date;
                 }
-                System.out.println("A data deve ser uma data válida");
+                System.out.println("A data deve estar no formato indicado");
             }
         } catch (Exception e) {
             PrintError.printErro(e);

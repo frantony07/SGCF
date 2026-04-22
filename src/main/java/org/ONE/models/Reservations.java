@@ -72,8 +72,6 @@ public class Reservations {
         this.passeio = tour;
     }
 
-
-
     public Long getId() {
         return id;
     }
@@ -104,7 +102,7 @@ public class Reservations {
                 "\nReserva agendada pelo cliente " + cliente +
                 "\nFuncionario responsável pela reserva = " + funcionario +
                 "\nPasseio escolhido " + passeio +
-                "\nId da reserva = " + id +
+                "\nID da reserva = " + id +
                 "\nData da reserva = " + date +
                 "\nValor da reserva = " + value +
                 "\nEstatus da reserva = " + status;

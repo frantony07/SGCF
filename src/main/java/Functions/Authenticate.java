@@ -27,9 +27,7 @@ public class Authenticate {
                     System.out.println("Login realizado com sucesso!");
                     return user;
                 }
-
                 System.out.println("Usuário ou senha incorreta, tente novamente");
-
             }
 
         } catch (Exception e) {

@@ -28,7 +28,6 @@ public class ScheduleReservations {
 
         Funcionario funcionario = funcionarios.findById(funcionarioId);
 
-
         new CreateNewRegister().createNewReservations(cliente, funcionario, passeio);
     }
 }

@@ -30,10 +30,8 @@ public class CNPJ {
                 return cnpj;
 
             } catch (Exception e) {
-
                 System.out.println("Erro: " + e.getMessage());
                 System.out.println("Tente novamente.\n");
-
             }
         }
     }

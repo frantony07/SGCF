@@ -21,7 +21,7 @@ public class FuncionarioServices {
     public  void createNewRecorde(Funcionario funcionario){
         try {
             if(funcionario == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo ");
             }
             funcionarioRepository.create(funcionario);
 
@@ -29,9 +29,10 @@ public class FuncionarioServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecorde(Funcionario funcionario){
         try {
-            if(funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(funcionario == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
             funcionarioRepository.update(funcionario);
 
@@ -41,7 +42,7 @@ public class FuncionarioServices {
     }
     public  void delete(Funcionario funcionario){
         try {
-            if (funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (funcionario == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
             funcionarioRepository.delete(funcionario);
 
@@ -52,7 +53,7 @@ public class FuncionarioServices {
     public List<Funcionario> findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException("O  nome não pode ser um número");
             }
 
             return funcionarioRepository.findByName(name);

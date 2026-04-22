@@ -97,7 +97,7 @@ public class Cliente{
     public String toString() {
         return "\n--------------------"+
                 "\nCliente " + name +
-                "\nId do cliente = " + id +
+                "\nID do cliente = " + id +
                 "\nCnpj do cliente = " + cnpj +
                 "\nCpf do cliente = " + cpf +
                 "\nLínguas que o cliente fala = " + languageSpeak +
