@@ -62,12 +62,9 @@ public class Funcionario{
         this.name = name;
     }
 
-
-
     public void setLanguagesSpoken(List<Language> languagesSpoken) {
         this.languagesSpoken = languagesSpoken;
     }
-
 
     public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}
 

@@ -105,12 +105,8 @@ public class PayServices {
                 System.out.println("Nenhum pagamento encontrado.");
             }
         } catch (Exception e) {
-            // PrintError.printErro(e); // Use seu logger aqui
-            e.printStackTrace();
-        } finally {
-            if (em.isOpen()) {
-                em.close();
-            }
+            PrintError.printErro(e);
+
         }
     }
 }

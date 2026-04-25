@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+// Fazer sc.close(); sempre que for criado um novo scanner e try-catch
+
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();
         FuncionarioServices funcionarios = new FuncionarioServices();
@@ -109,8 +111,8 @@ public class CreateNewRegister {
 
     }
     public void createNewPasseio(){
-        try {
             Scanner sc = new Scanner(System.in);
+        try {
 
             System.out.println("Digite o nome do passeio");
             String name = sc.nextLine();
@@ -133,6 +135,8 @@ public class CreateNewRegister {
 
         } catch (Exception e) {
             PrintError.printErro(e);
+        } finally{
+            sc.close();
         }
 
     }

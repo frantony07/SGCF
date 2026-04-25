@@ -1,10 +1,3 @@
-do $$
-begin 
-    if not exists (select 1 from information_schema.columns where table_name='funcionario' and column_name='fk_user_id') then
-alter table funcionario add column fk_user_id bigint references user_account(id);
-end if;
-end $$;
-
 drop table if exists reservations cascade;
 
 create table reservations(

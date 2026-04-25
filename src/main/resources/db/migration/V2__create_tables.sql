@@ -56,6 +56,6 @@ create table if not exists reservations(
 create table if not exists pay (
     id serial not null primary key,
     status varchar(15),
-    fk_reservations_id bigint not null,
-    foreign key (fk_reservations_id) references reservations(id)
+    fk_cliente_id bigint not null,
+    foreign key (fk_cliente_id) references clientes(id)
 );
