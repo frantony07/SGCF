@@ -27,6 +27,7 @@ public class PasseioServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecorde(Passeio passeio){
         try {
             if(passeio == null){throw new RuntimeException("O passeio não pode ser nulo ");}
@@ -37,6 +38,7 @@ public class PasseioServices {
             PrintError.printErro(e);
         }
     }
+
     public  void delete(Passeio passeio){
         try {
             if (passeio == null){throw new RuntimeException("O cliente não pode ser nulo ");}
@@ -47,6 +49,7 @@ public class PasseioServices {
             PrintError.printErro(e);
         }
     }
+
     public List<Passeio> findByName(String name){
         try {
             if (name.matches("\\d+")) {

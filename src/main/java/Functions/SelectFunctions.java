@@ -40,13 +40,14 @@ public class SelectFunctions {
                     break;
                     }
                 System.out.println("Opção inválida.");
-                } catch (Exception e) {
+            } catch (Exception e) {
                     PrintError.printErro(e);
                     sc.nextLine();
-                }
+            }
         }
     }
-     private void selectLanguageNotUsing(ArrayList<Language> languages, String classification){
+
+    private void selectLanguageNotUsing(ArrayList<Language> languages, String classification){
         try {
             System.out.println("Escolha a língua que o " + classification + " fala:");
             System.out.println("1. " + Language.ENGLISH);
@@ -67,9 +68,9 @@ public class SelectFunctions {
                 default:
                     System.out.println("Opção inválida");
                     }
-                } catch (Exception e) {
-                 PrintError.printErro(e);
-                    }
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
     }
 
     public CountryCostumer SelectCountryOfCostumer(){
@@ -93,9 +94,9 @@ public class SelectFunctions {
             System.out.println("Opção inválida");
                 }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             PrintError.printErro(e);
-                }
+        }
         return CountryCostumer.UNITED_STATES;
     }
 
@@ -119,11 +120,9 @@ public class SelectFunctions {
                     System.out.println("Opção inválida");
                 }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             PrintError.printErro(e);
-
-            }
-
+        }
         return CountryTour.Brasil;
     }
 
@@ -133,7 +132,7 @@ public class SelectFunctions {
             funcionarios.findAll().forEach(System.out::println);
             return   new ValidateNumber().validateLong(funcionarios.getSize());
 
-        }catch(Exception e){
+        } catch(Exception e){
             PrintError.printErro(e);
         }
 
@@ -161,6 +160,7 @@ public class SelectFunctions {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
+
         return 0L;
     }
 }

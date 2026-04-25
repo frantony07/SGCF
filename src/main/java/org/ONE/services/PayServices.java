@@ -24,6 +24,7 @@ public class PayServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecords(PayModel payModel){
         try {
             if(payModel == null){throw new RuntimeException("O cliente não pode ser nulo ");}
@@ -34,6 +35,7 @@ public class PayServices {
             PrintError.printErro(e);
         }
     }
+
     public void delete(PayModel payModel){
         try {
             if (payModel == null) {

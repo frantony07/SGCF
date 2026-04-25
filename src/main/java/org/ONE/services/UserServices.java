@@ -29,6 +29,7 @@ public class UserServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecorde(User user){
         try {
             if(user == null){throw new RuntimeException("O cliente não pode ser nulo ");}
@@ -39,6 +40,7 @@ public class UserServices {
             PrintError.printErro(e);
         }
     }
+
     public  void delete(User user){
         try {
             if (user == null){throw new RuntimeException("O cliente não pode ser nulo ");}
@@ -49,6 +51,7 @@ public class UserServices {
             PrintError.printErro(e);
         }
     }
+
     public User findByName(String name){
         try {
             if (name.matches("\\d+")) {
@@ -62,6 +65,7 @@ public class UserServices {
             return userRepository.findByName(name);
 
     }
+
     public List<User> findAll (){
         try {
             return  userRepository.findAll();

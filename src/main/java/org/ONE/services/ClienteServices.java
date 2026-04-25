@@ -30,6 +30,7 @@ public class ClienteServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecorde(Cliente cliente){
         try {
             if(cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
@@ -40,6 +41,7 @@ public class ClienteServices {
             PrintError.printErro(e);
         }
     }
+
     public  void delete(Cliente cliente){
         try {
             if (cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}

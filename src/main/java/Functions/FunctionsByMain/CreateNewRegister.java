@@ -48,7 +48,6 @@ public class CreateNewRegister {
                     case 5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
-
                         return;
                     default:
                         System.out.println("Opção inválida");
@@ -78,6 +77,7 @@ public class CreateNewRegister {
             PrintError.printErro(e);
         }
     }
+
     public void createNewCliente(){
         try {
             Scanner sc = new Scanner(System.in);
@@ -108,8 +108,8 @@ public class CreateNewRegister {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-
     }
+
     public void createNewPasseio(){
             Scanner sc = new Scanner(System.in);
         try {
@@ -138,7 +138,6 @@ public class CreateNewRegister {
         } finally{
             sc.close();
         }
-
     }
 
     public void createNewReservations( Cliente cliente , Funcionario funcionario , Passeio passeio  ){
@@ -173,7 +172,6 @@ public class CreateNewRegister {
 
     public Permission selctedCategoryOfUser(){
         try {
-
             System.out.println("Digite a categoria do usuário");
             System.out.println("1." + Permission.FUNCIONARIO);
             System.out.println("2." + Permission.GERENTE);

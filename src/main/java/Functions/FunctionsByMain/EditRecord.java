@@ -58,7 +58,6 @@ public class EditRecord {
                     default:
                      break;
                 }
-
             } catch (Exception e) {
                 PrintError.printErro(e);
             }
@@ -79,7 +78,6 @@ public class EditRecord {
 
     public void editPasswordUser(User user) {
         try {
-
             Scanner sc = new Scanner(System.in);
             System.out.println("Digite sua senha atual");
             String senha = sc.next();
@@ -112,8 +110,10 @@ public class EditRecord {
             System.out.println("Passeios escolhido" + passeios1);
             System.out.println("Digite o novo preço do passeio");
             Double novoPreco = sc.nextDouble();
+
             passeios1.setPrice(novoPreco);
             passeios.updateRecorde(passeios1);
+
             System.out.println("Passeio atualizado com novo preço");
             System.out.println(passeios1);
         } catch (Exception e){
