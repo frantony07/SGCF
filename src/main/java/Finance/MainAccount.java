@@ -23,10 +23,9 @@ public class MainAccount {
 
             System.out.println("1. Recibos de tours confirmados");
             System.out.println("2. Histórico de tours pendentes");
-            System.out.println("3. Histórico de tours cancelados ");
+            System.out.println("3. Histórico de tours cancelados");
             System.out.println("4. Metas");
             System.out.println("5. Mostrar todas as reservas");
-
             System.out.println("6. Voltar");
 
             menu = ValidateNumber.validateINT(6);

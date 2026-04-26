@@ -34,10 +34,6 @@ public class QuotaRepository {
         em.getTransaction().commit();
     }
 
-    public List<QuotaModel> findByName(String name) {
-        return em.createQuery("select c from QuotaModel c where  lower(c.name) like lower(:name)" , QuotaModel.class).setParameter("name" , name +"%").getResultList();
-    }
-
     public List<QuotaModel> findAll () {
         return em.createQuery("select c from QuotaModel c " , QuotaModel.class).getResultList();
     }
