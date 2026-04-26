@@ -3,11 +3,8 @@ package org.ONE.services;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.Cliente;
-import org.ONE.models.Passeio;
 import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
-import org.ONE.repositories.UserRepository;
-import org.hibernate.service.spi.InjectService;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class ClienteServices {
     public ClienteServices() {
     }
 
-    public  void createNewRecorde(Cliente cliente){
+    public void createNewRecord(Cliente cliente){
         try {
             if(cliente == null){
                 throw new RuntimeException("O cliente não pode ser nulo");
@@ -31,7 +28,7 @@ public class ClienteServices {
         }
     }
 
-    public void updateRecorde(Cliente cliente){
+    public void updateRecord(Cliente cliente){
         try {
             if(cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
@@ -42,7 +39,7 @@ public class ClienteServices {
         }
     }
 
-    public  void delete(Cliente cliente){
+    public void delete(Cliente cliente){
         try {
             if (cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
 

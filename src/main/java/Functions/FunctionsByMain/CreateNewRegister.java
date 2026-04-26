@@ -103,7 +103,7 @@ public class CreateNewRegister {
 
             new SelectFunctions().selectLanguageMain(languages, "cliente");
 
-            clientes.createNewRecorde(new Cliente(languages, countryCostumer, cnpj, cpf, name));
+            clientes.createNewRecord(new Cliente(languages, countryCostumer, cnpj, cpf, name));
 
         } catch (Exception e) {
             PrintError.printErro(e);
