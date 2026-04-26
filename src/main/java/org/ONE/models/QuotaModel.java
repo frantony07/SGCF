@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Table
 @Entity(name = "meta")
-public class MetaModel {
+public class QuotaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,11 +27,11 @@ public class MetaModel {
     @Column(name = "fk_funcionario_id")
     private Long idFuncionario;
 
-    public MetaModel() {
+    public QuotaModel() {
 
     }
 
-    public MetaModel(LocalDate startDate, LocalDate endDate, double targetValue, double accumulatedValue) {
+    public QuotaModel(LocalDate startDate, LocalDate endDate, double targetValue, double accumulatedValue) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.targetValue = targetValue;
