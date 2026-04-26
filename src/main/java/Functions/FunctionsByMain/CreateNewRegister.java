@@ -53,7 +53,7 @@ public class CreateNewRegister {
                         System.out.println("Opção inválida");
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 PrintError.printErro(e);
             }
         }
