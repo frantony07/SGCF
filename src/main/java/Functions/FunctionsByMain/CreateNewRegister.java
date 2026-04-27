@@ -83,8 +83,8 @@ public class CreateNewRegister {
             Scanner sc = new Scanner(System.in);
 
             System.out.println("Escolha");
-            System.out.println("1.Atribuir CPF ao cliente");
-            System.out.println("2.Atribuir CNPJ ao cliente");
+            System.out.println("1. Atribuir CPF ao cliente");
+            System.out.println("2. Atribuir CNPJ ao cliente");
             int escolha = sc.nextInt();
             String cnpj = null;
             String cpf = null;
@@ -121,22 +121,20 @@ public class CreateNewRegister {
             double price = sc.nextDouble();
 
             System.out.println("Digite a duração em minutos");
-            long durationInMinute = sc.nextLong();
+            long durations_in_minute = sc.nextLong();
             sc.nextLine();
 
             System.out.println("Digite a localização do tour");
-            String location = sc.nextLine();
+            String locations = sc.nextLine();
 
             System.out.println("Digite a distância em kilômetros do passeio");
-            Long km = sc.nextLong();
+            Long km_of_tour = sc.nextLong();
 
-            CountryTour countryTour = new SelectFunctions().selecteCountryTour();
-            passeios.createNewRecorde(new Passeio(price,durationInMinute,countryTour,km,name,location));
+            CountryTour country_of_tour = new SelectFunctions().selecteCountryTour();
+            passeios.createNewRecorde(new Passeio(price,durations_in_minute,country_of_tour,km_of_tour,name,locations));
 
         } catch (Exception e) {
             PrintError.printErro(e);
-        } finally{
-            sc.close();
         }
     }
 

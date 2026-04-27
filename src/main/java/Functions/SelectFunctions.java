@@ -103,19 +103,19 @@ public class SelectFunctions {
     public CountryTour selecteCountryTour(){
         try {
             System.out.println("Selecione o país do passeio");
-            System.out.println("1." + CountryTour.Argentina);
-            System.out.println("2." + CountryTour.Brasil);
-            System.out.println("3." + CountryTour.Paraguay);
+            System.out.println("1." + CountryTour.ARGENTINA);
+            System.out.println("2." + CountryTour.BRAZIL);
+            System.out.println("3." + CountryTour.PARAGUAY);
 
             int optionMenu = ValidateNumber.validateINT(3);
 
             switch (optionMenu){
                 case 1:
-                    return CountryTour.Argentina;
+                    return CountryTour.ARGENTINA;
                 case 2:
-                    return CountryTour.Brasil;
+                    return CountryTour.BRAZIL;
                 case 3 :
-                    return CountryTour.Paraguay;
+                    return CountryTour.PARAGUAY;
                 default:
                     System.out.println("Opção inválida");
                 }
@@ -123,7 +123,7 @@ public class SelectFunctions {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-        return CountryTour.Brasil;
+        return CountryTour.BRAZIL;
     }
 
     public long selectFuncionario(){

@@ -33,7 +33,6 @@ public class Recorde {
                     break;
                 case 3 :
                     passeios.findAll().forEach(System.out::println);
-
                     break;
                 case 4 :
                     reservations.printReservationsForFuncionario().forEach(row -> {
@@ -53,6 +52,7 @@ public class Recorde {
                             System.out.println(" Cliente: " + c.getName() + " | Reserva: " + (r != null ? r.getId() : "Nula"));
                         }
                     }
+                        break;
                 case 6:
                     System.out.println("Voltando ao menu");
                     return;
