@@ -14,8 +14,15 @@ public class QuotaServices {
 
     public QuotaServices() {};
 
-    public void createQuota() {
-
+    public void createQuota(QuotaModel quotaModel) {
+        try {
+            if(quotaModel == null) {
+                throw new RuntimeException("A meta não pode ser nula");
+            }
+            quotaRepository.create(quotaModel);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
     }
 
     public void updateQuota(QuotaModel quotaModel) {

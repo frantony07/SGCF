@@ -19,7 +19,7 @@ public class ReservationsServices {
     public  void createNewRecorde(Reservations reservations){
         try {
             if(reservations == null){
-                throw new RuntimeException("O cliente não pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo");
             }
             reservationsRepository.create(reservations);
 
@@ -30,7 +30,7 @@ public class ReservationsServices {
 
     public void updateRecorde(Reservations reservations){
         try {
-            if(reservations == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+            if(reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             reservationsRepository.update(reservations);
 
@@ -41,7 +41,7 @@ public class ReservationsServices {
 
     public  void delete(Reservations reservations){
         try {
-            if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+            if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             reservationsRepository.delete(reservations);
 
