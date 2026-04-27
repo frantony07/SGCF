@@ -46,8 +46,15 @@ public class EditRecord {
                     case 3:
                         if(passeios.getSize() == 0L){
                             System.out.println("Existem 0 passeios cadastrados");
-                        } else{
-                            editPrice();
+                        } else {
+                            System.out.println("1. Mudar preço do passeio");
+                            System.out.println("2. Mudar nome do passeio");
+                            int opcaoP = ValidateNumber.validateINT(2);
+                            if (opcaoP == 1) {
+                                editPrice();
+                            } else if(opcaoP == 2) {
+                                editNameTour();
+                            }
                         }
                         break;
                     case 4:
@@ -78,6 +85,7 @@ public class EditRecord {
 
     public void editPasswordUser(User user) {
         try {
+
             Scanner sc = new Scanner(System.in);
             System.out.println("Digite sua senha atual");
             String senha = sc.next();
@@ -103,22 +111,34 @@ public class EditRecord {
 
         public void editPrice(){
         try {
-            System.out.println("Selecione o ID do passeio que deseja alterar: ");
             Long passeiosSelect = new SelectFunctions().selectPasseio();
             Passeio passeios1 = passeios.findById(passeiosSelect);
             System.out.println(passeios1);
-            System.out.println("Passeios escolhido" + passeios1);
+            System.out.println("Passeio escolhido" + passeios1);
             System.out.println("Digite o novo preço do passeio");
             Double novoPreco = sc.nextDouble();
-
             passeios1.setPrice(novoPreco);
             passeios.updateRecorde(passeios1);
-
             System.out.println("Passeio atualizado com novo preço");
             System.out.println(passeios1);
         } catch (Exception e){
             PrintError.printErro(e);
             }
 
+    }
+
+    public void editNameTour(){
+        try {
+            Long passeioSelect = new SelectFunctions().selectPasseio();
+            Passeio passeio1 = passeios.findById(passeioSelect);
+            System.out.println("Passeio escolhido: " +passeio1);
+            System.out.println("Digite o novo nome do passeio: ");
+            String novoNome = sc.next();
+            passeio1.setNameOfTour(novoNome);
+            passeios.updateRecorde(passeio1);
+            System.out.println("Passeio atualizado com novo nome: " +passeio1);
+        } catch(Exception e){
+            PrintError.printErro(e);
+        }
     }
 }

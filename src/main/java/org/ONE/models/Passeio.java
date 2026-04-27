@@ -57,7 +57,9 @@ public class Passeio {
         return nameOfTour;
     }
 
-
+    public void setNameOfTour(String nameOfTour) {
+        this.nameOfTour = nameOfTour;
+    }
 
     public Long getKmOftour() {
         return kmOftour;

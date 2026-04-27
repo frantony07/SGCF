@@ -19,7 +19,7 @@ public class PasseioServices {
     public  void createNewRecorde(Passeio passeio){
         try {
             if(passeio == null){
-                throw new RuntimeException("O cliente não pode ser nulo ");
+                throw new RuntimeException("O Passeio não pode ser nulo ");
             }
             passeioRepository.create(passeio);
 

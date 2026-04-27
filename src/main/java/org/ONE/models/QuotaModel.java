@@ -6,7 +6,9 @@ import java.time.LocalDate;
 
 @Table
 @Entity(name = "meta")
-public class QuotaModel {
+public class
+
+QuotaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
