@@ -29,7 +29,7 @@ public class CreateNewRegister {
                 System.out.println("1. Criar novo funcionário");
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
-                System.out.println("4. criar novo usuario ");
+                System.out.println("4. Criar novo usuario ");
                 System.out.println("5. Voltar ao menu principal");
                 int menuOption = ValidateNumber.validateINT(5);
 
