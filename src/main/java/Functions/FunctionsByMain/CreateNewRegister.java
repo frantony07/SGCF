@@ -135,8 +135,6 @@ public class CreateNewRegister {
 
         } catch (Exception e) {
             PrintError.printErro(e);
-        } finally{
-            sc.close();
         }
     }
 
@@ -151,7 +149,7 @@ public class CreateNewRegister {
         User newUser = new User();
         System.out.println("Digite o nome do usuario");
         String userName = sc.next();
-        //is unique
+
         System.out.println("Digite sua senha");
         String senha1 = sc.next();
 
