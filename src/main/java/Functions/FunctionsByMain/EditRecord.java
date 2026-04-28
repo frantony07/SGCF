@@ -133,7 +133,7 @@ public class EditRecord {
             Passeio passeio1 = passeios.findById(passeioSelect);
             System.out.println("Passeio escolhido: " +passeio1);
             System.out.println("Digite o novo nome do passeio: ");
-            String novoNome = sc.next();
+            String novoNome = sc.nextLine();
             passeio1.setNameOfTour(novoNome);
             passeios.updateRecorde(passeio1);
             System.out.println("Passeio atualizado com novo nome: " +passeio1);
