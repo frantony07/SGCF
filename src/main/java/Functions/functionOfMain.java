@@ -63,7 +63,11 @@ public class functionOfMain {
                             System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 7:
-                            System.out.println("Alterar reserva");
+                            if (Authenticate.isManager(user)){
+                                new EditReservations().main(user);
+                                break;
+                            }
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 8:
                             System.out.println("Saindo do sistema");
