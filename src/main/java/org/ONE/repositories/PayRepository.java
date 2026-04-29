@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.ONE.models.PayModel;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PayRepository {
@@ -64,4 +65,24 @@ public class PayRepository {
                         Long.class)
                 .getSingleResult();
     }
+
+    public Double sumEarningsByEmployee(Long employeeId,
+                                        String status,
+                                        LocalDateTime start,
+                                        LocalDateTime end) {
+        return em.createQuery(
+                        "select coalesce(sum(p.total_account), 0) " +
+                                "from PayModel p, Reservations r " +
+                                "where r.cliente = p.cliente " +
+                                "and r.funcionario.id = :employeeId " +
+                                "and p.status = :status " +
+                                "and r.date between :start and :end",
+                        Double.class)
+                .setParameter("employeeId", employeeId)
+                .setParameter("status", status)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .getSingleResult();
+    }
+
 }
