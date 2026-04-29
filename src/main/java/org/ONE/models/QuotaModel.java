@@ -2,7 +2,7 @@ package org.ONE.models;
 
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Table
 @Entity(name = "meta")
@@ -14,31 +14,33 @@ QuotaModel {
     private Long id;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "target_value")
     private double targetValue;
 
-    @Column(name = "accumulated_value")
-    private double accumulatedValue;
-
-    @ManyToOne
     @Column(name = "fk_funcionario_id")
     private Long idFuncionario;
 
-    public QuotaModel() {
+    public QuotaModel() {}
 
-    }
-
-    public QuotaModel(LocalDate startDate, LocalDate endDate, double targetValue, double accumulatedValue) {
+    // Company Quota (employee ID is null)
+    public QuotaModel(LocalDateTime startDate, LocalDateTime endDate, double targetValue) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.targetValue = targetValue;
-        this.accumulatedValue = accumulatedValue;
+        this.idFuncionario = null;
     }
 
-
+    // Employee Quota (employee ID must NOT be null)
+    public QuotaModel(LocalDateTime startDate, LocalDateTime endDate, double targetValue, Long funcionarioID) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.targetValue = targetValue;
+        this.idFuncionario = funcionarioID;
+    }
 }
+
