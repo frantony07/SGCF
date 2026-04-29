@@ -2,10 +2,7 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.FuncionarioRepository;
 
@@ -75,6 +72,14 @@ public class FuncionarioServices {
         return List.of();
     }
     public Funcionario findById(Long id) {return funcionarioRepository.findById(id); }
+
+    public Long findIdByCPF(String cpf) {
+        try {
+            return funcionarioRepository.findIdByCPF(cpf);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+    }
 
     public Long getSize(){
         try {
