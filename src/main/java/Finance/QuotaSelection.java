@@ -32,9 +32,11 @@ public class QuotaSelection {
                         createCompanyQuota(quotaServices, sc);
                         break;
                     case 3:
+                        // Start work
                         System.out.println("Metas ativas: ");
                         break;
                     case 4:
+                        System.out.println("Retornando ao menu financeiro...");
                         return;
                     default:
                         System.out.println("Erro! Digite um número entre 1 e 4.");
