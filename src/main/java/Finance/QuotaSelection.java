@@ -2,10 +2,16 @@ package Finance;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
+import org.ONE.models.QuotaModel;
+import org.ONE.services.FuncionarioServices;
+import org.ONE.services.QuotaServices;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class QuotaSelection {
+    QuotaServices quotaServices = new QuotaServices();
+    FuncionarioServices funcionarioServices = new FuncionarioServices();
 
     public void quotaCreation(Scanner sc) {
         try {
@@ -21,14 +27,20 @@ public class QuotaSelection {
 
                 switch (metaOption) {
                     case 1:
-                        System.out.println("Insira o valor da sua meta: ");
-                        sc.nextInt();
-
-
+                        createEmployeeQuota(quotaServices, funcionarioServices, sc);
                         break;
                     case 2:
                         System.out.println("Insira o valor da meta da empresa: ");
-                        sc.nextInt();
+                        while (!sc.hasNextDouble()) {
+                            System.out.println("Digite um valor válido.");
+                            sc.next();
+                        }
+                        double companyTargetValue = sc.nextDouble();
+
+                        System.out.println("Valor da meta criada: " + companyTargetValue);
+                        LocalDateTime companyInitialDate = LocalDateTime.now();
+                        LocalDateTime companyFinalDate = companyInitialDate.plusDays(30);
+                        System.out.println("A data limite para a meta é de 30 dias em: " + companyFinalDate);
 
                         break;
                     case 3:
@@ -45,4 +57,37 @@ public class QuotaSelection {
             PrintError.printErro(err);
         }
     }
+
+    public void createEmployeeQuota(QuotaServices quotaServices, FuncionarioServices funcionarioServices, Scanner sc) {
+        System.out.println("Digite o CPF do funcionário: ");
+        String cpf = sc.next();
+        Long employeeID = funcionarioServices.findIdByCPF(cpf);
+
+        if (employeeID == null) {
+            System.out.println("Não foi encontrado nenhum funcionário com este CPF.");
+            return;
+        }
+
+        System.out.println("Insira o valor da sua meta: ");
+        while (!sc.hasNextDouble()) {
+            System.out.println("Digite um valor válido.");
+            sc.next();
+        }
+        double employeeTargetValue = sc.nextDouble();
+
+        System.out.println("Valor da meta criada: " + employeeTargetValue);
+        LocalDateTime employeeInitialDate = LocalDateTime.now();
+        LocalDateTime employeeFinalDate = employeeInitialDate.plusDays(30);
+        System.out.println("A data limite para a meta é de 30 dias em: " + employeeFinalDate);
+
+        quotaServices.createQuota(
+                new QuotaModel(
+                        employeeInitialDate,
+                        employeeFinalDate,
+                        employeeTargetValue,
+                        employeeID
+                )
+        );
+    }
+
 }
