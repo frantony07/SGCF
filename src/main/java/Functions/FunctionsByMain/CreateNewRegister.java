@@ -2,10 +2,7 @@ package Functions.FunctionsByMain;
 
 import Functions.*;
 import org.ONE.models.*;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.ENUM.Permission;
+import org.ONE.models.ENUM.*;
 import org.ONE.services.*;
 
 import java.time.LocalDate;
@@ -137,9 +134,9 @@ public class CreateNewRegister {
         }
     }
 
-    public void createNewReservations( Cliente cliente , Funcionario funcionario , Passeio passeio  ){
+    public void createNewReservations(Cliente cliente , Funcionario funcionario , Passeio passeio, Status status){
         LocalDate data = new CreateDate().createNewData();
-        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice());
+        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice(), status);
         reservations.createNewRecorde(reservation);
     }
 

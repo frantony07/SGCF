@@ -16,6 +16,15 @@ public class ReservationsServices {
     public ReservationsServices() {
     }
 
+    public Reservations findById(Long id) {
+        try {
+            return reservationsRepository.finById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
+
     public  void createNewRecorde(Reservations reservations){
         try {
             if(reservations == null){

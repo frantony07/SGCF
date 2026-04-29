@@ -26,8 +26,8 @@ QuotaModel {
     private double accumulatedValue;
 
     @ManyToOne
-    @Column(name = "fk_funcionario_id")
-    private Long idFuncionario;
+    @JoinColumn(name = "fk_funcionario_id")//mudei para join (FK)
+    private Funcionario funcionario;
 
     public QuotaModel() {
 

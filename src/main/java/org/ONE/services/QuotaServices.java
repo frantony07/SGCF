@@ -47,16 +47,6 @@ public class QuotaServices {
         }
     }
 
-    public void quickGetEmployeeQuota() {
-        EntityManager em = CustomizerFactory.getEntityManager();
-
-        try {
-            quotaRepository
-        } catch (Exception err) {
-            PrintError.printErro(err);
-        }
-    }
-
     public List<QuotaModel> findAllQuotas() {
         try {
             return quotaRepository.findAll();
