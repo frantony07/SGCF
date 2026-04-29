@@ -3,7 +3,7 @@ package Functions;
 import java.util.Scanner;
 
 public class ValidateNumber {
-    public  static int validateINT(int limitOfNumber){
+    public static int validateINT(int limitOfNumber){
         Scanner sc = new Scanner(System.in);
 
         while (true){
@@ -43,5 +43,41 @@ public class ValidateNumber {
                 sc.next();
             }
         }
+    }
+
+    public static float validateFloat() {
+        Scanner sc = new Scanner(System.in);
+
+        while(true){
+         try {
+            while (!sc.hasNextFloat()) {
+                System.out.println("Valor nao valido, digite um valor float");
+                sc.next();
+            }
+             float value = sc.nextFloat();
+             return value;
+    } catch (Exception e) {
+             PrintError.printErro(e);
+             sc.next();
+         }
+     }
+    }
+
+    public String validateString(){
+     Scanner sc = new Scanner(System.in);
+
+     while(true){
+         try{
+             while (!sc.hasNext()){
+                 System.out.println("Por favor, digite apenas palavras");
+                 sc.next();
+             }
+             String value = sc.next();
+             return value;
+         } catch (Exception e){
+             PrintError.printErro(e);
+             sc.next();
+         }
+     }
     }
 }

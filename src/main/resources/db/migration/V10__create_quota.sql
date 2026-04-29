@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS meta (
     accumulated_value double precision not null,
     fk_funcionario_id serial not null,
 
-    foreign key (fk_funcionario_id) references funcionarios(id)
+    foreign key (fk_funcionario_id) references funcionario(id)
 );

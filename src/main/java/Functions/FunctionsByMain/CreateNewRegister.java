@@ -85,7 +85,7 @@ public class CreateNewRegister {
             System.out.println("Escolha");
             System.out.println("1. Atribuir CPF ao cliente");
             System.out.println("2. Atribuir CNPJ ao cliente");
-            int escolha = sc.nextInt();
+            int escolha = ValidateNumber.validateINT(2);
             String cnpj = null;
             String cpf = null;
             if (escolha == 1) {
@@ -118,7 +118,7 @@ public class CreateNewRegister {
             String name = sc.nextLine();
 
             System.out.println("Digite o preço do passeio");
-            double price = sc.nextDouble();
+            float price = ValidateNumber.validateFloat();
 
             System.out.println("Digite a duração em minutos");
             long durations_in_minute = sc.nextLong();
