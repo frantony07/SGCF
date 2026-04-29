@@ -35,10 +35,10 @@ public class QuotaRepository {
     }
 
     public List<QuotaModel> findAllQuotas() {
-        return em.createQuery("select c from QuotaModel c " , QuotaModel.class).getResultList();
+        return em.createQuery("select q from QuotaModel q " , QuotaModel.class).getResultList();
     }
 
     public Long getSize() {
-        return em.createQuery("select count(c.id) from QuotaModel c" , Long.class).getSingleResult();
+        return em.createQuery("select count(q.id) from QuotaModel q" , Long.class).getSingleResult();
     }
 }
