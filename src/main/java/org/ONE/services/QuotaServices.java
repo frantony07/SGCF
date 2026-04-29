@@ -14,34 +14,46 @@ public class QuotaServices {
 
     public QuotaServices() {};
 
-    public void createQuota(QuotaModel quotaModel) {
+    public void createQuota (QuotaModel quotaModel) {
         try {
-            if(quotaModel == null) {
+            if (quotaModel == null) {
                 throw new RuntimeException("A meta não pode ser nula");
             }
-            quotaRepository.create(quotaModel);
+            quotaRepository.createQuota(quotaModel);
         } catch (Exception err) {
             PrintError.printErro(err);
         }
     }
 
-    public void updateQuota(QuotaModel quotaModel) {
+    public void updateQuota (QuotaModel quotaModel) {
         try {
             if (quotaModel == null) {
-                throw new RuntimeException("A quota não pode ser nula");
+                throw new RuntimeException("A meta não pode ser nula");
             }
-            quotaRepository.update(quotaModel);
+            quotaRepository.updateQuota(quotaModel);
         } catch (Exception err) {
             PrintError.printErro(err);
         }
     }
 
-    public void deleteQuota(QuotaModel quotaModel) {
+    public void deleteQuota (QuotaModel quotaModel) {
         try {
             if (quotaModel == null) {
-                throw new RuntimeException("A quota não pode ser nula");
+                throw new RuntimeException("A meta não pode ser nula");
             }
-            quotaRepository.delete(quotaModel);
+            quotaRepository.deleteQuota(quotaModel);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+    }
+
+    public void quickGetCompanyQuota (QuotaModel quotaModel) {
+        try {
+            if (quotaModel == null) {
+                System.out.println("Erro, não há uma meta ativa");
+                return;
+            }
+            // Gotta work on this one
         } catch (Exception err) {
             PrintError.printErro(err);
         }
@@ -51,7 +63,7 @@ public class QuotaServices {
         EntityManager em = CustomizerFactory.getEntityManager();
 
         try {
-            quotaRepository
+            // Working on it
         } catch (Exception err) {
             PrintError.printErro(err);
         }
@@ -59,16 +71,25 @@ public class QuotaServices {
 
     public List<QuotaModel> findAllQuotas() {
         try {
-            return quotaRepository.findAll();
+            return quotaRepository.findAllQuotas();
         } catch (Exception err) {
             PrintError.printErro(err);
         }
         return List.of();
     }
 
-    public QuotaModel findQuotaById(Long id) {
+    public QuotaModel findQuotaById (Long id) {
         try {
             return quotaRepository.findById(id);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+        return null;
+    }
+
+    public Long getQuotaSize() {
+        try {
+            return quotaRepository.getSize();
         } catch (Exception err) {
             PrintError.printErro(err);
         }
