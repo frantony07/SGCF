@@ -6,7 +6,7 @@ import org.ONE.services.FuncionarioServices;
 import org.ONE.services.PayServices;
 import org.ONE.services.QuotaServices;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -31,8 +31,8 @@ public class PrintQuotaInformation {
             return;
         }
 
-        LocalDateTime startDate = activeQuota.getStartDate();
-        LocalDateTime endDate = activeQuota.getEndDate();
+        LocalDate startDate = activeQuota.getStartDate();
+        LocalDate endDate = activeQuota.getEndDate();
 
         double earned = payServices.sumEarningsByEmployee(
                 employeeID,
@@ -53,7 +53,7 @@ public class PrintQuotaInformation {
     }
 
     private QuotaModel findActiveQuotaForEmployee(QuotaServices quotaServices, Long employeeID) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDate now = LocalDate.now();
 
         return quotaServices.findAllQuotas().stream()
                 .filter(q -> employeeID.equals(q.getIdFuncionario()))

@@ -2,22 +2,20 @@ package org.ONE.models;
 
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-@Table
-@Entity(name = "meta")
-public class
-
-QuotaModel {
+@Entity
+@Table(name = "meta")
+public class QuotaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "start_date")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name = "target_value")
     private double targetValue;
@@ -27,33 +25,33 @@ QuotaModel {
 
     public QuotaModel() {}
 
-    public QuotaModel(LocalDateTime companyStartDate, LocalDateTime companyEndDate, double companyTargetValue) {
+    public QuotaModel(LocalDate companyStartDate, LocalDate companyEndDate, double companyTargetValue) {
         this.startDate = companyStartDate;
         this.endDate = companyEndDate;
         this.targetValue = companyTargetValue;
         this.idFuncionario = null;
     }
 
-    public QuotaModel(LocalDateTime employeeStartDate, LocalDateTime employeeEndDate, double employeeTargetValue, Long funcionarioID) {
+    public QuotaModel(LocalDate employeeStartDate, LocalDate employeeEndDate, double employeeTargetValue, Long funcionarioID) {
         this.startDate = employeeStartDate;
         this.endDate = employeeEndDate;
         this.targetValue = employeeTargetValue;
         this.idFuncionario = funcionarioID;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
