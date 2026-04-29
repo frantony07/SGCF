@@ -86,7 +86,7 @@ public class ReservationsServices {
         return 0L;
     }
 
-    public List printReservationsForFuncionario(){
+    public List printReservationsForAllFuncionario(){
         try {
             return reservationsRepository.getFullJoinReservationsFuncionarios();
         } catch (Exception e) {

@@ -6,14 +6,10 @@ import org.ONE.models.Funcionario;
 import org.ONE.models.Passeio;
 import org.ONE.services.*;
 
-import java.util.Scanner;
-
 public class ScheduleReservations {
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
     PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
-    ReservationsServices reservations = new ReservationsServices();
     public void scheduleReservation() {
 
         long passeioId = new SelectFunctions().selectPasseio();

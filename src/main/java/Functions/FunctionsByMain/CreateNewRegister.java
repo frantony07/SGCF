@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-// Fazer sc.close(); sempre que for criado um novo scanner e try-catch
 
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();

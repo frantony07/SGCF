@@ -12,7 +12,6 @@ public class Recorde {
     ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
     PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 
     public void displayRecorde(){
@@ -35,7 +34,7 @@ public class Recorde {
                     passeios.findAll().forEach(System.out::println);
                     break;
                 case 4 :
-                    reservations.printReservationsForFuncionario().forEach(row -> {
+                    reservations.printReservationsForAllFuncionario().forEach(row -> {
                         Object[] columnas = (Object[]) row;
 
                         System.out.println("Reserva ID: " + columnas[0] + " | Funcionario: " + columnas[8]);

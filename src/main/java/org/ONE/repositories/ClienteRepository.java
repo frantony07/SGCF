@@ -33,6 +33,7 @@ public class ClienteRepository {
     public List<Cliente> findByName(String name){
         return em.createQuery("select c from Cliente c where  lower(c.name) like lower(:name)" , Cliente.class).setParameter("name" , name +"%").getResultList();
     }
+
     public List<Cliente> findAll (){return em.createQuery("select c from Cliente c " , Cliente.class).getResultList();}
 
     public Long getSize(){
