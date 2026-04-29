@@ -144,22 +144,33 @@ public class CreateNewRegister {
         Scanner sc = new Scanner(System.in);
         User newUser = new User();
         System.out.println("Digite o nome do usuario");
-        String userName = sc.next();
+        String userName = sc.nextLine().trim();
 
         System.out.println("Digite sua senha");
-        String senha1 = sc.next();
+        String senha1 = sc.nextLine().trim();
 
         System.out.println("Confirma sua senha");
-        String senha2 = sc.next();
+        String senha2 = sc.nextLine().trim();
 
         if(!Objects.equals(senha1, senha2)){
             System.out.println("Senhas incorretas");
             return;
         }
+
+        String email = "";
+        while (email.isEmpty() || !email.contains("@") || email.length() > 100) {
+            System.out.println("Digite o e-mail do usuário:");
+            email = sc.nextLine().trim();
+            if (email.isEmpty() || !email.contains("@") || email.length() > 100) {
+                System.out.println("E-mail inválido. Digite um e-mail válido com no máximo 100 caracteres.");
+            }
+        }
+
         Permission permission = selctedCategoryOfUser();
         newUser.setUserName(userName);
         newUser.setUserPassword(senha1);
         newUser.setPermission(permission);
+        newUser.setEmail(email);
 
         userServices.createNewRecorde(newUser);
     }
