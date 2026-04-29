@@ -71,7 +71,14 @@ public class FuncionarioServices {
 
         return List.of();
     }
-    public Funcionario findById(Long id) {return funcionarioRepository.findById(id); }
+    public Funcionario findById(Long id) {
+        try {
+            return funcionarioRepository.findById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
 
     public Long findIdByCPF(String cpf) {
         try {
@@ -79,6 +86,7 @@ public class FuncionarioServices {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
+        return null;
     }
 
     public Long getSize(){
