@@ -27,19 +27,17 @@ QuotaModel {
 
     public QuotaModel() {}
 
-    // Company Quota (employee ID is null)
-    public QuotaModel(LocalDateTime startDate, LocalDateTime endDate, double targetValue) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.targetValue = targetValue;
+    public QuotaModel(LocalDateTime companyStartDate, LocalDateTime companyEndDate, double companyTargetValue) {
+        this.startDate = companyStartDate;
+        this.endDate = companyEndDate;
+        this.targetValue = companyTargetValue;
         this.idFuncionario = null;
     }
 
-    // Employee Quota (employee ID must NOT be null)
-    public QuotaModel(LocalDateTime startDate, LocalDateTime endDate, double targetValue, Long funcionarioID) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.targetValue = targetValue;
+    public QuotaModel(LocalDateTime employeeStartDate, LocalDateTime employeeEndDate, double employeeTargetValue, Long funcionarioID) {
+        this.startDate = employeeStartDate;
+        this.endDate = employeeEndDate;
+        this.targetValue = employeeTargetValue;
         this.idFuncionario = funcionarioID;
     }
 }
