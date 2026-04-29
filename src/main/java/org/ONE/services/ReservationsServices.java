@@ -114,8 +114,7 @@ public class ReservationsServices {
         return List.of();
     }
 
-
-        public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
+    public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
     }
 
     public ReceiptSummary processReceipts(String payStatus) {
