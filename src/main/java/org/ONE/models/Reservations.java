@@ -3,10 +3,7 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.Status;
 
-import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "reservations")
@@ -35,7 +32,7 @@ public class Reservations {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private Status status = Status.pendente;
+    private Status status = Status.PENDENTE;
 
     public Reservations() {}
 
