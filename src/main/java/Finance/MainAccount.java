@@ -43,8 +43,7 @@ public class MainAccount {
                         reservationsServices.printReceipt(Status.CANCELADA.name());
                         break;
                     case 4:
-                        // new QuotaSelection(sc);
-                        System.out.println("To be added");
+                        new QuotaSelection().quotaCreation(sc);
                         break;
                     case 5:
                         reservationsServices.getReservationsWithPaymentStatus().forEach(row -> {
@@ -59,6 +58,7 @@ public class MainAccount {
                                             " | Status: " + p.getStatus()
                             );
                         });
+                        break;
                     case 6:
                         mainOption = false;
                         System.out.println("Saindo das finanças");
