@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class QuotaSelection {
     QuotaServices quotaServices = new QuotaServices();
-    FuncionarioServices funcionarioServices = new FuncionarioServices();
 
     public void quotaCreation(Scanner sc) {
         try {
@@ -27,21 +26,10 @@ public class QuotaSelection {
 
                 switch (metaOption) {
                     case 1:
-                        createEmployeeQuota(quotaServices, funcionarioServices, sc);
+                        createEmployeeQuota(quotaServices, sc);
                         break;
                     case 2:
-                        System.out.println("Insira o valor da meta da empresa: ");
-                        while (!sc.hasNextDouble()) {
-                            System.out.println("Digite um valor válido.");
-                            sc.next();
-                        }
-                        double companyTargetValue = sc.nextDouble();
-
-                        System.out.println("Valor da meta criada: " + companyTargetValue);
-                        LocalDateTime companyInitialDate = LocalDateTime.now();
-                        LocalDateTime companyFinalDate = companyInitialDate.plusDays(30);
-                        System.out.println("A data limite para a meta é de 30 dias em: " + companyFinalDate);
-
+                        createCompanyQuota(quotaServices, sc);
                         break;
                     case 3:
                         System.out.println("Metas ativas: ");
@@ -58,7 +46,9 @@ public class QuotaSelection {
         }
     }
 
-    public void createEmployeeQuota(QuotaServices quotaServices, FuncionarioServices funcionarioServices, Scanner sc) {
+    public void createEmployeeQuota(QuotaServices quotaServices, Scanner sc) {
+        FuncionarioServices funcionarioServices = new FuncionarioServices();
+
         System.out.println("Digite o CPF do funcionário: ");
         String cpf = sc.next();
         Long employeeID = funcionarioServices.findIdByCPF(cpf);
@@ -86,6 +76,28 @@ public class QuotaSelection {
                         employeeFinalDate,
                         employeeTargetValue,
                         employeeID
+                )
+        );
+    }
+
+    public void createCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+        System.out.println("Insira o valor da meta da empresa: ");
+        while (!sc.hasNextDouble()) {
+            System.out.println("Digite um valor válido.");
+            sc.next();
+        }
+        double companyTargetValue = sc.nextDouble();
+
+        System.out.println("Valor da meta criada: " + companyTargetValue);
+        LocalDateTime companyInitialDate = LocalDateTime.now();
+        LocalDateTime companyFinalDate = companyInitialDate.plusDays(30);
+        System.out.println("A data limite para a meta é de 30 dias em: " + companyFinalDate);
+
+        quotaServices.createQuota(
+                new QuotaModel(
+                        companyInitialDate,
+                        companyFinalDate,
+                        companyTargetValue
                 )
         );
     }
