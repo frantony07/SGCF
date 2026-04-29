@@ -10,16 +10,12 @@ import org.ONE.models.User;
 import org.ONE.services.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class EditRecord {
 
-    ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
     PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
-    ReservationsServices reservations = new ReservationsServices();
     Scanner sc = new Scanner(System.in);
 
     public void main(User user){
@@ -71,6 +67,7 @@ public class EditRecord {
         }
 
     }
+
     public void addNewLanguage(){
         try {
             long funcionario = new SelectFunctions().selectFuncionario();

@@ -16,6 +16,15 @@ public class ReservationsServices {
     public ReservationsServices() {
     }
 
+    public Reservations findById(Long id) {
+        try {
+            return reservationsRepository.finById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
+
     public  void createNewRecorde(Reservations reservations){
         try {
             if(reservations == null){
@@ -86,7 +95,7 @@ public class ReservationsServices {
         return 0L;
     }
 
-    public List printReservationsForFuncionario(){
+    public List printReservationsForAllFuncionario(){
         try {
             return reservationsRepository.getFullJoinReservationsFuncionarios();
         } catch (Exception e) {

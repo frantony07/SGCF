@@ -36,12 +36,13 @@ public class Reservations {
 
     public Reservations() {}
 
-    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio passeio, double value) {
+    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio passeio, double value, Status status) {
         this.cliente = cliente;
         this.date = date;
         this.funcionario = funcionario;
         this.passeio = passeio;
         this.value = value;
+        this.status = status;
     }
 
 
@@ -91,6 +92,12 @@ public class Reservations {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Status getStatus() {return status;}
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

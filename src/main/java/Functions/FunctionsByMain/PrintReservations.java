@@ -7,10 +7,6 @@ import org.ONE.services.*;
 
 public class PrintReservations {
 
-    ClienteServices clientes = new ClienteServices();
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 
     public void printReservation() {

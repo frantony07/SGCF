@@ -2,10 +2,7 @@ package Functions.FunctionsByMain;
 
 import Functions.*;
 import org.ONE.models.*;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.ENUM.Permission;
+import org.ONE.models.ENUM.*;
 import org.ONE.services.*;
 
 import java.time.LocalDate;
@@ -13,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-// Fazer sc.close(); sempre que for criado um novo scanner e try-catch
 
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();
@@ -85,7 +81,7 @@ public class CreateNewRegister {
             System.out.println("Escolha");
             System.out.println("1. Atribuir CPF ao cliente");
             System.out.println("2. Atribuir CNPJ ao cliente");
-            int escolha = sc.nextInt();
+            int escolha = ValidateNumber.validateINT(2);
             String cnpj = null;
             String cpf = null;
             if (escolha == 1) {
@@ -118,7 +114,7 @@ public class CreateNewRegister {
             String name = sc.nextLine();
 
             System.out.println("Digite o preço do passeio");
-            double price = sc.nextDouble();
+            float price = ValidateNumber.validateFloat();
 
             System.out.println("Digite a duração em minutos");
             long durations_in_minute = sc.nextLong();
@@ -138,9 +134,9 @@ public class CreateNewRegister {
         }
     }
 
-    public void createNewReservations( Cliente cliente , Funcionario funcionario , Passeio passeio  ){
+    public void createNewReservations(Cliente cliente , Funcionario funcionario , Passeio passeio, Status status){
         LocalDate data = new CreateDate().createNewData();
-        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice());
+        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice(), status);
         reservations.createNewRecorde(reservation);
     }
 
