@@ -16,11 +16,6 @@ public class Authenticate {
                 System.out.println("Digite seu nome de usuário ('reset' para recuperar a senha):");
                 String userName = sc.nextLine().trim();
 
-                if (userName.equalsIgnoreCase("reset")) {
-                    new PasswordRecovery().iniciarRecuperacao();
-                    continue;
-                }
-
                 System.out.println("Digite sua senha:");
                 String password = sc.nextLine().trim();
                 User user = new UserServices().authenticate(userName,password);
