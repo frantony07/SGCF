@@ -7,7 +7,6 @@ import org.ONE.services.PayServices;
 import org.ONE.services.QuotaServices;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class PrintQuotaInformation {
@@ -24,7 +23,7 @@ public class PrintQuotaInformation {
             return;
         }
 
-        QuotaModel activeQuota = findActiveQuotaForEmployee(quotaServices, employeeID);
+        QuotaModel activeQuota = new QuotaServices().findActiveQuotaForEmployee(employeeID);
 
         if (activeQuota == null) {
             System.out.println("Este funcionário não possui meta ativa.");
@@ -50,16 +49,5 @@ public class PrintQuotaInformation {
         System.out.printf("Meta: R$ %.2f%n", target);
         System.out.printf("Progresso: %.2f%%%n", progress);
         System.out.printf("Faltam: R$ %.2f%n", remaining);
-    }
-
-    private QuotaModel findActiveQuotaForEmployee(QuotaServices quotaServices, Long employeeID) {
-        LocalDate now = LocalDate.now();
-
-        return quotaServices.findAllQuotas().stream()
-                .filter(q -> employeeID.equals(q.getIdFuncionario()))
-                .filter(q -> q.getStartDate() != null && q.getEndDate() != null)
-                .filter(q -> !now.isBefore(q.getStartDate()) && !now.isAfter(q.getEndDate()))
-                .max(Comparator.comparing(QuotaModel::getStartDate))
-                .orElse(null);
     }
 }
