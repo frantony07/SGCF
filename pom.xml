@@ -46,7 +46,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
-            <version>12.3.0</version> <!-- mesma versão do flyway-core -->
+            <version>12.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -80,6 +80,11 @@
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
         </dependency>
     </dependencies>
 
