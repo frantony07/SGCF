@@ -8,8 +8,8 @@
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/SGCF</property>
         <property name="hibernate.default_schema">public</property>
 
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.username">frantony07</property>
+        <property name="hibernate.connection.password">santi14072005</property>
 
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">false</property>
@@ -21,5 +21,8 @@
         <mapping class="org.ONE.models.PayModel"/>
         <mapping class="org.ONE.models.Reservations"/>
         <mapping class="org.ONE.models.User"/>
+        <mapping class="org.ONE.models.QuotaModel"/>
+        <mapping class="org.ONE.models.PasswordReset"/>
+
     </session-factory>
 </hibernate-configuration>

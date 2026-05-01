@@ -21,14 +21,10 @@ public class User {
     @Column(name = "permission", nullable = false)
     private Permission permission;
 
-    @Column(name = "email", nullable = false, length = 100, unique = true)
+    @Column(name = "user_email", nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(name = "reset_token", length = 6)
-    private String resetToken;
 
-    @Column(name = "reset_token_expiry")
-    private LocalDateTime resetTokenExpiry;
 
     public User(String userName, String userPassword, Permission permission, String email) {
         this.userName = userName;
@@ -75,9 +71,5 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getResetToken() { return resetToken; }
-    public void setResetToken(String resetToken) { this.resetToken = resetToken; }
 
-    public LocalDateTime getResetTokenExpiry() { return resetTokenExpiry; }
-    public void setResetTokenExpiry(LocalDateTime resetTokenExpiry) { this.resetTokenExpiry = resetTokenExpiry; }
 }

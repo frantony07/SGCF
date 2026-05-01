@@ -2,7 +2,8 @@ create table if not exists user_account(
     id serial not null primary key,
     user_name varchar(35) unique not null,
     user_password varchar(35) not null,
-    permission varchar(30) not null
+    permission varchar(30) not null,
+    user_email varchar(100) not null unique
 );
 
 create table if not exists funcionario(

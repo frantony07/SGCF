@@ -30,8 +30,14 @@ public class UserRepository {
     }
 
     public User findByName(String name){
-        return em.createQuery("select u from User u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+        try{
+         return em.createQuery("select u from User u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
     public User authenticate(String login, String password) {
         try {
             return   em.createQuery(
@@ -65,14 +71,5 @@ public class UserRepository {
         }
     }
 
-    public User findByResetToken(String token) {
-        try {
-            return em.createQuery(
-                    "select u from User u where u.resetToken = :token", User.class)
-                    .setParameter("token", token)
-                    .getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-    }
+
 }

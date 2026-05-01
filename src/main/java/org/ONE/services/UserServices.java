@@ -60,11 +60,27 @@ public class UserServices {
                 throw new RuntimeException("O nome não pode ser um número");
             }
 
+            return userRepository.findByName(name);
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-            return userRepository.findByName(name);
+        return null;
+
+    }
+
+    public User findByEmail(String email){
+        try {
+            if (email.matches("\\d+")) {
+                throw new RuntimeException("O nome não pode ser um número");
+            }
+
+            return userRepository.findByEmail(email);
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
 
     }
 
@@ -96,45 +112,5 @@ public class UserServices {
         return userRepository.authenticate(login,password);
     }
 
-    public boolean generatePasswordResetToken(String email) {
-        try {
-            User user = userRepository.findByEmail(email);
-            if (user == null) return false;
-            String token = String.format("%06d", new Random().nextInt(999999));
-            user.setResetToken(token);
-            user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
-            userRepository.update(user);
-            return true;
-        } catch (Exception e) {
-            PrintError.printErro(e);
-            return false;
-        }
-    }
 
-    public String getTokenByEmail(String email) {
-        try {
-            User user = userRepository.findByEmail(email);
-            if (user == null) return null;
-            return user.getResetToken();
-        } catch (Exception e) {
-            PrintError.printErro(e);
-            return null;
-        }
-    }
-
-    public boolean validateAndResetPassword(String token, String newPassword) {
-        try {
-            User user = userRepository.findByResetToken(token);
-            if (user == null) return false;
-            if (user.getResetTokenExpiry().isBefore(LocalDateTime.now())) return false;
-            user.setUserPassword(newPassword);
-            user.setResetToken(null);
-            user.setResetTokenExpiry(null);
-            userRepository.update(user);
-            return true;
-        } catch (Exception e) {
-            PrintError.printErro(e);
-            return false;
-        }
-    }
 }

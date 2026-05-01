@@ -1,7 +1,7 @@
 
-INSERT INTO user_account (user_name, user_password, permission) VALUES
-    ('admin', '1234', 'GERENTE'),
-    ('funcionario', '1234', 'FUNCIONARIO');
+INSERT INTO user_account (user_name, user_password, permission,user_email) VALUES
+    ('admin', '1234', 'GERENTE','frantonynieves@gmail.com'),
+    ('funcionario', '1234', 'FUNCIONARIO','victor.de.souza.muller@gmail.com');
 
 
 INSERT INTO funcionario (name, cpf) VALUES
