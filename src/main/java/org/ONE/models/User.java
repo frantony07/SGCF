@@ -14,7 +14,7 @@ public class User {
     @Column(name = "user_name" , nullable = false , length = 35 , unique = true)
     private String userName;
 
-    @Column(name = "user_password" , nullable = false , length = 35)
+    @Column(name = "user_password" , nullable = false)
     private String userPassword;
 
     @Enumerated(EnumType.STRING)
@@ -62,6 +62,10 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
     }
 
     public boolean isEqualPassword(String senha){

@@ -1,5 +1,6 @@
 package org.ONE.services;
 
+import Functions.Bcrypt;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.models.ENUM.Permission;
@@ -25,6 +26,10 @@ public class UserServices {
             if(user == null){
                 throw new RuntimeException("O cliente não pode ser nulo ");
             }
+
+            String senhaHash = Bcrypt.criarHash(user.getUserPassword());
+            user.setUserPassword(senhaHash);
+
             userRepository.create(user);
 
         } catch (Exception e) {
@@ -109,7 +114,20 @@ public class UserServices {
         if(login.isEmpty() || login.matches("\\d+") || password.isEmpty() ){
             throw new RuntimeException("Usuário ou senha incorreta");
         }
-        return userRepository.authenticate(login,password);
+
+        User user = userRepository.findByName(login);
+
+        if(user == null){
+            throw new RuntimeException("Usuário ou senha incorreta");
+        }
+
+        boolean senhaValida = Bcrypt.verificarHash(password, user.getUserPassword());
+
+        if(!senhaValida){
+            throw new RuntimeException("Usuário ou senha incorreta");
+        }
+
+        return user;
     }
 
 
