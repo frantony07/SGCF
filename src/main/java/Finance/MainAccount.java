@@ -34,7 +34,7 @@ public class MainAccount {
 
                 switch (menu) {
                     case 1:
-                        reservationsServices.printReceipt(Status.CONFIRMADA.name());
+                        reservationsServices.printReceipt(String.valueOf(Status.CONFIRMADA));
                         break;
                     case 2:
                         reservationsServices.printReceipt(Status.PENDENTE.name());
