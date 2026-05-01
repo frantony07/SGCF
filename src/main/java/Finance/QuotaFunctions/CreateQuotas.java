@@ -4,7 +4,7 @@ import org.ONE.models.QuotaModel;
 import org.ONE.services.FuncionarioServices;
 import org.ONE.services.QuotaServices;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CreateQuotas {
@@ -28,8 +28,8 @@ public class CreateQuotas {
         double employeeTargetValue = sc.nextDouble();
 
         System.out.println("Valor da meta criada: " + employeeTargetValue);
-        LocalDateTime employeeInitialDate = LocalDateTime.now();
-        LocalDateTime employeeFinalDate = employeeInitialDate.plusDays(30);
+        LocalDate employeeInitialDate = LocalDate.now();
+        LocalDate employeeFinalDate = employeeInitialDate.plusDays(30);
         System.out.println("A data limite para a meta é de 30 dias em: " + employeeFinalDate);
 
         quotaServices.createQuota(
@@ -51,8 +51,8 @@ public class CreateQuotas {
         double companyTargetValue = sc.nextDouble();
 
         System.out.println("Valor da meta criada: " + companyTargetValue);
-        LocalDateTime companyInitialDate = LocalDateTime.now();
-        LocalDateTime companyFinalDate = companyInitialDate.plusDays(30);
+        LocalDate companyInitialDate = LocalDate.now();
+        LocalDate companyFinalDate = companyInitialDate.plusDays(30);
         System.out.println("A data limite para a meta é de 30 dias em: " + companyFinalDate);
 
         quotaServices.createQuota(

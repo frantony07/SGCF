@@ -3,6 +3,7 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.Permission;
 
+import java.time.LocalDateTime;
 @Entity
 @Table(name = "user_account")
 public class User {
@@ -20,10 +21,20 @@ public class User {
     @Column(name = "permission", nullable = false)
     private Permission permission;
 
-    public User(String userName, String userPassword, Permission permission) {
+    @Column(name = "email", nullable = false, length = 100, unique = true)
+    private String email;
+
+    @Column(name = "reset_token", length = 6)
+    private String resetToken;
+
+    @Column(name = "reset_token_expiry")
+    private LocalDateTime resetTokenExpiry;
+
+    public User(String userName, String userPassword, Permission permission, String email) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.permission = permission;
+        this.email = email;
     }
 
     public User() {
@@ -64,4 +75,13 @@ public class User {
     public boolean isEqualPassword(String senha){
         return senha.equals(this.userPassword);
     }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getResetToken() { return resetToken; }
+    public void setResetToken(String resetToken) { this.resetToken = resetToken; }
+
+    public LocalDateTime getResetTokenExpiry() { return resetTokenExpiry; }
+    public void setResetTokenExpiry(LocalDateTime resetTokenExpiry) { this.resetTokenExpiry = resetTokenExpiry; }
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.ONE.models.PayModel;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PayRepository {
@@ -68,8 +68,8 @@ public class PayRepository {
 
     public Double sumEarningsByEmployee(Long employeeId,
                                         String status,
-                                        LocalDateTime start,
-                                        LocalDateTime end) {
+                                        LocalDate start,
+                                        LocalDate end) {
         return em.createQuery(
                         "select coalesce(sum(p.total_account), 0) " +
                                 "from PayModel p, Reservations r " +

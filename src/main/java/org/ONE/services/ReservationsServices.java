@@ -141,7 +141,7 @@ public class ReservationsServices {
             ReceiptSummary summary = processReceipts(payStatus);
 
             System.out.println("RECIBOS:");
-            System.out.println("Data/Horário: " + java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            System.out.println("Data/Horário: " + java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             System.out.println("Filtro de Status: " + payStatus);
             System.out.println("\n");
 

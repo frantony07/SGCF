@@ -9,7 +9,9 @@ import org.ONE.models.User;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 public class UserServices {
 
@@ -110,5 +112,47 @@ public class UserServices {
         }
 
         return user;
+    }
+
+    public boolean generatePasswordResetToken(String email) {
+        try {
+            User user = userRepository.findByEmail(email);
+            if (user == null) return false;
+            String token = String.format("%06d", new Random().nextInt(999999));
+            user.setResetToken(token);
+            user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
+            userRepository.update(user);
+            return true;
+        } catch (Exception e) {
+            PrintError.printErro(e);
+            return false;
+        }
+    }
+
+    public String getTokenByEmail(String email) {
+        try {
+            User user = userRepository.findByEmail(email);
+            if (user == null) return null;
+            return user.getResetToken();
+        } catch (Exception e) {
+            PrintError.printErro(e);
+            return null;
+        }
+    }
+
+    public boolean validateAndResetPassword(String token, String newPassword) {
+        try {
+            User user = userRepository.findByResetToken(token);
+            if (user == null) return false;
+            if (user.getResetTokenExpiry().isBefore(LocalDateTime.now())) return false;
+            user.setUserPassword(newPassword);
+            user.setResetToken(null);
+            user.setResetTokenExpiry(null);
+            userRepository.update(user);
+            return true;
+        } catch (Exception e) {
+            PrintError.printErro(e);
+            return false;
+        }
     }
 }

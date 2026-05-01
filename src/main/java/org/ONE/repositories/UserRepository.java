@@ -42,4 +42,26 @@ public class UserRepository {
     public User findById(String userName, String userPassword) {
         return null;
     }
+
+    public User findByEmail(String email) {
+        try {
+            return em.createQuery(
+                    "select u from User u where u.email = :email", User.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public User findByResetToken(String token) {
+        try {
+            return em.createQuery(
+                    "select u from User u where u.resetToken = :token", User.class)
+                    .setParameter("token", token)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

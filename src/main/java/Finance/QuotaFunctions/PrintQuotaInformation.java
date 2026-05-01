@@ -6,8 +6,7 @@ import org.ONE.services.FuncionarioServices;
 import org.ONE.services.PayServices;
 import org.ONE.services.QuotaServices;
 
-import java.time.LocalDateTime;
-import java.util.Comparator;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PrintQuotaInformation {
@@ -24,15 +23,15 @@ public class PrintQuotaInformation {
             return;
         }
 
-        QuotaModel activeQuota = findActiveQuotaForEmployee(quotaServices, employeeID);
+        QuotaModel activeQuota = new QuotaServices().findActiveQuotaForEmployee(employeeID);
 
         if (activeQuota == null) {
             System.out.println("Este funcionário não possui meta ativa.");
             return;
         }
 
-        LocalDateTime startDate = activeQuota.getStartDate();
-        LocalDateTime endDate = activeQuota.getEndDate();
+        LocalDate startDate = activeQuota.getStartDate();
+        LocalDate endDate = activeQuota.getEndDate();
 
         double earned = payServices.sumEarningsByEmployee(
                 employeeID,
@@ -50,16 +49,5 @@ public class PrintQuotaInformation {
         System.out.printf("Meta: R$ %.2f%n", target);
         System.out.printf("Progresso: %.2f%%%n", progress);
         System.out.printf("Faltam: R$ %.2f%n", remaining);
-    }
-
-    private QuotaModel findActiveQuotaForEmployee(QuotaServices quotaServices, Long employeeID) {
-        LocalDateTime now = LocalDateTime.now();
-
-        return quotaServices.findAllQuotas().stream()
-                .filter(q -> employeeID.equals(q.getIdFuncionario()))
-                .filter(q -> q.getStartDate() != null && q.getEndDate() != null)
-                .filter(q -> !now.isBefore(q.getStartDate()) && !now.isAfter(q.getEndDate()))
-                .max(Comparator.comparing(QuotaModel::getStartDate))
-                .orElse(null);
     }
 }

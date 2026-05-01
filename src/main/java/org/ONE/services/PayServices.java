@@ -6,7 +6,7 @@ import org.ONE.models.PayModel;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.PayRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PayServices {
@@ -114,8 +114,8 @@ public class PayServices {
 
     public double sumEarningsByEmployee(Long employeeId,
                                         String status,
-                                        LocalDateTime start,
-                                        LocalDateTime end) {
+                                        LocalDate start,
+                                        LocalDate end) {
         try {
             if (employeeId == null) {
                 throw new RuntimeException("O ID do funcionário não pode ser nulo");
