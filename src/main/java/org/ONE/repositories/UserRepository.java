@@ -31,7 +31,13 @@ public class UserRepository {
 
     public User findByName(String name){
         try{
-         return em.createQuery("select u from User u where lower(u.userName) like lower(:name)" , User.class).setParameter("name" , name +"%").getSingleResult();
+         List<User> user = em.createQuery("select u from User u where lower(u.userName) like lower(:name)"
+                 , User.class).setParameter("name" , name +"%").getResultList();
+         if (user.isEmpty()){
+             System.out.println("usuario não encontrado");
+             return null;
+         }
+         return user.get(0);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

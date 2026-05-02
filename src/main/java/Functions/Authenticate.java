@@ -25,7 +25,7 @@ public class Authenticate {
                     resetPassword();
                 }
                 System.out.println("Digite sua senha:");
-                String password = sc.nextLine().trim();
+                String password = sc.nextLine();
                 User user = new UserServices().authenticate(userName,password);
                 if(user != null) {
                     System.out.println("Login realizado com sucesso!");

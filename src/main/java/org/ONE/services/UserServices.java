@@ -9,6 +9,7 @@ import org.ONE.models.User;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.UserRepository;
 
+import javax.naming.AuthenticationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -110,25 +111,31 @@ public class UserServices {
         return 0L;
     }
 
-    public User  authenticate(String login, String password) {
-        if(login.isEmpty() || login.matches("\\d+") || password.isEmpty() ){
-            throw new RuntimeException("Usuário ou senha incorreta");
+    public User authenticate(String login, String password) throws AuthenticationException {
+        try {
+
+            if (login == null || login.isBlank() ||
+                    password == null || password.isBlank()) {
+                throw new AuthenticationException("Usuário ou senha incorreta");
+            }
+
+            User user = userRepository.findByName(login);
+
+            if (user == null) {
+                throw new AuthenticationException("Usuário ou senha incorreta");
+            }
+
+            boolean senhaValida = Bcrypt.verificarHash(password, user.getUserPassword());
+
+            if (!senhaValida) {
+                throw new AuthenticationException("Usuário ou senha incorreta");
+            }
+
+            return user;
+        } catch (Exception e) {
+            PrintError.printErro(e);
         }
 
-        User user = userRepository.findByName(login);
-
-        if(user == null){
-            throw new RuntimeException("Usuário ou senha incorreta");
-        }
-
-        boolean senhaValida = Bcrypt.verificarHash(password, user.getUserPassword());
-
-        if(!senhaValida){
-            throw new RuntimeException("Usuário ou senha incorreta");
-        }
-
-        return user;
+        return null;
     }
-
-
 }
