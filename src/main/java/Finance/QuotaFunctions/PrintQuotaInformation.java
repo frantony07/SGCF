@@ -23,8 +23,7 @@ public class PrintQuotaInformation {
             return;
         }
 
-        QuotaModel activeQuota = new QuotaServices().findActiveQuotaForEmployee(employeeID);
-
+        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(employeeID);
         if (activeQuota == null) {
             System.out.println("Este funcionário não possui meta ativa.");
             return;
@@ -49,5 +48,85 @@ public class PrintQuotaInformation {
         System.out.printf("Meta: R$ %.2f%n", target);
         System.out.printf("Progresso: %.2f%%%n", progress);
         System.out.printf("Faltam: R$ %.2f%n", remaining);
+
+        if (target <= earned) {
+            int newQuota = 0;
+            System.out.println("Meta completa, parabéns!");
+
+            while (!sc.hasNextInt()) {
+                System.out.println("Você gostaria de criar uma nova meta?");
+                System.out.println("1. Sim");
+                System.out.println("2. Não");
+                sc.next();
+            }
+            newQuota = sc.nextInt();
+
+            switch (newQuota) {
+                case 1:
+                    new CreateQuotas().updateEmployeeQuota(quotaServices, sc);
+                    return;
+                case 2:
+                    System.out.println("Retornando ao menu principal...");
+                    return;
+                default:
+                    System.out.println("Digite um número entre 1 e 2!");
+                    return;
+            }
+        }
+    }
+
+    public void printCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+        FuncionarioServices funcionarioServices = new FuncionarioServices();
+        PayServices payServices = new PayServices();
+
+        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
+
+        if (activeQuota == null) {
+            System.out.println("A companhia não possui meta ativa.");
+            return;
+        }
+
+        LocalDate startDate = activeQuota.getStartDate();
+        LocalDate endDate = activeQuota.getEndDate();
+
+        double earned = payServices.sumEarningsForCompany(
+                Status.confirmada.name(),
+                startDate,
+                endDate
+        );
+
+        double target = activeQuota.getTargetValue();
+        double progress = target <= 0 ? 0 : (earned / target) * 100.0;
+        double remaining = Math.max(target - earned, 0);
+
+        System.out.printf("Período: %s  →  %s%n", startDate, endDate);
+        System.out.printf("Total faturado (CONFIRMADA): R$ %.2f%n", earned);
+        System.out.printf("Meta: R$ %.2f%n", target);
+        System.out.printf("Progresso: %.2f%%%n", progress);
+        System.out.printf("Faltam: R$ %.2f%n", remaining);
+
+        if (target <= earned) {
+            int newQuota = 0;
+            System.out.println("Meta completa, parabéns!");
+
+            while (!sc.hasNextInt()) {
+                System.out.println("Você gostaria de criar uma nova meta?");
+                System.out.println("1. Sim");
+                System.out.println("2. Não");
+                sc.next();
+            }
+            newQuota = sc.nextInt();
+
+            switch (newQuota) {
+                case 1:
+                    new CreateQuotas().updateCompanyQuota(quotaServices, sc);
+                    return;
+                case 2:
+                    System.out.println("Retornando ao menu principal...");
+                    return;
+                default:
+                    System.out.println("Digite um número entre 1 e 2!");
+            }
+        }
     }
 }
