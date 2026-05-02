@@ -24,7 +24,7 @@ public class ValidateNumber {
         }
     }
 
-    public long validateLong(long limitOfNumber){
+    public static long validateLong(long limitOfNumber){
         Scanner sc = new Scanner(System.in);
 
         while (true){

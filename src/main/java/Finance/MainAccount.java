@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class MainAccount {
     Scanner sc = new Scanner(System.in);
     private final ReservationsServices reservationsServices = new ReservationsServices();
+    private final PayServices payServices= new PayServices();
 
     public void mainPagamento() {
         int menu = 0;
@@ -28,13 +29,14 @@ public class MainAccount {
                 System.out.println("3. Histórico de tours cancelados");
                 System.out.println("4. Metas");
                 System.out.println("5. Mostrar todas as reservas");
-                System.out.println("6. Voltar");
+                System.out.println("6. Realizar pagamento");
+                System.out.println("7. Voltar");
 
                 menu = ValidateNumber.validateINT(6);
 
                 switch (menu) {
                     case 1:
-                        reservationsServices.printReceipt(String.valueOf(Status.confirmada));
+                        reservationsServices.getReservationsConfirmate().forEach(System.out::println);
                         break;
                     case 2:
                         reservationsServices.printReceipt(Status.pendente.name());
@@ -43,7 +45,7 @@ public class MainAccount {
                         reservationsServices.printReceipt(Status.cancelada.name());
                         break;
                     case 4:
-                        new QuotaSelection().quotaCreation(sc);
+                        new QuotaSelection().quotaCreation();
                         break;
                     case 5:
                         reservationsServices.getReservationsWithPaymentStatus().forEach(row -> {
@@ -59,7 +61,11 @@ public class MainAccount {
                             );
                         });
                         break;
-                    case 6:
+
+                    case 6 :
+                            new Payment().makePayment();
+                        break;
+                    case 7:
                         mainOption = false;
                         System.out.println("Saindo das finanças");
                         return;

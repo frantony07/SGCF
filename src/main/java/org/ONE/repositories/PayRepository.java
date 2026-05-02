@@ -1,6 +1,7 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
+import org.ONE.models.ENUM.Status;
 import org.ONE.models.PayModel;
 
 
@@ -8,10 +9,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class PayRepository {
-    private EntityManager em;
+    private EntityManager em = CustomizerFactory.getEntityManager();
 
-    public PayRepository(EntityManager em) {
-        this.em = em;
+
+    public PayRepository() {
+
     }
 
     public PayModel findById(Long id) {
@@ -52,7 +54,7 @@ public class PayRepository {
                 .getResultList();
     }
 
-    public Long getCount() {
+    public Long getSize() {
         return em.createQuery(
                         "SELECT COUNT(p.ID) FROM PayModel p",
                         Long.class)
@@ -92,5 +94,12 @@ public class PayRepository {
                 .setParameter("start", start)
                 .setParameter("end", end)
                 .getSingleResult();
+    }
+    public List<PayModel> getPayModelPendent(){
+        return em.createQuery(  "select p " +
+                                        "from PayModel p  " +
+                                        " where p.status = :status ", PayModel.class)
+                                        .setParameter("status", Status.pendente)
+                                        .getResultList();
     }
 }

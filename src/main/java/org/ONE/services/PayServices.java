@@ -10,15 +10,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class PayServices {
-    private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private PayRepository payServices = new PayRepository(entityManager);
+    private PayRepository payRepository = new PayRepository();
+
+    public PayServices() {
+    }
 
     public void createNewRecorde(PayModel payModel){
         try {
             if(payModel == null){
                 throw new RuntimeException("O cliente não pode ser nulo ");
             }
-            payServices.create(payModel);
+            payRepository.create(payModel);
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -29,7 +31,7 @@ public class PayServices {
         try {
             if(payModel == null){throw new RuntimeException("O cliente não pode ser nulo ");}
 
-            payServices.update(payModel);
+            payRepository.update(payModel);
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -43,7 +45,7 @@ public class PayServices {
                         "O cliente não pode ser nulo"
                 );
             }
-            payServices.delete(payModel);
+            payRepository.delete(payModel);
         } catch (Exception e) {
             PrintError.printErro(e);
         }
@@ -57,7 +59,7 @@ public class PayServices {
                 );
             }
 
-            return payServices.findByName(name);
+            return payRepository.findByName(name);
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -67,7 +69,7 @@ public class PayServices {
 
     public List<PayModel> findAll (){
         try {
-            return  payServices.findAll();
+            return  payRepository.findAll();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -78,7 +80,7 @@ public class PayServices {
 
     public Long getCount(){
         try {
-            return payServices.getCount();
+            return payRepository.getSize();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -89,8 +91,8 @@ public class PayServices {
     public void quickGetPay() {
         EntityManager em = CustomizerFactory.getEntityManager();
         try {
-            PayRepository repo = new PayRepository(em);
-            Long total = repo.getCount();
+            PayRepository repo = new PayRepository();
+            Long total = repo.getSize();
 
             if (total != null && total > 0) {
                 List<PayModel> pagamentos = repo.findAll();
@@ -112,6 +114,16 @@ public class PayServices {
         }
     }
 
+    public Long getSize(){
+        try {
+            return payRepository.getSize();
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return 0L;
+    }
+
     public double sumEarningsByEmployee(Long employeeId,
                                         String status,
                                         LocalDate start,
@@ -120,7 +132,7 @@ public class PayServices {
             if (employeeId == null) {
                 throw new RuntimeException("O ID do funcionário não pode ser nulo");
             }
-            Double result = payServices.sumEarningsByEmployee(employeeId, status, start, end);
+            Double result = payRepository.sumEarningsByEmployee(employeeId, status, start, end);
             return result == null ? 0.0 : result;
         } catch (Exception err) {
             PrintError.printErro(err);
@@ -132,11 +144,24 @@ public class PayServices {
                                         LocalDate start,
                                         LocalDate end) {
         try {
-            Double result = payServices.sumEarningsForCompany(status, start, end);
+            Double result = payRepository.sumEarningsForCompany(status, start, end);
             return result == null ? 0.0 : result;
         } catch (Exception err) {
             PrintError.printErro(err);
         }
         return 0.0;
+    }
+    public void printPayPendent(){
+        try {
+
+        List<PayModel> payPendent = payRepository.getPayModelPendent();
+        if (payPendent.isEmpty()){
+            System.out.println("nao existem pagos pendentes");
+            return;
+        }
+        payPendent.forEach(System.out::println);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
     }
 }

@@ -9,9 +9,9 @@ import org.ONE.services.QuotaServices;
 import java.util.Scanner;
 
 public class QuotaSelection {
-    QuotaServices quotaServices = new QuotaServices();
 
-    public void quotaCreation(Scanner sc) {
+
+    public void quotaCreation() {
         try {
             int metaOption = 0;
             boolean quotaMenu = true;
@@ -26,20 +26,19 @@ public class QuotaSelection {
 
                 switch (metaOption) {
                     case 1:
-                        new CreateQuotas().createEmployeeQuota(quotaServices, sc);
+                        new CreateQuotas().createEmployeeQuota();
                         break;
                     case 2:
-                        new CreateQuotas().createCompanyQuota(quotaServices, sc);
+                        new CreateQuotas().createCompanyQuota();
                         break;
                     case 3:
-                        new PrintQuotaInformation().printEmployeeEarnings(quotaServices, sc);
+                        new PrintQuotaInformation().printEmployeeEarnings();
                         break;
                     case 4:
-                        new PrintQuotaInformation().printCompanyQuota(quotaServices, sc);
+                        new PrintQuotaInformation().printCompanyQuota();
                         break;
                     case 5:
                         System.out.println("Retornando ao menu financeiro...");
-                        quotaMenu = false;
                         return;
                     default:
                         System.out.println("Erro! Digite um número entre 1 e 4.");

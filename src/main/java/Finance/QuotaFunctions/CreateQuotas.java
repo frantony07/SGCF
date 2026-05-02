@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CreateQuotas {
-    public void createEmployeeQuota(QuotaServices quotaServices, Scanner sc) {
+    Scanner sc = new Scanner(System.in);
+    QuotaServices quotaServices = new QuotaServices();
+    public void createEmployeeQuota() {
         FuncionarioServices funcionarioServices = new FuncionarioServices();
 
         System.out.println("Digite o CPF do funcionário: ");
@@ -48,7 +50,7 @@ public class CreateQuotas {
         );
     }
 
-    public void createCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+    public void createCompanyQuota() {
 
         QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
         if (activeQuota != null) {
@@ -77,7 +79,7 @@ public class CreateQuotas {
         );
     }
 
-    public void updateEmployeeQuota(QuotaServices quotaServices, Scanner sc) {
+    public void updateEmployeeQuota() {
         FuncionarioServices funcionarioServices = new FuncionarioServices();
 
         System.out.println("Digite o CPF do funcionário: ");
@@ -111,7 +113,7 @@ public class CreateQuotas {
         );
     }
 
-    public void updateCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+    public void updateCompanyQuota() {
         System.out.println("Insira o valor da sua meta: ");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um valor válido.");

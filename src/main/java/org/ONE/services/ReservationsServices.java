@@ -122,6 +122,9 @@ public class ReservationsServices {
         }
         return List.of();
     }
+    public List<Reservations> getReservationsConfirmate(){
+        return  reservationsRepository.getReservationsConfirmate();
+    }
 
     public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
     }

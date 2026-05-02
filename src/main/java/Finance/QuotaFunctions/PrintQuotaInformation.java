@@ -10,7 +10,10 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PrintQuotaInformation {
-    public void printEmployeeEarnings(QuotaServices quotaServices, Scanner sc) {
+    Scanner sc = new Scanner(System.in);
+    QuotaServices quotaServices = new QuotaServices();
+
+    public void printEmployeeEarnings() {
         FuncionarioServices funcionarioServices = new FuncionarioServices();
         PayServices payServices = new PayServices();
 
@@ -63,19 +66,19 @@ public class PrintQuotaInformation {
 
             switch (newQuota) {
                 case 1:
-                    new CreateQuotas().updateEmployeeQuota(quotaServices, sc);
+                    new CreateQuotas().updateEmployeeQuota();
                     return;
                 case 2:
                     System.out.println("Retornando ao menu principal...");
                     return;
                 default:
                     System.out.println("Digite um número entre 1 e 2!");
-                    return;
+
             }
         }
     }
 
-    public void printCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+    public void printCompanyQuota() {
         PayServices payServices = new PayServices();
 
         QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
@@ -118,7 +121,7 @@ public class PrintQuotaInformation {
 
             switch (newQuota) {
                 case 1:
-                    new CreateQuotas().updateCompanyQuota(quotaServices, sc);
+                    new CreateQuotas().updateCompanyQuota();
                     return;
                 case 2:
                     System.out.println("Retornando ao menu principal...");

@@ -31,6 +31,9 @@ public class PasswordReset {
         this.used = false;
     }
 
+    public PasswordReset() {
+    }
+
     public LocalDateTime getExpiration() {
         return expiration;
     }

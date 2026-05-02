@@ -1,10 +1,9 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
+import org.ONE.models.ENUM.Status;
 import org.ONE.models.Reservations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationsRepository {
@@ -84,6 +83,14 @@ public class ReservationsRepository {
         return em.createNativeQuery(
                 "select r.*, f.* from reservations r full join funcionario f on r.fk_funcionario_id = f.id"
         ).getResultList();
+    }
+
+    public List<Reservations> getReservationsConfirmate(){
+        return  em.createQuery(
+          "select r from Reservations r where r.status = :status" ,
+                Reservations.class
+        ).setParameter("status", Status.confirmada)
+                .getResultList();
     }
 }
 
