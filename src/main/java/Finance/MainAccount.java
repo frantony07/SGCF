@@ -34,13 +34,13 @@ public class MainAccount {
 
                 switch (menu) {
                     case 1:
-                        reservationsServices.printReceipt(String.valueOf(Status.CONFIRMADA));
+                        reservationsServices.printReceipt(String.valueOf(Status.confirmada));
                         break;
                     case 2:
-                        reservationsServices.printReceipt(Status.PENDENTE.name());
+                        reservationsServices.printReceipt(Status.pendente.name());
                         break;
                     case 3:
-                        reservationsServices.printReceipt(Status.CANCELADA.name());
+                        reservationsServices.printReceipt(Status.cancelada.name());
                         break;
                     case 4:
                         new QuotaSelection().quotaCreation(sc);
