@@ -16,12 +16,13 @@ public class QuotaSelection {
             int metaOption = 0;
             boolean quotaMenu = true;
 
-            while (quotaMenu) {
+            while (quotaMenu != false) {
                 System.out.println("1. Meta pessoal");
                 System.out.println("2. Meta da empresa");
-                System.out.println("3. Mostrar metas");
-                System.out.println("4. Retornar");
-                metaOption = ValidateNumber.validateINT(4);
+                System.out.println("3. Mostrar meta - Funcionário");
+                System.out.println("4. Mostrar meta - Empresa");
+                System.out.println("5. Retornar");
+                metaOption = ValidateNumber.validateINT(5);
 
                 switch (metaOption) {
                     case 1:
@@ -34,7 +35,11 @@ public class QuotaSelection {
                         new PrintQuotaInformation().printEmployeeEarnings(quotaServices, sc);
                         break;
                     case 4:
+                        new PrintQuotaInformation().printCompanyQuota(quotaServices, sc);
+                        break;
+                    case 5:
                         System.out.println("Retornando ao menu financeiro...");
+                        quotaMenu = false;
                         return;
                     default:
                         System.out.println("Erro! Digite um número entre 1 e 4.");

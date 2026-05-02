@@ -76,7 +76,6 @@ public class PrintQuotaInformation {
     }
 
     public void printCompanyQuota(QuotaServices quotaServices, Scanner sc) {
-        FuncionarioServices funcionarioServices = new FuncionarioServices();
         PayServices payServices = new PayServices();
 
         QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
