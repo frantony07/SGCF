@@ -20,6 +20,12 @@ public class CreateQuotas {
             return;
         }
 
+        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(employeeID);
+        if (activeQuota != null) {
+            System.out.println("Este funcionário já possui uma meta ativa!");
+            return;
+        }
+
         System.out.println("Insira o valor da sua meta: ");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um valor válido.");
@@ -43,6 +49,13 @@ public class CreateQuotas {
     }
 
     public void createCompanyQuota(QuotaServices quotaServices, Scanner sc) {
+
+        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
+        if (activeQuota != null) {
+            System.out.println("A companhia já possui uma meta ativa!");
+            return;
+        }
+
         System.out.println("Insira o valor da meta da empresa: ");
         while (!sc.hasNextDouble()) {
             System.out.println("Digite um valor válido.");
