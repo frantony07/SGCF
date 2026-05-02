@@ -128,4 +128,15 @@ public class PayServices {
         return 0.0;
     }
 
+    public double sumEarningsForCompany(String status,
+                                        LocalDate start,
+                                        LocalDate end) {
+        try {
+            Double result = payServices.sumEarningsForCompany(status, start, end);
+            return result == null ? 0.0 : result;
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+        return 0.0;
+    }
 }
