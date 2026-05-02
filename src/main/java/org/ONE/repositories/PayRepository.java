@@ -52,13 +52,6 @@ public class PayRepository {
                 .getResultList();
     }
 
-    public List<PayModel> findTotalMoney() {
-        return em.createQuery(
-                "select recordedMoney from PayModel p",
-                PayModel.class)
-                .getResultList();
-    }
-
     public Long getCount() {
         return em.createQuery(
                         "SELECT COUNT(p.ID) FROM PayModel p",
@@ -85,4 +78,19 @@ public class PayRepository {
                 .getSingleResult();
     }
 
+    public Double sumEarningsForCompany(String status,
+                                        LocalDate start,
+                                        LocalDate end) {
+        return em.createQuery(
+                        "select coalesce(sum(p.total_account), 0) " +
+                                "from PayModel p, Reservations r " +
+                                "where r.cliente = p.cliente " +
+                                "and p.status = :status " +
+                                "and r.date between :start and :end",
+                        Double.class)
+                .setParameter("status", status)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .getSingleResult();
+    }
 }
