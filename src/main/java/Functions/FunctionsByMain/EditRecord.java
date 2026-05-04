@@ -1,5 +1,6 @@
 package Functions.FunctionsByMain;
 
+import Functions.Bcrypt;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
@@ -11,6 +12,8 @@ import org.ONE.services.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static Functions.Bcrypt.criarHash;
 
 public class EditRecord {
 
@@ -98,7 +101,8 @@ public class EditRecord {
             if (!newPassword.equals(newPasswordConfirmations)) {
                 throw new RuntimeException("Senha incorreta");
             }
-            user.setUserPassword(newPassword);
+
+            user.setUserPassword(criarHash(newPassword));
             System.out.println("Senha trocada com sucesso");
 
         } catch (Exception e) {

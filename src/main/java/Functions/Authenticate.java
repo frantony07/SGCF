@@ -9,6 +9,8 @@ import org.ONE.services.UserServices;
 
 import java.util.Scanner;
 
+import static Functions.Bcrypt.criarHash;
+
 
 public class Authenticate {
     PasswordRecordeService passwordRecordeService = new PasswordRecordeService();
@@ -77,7 +79,7 @@ public class Authenticate {
             System.out.println("Digite sua nova senha:");
             String newPassword = sc.nextLine();
 
-            user.setUserPassword(newPassword);
+            user.setUserPassword(criarHash(newPassword));
 
             userServices.updateRecorde(user);
 
