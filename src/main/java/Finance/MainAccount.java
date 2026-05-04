@@ -12,15 +12,13 @@ import java.util.Scanner;
 public class MainAccount {
     Scanner sc = new Scanner(System.in);
     private final ReservationsServices reservationsServices = new ReservationsServices();
-    private final PayServices payServices= new PayServices();
 
     public void mainPagamento() {
         int menu = 0;
         int count = 0;
-        boolean mainOption = true;
 
         try {
-            while (mainOption) {
+            while (true) {
                 System.out.println("Menu do caixa: ");
                 new PayServices().quickGetPay();
 
@@ -66,7 +64,6 @@ public class MainAccount {
                             new Payment().makePayment();
                         break;
                     case 7:
-                        mainOption = false;
                         System.out.println("Saindo das finanças");
                         return;
                     default:

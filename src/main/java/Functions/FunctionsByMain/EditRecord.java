@@ -19,6 +19,7 @@ public class EditRecord {
 
     FuncionarioServices funcionarios = new FuncionarioServices();
     PasseioServices passeios = new PasseioServices();
+    UserServices userServices = new UserServices();
     Scanner sc = new Scanner(System.in);
 
     public void main(User user){
@@ -90,7 +91,7 @@ public class EditRecord {
             System.out.println("Digite sua senha atual");
             String senha = sc.next();
 
-            if (!user.isEqualPassword(senha)) {
+            if (!Bcrypt.verificarHash(senha, user.getUserPassword())) {
                 throw new RuntimeException("Senha incorreta");
             }
             System.out.println("Digite sua nova senha");
@@ -103,6 +104,8 @@ public class EditRecord {
             }
 
             user.setUserPassword(criarHash(newPassword));
+            userServices.updateRecorde(user);
+
             System.out.println("Senha trocada com sucesso");
 
         } catch (Exception e) {

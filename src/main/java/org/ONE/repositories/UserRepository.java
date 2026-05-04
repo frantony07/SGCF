@@ -32,7 +32,7 @@ public class UserRepository {
     public User findByName(String name){
         try{
          List<User> user = em.createQuery("select u from User u where lower(u.userName) like lower(:name)"
-                 , User.class).setParameter("name" , name +"%").getResultList();
+                 , User.class).setParameter("name" , name ).getResultList();
          if (user.isEmpty()){
              System.out.println("usuario não encontrado");
              return null;

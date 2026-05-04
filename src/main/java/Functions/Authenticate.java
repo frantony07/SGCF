@@ -43,13 +43,7 @@ public class Authenticate {
     }
 
     public static boolean isManager(User user){
-        if (user.getPermission() == Permission.GERENTE ){
-            return true;
-        }
-        if (user.getPermission() == Permission.FUNCIONARIO){
-            return false;
-        }
-        return false;
+        return user.getPermission() == Permission.GERENTE;
     }
 
     public void resetPassword() {

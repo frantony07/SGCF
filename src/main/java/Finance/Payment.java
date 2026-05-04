@@ -15,12 +15,14 @@ public class Payment {
     PayRepository payRepository = new PayRepository();
 
     public void makePayment  (){
-        payServices.printPayPendent();
         List<PayModel> payModelList = payRepository.getPayModelPendent();
 
         if (payModelList.isEmpty()){
             System.out.println("nao existem pagos pendentes");
+            return;
         }
+
+        payServices.printPayPendent();
 
         System.out.println("escolhe o  id pagamento a ser realizado");
 
