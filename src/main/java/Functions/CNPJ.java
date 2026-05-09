@@ -36,7 +36,7 @@ public class CNPJ {
         }
     }
 
-    private static boolean isValidCNPJ(String cnpj) {
+    public static boolean isValidCNPJ(String cnpj) {
 
         int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
         int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};

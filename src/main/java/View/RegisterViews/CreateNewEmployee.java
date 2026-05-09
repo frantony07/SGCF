@@ -2,6 +2,7 @@ package View.RegisterViews;
 
 import Functions.CPF;
 import Functions.loadLanguage;
+import View.ItensDefault;
 import org.ONE.models.ENUM.Language;
 import org.ONE.models.Funcionario;
 import org.ONE.services.FuncionarioServices;
@@ -18,8 +19,8 @@ public class CreateNewEmployee extends JInternalFrame {
     public CreateNewEmployee() {
         super("Criar novo funcionário", true, true, true, true);
 
-        setSize(600, 450);
-        setLocation(200, 100);
+        setSize(600, 400);
+        setLocation(550, 100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
         if (url != null) {
@@ -27,6 +28,7 @@ public class CreateNewEmployee extends JInternalFrame {
         }
 
         JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(new Color(0x7E7D64));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -35,7 +37,7 @@ public class CreateNewEmployee extends JInternalFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Nome do funcionário:"), gbc);
+        panel.add(ItensDefault.createBoldLabel("Nome do funcionário:",14), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -45,7 +47,7 @@ public class CreateNewEmployee extends JInternalFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
-        panel.add(new JLabel("CPF do funcionário:"), gbc);
+        panel.add(ItensDefault.createBoldLabel("CPF do funcionário:",14), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -55,7 +57,7 @@ public class CreateNewEmployee extends JInternalFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
-        panel.add(new JLabel("Idiomas:"), gbc);
+        panel.add(ItensDefault.createBoldLabel("Idiomas:",14), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;

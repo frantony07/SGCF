@@ -1,0 +1,88 @@
+package View;
+
+import View.RegisterViews.CreateNewCustomer;
+import View.RegisterViews.CreateNewEmployee;
+import View.RegisterViews.CreateNewTour;
+import View.RegisterViews.CreateNewUser;
+
+import javax.swing.*;
+
+import static View.ItensDefault.addWindowButton;
+
+
+public class FunctionsOfWindowsRegister {
+    public FunctionsOfWindowsRegister() {
+    }
+
+    public  void CreatedNewEmployee(CreateNewEmployee createNewEmployee, JDesktopPane desktop, JPanel taskBar){
+        if (createNewEmployee == null || createNewEmployee.isClosed()){
+
+            createNewEmployee = new CreateNewEmployee();
+            createNewEmployee.setVisible(true);
+
+            desktop.add(createNewEmployee);
+
+            createNewEmployee.toFront();
+
+            addWindowButton(createNewEmployee,taskBar);
+
+        }else {
+
+            createNewEmployee.toFront();
+        }
+    }
+
+    public void CreateNewCustomer(CreateNewCustomer createNewCustomer,JDesktopPane desktop,JPanel taskBar){
+        if (createNewCustomer == null || createNewCustomer.isClosed()){
+
+            createNewCustomer = new CreateNewCustomer();
+            createNewCustomer.setVisible(true);
+
+            desktop.add(createNewCustomer);
+
+            createNewCustomer.toFront();
+
+            addWindowButton(createNewCustomer,taskBar);
+
+        }else {
+
+            createNewCustomer.toFront();
+        }
+    }
+    public void CreateNewTour(CreateNewTour createNewTour,JDesktopPane desktop,JPanel taskBar){
+        if (createNewTour == null || createNewTour.isClosed()){
+
+            createNewTour= new CreateNewTour();
+            createNewTour.setVisible(true);
+
+            desktop.add(createNewTour);
+
+            createNewTour.toFront();
+
+            addWindowButton(createNewTour,taskBar);
+
+        }else {
+
+            createNewTour.toFront();
+        }
+    }
+
+    public void CreateNewUser(CreateNewUser createNewUser,JDesktopPane desktop,JPanel taskBar){
+        if (createNewUser == null || createNewUser.isClosed()){
+
+            createNewUser = new CreateNewUser();
+            createNewUser.setVisible(true);
+
+            desktop.add(createNewUser);
+
+            createNewUser.toFront();
+
+            addWindowButton(createNewUser,taskBar);
+
+        }else {
+
+            createNewUser.toFront();
+        }
+    }
+
+}

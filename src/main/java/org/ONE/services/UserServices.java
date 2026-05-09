@@ -60,7 +60,7 @@ public class UserServices {
         }
     }
 
-    public User findByName(String name){
+    public List<User> findByName(String name){
         try {
             if (name.matches("\\d+")) {
                 throw new RuntimeException("O nome não pode ser um número");
@@ -119,7 +119,7 @@ public class UserServices {
                 throw new AuthenticationException("Usuário ou senha incorreta");
             }
 
-            User user = userRepository.findByName(login);
+            User user = userRepository.findByName(login).get(0);
 
             if (user == null) {
                 throw new AuthenticationException("Usuário ou senha incorreta");

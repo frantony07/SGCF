@@ -62,7 +62,7 @@ public class FuncionarioRepository {
     }
 
     public List<Funcionario> findByName(String name) {
-        return em.createQuery("select f from Funcionario f where lower(f.nome) like lower(:name)", Funcionario.class)
+        return em.createQuery("select f from Funcionario f where lower(f.name) like lower(:name)", Funcionario.class)
                 .setParameter("name", name + "%")
                 .getResultList();
     }

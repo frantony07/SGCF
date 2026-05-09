@@ -54,7 +54,7 @@ public class UserRepository {
         }
     }
 
-    public User findByName(String name) {
+    public List<User> findByName(String name) {
         try {
             List<User> users = em.createQuery("select u from User u where lower(u.userName) = lower(:name)", User.class)
                     .setParameter("name", name)
@@ -63,7 +63,7 @@ public class UserRepository {
             if (users.isEmpty()) {
                 return null;
             }
-            return users.get(0);
+            return users;
         } catch (Exception e) {
             return null;
         }

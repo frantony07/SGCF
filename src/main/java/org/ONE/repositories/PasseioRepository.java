@@ -65,8 +65,8 @@ public class PasseioRepository {
     }
 
     public List<Passeio> findByName(String prefixo) {
-        return em.createQuery("select p from Passeio p where lower(p.nome) like lower(:prefixo)", Passeio.class)
-                .setParameter("prefixo", prefixo + "%")
+        return em.createQuery("select p from Passeio p where lower(p.nameOfTour) like lower(:prefixo)", Passeio.class)
+                .setParameter("prefixo", "%" + prefixo + "%")
                 .getResultList();
     }
 

@@ -1,7 +1,9 @@
 package View.RegisterViews;
 
+import Functions.CNPJ;
 import Functions.CPF;
 import Functions.loadLanguage;
+import View.ItensDefault;
 import org.ONE.models.Cliente;
 import org.ONE.models.ENUM.CountryCostumer;
 import org.ONE.models.ENUM.Language;
@@ -22,9 +24,8 @@ public class CreateNewCustomer extends JInternalFrame {
         super("Criar novo cliente" , true,true,true,true);
 
         setVisible(true);
-        setBackground(new Color(0x7E7D64));
         setOpaque(true);
-        setSize(800,600);
+        setSize(600,400);
         setLocation(550,100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
@@ -35,20 +36,27 @@ public class CreateNewCustomer extends JInternalFrame {
         } else {
             System.out.println("o icone é nulo");
         }
+
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(new Color(0x7E7D64));
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(new JLabel("Nome do Cliente:"), gbc);
+
+
+        panel.add(ItensDefault.createBoldLabel("Nome do Cliente:",14), gbc);
+
         gbc.gridx = 1;
         JTextField txtName = new JTextField(20);
         panel.add(txtName, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1;
-        panel.add(new JLabel("Tipo de Documento:"), gbc);
+
+        panel.add(ItensDefault.createBoldLabel("Tipo de Documento",14),gbc);
 
         JPanel pnlRadio = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JRadioButton rbCpf = new JRadioButton("CPF", true);
@@ -62,8 +70,11 @@ public class CreateNewCustomer extends JInternalFrame {
         panel.add(pnlRadio, gbc);
 
         gbc.gridx = 0; gbc.gridy = 2;
+
         JLabel lblDoc = new JLabel("Número (CPF):");
+        lblDoc.setFont(new Font("SansSerif",Font.BOLD,14));
         panel.add(lblDoc, gbc);
+
         gbc.gridx = 1;
         JTextField txtDoc = new JTextField(15);
         panel.add(txtDoc, gbc);
@@ -72,14 +83,21 @@ public class CreateNewCustomer extends JInternalFrame {
         rbCnpj.addActionListener(e -> lblDoc.setText("Número (CNPJ):"));
 
         gbc.gridx = 0; gbc.gridy = 3;
-        panel.add(new JLabel("País de Origem:"), gbc);
+
+
+        panel.add(ItensDefault.createBoldLabel("País de Origem:",14),gbc);
+
+
         gbc.gridx = 1;
         JComboBox<CountryCostumer> cbCountry = new JComboBox<>(CountryCostumer.values());
         panel.add(cbCountry, gbc);
 
         gbc.gridx = 0; gbc.gridy = 4;
-        panel.add(new JLabel("Idiomas:"), gbc);
+
+        panel.add(ItensDefault.createBoldLabel("Idiomas:",14),gbc);
+
         gbc.gridx = 1;
+
         JList<Language> listLanguages = new JList<>(languageArrayList.toArray(new Language[0]));
         listLanguages.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         JScrollPane scroll = new JScrollPane(listLanguages);
@@ -92,7 +110,10 @@ public class CreateNewCustomer extends JInternalFrame {
         JButton btnSalvar = getBtnSalvar(txtName, txtDoc, rbCpf, cbCountry, listLanguages);
         panel.add(btnSalvar, gbc);
 
-        add(new JScrollPane(panel));
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.getViewport().setBackground(new Color(0x7E7D64));
+
+        add(scrollPane);
     }
 
     private @NotNull JButton getBtnSalvar(JTextField txtName, JTextField txtDoc, JRadioButton rbCpf,
@@ -114,6 +135,9 @@ public class CreateNewCustomer extends JInternalFrame {
 
             if (cpf != null && !CPF.isValidCPF(cpf)) {
                 JOptionPane.showMessageDialog(this, "CPF Inválido!"); return;
+            }
+            if (cnpj != null && !CNPJ.isValidCNPJ(cnpj)) {
+                JOptionPane.showMessageDialog(this, "CNPJ Inválido!"); return;
             }
 
             try {
