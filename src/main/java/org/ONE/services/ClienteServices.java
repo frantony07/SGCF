@@ -25,6 +25,7 @@ public class ClienteServices {
 
         } catch (Exception e) {
             PrintError.printErro(e);
+            throw e;
         }
     }
 

@@ -1,52 +1,77 @@
 package org.ONE.repositories;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import org.ONE.models.User;
 
 import java.util.List;
 
 public class UserRepository {
 
-    private EntityManager em ;
+    private final EntityManager em;
 
-    public UserRepository(EntityManager em ){ this.em = em;}
-    public User findById (Long id){ return em.find(User.class,id);}
-
-    public void create(User user){
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
+    public UserRepository(EntityManager em) {
+        this.em = em;
     }
 
-    public void update(User user){
-        em.getTransaction().begin();
-        em.merge(user);
-        em.getTransaction().commit();
-    }
-    public  void delete(User user){
-        em.getTransaction().begin();
-        em.remove(em.contains(user) ? user : em.merge(user));
-        em.getTransaction().commit();
+    public User findById(Long id) {
+        return em.find(User.class, id);
     }
 
-    public User findByName(String name){
-        try{
-         List<User> user = em.createQuery("select u from User u where lower(u.userName) like lower(:name)"
-                 , User.class).setParameter("name" , name ).getResultList();
-         if (user.isEmpty()){
-             System.out.println("usuario não encontrado");
-             return null;
-         }
-         return user.get(0);
-
+    public void create(User user) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.persist(user);
+            tx.commit();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    public void update(User user) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(user);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    public void delete(User user) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.remove(em.contains(user) ? user : em.merge(user));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    public User findByName(String name) {
+        try {
+            List<User> users = em.createQuery("select u from User u where lower(u.userName) = lower(:name)", User.class)
+                    .setParameter("name", name)
+                    .getResultList();
+
+            if (users.isEmpty()) {
+                return null;
+            }
+            return users.get(0);
+        } catch (Exception e) {
+            return null;
         }
     }
 
     public User authenticate(String login, String password) {
         try {
-            return   em.createQuery(
+            return em.createQuery(
                             "select u from User u where u.userName = :login and u.userPassword = :password", User.class)
                     .setParameter("login", login)
                     .setParameter("password", password)
@@ -56,26 +81,21 @@ public class UserRepository {
         }
     }
 
-    public List<User> findAll (){return em.createQuery("select u from User u " , User.class).getResultList();}
-
-    public Long getSize(){
-        return em.createQuery("select count(u.id) from User u" , Long.class).getSingleResult();
+    public List<User> findAll() {
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 
-    public User findById(String userName, String userPassword) {
-        return null;
+    public Long getSize() {
+        return em.createQuery("select count(u.id) from User u", Long.class).getSingleResult();
     }
 
     public User findByEmail(String email) {
         try {
-            return em.createQuery(
-                    "select u from User u where u.email = :email", User.class)
+            return em.createQuery("select u from User u where u.email = :email", User.class)
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (Exception e) {
             return null;
         }
     }
-
-
 }

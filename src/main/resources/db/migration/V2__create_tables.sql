@@ -9,7 +9,7 @@ create table if not exists user_account(
 create table if not exists funcionario(
     id serial primary key not null,
     name varchar(50) not null,
-    cpf varchar(11) not null
+    cpf varchar(11) not null unique
 );
 
 create table if not exists languages_funcionario(

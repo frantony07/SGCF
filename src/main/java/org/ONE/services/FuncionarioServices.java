@@ -18,18 +18,20 @@ public class FuncionarioServices {
     public  void createNewRecorde(Funcionario funcionario){
         try {
             if(funcionario == null){
-                throw new RuntimeException("O cliente não pode ser nulo ");
+                throw new RuntimeException("O funcionario não pode ser nulo ");
             }
             funcionarioRepository.create(funcionario);
 
         } catch (Exception e) {
             PrintError.printErro(e);
+            throw e;
+
         }
     }
 
     public void updateRecorde(Funcionario funcionario){
         try {
-            if(funcionario == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+            if(funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
 
             funcionarioRepository.update(funcionario);
 
@@ -39,7 +41,7 @@ public class FuncionarioServices {
     }
     public  void delete(Funcionario funcionario){
         try {
-            if (funcionario == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+            if (funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
 
             funcionarioRepository.delete(funcionario);
 
