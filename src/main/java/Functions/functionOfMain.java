@@ -2,10 +2,7 @@ package Functions;
 
 import Finance.MainAccount;
 import Functions.FunctionsByMain.*;
-import jakarta.persistence.EntityManager;
 import org.ONE.models.User;
-import org.ONE.repositories.*;
-import org.ONE.services.*;
 
 public class functionOfMain {
 
@@ -50,7 +47,7 @@ public class functionOfMain {
 
                         case 5:
                             if (Authenticate.isManager(user)){
-                                new MainAccount().mainPagamento();
+                                new MainAccount().mainPaymentMenuCLI();
                                 break;
                             }
                             System.out.println("Você não tem autorização para usar esta função");
