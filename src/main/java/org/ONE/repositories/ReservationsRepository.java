@@ -36,7 +36,10 @@ public class ReservationsRepository {
     public List<Reservations> findByName(String name){
         return em.createQuery("select r from Reservations r where lower(r.name) like lower(:name)" , Reservations.class).setParameter("name" , name +"%").getResultList();
     }
-    public List<Reservations> findAll (){return em.createQuery("select r from Reservations r " , Reservations.class).getResultList();}
+
+    public List<Reservations> findAll (){
+        return em.createQuery("select r from Reservations r " , Reservations.class).getResultList();
+    }
 
     public Long getCount(){
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
@@ -48,16 +51,19 @@ public class ReservationsRepository {
                 Reservations.class).setParameter("idFuncionario",idFuncionario)
                 .getResultList();
     }
+
     public List<Reservations> getClienteReservations(Long idCliente){
         return  em.createQuery(
                         "select r from Reservations r where r.cliente.id = :idCliente",
                         Reservations.class).setParameter("idCliente", idCliente)
                 .getResultList();
     }
+
     public Long getSize(){
         return em.createQuery("select count(r.id) from Reservations r" , Long.class).getSingleResult();
     }
-    public List<Reservations> getReceipts(String pStatus) {
+
+    public List<Reservations> getReceiptsBasedOffStatus(String pStatus) {
         return em.createQuery(
                 "select r from Reservations r inner join PayModel p on p.cliente = r.cliente where p.status = :pStatus",
                 Reservations.class
@@ -85,7 +91,7 @@ public class ReservationsRepository {
         ).getResultList();
     }
 
-    public List<Reservations> getReservationsConfirmate(){
+    public List<Reservations> getConfirmedReservations(){
         return  em.createQuery(
           "select r from Reservations r where r.status = :status" ,
                 Reservations.class

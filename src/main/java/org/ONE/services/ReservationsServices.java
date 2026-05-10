@@ -25,7 +25,7 @@ public class ReservationsServices {
         return null;
     }
 
-    public  void createNewRecorde(Reservations reservations){
+    public void createNewRecorde(Reservations reservations){
         try {
             if(reservations == null){
                 throw new RuntimeException("O cliente não pode ser nulo");
@@ -48,7 +48,7 @@ public class ReservationsServices {
         }
     }
 
-    public  void delete(Reservations reservations){
+    public void delete(Reservations reservations){
         try {
             if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
@@ -101,7 +101,7 @@ public class ReservationsServices {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-            return List.of();
+        return List.of();
     }
 
     public List<Object[]> getReservationsWithPaymentStatus(){
@@ -116,21 +116,29 @@ public class ReservationsServices {
     public List<Object[]> getClientesWithReservations() {
         try {
             return reservationsRepository.getClientesWithReservations();
-
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return List.of();
     }
-    public List<Reservations> getReservationsConfirmate(){
-        return  reservationsRepository.getReservationsConfirmate();
+    public List<Reservations> getConfirmedReservations(){
+        return reservationsRepository.getConfirmedReservations();
+    }
+
+    public List<Reservations> getReceiptOnStatus(String payStatus) {
+        try {
+            return reservationsRepository.getReceiptsBasedOffStatus(payStatus);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+        return List.of();
     }
 
     public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
     }
 
     public ReceiptSummary processReceipts(String payStatus) {
-        List<Reservations> receipts = reservationsRepository.getReceipts(payStatus);
+        List<Reservations> receipts = reservationsRepository.getReceiptsBasedOffStatus(payStatus);
 
         double totalValue = receipts.stream()
                 .mapToDouble(Reservations::getValue)
@@ -163,5 +171,3 @@ public class ReservationsServices {
         }
     }
 }
-
-//

@@ -151,12 +151,13 @@ public class PayServices {
         }
         return 0.0;
     }
+    
     public void printPayPendent(){
         try {
 
         List<PayModel> payPendent = payRepository.getPayModelPendent();
         if (payPendent.isEmpty()){
-            System.out.println("nao existem pagos pendentes");
+                System.out.println("Não existem pagamentos pendentes");
             return;
         }
         payPendent.forEach(System.out::println);
