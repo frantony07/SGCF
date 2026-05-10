@@ -12,7 +12,8 @@ import View.ShowViews.ShowUser;
 import javax.swing.*;
 import java.awt.*;
 
-import static View.ItensDefault.addWindowButton;
+import static View.FunctionsOfWindowsRegister.*;
+import static View.FunctionsOfWindowsShow.*;
 
 public class MainScreens  extends JFrame {
 
@@ -37,7 +38,7 @@ public class MainScreens  extends JFrame {
 
         desktop = new JDesktopPane();
         desktop.setVisible(true);
-        desktop.setBackground(new Color(0x5E5B41));
+        desktop.setBackground(new Color(0x783C3C));
         desktop.setOpaque(true);
 
         var url = getClass().getResource("/icons/Waterfall.png");
@@ -59,7 +60,7 @@ public class MainScreens  extends JFrame {
     }
     private void NewRegister(){
 
-        JMenu menuCadastro = new JMenu("cadastros");
+        JMenu menuCadastro = new JMenu("Cadastros");
         menuCadastro.setFont(new Font("Arial",Font.BOLD,20));
         menuCadastro.setBackground(new Color(0x79616139, true));
         menuCadastro.setOpaque(true);
@@ -67,19 +68,19 @@ public class MainScreens  extends JFrame {
         menuCadastro.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JMenuItem NewEmployee = new JMenuItem("Criar novo funcionario");
-        NewEmployee.addActionListener(e -> new FunctionsOfWindowsRegister().CreatedNewEmployee(createNewEmployee,desktop,taskBar));
+        NewEmployee.addActionListener(e -> createNewEmployee = CreatedNewEmployee(createNewEmployee,desktop,taskBar));
         menuCadastro.add(NewEmployee);
 
         JMenuItem newCustomer = new JMenuItem("Criar novo cliente");
-        newCustomer.addActionListener(e -> new FunctionsOfWindowsRegister().CreateNewCustomer(createNewCustomer,desktop,taskBar));
+        newCustomer.addActionListener(e -> createNewCustomer = CreateNewCustomer(createNewCustomer,desktop,taskBar));
         menuCadastro.add(newCustomer);
 
         JMenuItem newTour = new JMenuItem("Criar novo passeio");
-        newTour.addActionListener(e -> new FunctionsOfWindowsRegister().CreateNewTour(createNewTour,desktop,taskBar));
+        newTour.addActionListener(e -> createNewTour = CreateNewTour(createNewTour,desktop,taskBar));
         menuCadastro.add(newTour);
 
         JMenuItem newUser = new JMenuItem("Criar novo usuario");
-        newUser.addActionListener(e -> new FunctionsOfWindowsRegister().CreateNewUser(createNewUser,desktop,taskBar));
+        newUser.addActionListener(e -> createNewUser = CreateNewUser(createNewUser,desktop,taskBar));
         menuCadastro.add(newUser);
 
         menuBar.add(menuCadastro);
@@ -93,89 +94,27 @@ public class MainScreens  extends JFrame {
 
         menuOfShow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-        JMenuItem showTours = new JMenuItem("Mostrar passeios");
-        showTours.addActionListener(e -> ShowTours());
-        menuOfShow.add(showTours);
+        JMenuItem showToursItens = new JMenuItem("Mostrar passeios");
+        showToursItens.addActionListener(e -> showTours = showTour(showTours,desktop,taskBar));
+        menuOfShow.add(showToursItens);
 
-        JMenuItem showEmployee = new JMenuItem("Mostrar Funcionários");
-        showEmployee.addActionListener(e -> ShowEmployee());
-        menuOfShow.add(showEmployee);
+        JMenuItem showEmployeeItens = new JMenuItem("Mostrar Funcionários");
+        showEmployeeItens.addActionListener(e -> showEmployee = showEmployees(showEmployee,desktop,taskBar));
+        menuOfShow.add(showEmployeeItens);
 
-        JMenuItem showCustomer = new JMenuItem("Mostrar Clientes");
-        showCustomer.addActionListener(e -> ShowCustomer());
-        menuOfShow.add(showCustomer);
+        JMenuItem showCustomerItens = new JMenuItem("Mostrar Clientes");
+        showCustomerItens.addActionListener(e -> showCustomer = showCustomers(showCustomer,desktop,taskBar));
+        menuOfShow.add(showCustomerItens);
 
-        JMenuItem showUser = new JMenuItem("Mostrar Usuarios");
-        showUser.addActionListener(e -> ShowUser());
-        menuOfShow.add(showUser);
+        JMenuItem showUserItens = new JMenuItem("Mostrar Usuarios");
+        showUserItens.addActionListener(e -> showUser = showUsers(showUser,desktop,taskBar));
+        menuOfShow.add(showUserItens);
 
         menuBar.add(menuOfShow);
         setJMenuBar(menuBar);
 
     }
-    public void ShowTours(){
-        if (showTours == null || showTours.isClosed()){
 
-            showTours = new ShowTours();
-            showTours.setVisible(true);
-
-            desktop.add(showTours);
-
-            showTours.toFront();
-
-            addWindowButton(showTours,taskBar);
-
-        }else {
-
-            showTours.toFront();
-        }
-    }
-
-    private void ShowEmployee(){
-        if (showEmployee == null || showEmployee.isClosed()){
-
-            showEmployee = new ShowEmployee();
-            desktop.add(showEmployee);
-            showEmployee.setVisible(true);
-            showEmployee.toFront();
-
-           addWindowButton(showEmployee, taskBar);
-
-        } else {
-            showEmployee.toFront();
-        }
-    }
-
-    private void ShowCustomer(){
-        if (showCustomer == null || showCustomer.isClosed()){
-
-            showCustomer = new ShowCustomer();
-            desktop.add(showCustomer);
-            showCustomer.setVisible(true);
-            showCustomer.toFront();
-
-            addWindowButton(showCustomer, taskBar);
-
-        } else {
-            showCustomer.toFront();
-        }
-    }
-
-    public void ShowUser() {
-        if (showUser == null || showUser.isClosed()) {
-
-            showUser = new ShowUser();
-            showUser.setVisible(true);
-
-            desktop.add(showUser);
-            showUser.toFront();
-
-            addWindowButton(showUser, taskBar);
-
-        } else {
-            showUser.toFront();
-        }
-    }
 
     private JPanel createTaskBar() {
         taskBar = new JPanel();

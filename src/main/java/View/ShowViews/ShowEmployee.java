@@ -85,7 +85,7 @@ public class ShowEmployee extends JInternalFrame {
         List<Funcionario> lista = employeeService.findByName(nome);
 
         if (lista.isEmpty()){
-            JOptionPane.showMessageDialog(this,"nenhum funcionario encontrado", "erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nenhum funcionario encontrado", "erro",JOptionPane.ERROR_MESSAGE);
         }
 
         for (Funcionario emp : lista) {

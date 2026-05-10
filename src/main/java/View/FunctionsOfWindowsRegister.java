@@ -14,7 +14,7 @@ public class FunctionsOfWindowsRegister {
     public FunctionsOfWindowsRegister() {
     }
 
-    public  void CreatedNewEmployee(CreateNewEmployee createNewEmployee, JDesktopPane desktop, JPanel taskBar){
+    public static CreateNewEmployee  CreatedNewEmployee(CreateNewEmployee createNewEmployee, JDesktopPane desktop, JPanel taskBar){
         if (createNewEmployee == null || createNewEmployee.isClosed()){
 
             createNewEmployee = new CreateNewEmployee();
@@ -30,9 +30,10 @@ public class FunctionsOfWindowsRegister {
 
             createNewEmployee.toFront();
         }
+        return createNewEmployee;
     }
 
-    public void CreateNewCustomer(CreateNewCustomer createNewCustomer,JDesktopPane desktop,JPanel taskBar){
+    public static CreateNewCustomer CreateNewCustomer(CreateNewCustomer createNewCustomer,JDesktopPane desktop,JPanel taskBar){
         if (createNewCustomer == null || createNewCustomer.isClosed()){
 
             createNewCustomer = new CreateNewCustomer();
@@ -48,8 +49,9 @@ public class FunctionsOfWindowsRegister {
 
             createNewCustomer.toFront();
         }
+        return createNewCustomer;
     }
-    public void CreateNewTour(CreateNewTour createNewTour,JDesktopPane desktop,JPanel taskBar){
+    public static CreateNewTour CreateNewTour(CreateNewTour createNewTour,JDesktopPane desktop,JPanel taskBar){
         if (createNewTour == null || createNewTour.isClosed()){
 
             createNewTour= new CreateNewTour();
@@ -65,9 +67,10 @@ public class FunctionsOfWindowsRegister {
 
             createNewTour.toFront();
         }
+        return createNewTour;
     }
 
-    public void CreateNewUser(CreateNewUser createNewUser,JDesktopPane desktop,JPanel taskBar){
+    public static CreateNewUser CreateNewUser(CreateNewUser createNewUser,JDesktopPane desktop,JPanel taskBar){
         if (createNewUser == null || createNewUser.isClosed()){
 
             createNewUser = new CreateNewUser();
@@ -83,6 +86,7 @@ public class FunctionsOfWindowsRegister {
 
             createNewUser.toFront();
         }
+        return createNewUser;
     }
 
 }
