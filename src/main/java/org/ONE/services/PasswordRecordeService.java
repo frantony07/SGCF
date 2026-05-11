@@ -1,5 +1,6 @@
 package org.ONE.services;
 
+import Functions.GenerateCode;
 import org.ONE.models.PasswordReset;
 import org.ONE.models.User;
 import org.ONE.repositories.CustomizerFactory;
@@ -17,12 +18,13 @@ public class PasswordRecordeService {
     }
 
     public void requestPasswordReset(User user) {
-       String code = Functions.GenerateCode.generateCode();
+       String code = GenerateCode.generateCode();
        LocalDateTime expiration = LocalDateTime.now().plusMinutes(10);
 
        PasswordReset token = new PasswordReset(expiration, code, user);
        passwordResetService.create(token);
-       emailService.sendEmail(user.getEmail(), code);
+        String codigo = "";
+        emailService.sendEmail(user.getEmail(), code, "Seu código de recuperação é: " + codigo);
    }
 
    public PasswordReset validateToken(String code) throws Exception {

@@ -37,10 +37,10 @@ public class MainAccount {
                         reservationsServices.getReservationsConfirmate().forEach(System.out::println);
                         break;
                     case 2:
-                        reservationsServices.printReceipt(Status.pendente.name());
+                        reservationsServices.printReceipt(Status.PENDENTE.name());
                         break;
                     case 3:
-                        reservationsServices.printReceipt(Status.cancelada.name());
+                        reservationsServices.printReceipt(Status.CANCELADA.name());
                         break;
                     case 4:
                         new QuotaSelection().quotaCreation();

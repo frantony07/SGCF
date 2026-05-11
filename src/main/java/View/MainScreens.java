@@ -128,6 +128,25 @@ public class MainScreens  extends JFrame {
         alterarEstado.addActionListener(e -> editStatusReservationWindow = editStatusReservations(editStatusReservationWindow,desktop,taskBar));
         menuOfShow.add(alterarEstado);
 
+        JMenuItem showReservationsItens =
+                new JMenuItem("Mostrar Reservas");
+
+        showReservationsItens.addActionListener(e -> {
+
+            if(showReservations == null
+                    || showReservations.isDisplayable()) {
+
+                showReservations =
+                        new ShowReservations();
+
+                desktop.add(showReservations);
+
+                showReservations.setVisible(true);
+            }
+        });
+
+        menuOfShow.add(showReservationsItens);
+
         menuBar.add(menuOfShow);
         setJMenuBar(menuBar);
 

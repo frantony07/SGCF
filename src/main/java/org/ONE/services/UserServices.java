@@ -116,19 +116,19 @@ public class UserServices {
 
             if (login == null || login.isBlank() ||
                     password == null || password.isBlank()) {
-                throw new AuthenticationException("Usuário ou senha incorreta");
+                throw new AuthenticationException("USUARIO VAZIO SENHA VAZIA");
             }
 
             User user = userRepository.findByName(login).get(0);
 
             if (user == null) {
-                throw new AuthenticationException("Usuário ou senha incorreta");
+                throw new AuthenticationException("USUARIO NULO");
             }
 
             boolean senhaValida = Bcrypt.verificarHash(password, user.getUserPassword());
 
             if (!senhaValida) {
-                throw new AuthenticationException("Usuário ou senha incorreta");
+                throw new AuthenticationException("SENHA INVALIDA");
             }
 
             return user;

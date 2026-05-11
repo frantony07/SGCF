@@ -17,7 +17,7 @@ public class EditReservations {
         try {
             System.out.println("____________________________");
             List<Reservations> pendentes = reservations.findAll().stream()
-                .filter(r -> r.getStatus() == Status.pendente)
+                .filter(r -> r.getStatus() == Status.PENDENTE)
                 .toList();
 
             if (pendentes.isEmpty()) {
@@ -53,7 +53,7 @@ public class EditReservations {
                 return;
             }
 
-            if (reservation.getStatus() != Status.pendente) {
+            if (reservation.getStatus() != Status.PENDENTE) {
                 System.out.println("Apenas reservas com status 'pendente' podem ser alteradas.");
                 return;
             }
@@ -66,8 +66,8 @@ public class EditReservations {
             int choice = ValidateNumber.validateINT(2);
 
             Status novoStatus = switch (choice) {
-                case 1 -> Status.confirmada;
-                case 2 -> Status.cancelada;
+                case 1 -> Status.CONFIRMADA;
+                case 2 -> Status.CANCELADA;
                 default -> throw new IllegalStateException("Opção inválida: " + choice);
             };
 
