@@ -17,7 +17,7 @@ public class EditReservations {
         try {
             System.out.println("____________________________");
             List<Reservations> pendentes = reservations.findAll().stream()
-                .filter(r -> r.getStatus() == Status.PENDENTE)
+                .filter(r -> r.getStatus() == Status.pendente)
                 .toList();
 
             if (pendentes.isEmpty()) {
@@ -53,7 +53,7 @@ public class EditReservations {
                 return;
             }
 
-            if (reservation.getStatus() != Status.PENDENTE) {
+            if (reservation.getStatus() != Status.pendente) {
                 System.out.println("Apenas reservas com status 'pendente' podem ser alteradas.");
                 return;
             }

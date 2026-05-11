@@ -19,7 +19,6 @@ public class Main {
 //       User user = new Authenticate().authenticateUser();
 //       new functionOfMain().menu(user);
 //        MainScreens mainScreens = new MainScreens();
-        new Login().setVisible(true);
-        SwingUtilities.invokeLater(MainScreens::new);
+        SwingUtilities.invokeLater(Login::new);
     }
 }

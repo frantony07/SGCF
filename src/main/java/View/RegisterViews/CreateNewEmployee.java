@@ -19,6 +19,7 @@ public class CreateNewEmployee extends JInternalFrame {
     public CreateNewEmployee() {
         super("Criar novo funcionário", true, true, true, true);
 
+        setSize(600, 400);
         setLocation(550, 100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
@@ -76,7 +77,6 @@ public class CreateNewEmployee extends JInternalFrame {
         panel.add(btnSalvar, gbc);
 
         add(panel);
-        pack();
     }
 
     private @NotNull JButton getJButton(JTextField getName, JTextField getCPF, JList<Language> listLanguage) {

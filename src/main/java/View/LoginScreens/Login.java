@@ -21,9 +21,18 @@ public class Login extends javax.swing.JFrame {
     public Login() {
 
         initComponents();
+        setVisible(true);
         userServices = new UserServices();
         setLocationRelativeTo(null);
         setTitle("Sistema de Reservas");
+        var url = getClass().getResource("/icons/Waterfall.png");
+
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            setIconImage(icon.getImage());
+        } else {
+            System.out.println("o icone é nulo");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -133,28 +142,28 @@ public class Login extends javax.swing.JFrame {
 
         try {
 
-            User user = userServices.authenticate(usuario, senha);
-            if(user != null) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Login realizado com sucesso"
-                );
+            SwingWorker<User, Void> worker = new SwingWorker<>() {
 
-                MainScreens mainScreens = new MainScreens();
-                mainScreens.setVisible(true);
-                dispose();
+                @Override
+                protected User doInBackground() throws Exception {
+                    return userServices.authenticate(usuario, senha);
+                }
 
-            } else {
+                @Override
+                protected void done() {
+                    try {
+                        User user = get();
+                        JOptionPane.showMessageDialog(null, "Login realizado!");
+                        SwingUtilities.invokeLater(MainScreens::new);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Erro no login");
+                    }
+                }
+            };
 
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Usuário ou senha inválidos",
-                        "Erro",
-                        JOptionPane.ERROR_MESSAGE
-                );
-            }
+            worker.execute();
 
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
 
             JOptionPane.showMessageDialog(
                     this,
@@ -180,40 +189,7 @@ public class Login extends javax.swing.JFrame {
         btnEntrarActionPerformed(evt);
     }
 
-    private void inputUsuarioActionPerformed(
-            java.awt.event.ActionEvent evt
-    ) {
-    }
 
-    public static void main(String args[]) {
-
-        try {
-
-            for (javax.swing.UIManager.LookAndFeelInfo info :
-                    javax.swing.UIManager.getInstalledLookAndFeels()) {
-
-                if ("Nimbus".equals(info.getName())) {
-
-                    javax.swing.UIManager.setLookAndFeel(
-                            info.getClassName()
-                    );
-                    break;
-                }
-            }
-
-        } catch (Exception ex) {
-
-            logger.log(
-                    java.util.logging.Level.SEVERE,
-                    null,
-                    ex
-            );
-        }
-
-        java.awt.EventQueue.invokeLater(() ->
-                new Login().setVisible(true)
-        );
-    }
 
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnPasswordRecovery;

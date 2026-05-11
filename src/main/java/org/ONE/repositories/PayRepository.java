@@ -104,7 +104,7 @@ public class PayRepository {
     public List<PayModel> getPayModelPendent() {
         return em.createQuery(
                         "select p from PayModel p where p.status = :status", PayModel.class)
-                .setParameter("status", Status.PENDENTE)
+                .setParameter("status", Status.pendente)
                 .getResultList();
     }
 }

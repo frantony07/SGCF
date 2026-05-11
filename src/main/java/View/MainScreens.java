@@ -5,12 +5,7 @@ import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
 import View.RegisterViews.ScheduleReservationWindow;
-import View.ShowViews.EditReservationWindow;
-import View.ShowViews.EditStatusReservationWindow;
-import View.ShowViews.ShowCustomer;
-import View.ShowViews.ShowEmployee;
-import View.ShowViews.ShowTours;
-import View.ShowViews.ShowUser;
+import View.ShowViews.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +26,7 @@ public class MainScreens  extends JFrame {
     private ShowEmployee showEmployee;
     private ShowCustomer showCustomer;
     private ShowUser showUser;
+    ShowReservations showReservations;
     private ScheduleReservationWindow scheduleReservationWindow;
     private EditReservationWindow editReservationWindow;
     private EditStatusReservationWindow editStatusReservationWindow;
@@ -44,7 +40,7 @@ public class MainScreens  extends JFrame {
 
         desktop = new JDesktopPane();
         desktop.setVisible(true);
-        desktop.setBackground(new Color(0x783C3C));
+        desktop.setBackground(new Color(0x9E9D8D));
         desktop.setOpaque(true);
 
         var url = getClass().getResource("/icons/Waterfall.png");
@@ -61,6 +57,7 @@ public class MainScreens  extends JFrame {
 
         NewRegister();
         ShowRegister();
+        EditRegister();
 
         setVisible(true);
     }
@@ -119,6 +116,20 @@ public class MainScreens  extends JFrame {
         JMenuItem showUserItens = new JMenuItem("Mostrar Usuarios");
         showUserItens.addActionListener(e -> showUser = showUsers(showUser,desktop,taskBar));
         menuOfShow.add(showUserItens);
+
+
+        menuBar.add(menuOfShow);
+        setJMenuBar(menuBar);
+
+    }
+
+    private void EditRegister(){
+        JMenu menuOfShow = new JMenu("Editar registros");
+        menuOfShow.setFont(new Font("Arial",Font.BOLD,20));
+        menuOfShow.setBackground(new Color(0x79616139, true));
+        menuOfShow.setOpaque(true);
+
+        menuOfShow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JMenuItem alterarRegistros = new JMenuItem("Alterar registros de reservas");
         alterarRegistros.addActionListener(e -> editReservationWindow = editReservations(editReservationWindow,desktop,taskBar));

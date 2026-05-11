@@ -25,6 +25,6 @@ public class ScheduleReservations {
 
         Funcionario funcionario = funcionarios.findById(funcionarioId);
 
-        new CreateNewRegister().createNewReservations(cliente, funcionario, passeio, Status.PENDENTE);
+        new CreateNewRegister().createNewReservations(cliente, funcionario, passeio, Status.pendente);
     }
 }
