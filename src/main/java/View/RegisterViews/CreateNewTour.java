@@ -29,10 +29,8 @@ public class CreateNewTour extends JInternalFrame {
     public CreateNewTour(){
         super("Criar novo passeio" , true,true,true,true);
 
-        setVisible(true);
         setBackground(new Color(0x7E7D64));
         setOpaque(true);
-        setSize(600,400);
         setLocation(550,100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
@@ -121,6 +119,7 @@ public class CreateNewTour extends JInternalFrame {
 
         add(panel);
 
+        pack();
 
         setVisible(true);
     }

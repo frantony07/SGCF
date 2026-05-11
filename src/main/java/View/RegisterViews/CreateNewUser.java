@@ -23,7 +23,6 @@ public class CreateNewUser extends JInternalFrame {
         setBackground(new Color(0x7E7D64));
         setOpaque(true);
         setVisible(true);
-        setSize(600,400);
         setLocation(550,100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
@@ -87,6 +86,7 @@ public class CreateNewUser extends JInternalFrame {
         panel.add(btnSalvar, gbc);
 
         add(panel);
+        pack();
         setVisible(true);
     }
     private void salveUser() {

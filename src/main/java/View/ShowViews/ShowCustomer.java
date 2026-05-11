@@ -20,7 +20,6 @@ public class ShowCustomer extends JInternalFrame {
 
         clienteService = new ClienteServices();
 
-        setSize(900, 500);
         setLocation(550, 100);
         setLayout(new BorderLayout());
 
@@ -56,6 +55,7 @@ public class ShowCustomer extends JInternalFrame {
         btnAtualizar.addActionListener(e -> loadData());
 
         loadData();
+        pack();
     }
 
     private void loadData() {

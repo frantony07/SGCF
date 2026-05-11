@@ -23,8 +23,7 @@ public class ShowUser extends JInternalFrame {
 
         userService = new UserServices();
 
-        setSize(800, 500);
-        setLocation(550, 100);
+        setLocation(500, 100);
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
@@ -56,6 +55,7 @@ public class ShowUser extends JInternalFrame {
         btnRefresh.addActionListener(e -> loadData());
 
         loadData();
+        pack();
     }
 
     private void loadData() {
