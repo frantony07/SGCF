@@ -2,20 +2,20 @@ package Finance;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
+import View.FinanceView.FinanceMainMenu;
 import org.ONE.models.ENUM.Status;
 import org.ONE.models.PayModel;
 import org.ONE.models.Reservations;
 import org.ONE.services.PayServices;
 import org.ONE.services.ReservationsServices;
-import org.ONE.view.financeView.FinanceMainMenu;
 
 import javax.swing.*;
 import java.util.Scanner;
 
 public class MainAccount {
-    public void mainPagamentoGUI() {
-        JFrame frame = new FinanceMainMenu();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void mainPaymentGUI() {
+        SwingUtilities.invokeLater(() ->
+                new FinanceMainMenu().setVisible(true));
     }
 
     public void mainPaymentMenuCLI() {
@@ -23,7 +23,6 @@ public class MainAccount {
         final ReservationsServices reservationsServices = new ReservationsServices();
 
         int menu = 0;
-        int count = 0;
 
         try {
             while (true) {
@@ -42,7 +41,7 @@ public class MainAccount {
 
                 switch (menu) {
                     case 1:
-                        reservationsServices.getConfirmedReservations().forEach(System.out::println);
+                        reservationsServices.printReceipt(Status.confirmada.name());
                         break;
                     case 2:
                         reservationsServices.printReceipt(Status.pendente.name());
