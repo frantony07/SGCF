@@ -4,6 +4,9 @@ import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
+import View.RegisterViews.ScheduleReservationWindow;
+import View.ShowViews.EditReservationWindow;
+import View.ShowViews.EditStatusReservationWindow;
 import View.ShowViews.ShowCustomer;
 import View.ShowViews.ShowEmployee;
 import View.ShowViews.ShowTours;
@@ -28,6 +31,9 @@ public class MainScreens  extends JFrame {
     private ShowEmployee showEmployee;
     private ShowCustomer showCustomer;
     private ShowUser showUser;
+    private ScheduleReservationWindow scheduleReservationWindow;
+    private EditReservationWindow editReservationWindow;
+    private EditStatusReservationWindow editStatusReservationWindow;
 
 
     public MainScreens(){
@@ -83,6 +89,10 @@ public class MainScreens  extends JFrame {
         newUser.addActionListener(e -> createNewUser = CreateNewUser(createNewUser,desktop,taskBar));
         menuCadastro.add(newUser);
 
+        JMenuItem agendarReserva = new JMenuItem("Agendar reserva");
+        agendarReserva.addActionListener(e -> scheduleReservationWindow = scheduleReservation(scheduleReservationWindow,desktop,taskBar));
+        menuCadastro.add(agendarReserva);
+
         menuBar.add(menuCadastro);
         setJMenuBar(menuBar);
     }
@@ -109,6 +119,14 @@ public class MainScreens  extends JFrame {
         JMenuItem showUserItens = new JMenuItem("Mostrar Usuarios");
         showUserItens.addActionListener(e -> showUser = showUsers(showUser,desktop,taskBar));
         menuOfShow.add(showUserItens);
+
+        JMenuItem alterarRegistros = new JMenuItem("Alterar registros de reservas");
+        alterarRegistros.addActionListener(e -> editReservationWindow = editReservations(editReservationWindow,desktop,taskBar));
+        menuOfShow.add(alterarRegistros);
+
+        JMenuItem alterarEstado = new JMenuItem("Alterar estado de reserva");
+        alterarEstado.addActionListener(e -> editStatusReservationWindow = editStatusReservations(editStatusReservationWindow,desktop,taskBar));
+        menuOfShow.add(alterarEstado);
 
         menuBar.add(menuOfShow);
         setJMenuBar(menuBar);
