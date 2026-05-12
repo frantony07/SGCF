@@ -6,6 +6,8 @@ package View.FinanceView;
 
 import org.ONE.services.ReservationsServices;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Guy
@@ -33,11 +35,12 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
         ConfirmQuotaUpdate = new javax.swing.JOptionPane();
         ConfirmQuotaCreated = new javax.swing.JOptionPane();
+        ConfirmPayment = new javax.swing.JOptionPane();
         Title = new javax.swing.JLabel();
         UpdatePaymentStatus = new javax.swing.JButton();
         SearchReservations = new javax.swing.JButton();
         ShowQuotas = new javax.swing.JButton();
-        Return = new javax.swing.JButton();
+        ReturnButton = new javax.swing.JButton();
         ParentPanel = new javax.swing.JPanel();
         ReservationStatusPanel = new javax.swing.JPanel();
         PaymentStatusLabel = new javax.swing.JLabel();
@@ -54,10 +57,10 @@ public class FinanceMainMenu extends javax.swing.JFrame {
         CreateCompanyQuota = new javax.swing.JLabel();
         CreateCompanyQuotaBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        QuotaContributionTable = new javax.swing.JTable();
         ConfirmPaymentPanel = new javax.swing.JPanel();
-        PendingPaymentsTable = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        PendingPaymentsPane = new javax.swing.JScrollPane();
+        PaymentConfirmationTable = new javax.swing.JTable();
         IDBoxLabel = new javax.swing.JLabel();
         IDBoxTextField = new javax.swing.JTextField();
         IDBoxConfirmButton = new javax.swing.JButton();
@@ -67,7 +70,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 51, 51));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Title.setForeground(new java.awt.Color(255, 255, 255));
+        Title.setForeground(new java.awt.Color(51, 51, 51));
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Menu de Finanças");
 
@@ -80,16 +83,15 @@ public class FinanceMainMenu extends javax.swing.JFrame {
         ShowQuotas.setText("Metas");
         ShowQuotas.addActionListener(this::ShowQuotasActionPerformed);
 
-        Return.setBackground(new java.awt.Color(51, 51, 51));
-        Return.setText("Voltar");
-        Return.addActionListener(this::ReturnActionPerformed);
+        ReturnButton.setBackground(new java.awt.Color(51, 51, 51));
+        ReturnButton.setText("Voltar");
+        ReturnButton.addActionListener(this::ReturnButtonActionPerformed);
 
         ParentPanel.setLayout(new java.awt.CardLayout());
 
-        ReservationStatusPanel.setBackground(new java.awt.Color(102, 102, 102));
-
+        PaymentStatusLabel.setBackground(new java.awt.Color(255, 255, 255));
         PaymentStatusLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        PaymentStatusLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PaymentStatusLabel.setForeground(new java.awt.Color(102, 102, 102));
         PaymentStatusLabel.setText("Estado da reserva:");
 
         ShowPaymentsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,7 +101,15 @@ public class FinanceMainMenu extends javax.swing.JFrame {
             new String [] {
                 "ID", "Valor", "Funcionário", "Cliente", "Data"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         ShowPaymentsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ShowPaymentsPane.setViewportView(ShowPaymentsTable);
 
@@ -157,7 +167,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
         CreateCompanyQuotaBtn.setText("Criar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        QuotaContributionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -165,7 +175,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                 "ID Pagamento", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(QuotaContributionTable);
 
         javax.swing.GroupLayout QuotasPanelLayout = new javax.swing.GroupLayout(QuotasPanel);
         QuotasPanel.setLayout(QuotasPanelLayout);
@@ -228,7 +238,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
         ParentPanel.add(QuotasPanel, "card3");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        PaymentConfirmationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -244,7 +254,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        PendingPaymentsTable.setViewportView(jTable2);
+        PendingPaymentsPane.setViewportView(PaymentConfirmationTable);
 
         IDBoxLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         IDBoxLabel.setText("ID do Pagamento:");
@@ -254,6 +264,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
         IDBoxConfirmButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         IDBoxConfirmButton.setText("Confirmar");
+        IDBoxConfirmButton.addActionListener(this::IDBoxConfirmButtonActionPerformed);
 
         javax.swing.GroupLayout ConfirmPaymentPanelLayout = new javax.swing.GroupLayout(ConfirmPaymentPanel);
         ConfirmPaymentPanel.setLayout(ConfirmPaymentPanelLayout);
@@ -269,7 +280,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                             .addComponent(IDBoxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(IDBoxConfirmButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(PendingPaymentsTable, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PendingPaymentsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ConfirmPaymentPanelLayout.setVerticalGroup(
@@ -278,7 +289,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                 .addGroup(ConfirmPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ConfirmPaymentPanelLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(PendingPaymentsTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PendingPaymentsPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ConfirmPaymentPanelLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(IDBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,7 +317,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                             .addComponent(UpdatePaymentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(SearchReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ShowQuotas, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Return, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(643, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -326,7 +337,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(ShowQuotas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(Return, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -337,11 +348,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void UpdatePaymentStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePaymentStatusActionPerformed
-        ((java.awt.CardLayout) ParentPanel.getLayout()).show(ParentPanel, "card4");
-    }//GEN-LAST:event_UpdatePaymentStatusActionPerformed
-
+    
     private void SearchReservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchReservationsActionPerformed
         ((java.awt.CardLayout) ParentPanel.getLayout()).show(ParentPanel, "card2");
     }//GEN-LAST:event_SearchReservationsActionPerformed
@@ -350,9 +357,17 @@ public class FinanceMainMenu extends javax.swing.JFrame {
         ((java.awt.CardLayout) ParentPanel.getLayout()).show(ParentPanel, "card3");
     }//GEN-LAST:event_ShowQuotasActionPerformed
 
-    private void ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ReturnActionPerformed
+    private void UpdatePaymentStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePaymentStatusActionPerformed
+        ((java.awt.CardLayout) ParentPanel.getLayout()).show(ParentPanel, "card4");
+    }//GEN-LAST:event_UpdatePaymentStatusActionPerformed
+
+    private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
+        
+    }//GEN-LAST:event_ReturnButtonActionPerformed
+
+    private void IDBoxConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDBoxConfirmButtonActionPerformed
+        //TODO:
+    }//GEN-LAST:event_IDBoxConfirmButtonActionPerformed
 
     
 
@@ -383,6 +398,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CompanyLabel;
+    private javax.swing.JOptionPane ConfirmPayment;
     private javax.swing.JPanel ConfirmPaymentPanel;
     private javax.swing.JOptionPane ConfirmQuotaCreated;
     private javax.swing.JOptionPane ConfirmQuotaUpdate;
@@ -395,12 +411,14 @@ public class FinanceMainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel IDBoxLabel;
     private javax.swing.JTextField IDBoxTextField;
     private javax.swing.JPanel ParentPanel;
+    private javax.swing.JTable PaymentConfirmationTable;
     private javax.swing.JComboBox<String> PaymentStatusComboBox;
     private javax.swing.JLabel PaymentStatusLabel;
-    private javax.swing.JScrollPane PendingPaymentsTable;
+    private javax.swing.JScrollPane PendingPaymentsPane;
+    private javax.swing.JTable QuotaContributionTable;
     private javax.swing.JPanel QuotasPanel;
     private javax.swing.JPanel ReservationStatusPanel;
-    private javax.swing.JButton Return;
+    private javax.swing.JButton ReturnButton;
     private javax.swing.JButton SearchReservations;
     private javax.swing.JScrollPane ShowPaymentsPane;
     private javax.swing.JTable ShowPaymentsTable;
@@ -410,7 +428,5 @@ public class FinanceMainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JButton UpdatePaymentStatus;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
