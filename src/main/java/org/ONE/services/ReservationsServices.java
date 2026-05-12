@@ -170,4 +170,13 @@ public class ReservationsServices {
             PrintError.printErro(err);
         }
     }
+
+    public List<Object[]> getTableInfoForGUI() {
+        try {
+            return reservationsRepository.getTableInfoForGUI(pStatus);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+            return List.of();
+        }
+    }
 }
