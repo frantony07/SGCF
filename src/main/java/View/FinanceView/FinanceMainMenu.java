@@ -68,6 +68,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Finanças");
         setBackground(new java.awt.Color(51, 51, 51));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setForeground(new java.awt.Color(51, 51, 51));
@@ -99,7 +100,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Valor", "Funcionário", "Cliente", "Data"
+                "ID", "Funcionário", "Cliente", "Valor", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -111,6 +112,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
             }
         });
         ShowPaymentsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ShowPaymentsTable.getTableHeader().setReorderingAllowed(false);
         ShowPaymentsPane.setViewportView(ShowPaymentsTable);
 
         PaymentStatusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Selecione)", "Confirmada", "Pendente", "Cancelada" }));
@@ -174,7 +176,16 @@ public class FinanceMainMenu extends javax.swing.JFrame {
             new String [] {
                 "ID Pagamento", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        QuotaContributionTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(QuotaContributionTable);
 
         javax.swing.GroupLayout QuotasPanelLayout = new javax.swing.GroupLayout(QuotasPanel);
@@ -254,6 +265,7 @@ public class FinanceMainMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        PaymentConfirmationTable.getTableHeader().setReorderingAllowed(false);
         PendingPaymentsPane.setViewportView(PaymentConfirmationTable);
 
         IDBoxLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -362,14 +374,14 @@ public class FinanceMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdatePaymentStatusActionPerformed
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
-        
+        //TODO:
     }//GEN-LAST:event_ReturnButtonActionPerformed
 
     private void IDBoxConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDBoxConfirmButtonActionPerformed
         //TODO:
     }//GEN-LAST:event_IDBoxConfirmButtonActionPerformed
 
-    
+
 
     /**
      * @param args the command line arguments
