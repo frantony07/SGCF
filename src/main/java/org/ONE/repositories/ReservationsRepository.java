@@ -98,5 +98,15 @@ public class ReservationsRepository {
         ).setParameter("status", Status.confirmada)
                 .getResultList();
     }
+
+    public List getTableInfoForGUI() {
+        return em.createQuery(
+            "select r.id, c.name, f.name, r.value, r.date, p.status " +
+                    "from Reservations r " +
+                    "join Clientes c on r.fk_clientes_id = c.id " +
+                    "join Funcionario f on r.fk_funcionario_id = f.id " +
+                    "join Pay p on r.status = r.status"
+        ).getResultList();
+    }
 }
 
