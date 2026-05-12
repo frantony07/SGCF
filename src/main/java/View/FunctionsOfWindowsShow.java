@@ -1,11 +1,6 @@
 package View;
 
-import View.ShowViews.EditReservationWindow;
-import View.ShowViews.EditStatusReservationWindow;
-import View.ShowViews.ShowCustomer;
-import View.ShowViews.ShowEmployee;
-import View.ShowViews.ShowTours;
-import View.ShowViews.ShowUser;
+import View.ShowViews.*;
 
 import javax.swing.*;
 
@@ -82,6 +77,21 @@ public class FunctionsOfWindowsShow {
             showUser.toFront();
         }
         return  showUser;
+    }
+
+    public static ShowReservations showReservations(ShowReservations showReservations,JDesktopPane desktop , JPanel taskBar){
+        if(showReservations == null || showReservations.isDisplayable()) {
+
+            showReservations = new ShowReservations();
+
+            desktop.add(showReservations);
+
+            showReservations.setVisible(true);
+            taskBar.add(showReservations);
+        }else {
+            showReservations.toFront();
+        }
+        return showReservations;
     }
 
     public static EditReservationWindow editReservations(EditReservationWindow win, JDesktopPane desktop, JPanel taskBar) {

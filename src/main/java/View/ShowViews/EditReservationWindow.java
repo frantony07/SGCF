@@ -35,7 +35,6 @@ public class EditReservationWindow extends JInternalFrame {
     public EditReservationWindow() {
         super("Alterar Registros de Reservas", true, true, true, true);
 
-        setSize(950, 620);
         setLocation(300, 80);
         setLayout(new BorderLayout());
 
@@ -43,6 +42,7 @@ public class EditReservationWindow extends JInternalFrame {
         add(buildTablePanel(), BorderLayout.CENTER);
         add(buildFormPanel(), BorderLayout.SOUTH);
 
+        pack();
         loadData();
     }
 
@@ -75,6 +75,7 @@ public class EditReservationWindow extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
+
 
         return top;
     }

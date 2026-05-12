@@ -117,6 +117,11 @@ public class MainScreens  extends JFrame {
         showUserItens.addActionListener(e -> showUser = showUsers(showUser,desktop,taskBar));
         menuOfShow.add(showUserItens);
 
+        JMenuItem showReservationsItens = new JMenuItem("Mostrar Reservas");
+        showReservationsItens.addActionListener(e -> showReservations = showReservations(showReservations,desktop,taskBar));
+
+        menuOfShow.add(showReservationsItens);
+
 
         menuBar.add(menuOfShow);
         setJMenuBar(menuBar);
@@ -139,24 +144,6 @@ public class MainScreens  extends JFrame {
         alterarEstado.addActionListener(e -> editStatusReservationWindow = editStatusReservations(editStatusReservationWindow,desktop,taskBar));
         menuOfShow.add(alterarEstado);
 
-        JMenuItem showReservationsItens =
-                new JMenuItem("Mostrar Reservas");
-
-        showReservationsItens.addActionListener(e -> {
-
-            if(showReservations == null
-                    || showReservations.isDisplayable()) {
-
-                showReservations =
-                        new ShowReservations();
-
-                desktop.add(showReservations);
-
-                showReservations.setVisible(true);
-            }
-        });
-
-        menuOfShow.add(showReservationsItens);
 
         menuBar.add(menuOfShow);
         setJMenuBar(menuBar);

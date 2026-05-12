@@ -152,11 +152,21 @@ public class Login extends javax.swing.JFrame {
                 @Override
                 protected void done() {
                     try {
-                        User user = get();
-                        JOptionPane.showMessageDialog(null, "Login realizado!");
-                        SwingUtilities.invokeLater(MainScreens::new);
+                        User user = doInBackground();
+
+                        if (user != null){
+                            JOptionPane.showMessageDialog(null, "Login realizado!");
+
+                            SwingUtilities.invokeLater(MainScreens::new);
+                            dispose();
+
+                        }else {
+
+                            JOptionPane.showMessageDialog(null, "Erro no login");
+                        }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Erro no login");
+
                     }
                 }
             };
