@@ -120,7 +120,7 @@ public class ShowReservations extends JInternalFrame {
 
         List<Reservations> lista =
                 reservationsServices
-                        .getReservationsConfirmate();
+                        .getConfirmedReservations();
 
         for (Reservations r : lista) {
             if(r.getCliente().getName()
