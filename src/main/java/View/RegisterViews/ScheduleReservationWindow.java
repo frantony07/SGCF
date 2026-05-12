@@ -41,7 +41,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Passeio
         gbc.gridx = 0; gbc.gridy = 0; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Passeio:", 14), gbc);
 
@@ -56,7 +55,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(cbPasseio, gbc);
 
-        // Valor (auto-preenchido)
         gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Valor (R$):", 14), gbc);
 
@@ -72,7 +70,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(tfValor, gbc);
 
-        // Cliente
         gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Cliente:", 14), gbc);
 
@@ -87,7 +84,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(cbCliente, gbc);
 
-        // Funcionário
         gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Funcionário:", 14), gbc);
 
@@ -102,7 +98,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(cbFuncionario, gbc);
 
-        // Data
         gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Data (AAAA-MM-DD):", 14), gbc);
 
@@ -110,7 +105,6 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(tfData, gbc);
 
-        // Botão Agendar
         gbc.gridx = 1; gbc.gridy = 5;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.fill = GridBagConstraints.NONE;
@@ -128,6 +122,11 @@ public class ScheduleReservationWindow extends JInternalFrame {
 
             try {
                 LocalDate data = LocalDate.parse(dataStr);
+                if (data.isBefore(LocalDate.now())){
+                    JOptionPane.showMessageDialog(this, "a data não pode ser inferior a data atual" , "erro" , JOptionPane.ERROR_MESSAGE);
+                    dispose();
+                    return;
+                }
                 Reservations reservation = new Reservations(cliente, data, funcionario, passeio, passeio.getPrice(), Status.pendente);
                 reservationsServices.createNewRecorde(reservation);
                 JOptionPane.showMessageDialog(this,
