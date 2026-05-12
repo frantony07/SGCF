@@ -18,41 +18,38 @@ public class Payment {
         List<PayModel> payModelList = payRepository.getPayModelPendent();
 
         if (payModelList.isEmpty()){
-            System.out.println("nao existem pagos pendentes");
+            System.out.println("Não existem pagamentos pendentes.");
             return;
         }
 
         payServices.printPayPendent();
 
-        System.out.println("escolhe o  id pagamento a ser realizado");
+        System.out.println("Escolha o ID do pagamento a ser realizado.");
 
         Long choose = ValidateNumber.validateLong(payRepository.getSize());
 
         PayModel payChoose = payRepository.findById(choose);
 
-        if (payChoose.getStatus() == Status.CANCELADA){
-            System.out.println("este pagamento esta cancelado");
+        if (payChoose.getStatus() == Status.cancelada){
+            System.out.println("Este pagamento está cancelado.");
             return;
         }
-        if (payChoose.getStatus() == Status.CONFIRMADA){
-            System.out.println("este pagamento ja foi realizado");
+        if (payChoose.getStatus() == Status.confirmada){
+            System.out.println("Este pagamento já foi realizado.");
             return;
         }
-        System.out.println("o total a ser pago e = R$" + payChoose.getTotal_account());
+        System.out.println("O total a ser pago é de: R$" + payChoose.getTotal_account());
 
-        System.out.println("deseja confirmar o pagamento?");
+        System.out.println("Deseja confirmar o pagamento?");
         System.out.println("1.Sim");
         System.out.println("2.Não");
 
-        int confirmatePayment = ValidateNumber.validateINT(2);
+        int confirmPayment = ValidateNumber.validateINT(2);
 
-        if (confirmatePayment == 1){
-            payChoose.setStatus(Status.CONFIRMADA);
+        if (confirmPayment == 1){
+            payChoose.setStatus(Status.confirmada);
             payRepository.update(payChoose);
-            System.out.println("pagamento realizado com sucesso.");
+            System.out.println("Pagamento realizado com sucesso.");
         }
-
-
-
     }
 }

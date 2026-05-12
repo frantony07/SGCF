@@ -2,20 +2,27 @@ package Finance;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
+import View.FinanceView.FinanceMainMenu;
 import org.ONE.models.ENUM.Status;
 import org.ONE.models.PayModel;
 import org.ONE.models.Reservations;
 import org.ONE.services.PayServices;
 import org.ONE.services.ReservationsServices;
+
+import javax.swing.*;
 import java.util.Scanner;
 
 public class MainAccount {
-    Scanner sc = new Scanner(System.in);
-    private final ReservationsServices reservationsServices = new ReservationsServices();
+    public void mainPaymentGUI() {
+        SwingUtilities.invokeLater(() ->
+                new FinanceMainMenu().setVisible(true));
+    }
 
-    public void mainPagamento() {
+    public void mainPaymentMenuCLI() {
+        Scanner sc = new Scanner(System.in);
+        final ReservationsServices reservationsServices = new ReservationsServices();
+
         int menu = 0;
-        int count = 0;
 
         try {
             while (true) {
@@ -30,17 +37,17 @@ public class MainAccount {
                 System.out.println("6. Realizar pagamento");
                 System.out.println("7. Voltar");
 
-                menu = ValidateNumber.validateINT(6);
+                menu = ValidateNumber.validateINT(7);
 
                 switch (menu) {
                     case 1:
-                        reservationsServices.getReservationsConfirmate().forEach(System.out::println);
+                        reservationsServices.printReceipt(Status.confirmada.name());
                         break;
                     case 2:
                         reservationsServices.printReceipt(Status.pendente.name());
                         break;
                     case 3:
-                        reservationsServices.printReceipt(Status.CANCELADA.name());
+                        reservationsServices.printReceipt(Status.cancelada.name());
                         break;
                     case 4:
                         new QuotaSelection().quotaCreation();
@@ -59,9 +66,8 @@ public class MainAccount {
                             );
                         });
                         break;
-
-                    case 6 :
-                            new Payment().makePayment();
+                    case 6:
+                        new Payment().makePayment();
                         break;
                     case 7:
                         System.out.println("Saindo das finanças");
