@@ -66,8 +66,8 @@ public class EditReservations {
             int choice = ValidateNumber.validateINT(2);
 
             Status novoStatus = switch (choice) {
-                case 1 -> Status.confirmada;
-                case 2 -> Status.cancelada;
+                case 1 -> Status.CONFIRMADA;
+                case 2 -> Status.CANCELADA;
                 default -> throw new IllegalStateException("Opção inválida: " + choice);
             };
 

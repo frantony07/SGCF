@@ -30,11 +30,11 @@ public class Payment {
 
         PayModel payChoose = payRepository.findById(choose);
 
-        if (payChoose.getStatus() == Status.cancelada){
+        if (payChoose.getStatus() == Status.CANCELADA){
             System.out.println("Este pagamento está cancelado.");
             return;
         }
-        if (payChoose.getStatus() == Status.confirmada){
+        if (payChoose.getStatus() == Status.CONFIRMADA){
             System.out.println("Este pagamento já foi realizado.");
             return;
         }
@@ -47,7 +47,7 @@ public class Payment {
         int confirmPayment = ValidateNumber.validateINT(2);
 
         if (confirmPayment == 1){
-            payChoose.setStatus(Status.confirmada);
+            payChoose.setStatus(Status.CONFIRMADA);
             payRepository.update(payChoose);
             System.out.println("Pagamento realizado com sucesso.");
         }

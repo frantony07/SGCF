@@ -95,7 +95,7 @@ public class ReservationsRepository {
         return  em.createQuery(
           "select r from Reservations r where r.status = :status" ,
                 Reservations.class
-        ).setParameter("status", Status.confirmada)
+        ).setParameter("status", Status.CONFIRMADA)
                 .getResultList();
     }
 
