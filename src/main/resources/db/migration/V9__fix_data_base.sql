@@ -33,6 +33,6 @@ INSERT INTO passeio (price, durations_in_minute, country_of_tour, km_of_tour, na
 
 
 INSERT INTO reservations (date, fk_passeio_id, fk_funcionario_id, fk_clientes_id, value, status) VALUES
-    ('2026-05-10', 1, 1, 1, 450.00, 'PENDENTE'),
-    ('2026-05-12', 2, 2, 2, 120.00, 'PENDENTE');
+    ('2026-05-10', 1, 1, 1, 450.00, 'pendente'),
+    ('2026-05-12', 2, 2, 2, 120.00, 'pendente');
 

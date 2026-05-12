@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static Functions.Bcrypt.criarHash;
+
 
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();
@@ -41,6 +43,7 @@ public class CreateNewRegister {
                         break;
                     case 4:
                         createNewUser();
+                        break;
                     case 5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");

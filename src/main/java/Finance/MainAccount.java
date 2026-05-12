@@ -47,7 +47,7 @@ public class MainAccount {
                         reservationsServices.printReceipt(Status.pendente.name());
                         break;
                     case 3:
-                        reservationsServices.printReceipt(Status.cancelada.name());
+                        reservationsServices.printReceipt(Status.CANCELADA.name());
                         break;
                     case 4:
                         new QuotaSelection().quotaCreation();

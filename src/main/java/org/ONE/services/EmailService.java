@@ -13,7 +13,7 @@ public class EmailService {
     private final String from = "frantonynieves@gmail.com";
     private final String password = "znhc akoh zlwu khas";
 
-    public void sendEmail(String to, String code) {
+    public void sendEmail(String to, String code, String s) {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

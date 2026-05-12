@@ -22,7 +22,6 @@ public class ShowTours extends JInternalFrame {
 
         passeioService = new PasseioServices();
 
-        setSize(900, 600);
         setLocation(550, 100);
         setLayout(new BorderLayout());
 
@@ -57,6 +56,7 @@ public class ShowTours extends JInternalFrame {
         btnAtualizar.addActionListener(e -> loadData());
 
         loadData();
+        pack();
     }
 
     private void loadData() {

@@ -23,9 +23,7 @@ public class CreateNewCustomer extends JInternalFrame {
     public CreateNewCustomer(){
         super("Criar novo cliente" , true,true,true,true);
 
-        setVisible(true);
         setOpaque(true);
-        setSize(600,400);
         setLocation(550,100);
 
         var url = getClass().getResource("/icons/icons8-creating-20.png");
@@ -114,6 +112,10 @@ public class CreateNewCustomer extends JInternalFrame {
         scrollPane.getViewport().setBackground(new Color(0x7E7D64));
 
         add(scrollPane);
+
+        pack();
+        setVisible(true);
+
     }
 
     private @NotNull JButton getBtnSalvar(JTextField txtName, JTextField txtDoc, JRadioButton rbCpf,

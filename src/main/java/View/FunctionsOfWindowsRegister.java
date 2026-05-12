@@ -4,6 +4,7 @@ import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
+import View.RegisterViews.ScheduleReservationWindow;
 
 import javax.swing.*;
 
@@ -87,6 +88,19 @@ public class FunctionsOfWindowsRegister {
             createNewUser.toFront();
         }
         return createNewUser;
+    }
+
+    public static ScheduleReservationWindow scheduleReservation(ScheduleReservationWindow win, JDesktopPane desktop, JPanel taskBar) {
+        if (win == null || win.isClosed()) {
+            win = new ScheduleReservationWindow();
+            win.setVisible(true);
+            desktop.add(win);
+            win.toFront();
+            addWindowButton(win, taskBar);
+        } else {
+            win.toFront();
+        }
+        return win;
     }
 
 }
