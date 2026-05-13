@@ -2,7 +2,6 @@ package Finance;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
-import View.FinanceView.FinanceMainMenu;
 import org.ONE.models.ENUM.Status;
 import org.ONE.models.PayModel;
 import org.ONE.models.Reservations;
@@ -13,10 +12,6 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class MainAccount {
-    public void mainPaymentGUI() {
-        SwingUtilities.invokeLater(() ->
-                new FinanceMainMenu().setVisible(true));
-    }
 
     public void mainPaymentMenuCLI() {
         Scanner sc = new Scanner(System.in);
