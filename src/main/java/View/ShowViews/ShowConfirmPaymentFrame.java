@@ -1,25 +1,20 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package View.FinanceView;
-
-import javax.swing.*;
+package View.ShowViews;
 
 /**
  *
  * @author Guy
  */
-public class ConfirmPaymentPanel extends JInternalFrame {
+public class ShowConfirmPaymentFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ConfirmPaymentPanel
+     * Creates new form ConfirmPaymentFrame
      */
-    public ConfirmPaymentPanel() {
-        super("Confirmar Pagamento",true,true,true,true);
-        setLocation(450, 80);
+    public ShowConfirmPaymentFrame() {
         initComponents();
-        pack();
     }
 
     /**
@@ -31,19 +26,12 @@ public class ConfirmPaymentPanel extends JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PaymentIDLabel = new javax.swing.JLabel();
-        PaymentIDTextField = new javax.swing.JTextField();
-        ConfirmPaymentButton = new javax.swing.JButton();
         ShowPendingPaymentsPane = new javax.swing.JScrollPane();
         ShowPendingPaymentsTable = new javax.swing.JTable();
         PendingPaymentsLabel = new javax.swing.JLabel();
-
-        PaymentIDLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PaymentIDLabel.setText("ID do Pagamento:");
-
-        PaymentIDTextField.setText("ID");
-
-        ConfirmPaymentButton.setText("Confirmar");
+        PaymentIDLabel = new javax.swing.JLabel();
+        PaymentIDTextField = new javax.swing.JTextField();
+        ConfirmPaymentButton = new javax.swing.JButton();
 
         ShowPendingPaymentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,9 +55,15 @@ public class ConfirmPaymentPanel extends JInternalFrame {
         PendingPaymentsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PendingPaymentsLabel.setText("Pagamentos Pendentes");
 
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        PaymentIDLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PaymentIDLabel.setText("ID do Pagamento:");
 
+        PaymentIDTextField.setText("ID");
+
+        ConfirmPaymentButton.setText("Confirmar");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -82,7 +76,7 @@ public class ConfirmPaymentPanel extends JInternalFrame {
                         .addComponent(PaymentIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(PaymentIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,9 +90,11 @@ public class ConfirmPaymentPanel extends JInternalFrame {
                 .addGap(61, 61, 61)
                 .addComponent(PendingPaymentsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ShowPendingPaymentsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addComponent(ShowPendingPaymentsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 

@@ -171,9 +171,9 @@ public class ReservationsServices {
         }
     }
 
-    public List<Object[]> getTableInfoForGUI(String pstatus) {
+    public List<Object[]> getTableInfoForGUI(String pStatus) {
         try {
-            return reservationsRepository.getTableInfoForGUI(pstatus);
+            return reservationsRepository.getTableInfoForGUI(pStatus);
         } catch (Exception err) {
             PrintError.printErro(err);
             return List.of();
