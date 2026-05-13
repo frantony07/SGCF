@@ -1,5 +1,7 @@
 package View;
 
+import View.FinanceView.ConfirmPaymentPanel;
+import View.FinanceView.QuotasPanel;
 import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
@@ -12,6 +14,7 @@ import java.awt.*;
 
 import static View.FunctionOfWindowsEdit.*;
 
+import static View.FunctionsOfWindowsFinances.*;
 import static View.FunctionsOfWindowsRegister.*;
 import static View.FunctionsOfWindowsShow.*;
 
@@ -28,10 +31,12 @@ public class MainScreens  extends JFrame {
     private ShowEmployee showEmployee;
     private ShowCustomer showCustomer;
     private ShowUser showUser;
-    ShowReservations showReservations;
+    private ShowReservations showReservations;
     private ScheduleReservationWindow scheduleReservationWindow;
     private EditReservationWindow editReservationWindow;
     private EditStatusReservationWindow editStatusReservationWindow;
+    private ConfirmPaymentPanel confirmPaymentPanel;
+    private QuotasPanel quotasPanel;
 
 
     public MainScreens(){
@@ -162,13 +167,13 @@ public class MainScreens  extends JFrame {
 
         menuOfShow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-//        JMenuItem realizarPagamento = new JMenuItem("Realizar Pagamento");
-//        realizarPagamento.addActionListener(e -> ));
-//        menuOfShow.add(realizarPagamento);
-//
-//        JMenuItem metas = new JMenuItem("Metas");
-//        metas.addActionListener(e -> ));
-//        menuOfShow.add(metas);
+        JMenuItem panelPayment = new JMenuItem("Realizar Pagamento");
+        panelPayment.addActionListener(e ->confirmPaymentPanel= confirmPaymentPanel(confirmPaymentPanel,desktop,taskBar));
+        menuOfShow.add(panelPayment);
+
+        JMenuItem metas = new JMenuItem("Metas");
+        metas.addActionListener(e ->quotasPanel = addQuotaPanel(quotasPanel,desktop,taskBar));
+        menuOfShow.add(metas);
 
 
         menuBar.add(menuOfShow);

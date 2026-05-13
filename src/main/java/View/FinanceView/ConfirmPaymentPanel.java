@@ -4,17 +4,22 @@
  */
 package View.FinanceView;
 
+import javax.swing.*;
+
 /**
  *
  * @author Guy
  */
-public class ConfirmPaymentPanel extends javax.swing.JPanel {
+public class ConfirmPaymentPanel extends JInternalFrame {
 
     /**
      * Creates new form ConfirmPaymentPanel
      */
     public ConfirmPaymentPanel() {
+        super("Confirmar Pagamento",true,true,true,true);
+        setLocation(450, 80);
         initComponents();
+        pack();
     }
 
     /**
@@ -62,8 +67,9 @@ public class ConfirmPaymentPanel extends javax.swing.JPanel {
         PendingPaymentsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PendingPaymentsLabel.setText("Pagamentos Pendentes");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()

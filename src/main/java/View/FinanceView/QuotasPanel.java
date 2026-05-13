@@ -4,17 +4,22 @@
  */
 package View.FinanceView;
 
+import javax.swing.*;
+
 /**
  *
  * @author Guy
  */
-public class QuotasPanel extends javax.swing.JPanel {
+public class QuotasPanel extends JInternalFrame {
 
     /**
      * Creates new form QuotasPanel
      */
     public QuotasPanel() {
+        super("Metas", true,true,true,true);
+        setLocation(450, 80);
         initComponents();
+        pack();
     }
 
     /**
@@ -81,8 +86,9 @@ public class QuotasPanel extends javax.swing.JPanel {
         ShowContributingValues.getTableHeader().setReorderingAllowed(false);
         ShowContributingValuesPanel.setViewportView(ShowContributingValues);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
