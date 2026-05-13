@@ -56,11 +56,13 @@ public class Login extends javax.swing.JFrame {
 
         inputSenha.addActionListener(this::inputSenhaActionPerformed);
 
-        btnEntrar.setBackground(new java.awt.Color(0, 153, 255));
+        btnEntrar.setBackground(new java.awt.Color(0x1A8A9E));
+        btnEntrar.setForeground(java.awt.Color.WHITE);
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(this::btnEntrarActionPerformed);
 
-        btnPasswordRecovery.setBackground(new java.awt.Color(0, 153, 255));
+        btnPasswordRecovery.setBackground(new java.awt.Color(0x1A8A9E));
+        btnPasswordRecovery.setForeground(java.awt.Color.WHITE);
         btnPasswordRecovery.setText("Esqueci minha senha");
         btnPasswordRecovery.addActionListener(this::btnPasswordRecoveryActionPerformed);
 

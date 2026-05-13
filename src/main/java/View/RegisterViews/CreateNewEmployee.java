@@ -28,7 +28,7 @@ public class CreateNewEmployee extends JInternalFrame {
         }
 
         JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(new Color(0x7E7D64));
+        panel.setBackground(ItensDefault.FUNDO_CLARO);
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         GridBagConstraints gbc = new GridBagConstraints();

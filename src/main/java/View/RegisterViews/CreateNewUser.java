@@ -20,7 +20,7 @@ public class CreateNewUser extends JInternalFrame {
     public CreateNewUser(){
         super("Criar novo usuario",true,true,true,true);
 
-        setBackground(new Color(0x7E7D64));
+        setBackground(ItensDefault.FUNDO_CLARO);
         setOpaque(true);
         setVisible(true);
         setLocation(550,100);
@@ -36,7 +36,7 @@ public class CreateNewUser extends JInternalFrame {
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(new Color(0x7E7D64));
+        panel.setBackground(ItensDefault.FUNDO_CLARO);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);

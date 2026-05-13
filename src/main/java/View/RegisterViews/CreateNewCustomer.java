@@ -37,7 +37,7 @@ public class CreateNewCustomer extends JInternalFrame {
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(new Color(0x7E7D64));
+        panel.setBackground(ItensDefault.FUNDO_CLARO);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
@@ -109,7 +109,7 @@ public class CreateNewCustomer extends JInternalFrame {
         panel.add(btnSalvar, gbc);
 
         JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.getViewport().setBackground(new Color(0x7E7D64));
+        scrollPane.getViewport().setBackground(ItensDefault.FUNDO_CLARO);
 
         add(scrollPane);
 

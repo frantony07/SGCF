@@ -29,7 +29,7 @@ public class CreateNewTour extends JInternalFrame {
     public CreateNewTour(){
         super("Criar novo passeio" , true,true,true,true);
 
-        setBackground(new Color(0x7E7D64));
+        setBackground(ItensDefault.FUNDO_CLARO);
         setOpaque(true);
         setLocation(550,100);
 
@@ -50,7 +50,7 @@ public class CreateNewTour extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(new Color(0x7E7D64));
+        panel.setBackground(ItensDefault.FUNDO_CLARO);
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.insets = new Insets(5, 5, 5, 5);
