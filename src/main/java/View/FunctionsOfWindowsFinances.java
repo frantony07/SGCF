@@ -1,8 +1,8 @@
 package View;
 
-import View.FinanceView.ConfirmPaymentPanel;
 import View.FinanceView.QuotasPanel;
 import View.RegisterViews.ScheduleReservationWindow;
+import View.ShowViews.ShowConfirmPaymentFrame;
 import View.ShowViews.ShowUser;
 
 import javax.swing.*;
@@ -13,9 +13,9 @@ public class FunctionsOfWindowsFinances {
     public FunctionsOfWindowsFinances() {
     }
 
-    public static ConfirmPaymentPanel confirmPaymentPanel(ConfirmPaymentPanel win, JDesktopPane desktop, JPanel taskBar) {
+    public static ShowConfirmPaymentFrame confirmPaymentPanel(ShowConfirmPaymentFrame win, JDesktopPane desktop, JPanel taskBar) {
         if (win == null || win.isClosed()) {
-            win = new ConfirmPaymentPanel();
+            win = new ShowConfirmPaymentFrame();
             win.setVisible(true);
             desktop.add(win);
             win.toFront();

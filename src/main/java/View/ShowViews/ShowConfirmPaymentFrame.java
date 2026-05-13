@@ -4,16 +4,20 @@
  */
 package View.ShowViews;
 
+import javax.swing.*;
+
 /**
  *
  * @author Guy
  */
-public class ShowConfirmPaymentFrame extends javax.swing.JInternalFrame {
+public class ShowConfirmPaymentFrame extends JInternalFrame {
 
     /**
      * Creates new form ConfirmPaymentFrame
      */
     public ShowConfirmPaymentFrame() {
+        super("Confirmar Pagamento",true,true,true,true);
+        setLocation(450, 80);
         initComponents();
     }
 

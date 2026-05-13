@@ -1,6 +1,5 @@
 package View;
 
-import View.FinanceView.ConfirmPaymentPanel;
 import View.FinanceView.QuotasPanel;
 import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
@@ -35,7 +34,7 @@ public class MainScreens  extends JFrame {
     private ScheduleReservationWindow scheduleReservationWindow;
     private EditReservationWindow editReservationWindow;
     private EditStatusReservationWindow editStatusReservationWindow;
-    private ConfirmPaymentPanel confirmPaymentPanel;
+    private ShowConfirmPaymentFrame confirmPaymentPanel;
     private QuotasPanel quotasPanel;
 
 
