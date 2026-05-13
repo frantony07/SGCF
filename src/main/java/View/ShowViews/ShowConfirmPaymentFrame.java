@@ -8,12 +8,12 @@ package View.ShowViews;
  *
  * @author Guy
  */
-public class ConfirmPaymentFrame extends javax.swing.JInternalFrame {
+public class ShowConfirmPaymentFrame extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ConfirmPaymentFrame
      */
-    public ConfirmPaymentFrame() {
+    public ShowConfirmPaymentFrame() {
         initComponents();
     }
 
