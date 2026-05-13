@@ -10,6 +10,8 @@ import View.ShowViews.*;
 import javax.swing.*;
 import java.awt.*;
 
+import static View.FunctionOfWindowsEdit.*;
+
 import static View.FunctionsOfWindowsRegister.*;
 import static View.FunctionsOfWindowsShow.*;
 
@@ -58,6 +60,7 @@ public class MainScreens  extends JFrame {
         NewRegister();
         ShowRegister();
         EditRegister();
+        Finances();
 
         setVisible(true);
     }
@@ -143,6 +146,29 @@ public class MainScreens  extends JFrame {
         JMenuItem alterarEstado = new JMenuItem("Alterar estado de reserva");
         alterarEstado.addActionListener(e -> editStatusReservationWindow = editStatusReservations(editStatusReservationWindow,desktop,taskBar));
         menuOfShow.add(alterarEstado);
+
+
+        menuBar.add(menuOfShow);
+        setJMenuBar(menuBar);
+
+    }
+
+    private void Finances(){
+
+        JMenu menuOfShow = new JMenu("Finanças ");
+        menuOfShow.setFont(new Font("Arial",Font.BOLD,20));
+        menuOfShow.setBackground(new Color(0x79616139, true));
+        menuOfShow.setOpaque(true);
+
+        menuOfShow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+//        JMenuItem realizarPagamento = new JMenuItem("Realizar Pagamento");
+//        realizarPagamento.addActionListener(e -> ));
+//        menuOfShow.add(realizarPagamento);
+//
+//        JMenuItem metas = new JMenuItem("Metas");
+//        metas.addActionListener(e -> ));
+//        menuOfShow.add(metas);
 
 
         menuBar.add(menuOfShow);

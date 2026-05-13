@@ -131,10 +131,7 @@ public class ResetPassword extends JFrame {
                 return;
             }
 
-            if(token.getExpiration()
-                    .isBefore(
-                            LocalDateTime.now()
-                    )) {
+            if(token.getExpiration().isBefore(LocalDateTime.now())) {
                 JOptionPane.showMessageDialog(
                         this,
                         "Código expirado"
