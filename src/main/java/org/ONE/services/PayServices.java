@@ -78,6 +78,16 @@ public class PayServices {
         return List.of();
     }
 
+    public PayModel findById(long id){
+        try {
+            return payRepository.findById(id);
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+    }
+
     public Long getCount(){
         try {
             return payRepository.getSize();
