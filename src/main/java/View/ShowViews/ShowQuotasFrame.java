@@ -8,12 +8,12 @@ package View.ShowViews;
  *
  * @author Guy
  */
-public class QuotasFrame extends javax.swing.JInternalFrame {
+public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NewJInternalFrame
      */
-    public QuotasFrame() {
+    public ShowQuotasFrame() {
         initComponents();
     }
 
@@ -32,9 +32,11 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
         InsertQuotaValueLabel = new javax.swing.JLabel();
         QuotaValueTextField = new javax.swing.JTextField();
         ConfirmEmployeeQuotaCreation = new javax.swing.JButton();
+        CancelEmployeeQuotaCreation = new javax.swing.JButton();
         CreateCompanyQuotaDialog = new javax.swing.JDialog();
         InsertCompanyQuotaValue = new javax.swing.JLabel();
         CompanyQuotaValueTextField = new javax.swing.JTextField();
+        CancelCompanyQuotaButton = new javax.swing.JButton();
         ConfirmCompanyQuotaButton = new javax.swing.JButton();
         CreateEmployeeQuotaLabel = new javax.swing.JLabel();
         CreateCompanyQuotaLabel = new javax.swing.JLabel();
@@ -66,6 +68,9 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
         ConfirmEmployeeQuotaCreation.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ConfirmEmployeeQuotaCreation.setText("Confirmar");
 
+        CancelEmployeeQuotaCreation.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CancelEmployeeQuotaCreation.setText("Cancelar");
+
         javax.swing.GroupLayout CreateEmployeeQuotaDialogLayout = new javax.swing.GroupLayout(CreateEmployeeQuotaDialog.getContentPane());
         CreateEmployeeQuotaDialog.getContentPane().setLayout(CreateEmployeeQuotaDialogLayout);
         CreateEmployeeQuotaDialogLayout.setHorizontalGroup(
@@ -81,11 +86,13 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
                         .addComponent(InsertQuotaValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(QuotaValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addGap(0, 145, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateEmployeeQuotaDialogLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CancelEmployeeQuotaCreation)
+                .addGap(18, 18, 18)
                 .addComponent(ConfirmEmployeeQuotaCreation)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
         CreateEmployeeQuotaDialogLayout.setVerticalGroup(
             CreateEmployeeQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,9 +105,11 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
                 .addGroup(CreateEmployeeQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertQuotaValueLabel)
                     .addComponent(QuotaValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ConfirmEmployeeQuotaCreation)
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(CreateEmployeeQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelEmployeeQuotaCreation, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmEmployeeQuotaCreation))
+                .addGap(15, 15, 15))
         );
 
         InsertCompanyQuotaValue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -108,6 +117,9 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
 
         CompanyQuotaValueTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         CompanyQuotaValueTextField.setText("000.00");
+
+        CancelCompanyQuotaButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CancelCompanyQuotaButton.setText("Cancel");
 
         ConfirmCompanyQuotaButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ConfirmCompanyQuotaButton.setText("Confirmar");
@@ -120,12 +132,15 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(InsertCompanyQuotaValue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CompanyQuotaValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateCompanyQuotaDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ConfirmCompanyQuotaButton)
-                .addGap(45, 45, 45))
+                .addGroup(CreateCompanyQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CreateCompanyQuotaDialogLayout.createSequentialGroup()
+                        .addComponent(CompanyQuotaValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(151, Short.MAX_VALUE))
+                    .addGroup(CreateCompanyQuotaDialogLayout.createSequentialGroup()
+                        .addComponent(CancelCompanyQuotaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ConfirmCompanyQuotaButton)
+                        .addGap(21, 21, 21))))
         );
         CreateCompanyQuotaDialogLayout.setVerticalGroup(
             CreateCompanyQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +149,11 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
                 .addGroup(CreateCompanyQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertCompanyQuotaValue)
                     .addComponent(CompanyQuotaValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(ConfirmCompanyQuotaButton)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(CreateCompanyQuotaDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmCompanyQuotaButton)
+                    .addComponent(CancelCompanyQuotaButton))
+                .addGap(21, 21, 21))
         );
 
         CreateEmployeeQuotaLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -244,6 +261,8 @@ public class QuotasFrame extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CPFLabel;
     private javax.swing.JTextField CPFTextField;
+    private javax.swing.JButton CancelCompanyQuotaButton;
+    private javax.swing.JButton CancelEmployeeQuotaCreation;
     private javax.swing.JLabel CompanyQuotaLabel;
     private javax.swing.JTextField CompanyQuotaValueTextField;
     private javax.swing.JButton ConfirmCompanyQuotaButton;
