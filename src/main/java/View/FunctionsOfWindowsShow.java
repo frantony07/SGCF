@@ -80,14 +80,15 @@ public class FunctionsOfWindowsShow {
     }
 
     public static ShowReservations showReservations(ShowReservations showReservations,JDesktopPane desktop , JPanel taskBar){
-        if(showReservations == null || showReservations.isDisplayable()) {
+        if(showReservations == null || showReservations.isClosed()) {
 
             showReservations = new ShowReservations();
 
             desktop.add(showReservations);
 
             showReservations.setVisible(true);
-            taskBar.add(showReservations);
+            showReservations.toFront();
+            addWindowButton(showReservations,taskBar);
         }else {
             showReservations.toFront();
         }

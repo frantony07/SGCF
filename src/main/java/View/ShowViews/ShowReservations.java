@@ -188,7 +188,7 @@ public class ShowReservations extends JInternalFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Reserva cancelada"
+                    "Reserva CANCELADA"
             );
             loadData();
         }
