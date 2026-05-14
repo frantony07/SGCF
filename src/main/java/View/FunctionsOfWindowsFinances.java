@@ -1,9 +1,7 @@
 package View;
 
 import View.FinanceView.QuotasPanel;
-import View.RegisterViews.ScheduleReservationWindow;
 import View.ShowViews.ShowConfirmPaymentFrame;
-import View.ShowViews.ShowUser;
 
 import javax.swing.*;
 
@@ -38,7 +36,4 @@ public class FunctionsOfWindowsFinances {
         }
         return win;
     }
-
-
-
 }

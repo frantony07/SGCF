@@ -26,7 +26,7 @@ public class PrintQuotaInformation {
             return;
         }
 
-        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(employeeID);
+        QuotaModel activeQuota = quotaServices.findActiveQuotaById(employeeID);
         if (activeQuota == null) {
             System.out.println("Este funcionário não possui meta ativa.");
             return;
@@ -81,7 +81,7 @@ public class PrintQuotaInformation {
     public void printCompanyQuota() {
         PayServices payServices = new PayServices();
 
-        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
+        QuotaModel activeQuota = quotaServices.findActiveQuotaById(null);
 
         if (activeQuota == null) {
             System.out.println("A companhia não possui meta ativa.");
