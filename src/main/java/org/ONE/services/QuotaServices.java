@@ -47,18 +47,6 @@ public class QuotaServices {
         }
     }
 
-    public void quickGetCompanyQuota (QuotaModel quotaModel) {
-        try {
-            if (quotaModel == null) {
-                System.out.println("Erro, não há uma meta ativa");
-                return;
-            }
-            // Gotta work on this one
-        } catch (Exception err) {
-            PrintError.printErro(err);
-        }
-    }
-
     public List<QuotaModel> findAllQuotas() {
         try {
             return quotaRepository.findAllQuotas();
