@@ -52,6 +52,37 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
         setSize(600, 500);
     }
 
+    private void configureComponents() {
+        showCompanyRemainingQuota.setEditable(false);
+        showEmployeeRemainingQuota.setEditable(false);
 
+        contributingPayments.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        contributingPayments.getTableHeader().setReorderingAllowed(false);
+    }
+
+    private void buildLayout() {
+        JPanel rootPanel = new JPanel(new BorderLayout(12, 12));
+        rootPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+
+        JPanel topPanel = new JPanel(new GridLayout(1, 2, 12, 12));
+        topPanel.add(createCompanyPanel());
+        //topPanel.add(createEmployeePanel());
+
+        JPanel tablePanel = new JPanel(new BorderLayout(8, 8));
+        tablePanel.setBorder(BorderFactory.createTitledBorder("Metas cadastradas"));
+        tablePanel.add(new JScrollPane(contributingPayments), BorderLayout.CENTER);
+
+        JButton refreshButton = new JButton("Atualizar");
+        refreshButton.addActionListener(event -> refreshAllData());
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(refreshButton);
+
+        rootPanel.add(topPanel, BorderLayout.NORTH);
+        rootPanel.add(tablePanel, BorderLayout.CENTER);
+        rootPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        setContentPane(rootPanel);
+    }
 
 }
