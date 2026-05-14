@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                         if (user != null){
                             JOptionPane.showMessageDialog(null, "Login realizado!");
 
-                            SwingUtilities.invokeLater(MainScreens::new);
+                            SwingUtilities.invokeLater(() -> new MainScreens(user));
                             dispose();
 
                         }else {
