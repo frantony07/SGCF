@@ -47,7 +47,7 @@ public class QuotaRepository {
         String jpql = "select q from QuotaModel q " +
                 "where " + (employeeId == null
                 ? "q.idFuncionario is null "
-                : "q.idFuncionario = :employeeId") +
+                : "q.idFuncionario = :employeeId ") +
                 "and q.startDate is not null " +
                 "and q.endDate is not null " +
                 "and :today between q.startDate and q.endDate " +

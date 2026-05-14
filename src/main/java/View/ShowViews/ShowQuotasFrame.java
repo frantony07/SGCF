@@ -243,7 +243,8 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
         if (activeQuota != null) {
             JOptionPane.showMessageDialog(
-                    this, "A companhia já possui uma meta ativa",
+                    this,
+                    "A companhia já possui uma meta ativa",
                     "Meta ativa",
                     JOptionPane.WARNING_MESSAGE
             );
