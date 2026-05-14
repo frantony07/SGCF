@@ -43,19 +43,25 @@ public class QuotaRepository {
         return em.createQuery("select count(q.id) from QuotaModel q" , Long.class).getSingleResult();
     }
 
-    public QuotaModel findActiveQuotaByEmployee(Long employeeId) {
-        List<QuotaModel> quotas = em.createQuery(
-                        "select q from QuotaModel q " +
-                                "where q.idFuncionario = :employeeId " +
-                                "and q.startDate is not null " +
-                                "and q.endDate is not null " +
-                                "and :today between q.startDate and q.endDate " +
-                                "order by q.startDate desc", QuotaModel.class)
-                .setParameter("employeeId", employeeId)
-                .setParameter("today", LocalDate.now())
-                .setMaxResults(1)
-                .getResultList();
+    public QuotaModel findActiveQuotaById(Long employeeId) {
+        String jpql = "select q from QuotaModel q " +
+                "where " + (employeeId == null
+                ? "q.idFuncionario is null "
+                : "q.idFuncionario = :employeeId") +
+                "and q.startDate is not null " +
+                "and q.endDate is not null " +
+                "and :today between q.startDate and q.endDate " +
+                "order by q.startDate desc";
 
+        var query = em.createQuery(jpql, QuotaModel.class)
+                .setParameter("today",LocalDate.now())
+                .setMaxResults(1);
+
+        if (employeeId != null) {
+            query.setParameter("employeeId", employeeId);
+        }
+
+        List<QuotaModel> quotas = query.getResultList();
         return quotas.isEmpty() ? null : quotas.get(0);
     }
 }
