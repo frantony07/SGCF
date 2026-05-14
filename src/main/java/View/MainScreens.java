@@ -6,6 +6,8 @@ import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
 import View.RegisterViews.ScheduleReservationWindow;
 import View.ShowViews.*;
+import org.ONE.models.ENUM.Permission;
+import org.ONE.models.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +38,7 @@ public class MainScreens extends JFrame {
     private ShowConfirmPaymentFrame confirmPaymentPanel;
     private ShowQuotasFrame showQuotasFrame;
 
-    public MainScreens() {
+    public MainScreens(User userName) {
         setTitle("SGCF");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -55,10 +57,18 @@ public class MainScreens extends JFrame {
         menuBar.setOpaque(true);
         menuBar.setBorderPainted(false);
 
-        NewRegister();
+        NewRegister(userName);
         ShowRegister();
-        EditRegister();
-        Finances();
+        EditRegister(userName);
+        Finances(userName);
+
+        menuBar.add(Box.createHorizontalGlue());
+        JLabel greetingLabel = new JLabel("Olá, " + userName.getUserName());
+        greetingLabel.setFont(ItensDefault.FONTE_MENU);
+        greetingLabel.setForeground(Color.WHITE);
+        greetingLabel.setBorder(BorderFactory.createEmptyBorder(4, 20, 4, 20));
+        menuBar.add(greetingLabel);
+
         setJMenuBar(menuBar);
 
         setVisible(true);
@@ -124,9 +134,11 @@ public class MainScreens extends JFrame {
         return menu;
     }
 
-    private void NewRegister() {
+    private void NewRegister(User user) {
         JMenu menuCadastro = createStyledMenu("Cadastros");
-
+        if (user.getPermission() == Permission.FUNCIONARIO) {
+            return;
+        }
         JMenuItem newEmployee = new JMenuItem("Criar novo funcionário");
         newEmployee.addActionListener(e -> createNewEmployee = CreatedNewEmployee(createNewEmployee, desktop, taskBar));
         menuCadastro.add(newEmployee);
@@ -176,9 +188,11 @@ public class MainScreens extends JFrame {
         menuBar.add(menuOfShow);
     }
 
-    private void EditRegister() {
+    private void EditRegister(User user) {
         JMenu menuOfShow = createStyledMenu("Editar registros");
-
+        if (user.getPermission() == Permission.FUNCIONARIO) {
+            return;
+        }
         JMenuItem alterarRegistros = new JMenuItem("Alterar registros de reservas");
         alterarRegistros.addActionListener(e -> editReservationWindow = editReservations(editReservationWindow, desktop, taskBar));
         menuOfShow.add(alterarRegistros);
@@ -190,18 +204,21 @@ public class MainScreens extends JFrame {
         menuBar.add(menuOfShow);
     }
 
-    private void Finances() {
+    private void Finances(User user) {
         JMenu menuOfShow = createStyledMenu("Finanças");
 
-        JMenuItem panelPayment = new JMenuItem("Realizar Pagamento");
-        panelPayment.addActionListener(e -> confirmPaymentPanel = confirmPaymentPanel(confirmPaymentPanel, desktop, taskBar));
-        menuOfShow.add(panelPayment);
+        if (user.getPermission() == Permission.FUNCIONARIO) {
+            return;
+        }
+            JMenuItem panelPayment = new JMenuItem("Realizar Pagamento");
+            panelPayment.addActionListener(e -> confirmPaymentPanel = confirmPaymentPanel(confirmPaymentPanel, desktop, taskBar));
+            menuOfShow.add(panelPayment);
 
         JMenuItem metas = new JMenuItem("Metas");
         metas.addActionListener(e -> showQuotasFrame = addQuotaPanel(showQuotasFrame, desktop, taskBar));
         menuOfShow.add(metas);
 
-        menuBar.add(menuOfShow);
+            menuBar.add(menuOfShow);
     }
 
     private JPanel createTaskBar() {
