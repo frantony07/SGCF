@@ -70,5 +70,9 @@ public class QuotaModel {
     public void setIdFuncionario(Long idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
+
+    public Object getId() {
+        return id;
+    }
 }
 
