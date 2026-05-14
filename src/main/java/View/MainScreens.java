@@ -1,6 +1,5 @@
 package View;
 
-import View.FinanceView.QuotasPanel;
 import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
@@ -35,7 +34,7 @@ public class MainScreens extends JFrame {
     private EditReservationWindow editReservationWindow;
     private EditStatusReservationWindow editStatusReservationWindow;
     private ShowConfirmPaymentFrame confirmPaymentPanel;
-    private QuotasPanel quotasPanel;
+    private ShowQuotasFrame showQuotasFrame;
 
     public MainScreens() {
         setTitle("SGCF");
@@ -199,7 +198,7 @@ public class MainScreens extends JFrame {
         menuOfShow.add(panelPayment);
 
         JMenuItem metas = new JMenuItem("Metas");
-        metas.addActionListener(e -> quotasPanel = addQuotaPanel(quotasPanel, desktop, taskBar));
+        metas.addActionListener(e -> showQuotasFrame = addQuotaPanel(showQuotasFrame, desktop, taskBar));
         menuOfShow.add(metas);
 
         menuBar.add(menuOfShow);

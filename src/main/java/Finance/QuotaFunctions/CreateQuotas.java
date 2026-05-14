@@ -22,7 +22,7 @@ public class CreateQuotas {
             return;
         }
 
-        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(employeeID);
+        QuotaModel activeQuota = quotaServices.findActiveQuotaById(employeeID);
         if (activeQuota != null) {
             System.out.println("Este funcionário já possui uma meta ativa!");
             return;
@@ -52,7 +52,7 @@ public class CreateQuotas {
 
     public void createCompanyQuota() {
 
-        QuotaModel activeQuota = quotaServices.findActiveEmployeeQuota(null);
+        QuotaModel activeQuota = quotaServices.findActiveQuotaById(null);
         if (activeQuota != null) {
             System.out.println("A companhia já possui uma meta ativa!");
             return;

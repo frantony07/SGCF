@@ -1,7 +1,7 @@
 package View;
 
-import View.FinanceView.QuotasPanel;
 import View.ShowViews.ShowConfirmPaymentFrame;
+import View.ShowViews.ShowQuotasFrame;
 
 import javax.swing.*;
 
@@ -24,9 +24,9 @@ public class FunctionsOfWindowsFinances {
         return win;
     }
 
-    public static QuotasPanel addQuotaPanel(QuotasPanel win, JDesktopPane desktop, JPanel taskBar) {
+    public static ShowQuotasFrame addQuotaPanel(ShowQuotasFrame win, JDesktopPane desktop, JPanel taskBar) {
         if (win == null || win.isClosed()) {
-            win = new QuotasPanel();
+            win = new ShowQuotasFrame();
             win.setVisible(true);
             desktop.add(win);
             win.toFront();
