@@ -2,6 +2,7 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
+import org.ONE.models.ENUM.Status;
 import org.ONE.models.PayModel;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.PayRepository;
@@ -135,7 +136,7 @@ public class PayServices {
     }
 
     public double sumEarningsByEmployee(Long employeeId,
-                                        String status,
+                                        Status status,
                                         LocalDate start,
                                         LocalDate end) {
         try {
@@ -150,11 +151,11 @@ public class PayServices {
         return 0.0;
     }
 
-    public double sumEarningsForCompany(String status,
+    public double sumEarningsForCompany(Status status,
                                         LocalDate start,
                                         LocalDate end) {
         try {
-            Double result = payRepository.sumEarningsForCompany(status, start, end);
+            Double result = payRepository.sumEarningsForCompany(Status.CONFIRMADA, start, end);
             return result == null ? 0.0 : result;
         } catch (Exception err) {
             PrintError.printErro(err);

@@ -37,7 +37,7 @@ public class PrintQuotaInformation {
 
         double earned = payServices.sumEarningsByEmployee(
                 employeeID,
-                Status.CONFIRMADA.name(),
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );
@@ -92,7 +92,7 @@ public class PrintQuotaInformation {
         LocalDate endDate = activeQuota.getEndDate();
 
         double earned = payServices.sumEarningsForCompany(
-                Status.CONFIRMADA.name(),
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );

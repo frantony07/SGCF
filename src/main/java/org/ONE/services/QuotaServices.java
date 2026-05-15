@@ -68,10 +68,9 @@ public class QuotaServices {
     public QuotaModel findActiveQuotaById(Long employeeId) {
         try {
             return quotaRepository.findActiveQuotaById(employeeId);
-        } catch (Exception err) {
-            PrintError.printErro(err);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public Long getQuotaSize() {

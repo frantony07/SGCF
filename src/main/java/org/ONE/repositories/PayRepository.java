@@ -72,7 +72,7 @@ public class PayRepository {
         return em.createQuery("SELECT COUNT(p.id) FROM PayModel p", Long.class).getSingleResult();
     }
 
-    public Double sumEarningsByEmployee(Long employeeId, String status, LocalDate start, LocalDate end) {
+    public Double sumEarningsByEmployee(Long employeeId, Status status, LocalDate start, LocalDate end) {
         // Usando o enum Status se p.status for do tipo Status, ou String se for string
         return em.createQuery(
                         "select coalesce(sum(p.total_account), 0.0) " +
@@ -88,7 +88,7 @@ public class PayRepository {
                 .getSingleResult();
     }
 
-    public Double sumEarningsForCompany(String status, LocalDate start, LocalDate end) {
+    public Double sumEarningsForCompany(Status status, LocalDate start, LocalDate end) {
         return em.createQuery(
                         "select coalesce(sum(p.total_account), 0.0) " +
                                 "from PayModel p, Reservations r " +
