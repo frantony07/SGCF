@@ -47,16 +47,15 @@ O Flyway criará automaticamente as tabelas ao iniciar o projeto.
 
 Pela IDE (IntelliJ ou Eclipse)
 
-Ou via Maven:
 
-mvn clean install
-mvn exec:java
- Autores
+Autores
+
 Kauan Alex Pereira
 Frantony Alexander Nieves Torrealba
 Camila Luiza Ronzzani da Silva
 Alex Dias Mendoza
- Objetivo do Projeto
+
+Objetivo do Projeto
 
 Projeto desenvolvido para fins acadêmicos e prática de:
 
