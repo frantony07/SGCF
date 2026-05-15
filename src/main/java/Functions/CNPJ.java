@@ -30,15 +30,13 @@ public class CNPJ {
                 return cnpj;
 
             } catch (Exception e) {
-
                 System.out.println("Erro: " + e.getMessage());
                 System.out.println("Tente novamente.\n");
-
             }
         }
     }
 
-    private static boolean isValidCNPJ(String cnpj) {
+    public static boolean isValidCNPJ(String cnpj) {
 
         int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
         int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};

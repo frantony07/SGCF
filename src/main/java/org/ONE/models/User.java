@@ -3,6 +3,7 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.Permission;
 
+import java.time.LocalDateTime;
 @Entity
 @Table(name = "user_account")
 public class User {
@@ -13,17 +14,23 @@ public class User {
     @Column(name = "user_name" , nullable = false , length = 35 , unique = true)
     private String userName;
 
-    @Column(name = "user_password" , nullable = false , length = 35)
+    @Column(name = "user_password" , nullable = false)
     private String userPassword;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "permission", nullable = false)
     private Permission permission;
 
-    public User(String userName, String userPassword, Permission permission) {
+    @Column(name = "user_email", nullable = false, length = 100, unique = true)
+    private String email;
+
+
+
+    public User(String userName, String userPassword, Permission permission, String email) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.permission = permission;
+        this.email = email;
     }
 
     public User() {
@@ -57,7 +64,16 @@ public class User {
         this.userPassword = userPassword;
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
     public boolean isEqualPassword(String senha){
         return senha.equals(this.userPassword);
     }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+
 }

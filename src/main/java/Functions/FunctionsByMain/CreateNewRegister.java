@@ -2,16 +2,16 @@ package Functions.FunctionsByMain;
 
 import Functions.*;
 import org.ONE.models.*;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.ENUM.Permission;
+import org.ONE.models.ENUM.*;
 import org.ONE.services.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+
+import static Functions.Bcrypt.criarHash;
+
 
 public class CreateNewRegister {
         ClienteServices clientes = new ClienteServices();
@@ -27,7 +27,7 @@ public class CreateNewRegister {
                 System.out.println("1. Criar novo funcionário");
                 System.out.println("2. Criar novo cliente");
                 System.out.println("3. Criar novo passeio");
-                System.out.println("4. criar novo usuario ");
+                System.out.println("4. Criar novo usuario ");
                 System.out.println("5. Voltar ao menu principal");
                 int menuOption = ValidateNumber.validateINT(5);
 
@@ -43,16 +43,16 @@ public class CreateNewRegister {
                         break;
                     case 4:
                         createNewUser();
+                        break;
                     case 5:
                         booleanMain = false;
                         System.out.println("Voltando ao menu principal");
-
                         return;
                     default:
                         System.out.println("Opção inválida");
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 PrintError.printErro(e);
             }
         }
@@ -76,14 +76,15 @@ public class CreateNewRegister {
             PrintError.printErro(e);
         }
     }
+
     public void createNewCliente(){
         try {
             Scanner sc = new Scanner(System.in);
 
             System.out.println("Escolha");
-            System.out.println("1.Atribuir CPF ao cliente");
-            System.out.println("2.Atribuir CNPJ ao cliente");
-            int escolha = sc.nextInt();
+            System.out.println("1. Atribuir CPF ao cliente");
+            System.out.println("2. Atribuir CNPJ ao cliente");
+            int escolha = ValidateNumber.validateINT(2);
             String cnpj = null;
             String cpf = null;
             if (escolha == 1) {
@@ -101,45 +102,44 @@ public class CreateNewRegister {
 
             new SelectFunctions().selectLanguageMain(languages, "cliente");
 
-            clientes.createNewRecorde(new Cliente(languages, countryCostumer, cnpj, cpf, name));
+            clientes.createNewRecord(new Cliente(languages, countryCostumer, cnpj, cpf, name));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-
     }
+
     public void createNewPasseio(){
-        try {
             Scanner sc = new Scanner(System.in);
+        try {
 
             System.out.println("Digite o nome do passeio");
             String name = sc.nextLine();
 
             System.out.println("Digite o preço do passeio");
-            double price = sc.nextDouble();
+            float price = ValidateNumber.validateFloat();
 
             System.out.println("Digite a duração em minutos");
-            long durationInMinute = sc.nextLong();
+            long durations_in_minute = sc.nextLong();
             sc.nextLine();
 
             System.out.println("Digite a localização do tour");
-            String location = sc.nextLine();
+            String locations = sc.nextLine();
 
             System.out.println("Digite a distância em kilômetros do passeio");
-            Long km = sc.nextLong();
+            Long km_of_tour = sc.nextLong();
 
-            CountryTour countryTour = new SelectFunctions().selecteCountryTour();
-            passeios.createNewRecorde(new Passeio(price,durationInMinute,countryTour,km,name,location));
+            CountryTour country_of_tour = new SelectFunctions().selecteCountryTour();
+            passeios.createNewRecorde(new Passeio(price,durations_in_minute,country_of_tour,km_of_tour,name,locations));
 
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-
     }
 
-    public void createNewReservations( Cliente cliente , Funcionario funcionario , Passeio passeio  ){
+    public void createNewReservations(Cliente cliente , Funcionario funcionario , Passeio passeio, Status status){
         LocalDate data = new CreateDate().createNewData();
-        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice());
+        Reservations reservation = new Reservations(cliente, data, funcionario , passeio, passeio.getPrice(), status);
         reservations.createNewRecorde(reservation);
     }
 
@@ -147,29 +147,39 @@ public class CreateNewRegister {
         Scanner sc = new Scanner(System.in);
         User newUser = new User();
         System.out.println("Digite o nome do usuario");
-        String userName = sc.next();
-        //is unique
+        String userName = sc.nextLine().trim();
+
         System.out.println("Digite sua senha");
-        String senha1 = sc.next();
+        String senha1 = sc.nextLine().trim();
 
         System.out.println("Confirma sua senha");
-        String senha2 = sc.next();
+        String senha2 = sc.nextLine().trim();
 
         if(!Objects.equals(senha1, senha2)){
             System.out.println("Senhas incorretas");
             return;
         }
+
+        String email = "";
+        while (email.isEmpty() || !email.contains("@") || email.length() > 100) {
+            System.out.println("Digite o e-mail do usuário:");
+            email = sc.nextLine().trim();
+            if (email.isEmpty() || !email.contains("@") || email.length() > 100) {
+                System.out.println("E-mail inválido. Digite um e-mail válido com no máximo 100 caracteres.");
+            }
+        }
+
         Permission permission = selctedCategoryOfUser();
         newUser.setUserName(userName);
         newUser.setUserPassword(senha1);
         newUser.setPermission(permission);
+        newUser.setEmail(email);
 
         userServices.createNewRecorde(newUser);
     }
 
     public Permission selctedCategoryOfUser(){
         try {
-
             System.out.println("Digite a categoria do usuário");
             System.out.println("1." + Permission.FUNCIONARIO);
             System.out.println("2." + Permission.GERENTE);

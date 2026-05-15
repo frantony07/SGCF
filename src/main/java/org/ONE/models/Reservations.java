@@ -3,10 +3,7 @@ package org.ONE.models;
 import jakarta.persistence.*;
 import org.ONE.models.ENUM.Status;
 
-import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "reservations")
@@ -39,12 +36,13 @@ public class Reservations {
 
     public Reservations() {}
 
-    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio passeio, double value) {
+    public Reservations(Cliente cliente, LocalDate date, Funcionario funcionario, Passeio passeio, double value, Status status) {
         this.cliente = cliente;
         this.date = date;
         this.funcionario = funcionario;
         this.passeio = passeio;
         this.value = value;
+        this.status = status;
     }
 
 
@@ -72,8 +70,6 @@ public class Reservations {
         this.passeio = tour;
     }
 
-
-
     public Long getId() {
         return id;
     }
@@ -98,13 +94,19 @@ public class Reservations {
         this.cliente = cliente;
     }
 
+    public Status getStatus() {return status;}
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "\n-----------------------" +
                 "\nReserva agendada pelo cliente " + cliente +
                 "\nFuncionario responsável pela reserva = " + funcionario +
                 "\nPasseio escolhido " + passeio +
-                "\nId da reserva = " + id +
+                "\nID da reserva = " + id +
                 "\nData da reserva = " + date +
                 "\nValor da reserva = " + value +
                 "\nEstatus da reserva = " + status;

@@ -33,7 +33,7 @@ public class CPF {
         }
     }
 
-    private static boolean isValidCPF(String cpf) {
+    public static boolean isValidCPF(String cpf) {
 
         int soma = 0;
 

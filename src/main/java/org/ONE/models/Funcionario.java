@@ -62,12 +62,9 @@ public class Funcionario{
         this.name = name;
     }
 
-
-
     public void setLanguagesSpoken(List<Language> languagesSpoken) {
         this.languagesSpoken = languagesSpoken;
     }
-
 
     public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}
 
@@ -78,7 +75,7 @@ public class Funcionario{
         return "\n------------------------" +
                 "\nFuncionario " + name +
                 "\nCpf do funcionario = " + cpf +
-                "\nId do funcionario = " + id +
+                "\nID do funcionario = " + id +
                 "\nLínguas que o funcionario fala = " + languagesSpoken;
     }
 }

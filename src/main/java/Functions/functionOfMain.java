@@ -2,10 +2,7 @@ package Functions;
 
 import Finance.MainAccount;
 import Functions.FunctionsByMain.*;
-import jakarta.persistence.EntityManager;
 import org.ONE.models.User;
-import org.ONE.repositories.*;
-import org.ONE.services.*;
 
 public class functionOfMain {
 
@@ -18,8 +15,8 @@ public class functionOfMain {
                 System.out.println("Bem-vindo ao menu principal");
                 System.out.println("1. Cadastro");
                 System.out.println("2. Agendar reserva");
-                System.out.println("3. Mostrar registros ");
-                System.out.println("4. Mostrar reservas ativas ");
+                System.out.println("3. Mostrar registros");
+                System.out.println("4. Mostrar reservas ativas");
                 System.out.println("5. Finanças");
                 System.out.println("6. Alterar registro");
                 System.out.println("7. Alterar o estado da reserva");
@@ -50,7 +47,7 @@ public class functionOfMain {
 
                         case 5:
                             if (Authenticate.isManager(user)){
-                                new MainAccount().mainPagamento();
+                                new MainAccount().mainPaymentMenuCLI();
                                 break;
                             }
                             System.out.println("Você não tem autorização para usar esta função");
@@ -63,7 +60,11 @@ public class functionOfMain {
                             System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 7:
-                            System.out.println("Alterar reserva");
+                            if (Authenticate.isManager(user)){
+                                new EditReservations().main(user);
+                                break;
+                            }
+                            System.out.println("Você não tem autorização para usar esta função");
                             break;
                         case 8:
                             System.out.println("Saindo do sistema");

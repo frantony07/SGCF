@@ -7,10 +7,6 @@ import org.ONE.services.*;
 
 public class PrintReservations {
 
-    ClienteServices clientes = new ClienteServices();
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
     ReservationsServices reservations = new ReservationsServices();
 
     public void printReservation() {
@@ -30,14 +26,15 @@ public class PrintReservations {
             PrintError.printErro(e);
         }
     }
+
     public void showReservationsFuncionario(){
 
         Long funcionarioId = new SelectFunctions()
                 .selectFuncionario();
         reservations.getFuncionarioReservations(funcionarioId)
                 .forEach(System.out::println);
-
     }
+
     public  void showReservationsClientes(){
 
         Long clienteId = new SelectFunctions()

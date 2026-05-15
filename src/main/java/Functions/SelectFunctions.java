@@ -40,13 +40,14 @@ public class SelectFunctions {
                     break;
                     }
                 System.out.println("Opção inválida.");
-                } catch (Exception e) {
+            } catch (Exception e) {
                     PrintError.printErro(e);
                     sc.nextLine();
-                }
+            }
         }
     }
-     private void selectLanguageNotUsing(ArrayList<Language> languages, String classification){
+
+    private void selectLanguageNotUsing(ArrayList<Language> languages, String classification){
         try {
             System.out.println("Escolha a língua que o " + classification + " fala:");
             System.out.println("1. " + Language.ENGLISH);
@@ -67,9 +68,9 @@ public class SelectFunctions {
                 default:
                     System.out.println("Opção inválida");
                     }
-                } catch (Exception e) {
-                 PrintError.printErro(e);
-                    }
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
     }
 
     public CountryCostumer SelectCountryOfCostumer(){
@@ -93,38 +94,36 @@ public class SelectFunctions {
             System.out.println("Opção inválida");
                 }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             PrintError.printErro(e);
-                }
+        }
         return CountryCostumer.UNITED_STATES;
     }
 
     public CountryTour selecteCountryTour(){
         try {
             System.out.println("Selecione o país do passeio");
-            System.out.println("1." + CountryTour.Argentina);
-            System.out.println("2." + CountryTour.Brasil);
-            System.out.println("3." + CountryTour.Paraguay);
+            System.out.println("1." + CountryTour.ARGENTINA);
+            System.out.println("2." + CountryTour.BRAZIL);
+            System.out.println("3." + CountryTour.PARAGUAY);
 
             int optionMenu = ValidateNumber.validateINT(3);
 
             switch (optionMenu){
                 case 1:
-                    return CountryTour.Argentina;
+                    return CountryTour.ARGENTINA;
                 case 2:
-                    return CountryTour.Brasil;
+                    return CountryTour.BRAZIL;
                 case 3 :
-                    return CountryTour.Paraguay;
+                    return CountryTour.PARAGUAY;
                 default:
                     System.out.println("Opção inválida");
                 }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             PrintError.printErro(e);
-
-            }
-
-        return CountryTour.Brasil;
+        }
+        return CountryTour.BRAZIL;
     }
 
     public long selectFuncionario(){
@@ -133,7 +132,7 @@ public class SelectFunctions {
             funcionarios.findAll().forEach(System.out::println);
             return   new ValidateNumber().validateLong(funcionarios.getSize());
 
-        }catch(Exception e){
+        } catch(Exception e){
             PrintError.printErro(e);
         }
 
@@ -161,6 +160,7 @@ public class SelectFunctions {
         } catch (Exception e) {
             PrintError.printErro(e);
         }
+
         return 0L;
     }
 }

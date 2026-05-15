@@ -1,5 +1,6 @@
 package Functions.FunctionsByMain;
 
+import Functions.Bcrypt;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
@@ -10,16 +11,15 @@ import org.ONE.models.User;
 import org.ONE.services.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import static Functions.Bcrypt.criarHash;
 
 public class EditRecord {
 
-    ClienteServices clientes = new ClienteServices();
     FuncionarioServices funcionarios = new FuncionarioServices();
     PasseioServices passeios = new PasseioServices();
     UserServices userServices = new UserServices();
-    ReservationsServices reservations = new ReservationsServices();
     Scanner sc = new Scanner(System.in);
 
     public void main(User user){
@@ -46,8 +46,15 @@ public class EditRecord {
                     case 3:
                         if(passeios.getSize() == 0L){
                             System.out.println("Existem 0 passeios cadastrados");
-                        } else{
-                            editPrice();
+                        } else {
+                            System.out.println("1. Mudar preço do passeio");
+                            System.out.println("2. Mudar nome do passeio");
+                            int opcaoP = ValidateNumber.validateINT(2);
+                            if (opcaoP == 1) {
+                                editPrice();
+                            } else if(opcaoP == 2) {
+                                editNameTour();
+                            }
                         }
                         break;
                     case 4:
@@ -58,13 +65,13 @@ public class EditRecord {
                     default:
                      break;
                 }
-
             } catch (Exception e) {
                 PrintError.printErro(e);
             }
         }
 
     }
+
     public void addNewLanguage(){
         try {
             long funcionario = new SelectFunctions().selectFuncionario();
@@ -84,7 +91,7 @@ public class EditRecord {
             System.out.println("Digite sua senha atual");
             String senha = sc.next();
 
-            if (!user.isEqualPassword(senha)) {
+            if (!Bcrypt.verificarHash(senha, user.getUserPassword())) {
                 throw new RuntimeException("Senha incorreta");
             }
             System.out.println("Digite sua nova senha");
@@ -95,7 +102,10 @@ public class EditRecord {
             if (!newPassword.equals(newPasswordConfirmations)) {
                 throw new RuntimeException("Senha incorreta");
             }
-            user.setUserPassword(newPassword);
+
+            user.setUserPassword(criarHash(newPassword));
+            userServices.updateRecorde(user);
+
             System.out.println("Senha trocada com sucesso");
 
         } catch (Exception e) {
@@ -105,11 +115,10 @@ public class EditRecord {
 
         public void editPrice(){
         try {
-            System.out.println("Selecione o ID do passeio que deseja alterar: ");
             Long passeiosSelect = new SelectFunctions().selectPasseio();
             Passeio passeios1 = passeios.findById(passeiosSelect);
             System.out.println(passeios1);
-            System.out.println("Passeios escolhido" + passeios1);
+            System.out.println("Passeio escolhido" + passeios1);
             System.out.println("Digite o novo preço do passeio");
             Double novoPreco = sc.nextDouble();
             passeios1.setPrice(novoPreco);
@@ -120,5 +129,20 @@ public class EditRecord {
             PrintError.printErro(e);
             }
 
+    }
+
+    public void editNameTour(){
+        try {
+            Long passeioSelect = new SelectFunctions().selectPasseio();
+            Passeio passeio1 = passeios.findById(passeioSelect);
+            System.out.println("Passeio escolhido: " +passeio1);
+            System.out.println("Digite o novo nome do passeio: ");
+            String novoNome = sc.nextLine();
+            passeio1.setNameOfTour(novoNome);
+            passeios.updateRecorde(passeio1);
+            System.out.println("Passeio atualizado com novo nome: " +passeio1);
+        } catch(Exception e){
+            PrintError.printErro(e);
+        }
     }
 }

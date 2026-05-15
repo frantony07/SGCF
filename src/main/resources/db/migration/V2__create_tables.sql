@@ -1,14 +1,15 @@
 create table if not exists user_account(
     id serial not null primary key,
     user_name varchar(35) unique not null,
-    user_password varchar(35) not null,
-    permission varchar(30) not null
+    user_password varchar(150) not null,
+    permission varchar(30) not null,
+    user_email varchar(100) not null unique
 );
 
 create table if not exists funcionario(
     id serial primary key not null,
     name varchar(50) not null,
-    cpf varchar(11) not null
+    cpf varchar(11) not null unique
 );
 
 create table if not exists languages_funcionario(
@@ -56,6 +57,6 @@ create table if not exists reservations(
 create table if not exists pay (
     id serial not null primary key,
     status varchar(15),
-    fk_reservations_id bigint not null,
-    foreign key (fk_reservations_id) references reservations(id)
+    fk_cliente_id bigint not null,
+    foreign key (fk_cliente_id) references clientes(id)
 );

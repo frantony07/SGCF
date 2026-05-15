@@ -1,26 +1,33 @@
 package org.ONE;
-
-import Functions.Authenticate;
-import Functions.functionOfMain;
+import View.LoginScreens.Login;
 import jakarta.persistence.EntityManager;
 import org.ONE.config.FlyWayconfig;
-import org.ONE.models.*;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.ENUM.Language;
-import org.ONE.repositories.*;
+import org.ONE.repositories.CustomizerFactory;
 
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.*;
+import javax.swing.UIDefaults;
+import java.awt.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        FlyWayconfig.migrate();
-        User user = new Authenticate().authenticateUser();
-        new functionOfMain().menu(user);
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+            UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+            defaults.put("nimbusBase",            new Color(0x1A6B8A));
+            defaults.put("nimbusBlueGrey",        new Color(0x4A7B9B));
+            defaults.put("control",               new Color(0xEFF5FA));
+            defaults.put("nimbusLightBackground", new Color(0xFFFFFF));
+        } catch (Exception ignored) {}
+
+         FlyWayconfig.migrate();
+         EntityManager entityManager = CustomizerFactory.getEntityManager();
+         entityManager.close();
+
+         SwingUtilities.invokeLater(Login::new);
     }
 }

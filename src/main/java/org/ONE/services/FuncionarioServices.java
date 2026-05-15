@@ -2,10 +2,7 @@ package org.ONE.services;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
-import org.ONE.models.Cliente;
 import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.repositories.ClienteRepository;
 import org.ONE.repositories.CustomizerFactory;
 import org.ONE.repositories.FuncionarioRepository;
 
@@ -21,17 +18,20 @@ public class FuncionarioServices {
     public  void createNewRecorde(Funcionario funcionario){
         try {
             if(funcionario == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O funcionario não pode ser nulo ");
             }
             funcionarioRepository.create(funcionario);
 
         } catch (Exception e) {
             PrintError.printErro(e);
+            throw e;
+
         }
     }
+
     public void updateRecorde(Funcionario funcionario){
         try {
-            if(funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
 
             funcionarioRepository.update(funcionario);
 
@@ -41,7 +41,7 @@ public class FuncionarioServices {
     }
     public  void delete(Funcionario funcionario){
         try {
-            if (funcionario == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
 
             funcionarioRepository.delete(funcionario);
 
@@ -52,7 +52,7 @@ public class FuncionarioServices {
     public List<Funcionario> findByName(String name){
         try {
             if (name.matches("\\d+")) {
-                throw new RuntimeException("o  nome nao pode ser um numero");
+                throw new RuntimeException("O  nome não pode ser um número");
             }
 
             return funcionarioRepository.findByName(name);
@@ -73,7 +73,23 @@ public class FuncionarioServices {
 
         return List.of();
     }
-    public Funcionario findById(Long id) {return funcionarioRepository.findById(id); }
+    public Funcionario findById(Long id) {
+        try {
+            return funcionarioRepository.findById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
+
+    public Long findIdByCPF(String cpf) {
+        try {
+            return funcionarioRepository.findIdByCPF(cpf);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
 
     public Long getSize(){
         try {

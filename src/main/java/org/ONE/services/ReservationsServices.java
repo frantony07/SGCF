@@ -16,10 +16,19 @@ public class ReservationsServices {
     public ReservationsServices() {
     }
 
-    public  void createNewRecorde(Reservations reservations){
+    public Reservations findById(Long id) {
+        try {
+            return reservationsRepository.finById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
+
+    public void createNewRecorde(Reservations reservations){
         try {
             if(reservations == null){
-                throw new RuntimeException("o cliente nao pode ser nulo ");
+                throw new RuntimeException("O cliente não pode ser nulo");
             }
             reservationsRepository.create(reservations);
 
@@ -27,9 +36,10 @@ public class ReservationsServices {
             PrintError.printErro(e);
         }
     }
+
     public void updateRecorde(Reservations reservations){
         try {
-            if(reservations == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if(reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             reservationsRepository.update(reservations);
 
@@ -37,9 +47,10 @@ public class ReservationsServices {
             PrintError.printErro(e);
         }
     }
-    public  void delete(Reservations reservations){
+
+    public void delete(Reservations reservations){
         try {
-            if (reservations == null){throw new RuntimeException("o cliente nao pode ser nulo ");}
+            if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             reservationsRepository.delete(reservations);
 
@@ -84,13 +95,13 @@ public class ReservationsServices {
         return 0L;
     }
 
-    public List printReservationsForFuncionario(){
+    public List printReservationsForAllFuncionario(){
         try {
             return reservationsRepository.getFullJoinReservationsFuncionarios();
         } catch (Exception e) {
             PrintError.printErro(e);
         }
-            return List.of();
+        return List.of();
     }
 
     public List<Object[]> getReservationsWithPaymentStatus(){
@@ -105,19 +116,29 @@ public class ReservationsServices {
     public List<Object[]> getClientesWithReservations() {
         try {
             return reservationsRepository.getClientesWithReservations();
-
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return List.of();
     }
+    public List<Reservations> getConfirmedReservations(){
+        return reservationsRepository.getConfirmedReservations();
+    }
 
+    public List<Reservations> getReceiptOnStatus(String payStatus) {
+        try {
+            return reservationsRepository.getReceiptsBasedOffStatus(payStatus);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
+        return List.of();
+    }
 
-        public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
+    public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
     }
 
     public ReceiptSummary processReceipts(String payStatus) {
-        List<Reservations> receipts = reservationsRepository.getReceipts(payStatus);
+        List<Reservations> receipts = reservationsRepository.getReceiptsBasedOffStatus(payStatus);
 
         double totalValue = receipts.stream()
                 .mapToDouble(Reservations::getValue)
@@ -131,7 +152,7 @@ public class ReservationsServices {
             ReceiptSummary summary = processReceipts(payStatus);
 
             System.out.println("RECIBOS:");
-            System.out.println("Data/Horário: " + java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            System.out.println("Data/Horário: " + java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             System.out.println("Filtro de Status: " + payStatus);
             System.out.println("\n");
 
@@ -149,6 +170,13 @@ public class ReservationsServices {
             PrintError.printErro(err);
         }
     }
-}
 
-//
+    public List<Object[]> getTableInfoForGUI(String pStatus) {
+        try {
+            return reservationsRepository.getTableInfoForGUI(pStatus);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+            return List.of();
+        }
+    }
+}

@@ -40,8 +40,6 @@ public class Passeio {
         this.kmOftour = kmOftour;
         this.locations = locations;
         this.nameOfTour = nameOfTour;
-
-
     }
 
     public Passeio() {
@@ -59,7 +57,9 @@ public class Passeio {
         return nameOfTour;
     }
 
-
+    public void setNameOfTour(String nameOfTour) {
+        this.nameOfTour = nameOfTour;
+    }
 
     public Long getKmOftour() {
         return kmOftour;
@@ -104,7 +104,6 @@ public class Passeio {
     }
 
     public void setIdTour(){
-
     }
 
     public void printInformationOfTour(){
@@ -116,7 +115,7 @@ public class Passeio {
         return
                 "\n--------------------"+
                 "\nPasseio " + nameOfTour +
-                "\nId do passeio = " + id +
+                "\nID do passeio = " + id +
                 "\nPreço do passeio = " + price +
                 "\nDuração do passeio em minutos = " + durationOfTourInMinute +
                 "\nKm do passeio = " + kmOftour +

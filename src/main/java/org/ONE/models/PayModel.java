@@ -1,6 +1,7 @@
 package org.ONE.models;
 
 import jakarta.persistence.*;
+import org.ONE.models.ENUM.Status;
 
 @Entity
 @Table(name = "pay")
@@ -9,8 +10,9 @@ public class PayModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id")
@@ -19,10 +21,13 @@ public class PayModel {
     @Column(name = "total_account")
     private double total_account ;
 
-    public void ModelLedger(Long ID, String status, Cliente cliente) {
+    public void ModelLedger(Long ID, Status status, Cliente cliente) {
         this.id = ID;
         this.status = status;
         this.cliente = cliente;
+    }
+
+    public PayModel() {
     }
 
     public Long getID() {
@@ -41,11 +46,12 @@ public class PayModel {
         this.cliente = cliente;
     }
 
-    public String getStatus() {
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -55,5 +61,15 @@ public class PayModel {
 
     public void setTotal_account(double total_account) {
         this.total_account = total_account;
+    }
+
+    @Override
+    public String toString() {
+        return "\n--------------------------" +
+                "\ncliente=" + cliente.getName() +
+                "\nid=" + id +
+                "\nstatus=" + status +
+                "\ntotal=" + total_account +
+                "\n-------------------------";
     }
 }
