@@ -135,6 +135,26 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
             }
 
             showCompanyRemainingQuota.setText(buildCompanyQuotaText(activeQuota));
+
+            LocalDate startDate = activeQuota.getStartDate();
+            LocalDate endDate = activeQuota.getEndDate();
+
+            double earned = payServices.sumEarningsForCompany(
+                    Status.CONFIRMADA,
+                    startDate,
+                    endDate
+            );
+
+            double targetValue = activeQuota.getTargetValue();
+
+            if (earned >= targetValue) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "A companhia completou a meta mensal!",
+                        "Meta Companhia Completa",
+                        JOptionPane.OK_OPTION
+                );
+            }
         } catch (Exception err) {
             System.out.println("Erro no refreshCompanyQuota");
             showCompanyRemainingQuota.setText("Erro ao carregar a meta da empresa");
@@ -165,6 +185,27 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
             }
 
             showEmployeeRemainingQuota.setText(buildEmployeeQuotaText(activeQuota, employeeId));
+
+            LocalDate startDate = activeQuota.getStartDate();
+            LocalDate endDate = activeQuota.getEndDate();
+
+            double earned = payServices.sumEarningsByEmployee(
+                    employeeId,
+                    Status.CONFIRMADA,
+                    startDate,
+                    endDate
+            );
+
+            double targetValue = activeQuota.getTargetValue();
+
+            if (earned >= targetValue) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "O funcionário verificado completou a meta pessoal mensal, parabéns!",
+                        "Meta Funcionário Completa",
+                        JOptionPane.OK_OPTION
+                );
+            }
         } catch (Exception err) {
             System.out.println("Erro no refreshEmployeeQuota");
             showEmployeeRemainingQuota.setText("Erro ao carregar a meta do funcionário");
