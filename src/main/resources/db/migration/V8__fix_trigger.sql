@@ -1,5 +1,4 @@
-drop trigger if exists after_reservation_insert on reservations;
-drop function if exists add_bonus_payment_in_employee();
+drop trigger if exists tr_after_reservation_insert on reservations;
 drop table if exists bonus_funcionario;
 
 create table bonus_funcionario(
@@ -21,7 +20,7 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger after_reservation_insert
+create trigger tr_after_reservation_insert
     after insert on reservations
     for each row
 execute function add_bonus_payment_in_employee();
