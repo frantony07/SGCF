@@ -51,7 +51,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
         buildLayout();
         refreshAllData();
 
-        setSize(600, 500);
+        setSize(700, 500);
     }
 
     private void configureComponents() {
@@ -129,7 +129,6 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
         try {
             QuotaModel activeQuota = quotaServices.findActiveQuotaById(null);
 
-
             if (activeQuota == null) {
                 showCompanyRemainingQuota.setText("A companhia não possui meta ativa");
                 return;
@@ -137,6 +136,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
             showCompanyRemainingQuota.setText(buildCompanyQuotaText(activeQuota));
         } catch (Exception err) {
+            System.out.println("Erro no refreshCompanyQuota");
             showCompanyRemainingQuota.setText("Erro ao carregar a meta da empresa");
         }
     }
@@ -166,34 +166,43 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
             showEmployeeRemainingQuota.setText(buildEmployeeQuotaText(activeQuota, employeeId));
         } catch (Exception err) {
+            System.out.println("Erro no refreshEmployeeQuota");
             showEmployeeRemainingQuota.setText("Erro ao carregar a meta do funcionário");
         }
     }
 
     private void refreshQuotaTable() {
-        tableModel.setRowCount(0);
+        try {
+            tableModel.setRowCount(0);
 
-        List<QuotaModel> quotas = quotaServices.findAllQuotas();
+            List<QuotaModel> quotas = quotaServices.findAllQuotas();
 
-        for (QuotaModel quota : quotas) {
-            Long employeeId = quota.getIdFuncionario();
-            boolean isCompanyQuota = employeeId == null;
+            for (QuotaModel quota : quotas) {
+                Long employeeId = quota.getIdFuncionario();
+                boolean isCompanyQuota = employeeId == null;
 
-            tableModel.addRow(new Object[]{
-                    quota.getId(),
-                    isCompanyQuota ? "Empresa" : "Funcionário",
-                    isCompanyQuota ? "-" : quota.getIdFuncionario(),
-                    quota.getStartDate(),
-                    quota.getEndDate(),
-                    currencyFormat.format(quota.getTargetValue())
-            });
+                tableModel.addRow(new Object[]{
+                        quota.getId(),
+                        isCompanyQuota ? "Empresa" : "Funcionário",
+                        isCompanyQuota ? "-" : quota.getIdFuncionario(),
+                        quota.getStartDate(),
+                        quota.getEndDate(),
+                        currencyFormat.format(quota.getTargetValue())
+                });
+            }
+        } catch (Exception err) {
+            System.out.println("Erro em refreshQuotaTable");
         }
     }
 
     private void refreshAllData() {
-        refreshCompanyQuota();
-        refreshEmployeeQuota();
-        refreshQuotaTable();
+        try {
+            refreshCompanyQuota();
+            refreshEmployeeQuota();
+            refreshQuotaTable();
+        } catch (Exception err) {
+            System.out.println("Erro ao atualizar todas as informações");
+        }
     }
 
     private String buildCompanyQuotaText(QuotaModel activeQuota) {
@@ -201,7 +210,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
         LocalDate endDate = activeQuota.getEndDate();
 
         double earned = payServices.sumEarningsForCompany(
-                Status.CONFIRMADA.name(),
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );
@@ -215,7 +224,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
         double earned = payServices.sumEarningsByEmployee(
                 employeeId,
-                Status.CONFIRMADA.name(),
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );
