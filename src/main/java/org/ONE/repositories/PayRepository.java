@@ -73,13 +73,11 @@ public class PayRepository {
     }
 
     public Double sumEarningsByEmployee(Long employeeId, Status status, LocalDate start, LocalDate end) {
-        // Usando o enum Status se p.status for do tipo Status, ou String se for string
         return em.createQuery(
-                        "select coalesce(sum(p.total_account), 0.0) " +
-                                "from PayModel p, Reservations r " +
-                                "where r.cliente = p.cliente " +
-                                "and r.funcionario.id = :employeeId " +
-                                "and p.status = :status " +
+                        "select coalesce(sum(r.value), 0.0) " +
+                                "from Reservations r " +
+                                "where r.funcionario.id = :employeeId " +
+                                "and r.status = :status " +
                                 "and r.date between :start and :end", Double.class)
                 .setParameter("employeeId", employeeId)
                 .setParameter("status", status)
@@ -90,10 +88,9 @@ public class PayRepository {
 
     public Double sumEarningsForCompany(Status status, LocalDate start, LocalDate end) {
         return em.createQuery(
-                        "select coalesce(sum(p.total_account), 0.0) " +
-                                "from PayModel p, Reservations r " +
-                                "where r.cliente = p.cliente " +
-                                "and p.status = :status " +
+                        "select coalesce(sum(r.value), 0.0) " +
+                                "from Reservations r " +
+                                "where r.status = :status " +
                                 "and r.date between :start and :end", Double.class)
                 .setParameter("status", status)
                 .setParameter("start", start)
