@@ -78,7 +78,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
                         .addGap(20)
         );
 
-        confirmPaymentButton.addActionListener(e -> confirmatePayment());
+        confirmPaymentButton.addActionListener(e -> confirmPayment());
 
         pack();
     }
@@ -99,7 +99,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
         }
     }
 
-    private void confirmatePayment() {
+    private void confirmPayment() {
 
         try {
             String text = paymentIDTextField.getText().trim();
