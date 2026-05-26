@@ -1,7 +1,7 @@
 package View.ShowViews;
 
-import org.ONE.models.Cliente;
-import org.ONE.services.ClienteServices;
+import org.ONE.model.entity.Cliente;
+import org.ONE.model.services.impl.ClienteServicesImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,13 +12,13 @@ public class ShowCustomer extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ClienteServices clienteService;
+    private ClienteServicesImpl clienteService;
     private JTextField txtBusca;
 
     public ShowCustomer() {
         super("Lista de Clientes", true, true, true, true);
 
-        clienteService = new ClienteServices();
+        clienteService = new ClienteServicesImpl();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());

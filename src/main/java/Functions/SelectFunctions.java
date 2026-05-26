@@ -1,24 +1,20 @@
 package Functions;
 
-import org.ONE.models.Cliente;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.Funcionario;
-import org.ONE.repositories.ClienteRepository;
-import org.ONE.repositories.FuncionarioRepository;
-import org.ONE.services.ClienteServices;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.PasseioServices;
+import org.ONE.model.entity.ENUM.CountryCostumer;
+import org.ONE.model.entity.ENUM.Language;
+import org.ONE.model.entity.ENUM.CountryTour;
+import org.ONE.model.services.impl.ClienteServicesImpl;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
 
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SelectFunctions {
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    ClienteServices clientes = new ClienteServices();
-    PasseioServices passeios = new PasseioServices();
+    FuncionarioService funcionarios = new FuncionarioService();
+    ClienteServicesImpl clientes = new ClienteServicesImpl();
+    PasseioService passeios = new PasseioService();
 
     public void selectLanguageMain(ArrayList<Language> languages, String classification) {
 

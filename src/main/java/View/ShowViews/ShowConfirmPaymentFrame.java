@@ -1,8 +1,8 @@
 package View.ShowViews;
 
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.PayModel;
-import org.ONE.services.PayServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.PayModel;
+import org.ONE.model.services.PayService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ShowConfirmPaymentFrame extends JInternalFrame {
 
-    private PayServices payServices = new PayServices();
+    private PayService payServices = new PayService();
 
     private JTable paymentsTable;
     private DefaultTableModel tableModel;

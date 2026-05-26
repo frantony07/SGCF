@@ -1,26 +1,25 @@
 package View.ShowViews;
 
-import org.ONE.models.Passeio;
-import org.ONE.services.PasseioServices;
+import org.ONE.model.entity.Passeio;
+import org.ONE.model.services.PasseioService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowTours extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private PasseioServices passeioService;
+    private PasseioService passeioService;
 
     private JTextField txtBusca;
 
     public ShowTours() {
         super("Lista de Passeios", true, true, true, true);
 
-        passeioService = new PasseioServices();
+        passeioService = new PasseioService();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());

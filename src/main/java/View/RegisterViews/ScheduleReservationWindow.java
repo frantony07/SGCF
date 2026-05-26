@@ -1,15 +1,15 @@
 package View.RegisterViews;
 
 import View.ItensDefault;
-import org.ONE.models.Cliente;
-import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.models.Reservations;
-import org.ONE.models.ENUM.Status;
-import org.ONE.services.ClienteServices;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.PasseioServices;
-import org.ONE.services.ReservationsServices;
+import org.ONE.model.entity.Cliente;
+import org.ONE.model.entity.Funcionario;
+import org.ONE.model.entity.Passeio;
+import org.ONE.model.entity.Reservations;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.services.impl.ClienteServicesImpl;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.ReservationsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class ScheduleReservationWindow extends JInternalFrame {
 
-    private ReservationsServices reservationsServices = new ReservationsServices();
-    private ClienteServices clienteServices = new ClienteServices();
-    private FuncionarioServices funcionarioServices = new FuncionarioServices();
-    private PasseioServices passeioServices = new PasseioServices();
+    private ReservationsService reservationsServices = new ReservationsService();
+    private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
+    private FuncionarioService funcionarioServices = new FuncionarioService();
+    private PasseioService passeioServices = new PasseioService();
 
     public ScheduleReservationWindow() {
         super("Agendar Reserva", true, true, true, true);

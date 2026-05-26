@@ -1,17 +1,17 @@
 package Finance.QuotaFunctions;
 
-import org.ONE.models.QuotaModel;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.QuotaServices;
+import org.ONE.model.entity.QuotaModel;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.QuotaService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CreateQuotas {
     Scanner sc = new Scanner(System.in);
-    QuotaServices quotaServices = new QuotaServices();
+    QuotaService quotaServices = new QuotaService();
     public void createEmployeeQuota() {
-        FuncionarioServices funcionarioServices = new FuncionarioServices();
+        FuncionarioService funcionarioServices = new FuncionarioService();
 
         System.out.println("Digite o CPF do funcionário: ");
         String cpf = sc.next();
@@ -80,7 +80,7 @@ public class CreateQuotas {
     }
 
     public void updateEmployeeQuota() {
-        FuncionarioServices funcionarioServices = new FuncionarioServices();
+        FuncionarioService funcionarioServices = new FuncionarioService();
 
         System.out.println("Digite o CPF do funcionário: ");
         String cpf = sc.next();

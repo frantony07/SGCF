@@ -1,10 +1,9 @@
 package View.LoginScreens;
 
 import View.MainScreens;
-import org.ONE.models.User;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.UserService;
 
-import javax.naming.AuthenticationException;
 import javax.swing.*;
 
 /**
@@ -16,13 +15,13 @@ public class Login extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Login.class.getName());
 
-    private UserServices userServices;
+    private UserService userServices;
 
     public Login() {
 
         initComponents();
         setVisible(true);
-        userServices = new UserServices();
+        userServices = new UserService();
         setLocationRelativeTo(null);
         setTitle("Sistema de Reservas");
         var url = getClass().getResource("/icons/Waterfall.png");

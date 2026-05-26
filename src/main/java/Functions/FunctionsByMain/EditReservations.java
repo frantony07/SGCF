@@ -2,16 +2,16 @@ package Functions.FunctionsByMain;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.Reservations;
-import org.ONE.models.User;
-import org.ONE.services.ReservationsServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.Reservations;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.ReservationsService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class EditReservations {
-    ReservationsServices reservations = new ReservationsServices();
+    ReservationsService reservations = new ReservationsService();
 
     public void main(User user) {
         try {

@@ -1,11 +1,11 @@
 package View.LoginScreens;
 
 import Functions.GenerateCode;
-import org.ONE.models.PasswordReset;
-import org.ONE.models.User;
-import org.ONE.services.EmailService;
-import org.ONE.services.PasswordResetService;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.PasswordReset;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.EmailService;
+import org.ONE.model.services.PasswordResetService;
+import org.ONE.model.services.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,13 +16,13 @@ public class PasswordRecovery extends JFrame {
     private JTextField inputEmail;
     private JButton btnEnviar;
     private JButton btnVoltar;
-    private UserServices userServices;
+    private UserService userServices;
     private PasswordResetService passwordResetService;
     private EmailService emailService;
 
     public PasswordRecovery() {
 
-        userServices = new UserServices();
+        userServices = new UserService();
         passwordResetService = new PasswordResetService();
         emailService = new EmailService();
         initComponents();

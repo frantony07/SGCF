@@ -1,8 +1,8 @@
 package View.ShowViews;
 
-import org.ONE.models.Reservations;
-import org.ONE.models.ENUM.Status;
-import org.ONE.services.ReservationsServices;
+import org.ONE.model.entity.Reservations;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.services.ReservationsService;
 import View.ItensDefault;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class EditStatusReservationWindow extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ReservationsServices reservationsServices = new ReservationsServices();
+    private ReservationsService reservationsServices = new ReservationsService();
 
     private JComboBox<Status> cbFiltro;
     private JComboBox<Status> cbNovoStatus;

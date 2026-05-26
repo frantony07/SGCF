@@ -1,24 +1,26 @@
 package Functions.FunctionsByMain;
 
 import Functions.*;
-import org.ONE.models.*;
-import org.ONE.models.ENUM.*;
-import org.ONE.services.*;
+import org.ONE.model.entity.*;
+import org.ONE.model.entity.ENUM.*;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.UserService;
+import org.ONE.model.services.impl.ClienteServicesImpl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static Functions.Bcrypt.criarHash;
-
 
 public class CreateNewRegister {
-        ClienteServices clientes = new ClienteServices();
-        FuncionarioServices funcionarios = new FuncionarioServices();
-        PasseioServices passeios = new PasseioServices();
-        UserServices userServices = new UserServices();
-        ReservationsServices reservations = new ReservationsServices();
+        ClienteServicesImpl clientes = new ClienteServicesImpl();
+        FuncionarioService funcionarios = new FuncionarioService();
+        PasseioService passeios = new PasseioService();
+        UserService userServices = new UserService();
+        ReservationsService reservations = new ReservationsService();
 
     public void register(){
         boolean booleanMain = true;

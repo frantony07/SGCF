@@ -1,7 +1,7 @@
 package View.ShowViews;
 
-import org.ONE.models.User;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.UserService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +12,7 @@ public class ShowUser extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private UserServices userService;
+    private UserService userService;
 
     private JTextField txtSearch;
     private JButton btnSearch;
@@ -21,7 +21,7 @@ public class ShowUser extends JInternalFrame {
     public ShowUser() {
         super("Lista de Usuários", true, true, true, true);
 
-        userService = new UserServices();
+        userService = new UserService();
 
         setLocation(500, 100);
         setLayout(new BorderLayout());

@@ -4,9 +4,6 @@ import Finance.QuotaFunctions.CreateQuotas;
 import Finance.QuotaFunctions.PrintQuotaInformation;
 import Functions.PrintError;
 import Functions.ValidateNumber;
-import org.ONE.services.QuotaServices;
-
-import java.util.Scanner;
 
 public class QuotaSelection {
 

@@ -1,7 +1,7 @@
 package View.ShowViews;
 
-import org.ONE.models.Funcionario;
-import org.ONE.services.FuncionarioServices;
+import org.ONE.model.entity.Funcionario;
+import org.ONE.model.services.FuncionarioService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,14 +12,14 @@ public class ShowEmployee extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private FuncionarioServices employeeService;
+    private FuncionarioService employeeService;
 
     private JTextField txtBusca;
 
     public ShowEmployee() {
         super("Lista de Funcionários", true, true, true, true);
 
-        employeeService = new FuncionarioServices();
+        employeeService = new FuncionarioService();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());

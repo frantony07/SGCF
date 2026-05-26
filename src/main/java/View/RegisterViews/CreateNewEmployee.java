@@ -3,9 +3,9 @@ package View.RegisterViews;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.Funcionario;
-import org.ONE.services.FuncionarioServices;
+import org.ONE.model.entity.ENUM.Language;
+import org.ONE.model.entity.Funcionario;
+import org.ONE.model.services.FuncionarioService;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class CreateNewEmployee extends JInternalFrame {
     ArrayList<Language> languageArrayList = new ArrayList<>();
-    FuncionarioServices funcionarioServices = new FuncionarioServices();
+    FuncionarioService funcionarioServices = new FuncionarioService();
 
     public CreateNewEmployee() {
         super("Criar novo funcionário", true, true, true, true);

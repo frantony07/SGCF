@@ -1,17 +1,17 @@
 package Finance;
 
 import Functions.ValidateNumber;
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.PayModel;
-import org.ONE.repositories.PayRepository;
-import org.ONE.services.PayServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.PayModel;
+import org.ONE.model.repositories.PayRepository;
+import org.ONE.model.services.PayService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class Payment {
     Scanner sc = new Scanner(System.in);
-    PayServices payServices = new PayServices();
+    PayService payServices = new PayService();
     PayRepository payRepository = new PayRepository();
 
     public void makePayment  (){

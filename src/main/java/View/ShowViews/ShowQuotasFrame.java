@@ -2,11 +2,11 @@ package View.ShowViews;
 
 
 
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.QuotaModel;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.PayServices;
-import org.ONE.services.QuotaServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.QuotaModel;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PayService;
+import org.ONE.model.services.QuotaService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,9 +18,9 @@ import java.util.Locale;
 
 public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
-    private final QuotaServices quotaServices = new QuotaServices();
-    private final FuncionarioServices funcionarioServices = new FuncionarioServices();
-    private final PayServices payServices = new PayServices();
+    private final QuotaService quotaServices = new QuotaService();
+    private final FuncionarioService funcionarioServices = new FuncionarioService();
+    private final PayService payServices = new PayService();
 
     private final JTable contributingPayments;
     private final DefaultTableModel tableModel;

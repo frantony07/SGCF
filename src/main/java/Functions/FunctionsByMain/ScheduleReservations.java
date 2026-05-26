@@ -1,16 +1,18 @@
 package Functions.FunctionsByMain;
 
 import Functions.SelectFunctions;
-import org.ONE.models.Cliente;
-import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.models.ENUM.Status;
-import org.ONE.services.*;
+import org.ONE.model.entity.Cliente;
+import org.ONE.model.entity.Funcionario;
+import org.ONE.model.entity.Passeio;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.impl.ClienteServicesImpl;
 
 public class ScheduleReservations {
-    ClienteServices clientes = new ClienteServices();
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioServices passeios = new PasseioServices();
+    ClienteServicesImpl clientes = new ClienteServicesImpl();
+    FuncionarioService funcionarios = new FuncionarioService();
+    PasseioService passeios = new PasseioService();
     public void scheduleReservation() {
 
         long passeioId = new SelectFunctions().selectPasseio();

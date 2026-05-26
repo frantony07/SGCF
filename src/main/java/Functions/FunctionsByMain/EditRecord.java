@@ -4,11 +4,13 @@ import Functions.Bcrypt;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.Funcionario;
-import org.ONE.models.Passeio;
-import org.ONE.models.User;
-import org.ONE.services.*;
+import org.ONE.model.entity.ENUM.Language;
+import org.ONE.model.entity.Funcionario;
+import org.ONE.model.entity.Passeio;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.UserService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,9 +19,9 @@ import static Functions.Bcrypt.criarHash;
 
 public class EditRecord {
 
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioServices passeios = new PasseioServices();
-    UserServices userServices = new UserServices();
+    FuncionarioService funcionarios = new FuncionarioService();
+    PasseioService passeios = new PasseioService();
+    UserService userServices = new UserService();
     Scanner sc = new Scanner(System.in);
 
     public void main(User user){

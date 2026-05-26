@@ -1,6 +1,6 @@
 package Functions;
 
-import org.ONE.models.ENUM.Language;
+import org.ONE.model.entity.ENUM.Language;
 
 import java.util.ArrayList;
 import java.util.Collections;

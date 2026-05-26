@@ -3,11 +3,11 @@ package Functions.FunctionsByMain;
 import Functions.PrintError;
 import Functions.SelectFunctions;
 import Functions.ValidateNumber;
-import org.ONE.services.*;
+import org.ONE.model.services.ReservationsService;
 
 public class PrintReservations {
 
-    ReservationsServices reservations = new ReservationsServices();
+    ReservationsService reservations = new ReservationsService();
 
     public void printReservation() {
         try {

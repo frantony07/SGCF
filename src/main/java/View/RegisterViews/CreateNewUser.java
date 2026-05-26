@@ -1,9 +1,9 @@
 package View.RegisterViews;
 
 import View.ItensDefault;
-import org.ONE.models.ENUM.Permission;
-import org.ONE.models.User;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.ENUM.Permission;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class CreateNewUser extends JInternalFrame {
     private JTextField txtEmail;
     private JComboBox<Permission> cbPermission;
 
-    private UserServices userServices = new UserServices();
+    private UserService userServices = new UserService();
     public CreateNewUser(){
         super("Criar novo usuario",true,true,true,true);
 

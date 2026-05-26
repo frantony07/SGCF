@@ -2,7 +2,7 @@ package org.ONE;
 import View.LoginScreens.Login;
 import jakarta.persistence.EntityManager;
 import org.ONE.config.FlyWayconfig;
-import org.ONE.repositories.CustomizerFactory;
+import org.ONE.model.repositories.CustomizerFactory;
 
 import javax.swing.*;
 import javax.swing.UIDefaults;

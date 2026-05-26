@@ -2,17 +2,20 @@ package Functions.FunctionsByMain;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
-import org.ONE.models.Cliente;
-import org.ONE.models.Reservations;
-import org.ONE.services.*;
+import org.ONE.model.entity.Cliente;
+import org.ONE.model.entity.Reservations;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ClienteServicesImpl;
 
 import java.util.List;
 
 public class Recorde {
-    ClienteServices clientes = new ClienteServices();
-    FuncionarioServices funcionarios = new FuncionarioServices();
-    PasseioServices passeios = new PasseioServices();
-    ReservationsServices reservations = new ReservationsServices();
+    ClienteServicesImpl clientes = new ClienteServicesImpl();
+    FuncionarioService funcionarios = new FuncionarioService();
+    PasseioService passeios = new PasseioService();
+    ReservationsService reservations = new ReservationsService();
 
     public void displayRecorde(){
         try {

@@ -1,21 +1,21 @@
 package Finance.QuotaFunctions;
 
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.QuotaModel;
-import org.ONE.services.FuncionarioServices;
-import org.ONE.services.PayServices;
-import org.ONE.services.QuotaServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.QuotaModel;
+import org.ONE.model.services.FuncionarioService;
+import org.ONE.model.services.PayService;
+import org.ONE.model.services.QuotaService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PrintQuotaInformation {
     Scanner sc = new Scanner(System.in);
-    QuotaServices quotaServices = new QuotaServices();
+    QuotaService quotaServices = new QuotaService();
 
     public void printEmployeeEarnings() {
-        FuncionarioServices funcionarioServices = new FuncionarioServices();
-        PayServices payServices = new PayServices();
+        FuncionarioService funcionarioServices = new FuncionarioService();
+        PayService payServices = new PayService();
 
         System.out.println("Digite o CPF do funcionário: ");
         String cpf = sc.next();
@@ -79,7 +79,7 @@ public class PrintQuotaInformation {
     }
 
     public void printCompanyQuota() {
-        PayServices payServices = new PayServices();
+        PayService payServices = new PayService();
 
         QuotaModel activeQuota = quotaServices.findActiveQuotaById(null);
 

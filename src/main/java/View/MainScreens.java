@@ -6,8 +6,8 @@ import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
 import View.RegisterViews.ScheduleReservationWindow;
 import View.ShowViews.*;
-import org.ONE.models.ENUM.Permission;
-import org.ONE.models.User;
+import org.ONE.model.entity.ENUM.Permission;
+import org.ONE.model.entity.User;
 
 import javax.swing.*;
 import java.awt.*;

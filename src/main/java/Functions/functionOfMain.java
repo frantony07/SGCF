@@ -2,7 +2,7 @@ package Functions;
 
 import Finance.MainAccount;
 import Functions.FunctionsByMain.*;
-import org.ONE.models.User;
+import org.ONE.model.entity.User;
 
 public class functionOfMain {
 

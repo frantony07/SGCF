@@ -1,18 +1,12 @@
 package View.RegisterViews;
 
-import Functions.FunctionsByMain.LoadCountry;
-import Functions.SelectFunctions;
 import View.ItensDefault;
-import org.ONE.models.ENUM.CountryTour;
-import org.ONE.models.ENUM.Language;
-import org.ONE.models.Passeio;
-import org.ONE.services.PasseioServices;
+import org.ONE.model.entity.ENUM.CountryTour;
+import org.ONE.model.entity.Passeio;
+import org.ONE.model.services.PasseioService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class CreateNewTour extends JInternalFrame {
 
@@ -23,7 +17,7 @@ public class CreateNewTour extends JInternalFrame {
     private JTextField txtKm;
     private CountryTour countryTour;
 
-    private PasseioServices passeioService;
+    private PasseioService passeioService;
     private JComboBox<CountryTour> cbCountry;
 
     public CreateNewTour(){
@@ -42,7 +36,7 @@ public class CreateNewTour extends JInternalFrame {
             System.out.println("o icone é nulo");
         }
 
-        passeioService = new PasseioServices();
+        passeioService = new PasseioService();
 
         setTitle("Cadastrar Novo Passeio");
         setSize(500, 400);

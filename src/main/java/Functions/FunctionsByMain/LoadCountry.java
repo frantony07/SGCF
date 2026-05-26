@@ -1,7 +1,6 @@
 package Functions.FunctionsByMain;
 
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.CountryTour;
+import org.ONE.model.entity.ENUM.CountryTour;
 
 import java.util.ArrayList;
 import java.util.Collections;

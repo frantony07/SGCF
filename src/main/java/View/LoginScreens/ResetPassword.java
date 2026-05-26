@@ -1,9 +1,9 @@
 package View.LoginScreens;
 
-import org.ONE.models.PasswordReset;
-import org.ONE.models.User;
-import org.ONE.services.PasswordResetService;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.PasswordReset;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.PasswordResetService;
+import org.ONE.model.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
@@ -17,14 +17,14 @@ public class ResetPassword extends JFrame {
     private JButton btnConfirmar;
     private String email;
     private PasswordResetService passwordResetService;
-    private UserServices userServices;
+    private UserService userServices;
 
     public ResetPassword(String email) {
 
         this.email = email;
         passwordResetService =
                 new PasswordResetService();
-        userServices = new UserServices();
+        userServices = new UserService();
         initComponents();
     }
 

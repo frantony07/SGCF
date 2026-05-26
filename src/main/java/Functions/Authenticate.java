@@ -1,11 +1,10 @@
 package Functions;
 
-import Finance.QuotaFunctions.CreateQuotas;
-import org.ONE.models.ENUM.Permission;
-import org.ONE.models.PasswordReset;
-import org.ONE.models.User;
-import org.ONE.services.PasswordRecordeService;
-import org.ONE.services.UserServices;
+import org.ONE.model.entity.ENUM.Permission;
+import org.ONE.model.entity.PasswordReset;
+import org.ONE.model.entity.User;
+import org.ONE.model.services.PasswordRecordeService;
+import org.ONE.model.services.UserService;
 
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ import static Functions.Bcrypt.criarHash;
 
 public class Authenticate {
     PasswordRecordeService passwordRecordeService = new PasswordRecordeService();
-    UserServices userServices = new UserServices();
+    UserService userServices = new UserService();
 
     public  User authenticateUser(){
         try {
@@ -28,7 +27,7 @@ public class Authenticate {
                 }
                 System.out.println("Digite sua senha:");
                 String password = sc.nextLine();
-                User user = new UserServices().authenticate(userName,password);
+                User user = new UserService().authenticate(userName,password);
                 if(user != null) {
                     System.out.println("Login realizado com sucesso!");
                     return user;

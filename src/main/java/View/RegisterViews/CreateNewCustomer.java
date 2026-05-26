@@ -4,10 +4,10 @@ import Functions.CNPJ;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
-import org.ONE.models.Cliente;
-import org.ONE.models.ENUM.CountryCostumer;
-import org.ONE.models.ENUM.Language;
-import org.ONE.services.ClienteServices;
+import org.ONE.model.entity.Cliente;
+import org.ONE.model.entity.ENUM.CountryCostumer;
+import org.ONE.model.entity.ENUM.Language;
+import org.ONE.model.services.impl.ClienteServicesImpl;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class CreateNewCustomer extends JInternalFrame {
 
     CountryCostumer CountryCostumer;
     ArrayList<Language> languageArrayList = loadLanguage.getLanguage();
-    ClienteServices clienteServices = new ClienteServices();
+    ClienteServicesImpl clienteServices = new ClienteServicesImpl();
 
     public CreateNewCustomer(){
         super("Criar novo cliente" , true,true,true,true);

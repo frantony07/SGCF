@@ -2,27 +2,26 @@ package Finance;
 
 import Functions.PrintError;
 import Functions.ValidateNumber;
-import org.ONE.models.ENUM.Status;
-import org.ONE.models.PayModel;
-import org.ONE.models.Reservations;
-import org.ONE.services.PayServices;
-import org.ONE.services.ReservationsServices;
+import org.ONE.model.entity.ENUM.Status;
+import org.ONE.model.entity.PayModel;
+import org.ONE.model.entity.Reservations;
+import org.ONE.model.services.PayService;
+import org.ONE.model.services.ReservationsService;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class MainAccount {
 
     public void mainPaymentMenuCLI() {
         Scanner sc = new Scanner(System.in);
-        final ReservationsServices reservationsServices = new ReservationsServices();
+        final ReservationsService reservationsServices = new ReservationsService();
 
         int menu = 0;
 
         try {
             while (true) {
                 System.out.println("Menu do caixa: ");
-                new PayServices().quickGetPay();
+                new PayService().quickGetPay();
 
                 System.out.println("1. Recibos de tours confirmados");
                 System.out.println("2. Histórico de tours pendentes");
