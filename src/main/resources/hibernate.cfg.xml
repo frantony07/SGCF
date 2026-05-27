@@ -8,21 +8,21 @@
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/SGCF</property>
         <property name="hibernate.default_schema">public</property>
 
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.username">frantony07</property>
+        <property name="hibernate.connection.password">santi14072005</property>
 
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">none</property>
 
-        <mapping class="org.ONE.models.Cliente"/>
-        <mapping class="org.ONE.models.Funcionario"/>
-        <mapping class="org.ONE.models.Passeio"/>
-        <mapping class="org.ONE.models.PayModel"/>
-        <mapping class="org.ONE.models.Reservations"/>
-        <mapping class="org.ONE.models.User"/>
-        <mapping class="org.ONE.models.QuotaModel"/>
-        <mapping class="org.ONE.models.PasswordReset"/>
+        <mapping class="org.ONE.model.entity.Cliente"/>
+        <mapping class="org.ONE.model.entity.Funcionario"/>
+        <mapping class="org.ONE.model.entity.Passeio"/>
+        <mapping class="org.ONE.model.entity.PayModel"/>
+        <mapping class="org.ONE.model.entity.Reservations"/>
+        <mapping class="org.ONE.model.entity.User"/>
+        <mapping class="org.ONE.model.entity.QuotaModel"/>
+        <mapping class="org.ONE.model.entity.PasswordReset"/>
 
     </session-factory>
 </hibernate-configuration>

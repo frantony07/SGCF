@@ -6,9 +6,9 @@ public class FlyWayconfig {
     public static void migrate(){
         Flyway flyway = Flyway.configure().
                 dataSource(
-                        "jdbc:postgresql://localhost:8001/postgres",
-                        "postgres",
-                        "postgres"
+                        "jdbc:postgresql://localhost:5432/postgres",
+                        "frantony07",
+                        "santi14072005"
                 )
                 .baselineOnMigrate(true).load();
         flyway.repair();
