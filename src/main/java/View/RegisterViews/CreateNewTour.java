@@ -4,6 +4,7 @@ import View.ItensDefault;
 import org.ONE.model.entity.ENUM.CountryTour;
 import org.ONE.model.entity.Passeio;
 import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.impl.PasseioServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,7 @@ public class CreateNewTour extends JInternalFrame {
             System.out.println("o icone é nulo");
         }
 
-        passeioService = new PasseioService();
+        passeioService = new PasseioServiceImpl();
 
         setTitle("Cadastrar Novo Passeio");
         setSize(500, 400);

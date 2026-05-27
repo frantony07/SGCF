@@ -4,6 +4,8 @@ import org.ONE.model.entity.PasswordReset;
 import org.ONE.model.entity.User;
 import org.ONE.model.services.PasswordResetService;
 import org.ONE.model.services.UserService;
+import org.ONE.model.services.impl.PasswordResetServiceimpl;
+import org.ONE.model.services.impl.UserServiceImpl;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
@@ -22,9 +24,8 @@ public class ResetPassword extends JFrame {
     public ResetPassword(String email) {
 
         this.email = email;
-        passwordResetService =
-                new PasswordResetService();
-        userServices = new UserService();
+        passwordResetService = new PasswordResetServiceimpl();
+        userServices = new UserServiceImpl();
         initComponents();
     }
 

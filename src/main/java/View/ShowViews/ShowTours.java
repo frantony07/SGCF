@@ -2,6 +2,7 @@ package View.ShowViews;
 
 import org.ONE.model.entity.Passeio;
 import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.impl.PasseioServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,7 @@ public class ShowTours extends JInternalFrame {
     public ShowTours() {
         super("Lista de Passeios", true, true, true, true);
 
-        passeioService = new PasseioService();
+        passeioService = new PasseioServiceImpl();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());

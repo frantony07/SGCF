@@ -8,96 +8,15 @@ import org.ONE.model.repositories.FuncionarioRepository;
 
 import java.util.List;
 
-public class FuncionarioService {
-    private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private FuncionarioRepository funcionarioRepository = new FuncionarioRepository(entityManager);
+public interface FuncionarioService {
 
-    public FuncionarioService() {
-    }
+    void createNewRecorde(Funcionario funcionario);
 
-    public  void createNewRecorde(Funcionario funcionario){
-        try {
-            if(funcionario == null){
-                throw new RuntimeException("O funcionario não pode ser nulo ");
-            }
-            funcionarioRepository.create(funcionario);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-            throw e;
-
-        }
-    }
-
-    public void updateRecorde(Funcionario funcionario){
-        try {
-            if(funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
-
-            funcionarioRepository.update(funcionario);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
-    public  void delete(Funcionario funcionario){
-        try {
-            if (funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
-
-            funcionarioRepository.delete(funcionario);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
-    public List<Funcionario> findByName(String name){
-        try {
-            if (name.matches("\\d+")) {
-                throw new RuntimeException("O  nome não pode ser um número");
-            }
-
-            return funcionarioRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
-    }
-    public List<Funcionario> findAll (){
-        try {
-            return  funcionarioRepository.findAll();
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
-    }
-    public Funcionario findById(Long id) {
-        try {
-            return funcionarioRepository.findById(id);
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-        return null;
-    }
-
-    public Long findIdByCPF(String cpf) {
-        try {
-            return funcionarioRepository.findIdByCPF(cpf);
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-        return null;
-    }
-
-    public Long getSize(){
-        try {
-            return funcionarioRepository.getSize();
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-        return 0L;
-    }
+    void updateRecorde(Funcionario funcionario);
+    void delete(Funcionario funcionario);
+    List<Funcionario> findByName(String name);
+    List<Funcionario> findAll ();
+    Funcionario findById(Long id);
+    Long findIdByCPF(String cpf);
+    Long getSize();
 }

@@ -7,6 +7,8 @@ import org.ONE.model.entity.Reservations;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
+import org.ONE.model.services.impl.FuncionarioServiceImpl;
+import org.ONE.model.services.impl.PasseioServiceImpl;
 import org.ONE.model.services.impl.ReservationsServiceImpl;
 import View.ItensDefault;
 
@@ -23,8 +25,8 @@ public class EditReservationWindow extends JInternalFrame {
     private DefaultTableModel model;
     private ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
     private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
-    private FuncionarioService funcionarioServices = new FuncionarioService();
-    private PasseioService passeioServices = new PasseioService();
+    private FuncionarioService funcionarioServices = new FuncionarioServiceImpl();
+    private PasseioService passeioServices = new PasseioServiceImpl();
 
     private JComboBox<Cliente> cbCliente;
     private JComboBox<Funcionario> cbFuncionario;

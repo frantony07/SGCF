@@ -8,73 +8,19 @@ import org.ONE.model.repositories.PasseioRepository;
 
 import java.util.List;
 
-public class PasseioService {
-    private EntityManager entityManager = CustomizerFactory.getEntityManager();
-    private PasseioRepository passeioRepository = new PasseioRepository(entityManager);
+public interface PasseioService {
 
-    public PasseioService() {
-    }
+    void createNewRecorde(Passeio passeio);
 
-    public  void createNewRecorde(Passeio passeio){
-        try {
-            if(passeio == null){
-                throw new RuntimeException("O Passeio não pode ser nulo ");
-            }
-            passeioRepository.create(passeio);
+    void updateRecorde(Passeio passeio);
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
+    void delete(Passeio passeio);
 
-    public void updateRecorde(Passeio passeio){
-        try {
-            if(passeio == null){throw new RuntimeException("O passeio não pode ser nulo ");}
+    List<Passeio> findByName(String name);
 
-            passeioRepository.update(passeio);
+    List<Passeio> findAll ();
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
+    Passeio findById(Long id);
 
-    public  void delete(Passeio passeio){
-        try {
-            if (passeio == null){throw new RuntimeException("O cliente não pode ser nulo ");}
-
-            passeioRepository.delete(passeio);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
-
-    public List<Passeio> findByName(String name){
-        try {
-            if (name.matches("\\d+")) {
-                throw new RuntimeException("O nome não pode ser um número");
-            }
-
-            return passeioRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
-    }
-
-    public List<Passeio> findAll (){return entityManager.createQuery("select f from Passeio f " , Passeio.class).getResultList();}
-
-    public Passeio findById(Long id) {return passeioRepository.findById(id); }
-
-    public Long getSize(){
-        try {
-            return passeioRepository.getSize();
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-        return 0L;
-    }
+    Long getSize();
 }

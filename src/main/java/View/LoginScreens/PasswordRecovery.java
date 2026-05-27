@@ -6,6 +6,9 @@ import org.ONE.model.entity.User;
 import org.ONE.model.services.EmailService;
 import org.ONE.model.services.PasswordResetService;
 import org.ONE.model.services.UserService;
+import org.ONE.model.services.impl.EmailServiceImpl;
+import org.ONE.model.services.impl.PasswordResetServiceimpl;
+import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +25,9 @@ public class PasswordRecovery extends JFrame {
 
     public PasswordRecovery() {
 
-        userServices = new UserService();
-        passwordResetService = new PasswordResetService();
-        emailService = new EmailService();
+        userServices = new UserServiceImpl();
+        passwordResetService = new PasswordResetServiceimpl();
+        emailService = new EmailServiceImpl();
         initComponents();
     }
 

@@ -3,6 +3,7 @@ package View.LoginScreens;
 import View.MainScreens;
 import org.ONE.model.entity.User;
 import org.ONE.model.services.UserService;
+import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
 
@@ -21,7 +22,7 @@ public class Login extends javax.swing.JFrame {
 
         initComponents();
         setVisible(true);
-        userServices = new UserService();
+        userServices = new UserServiceImpl();
         setLocationRelativeTo(null);
         setTitle("Sistema de Reservas");
         var url = getClass().getResource("/icons/Waterfall.png");
