@@ -154,11 +154,11 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
                         this,
                         "A companhia completou a meta mensal!",
                         "Meta Companhia Completa",
-                        JOptionPane.OK_OPTION
+                        JOptionPane.INFORMATION_MESSAGE
                 );
             }
         } catch (Exception err) {
-            System.out.println("Erro no refreshCompanyQuota");
+            System.out.println("Erro em refreshCompanyQuota");
             showCompanyRemainingQuota.setText("Erro ao carregar a meta da empresa");
         }
     }
@@ -205,7 +205,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
                         this,
                         "O funcionário verificado completou a meta pessoal mensal, parabéns!",
                         "Meta Funcionário Completa",
-                        JOptionPane.OK_OPTION
+                        JOptionPane.INFORMATION_MESSAGE
                 );
             }
         } catch (Exception err) {
