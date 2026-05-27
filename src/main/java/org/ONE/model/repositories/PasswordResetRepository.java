@@ -32,4 +32,11 @@ public class PasswordResetRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void markAsUsed(PasswordReset token) {
+        em.getTransaction().begin();
+        token.setUsed(true);
+        em.merge(token);
+        em.getTransaction().commit();
+    }
 }

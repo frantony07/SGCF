@@ -1,7 +1,7 @@
 package View.ShowViews;
 
 import org.ONE.model.entity.Reservations;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +12,7 @@ public class ShowReservations extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ReservationsService reservationsServices;
+    private ReservationsServiceImpl reservationsServices;
     private JTextField txtBusca;
 
     public ShowReservations() {
@@ -26,7 +26,7 @@ public class ShowReservations extends JInternalFrame {
         );
 
         reservationsServices =
-                new ReservationsService();
+                new ReservationsServiceImpl();
 
         setSize(1000, 500);
         setLocation(550, 100);

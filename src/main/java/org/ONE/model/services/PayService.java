@@ -18,7 +18,7 @@ public class PayService {
 
     public void createNewRecorde(PayModel payModel){
         try {
-            if(payModel == null){
+            if (payModel == null){
                 throw new RuntimeException("O cliente não pode ser nulo ");
             }
             payRepository.create(payModel);

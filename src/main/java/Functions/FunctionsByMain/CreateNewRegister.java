@@ -5,7 +5,7 @@ import org.ONE.model.entity.*;
 import org.ONE.model.entity.ENUM.*;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 import org.ONE.model.services.UserService;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 
@@ -20,7 +20,7 @@ public class CreateNewRegister {
         FuncionarioService funcionarios = new FuncionarioService();
         PasseioService passeios = new PasseioService();
         UserService userServices = new UserService();
-        ReservationsService reservations = new ReservationsService();
+        ReservationsServiceImpl reservations = new ReservationsServiceImpl();
 
     public void register(){
         boolean booleanMain = true;

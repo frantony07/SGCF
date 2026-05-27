@@ -6,7 +6,7 @@ import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.PayModel;
 import org.ONE.model.entity.Reservations;
 import org.ONE.model.services.PayService;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class MainAccount {
 
     public void mainPaymentMenuCLI() {
         Scanner sc = new Scanner(System.in);
-        final ReservationsService reservationsServices = new ReservationsService();
+        final ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
 
         int menu = 0;
 

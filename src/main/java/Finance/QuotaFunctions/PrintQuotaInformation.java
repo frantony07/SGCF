@@ -4,14 +4,14 @@ import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.QuotaModel;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PayService;
-import org.ONE.model.services.QuotaService;
+import org.ONE.model.services.impl.QuotaServiceImpl;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PrintQuotaInformation {
     Scanner sc = new Scanner(System.in);
-    QuotaService quotaServices = new QuotaService();
+    QuotaServiceImpl quotaServices = new QuotaServiceImpl();
 
     public void printEmployeeEarnings() {
         FuncionarioService funcionarioServices = new FuncionarioService();

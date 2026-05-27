@@ -7,7 +7,7 @@ import org.ONE.model.entity.Reservations;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 import View.ItensDefault;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class EditReservationWindow extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ReservationsService reservationsServices = new ReservationsService();
+    private ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
     private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
     private FuncionarioService funcionarioServices = new FuncionarioService();
     private PasseioService passeioServices = new PasseioService();

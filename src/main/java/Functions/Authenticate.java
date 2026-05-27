@@ -3,7 +3,7 @@ package Functions;
 import org.ONE.model.entity.ENUM.Permission;
 import org.ONE.model.entity.PasswordReset;
 import org.ONE.model.entity.User;
-import org.ONE.model.services.PasswordRecordeService;
+import org.ONE.model.services.impl.PasswordRecordServiceImpl;
 import org.ONE.model.services.UserService;
 
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import static Functions.Bcrypt.criarHash;
 
 
 public class Authenticate {
-    PasswordRecordeService passwordRecordeService = new PasswordRecordeService();
+    PasswordRecordServiceImpl passwordRecordeService = new PasswordRecordServiceImpl();
     UserService userServices = new UserService();
 
     public  User authenticateUser(){

@@ -5,13 +5,13 @@ import Functions.ValidateNumber;
 import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.Reservations;
 import org.ONE.model.entity.User;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class EditReservations {
-    ReservationsService reservations = new ReservationsService();
+    ReservationsServiceImpl reservations = new ReservationsServiceImpl();
 
     public void main(User user) {
         try {

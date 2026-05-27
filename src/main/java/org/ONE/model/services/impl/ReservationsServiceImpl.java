@@ -1,4 +1,4 @@
-package org.ONE.model.services;
+package org.ONE.model.services.impl;
 
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
@@ -6,16 +6,18 @@ import org.ONE.model.entity.Reservations;
 import org.ONE.model.repositories.CustomizerFactory;
 
 import org.ONE.model.repositories.ReservationsRepository;
+import org.ONE.model.services.ReservationService;
 
 import java.util.List;
 
-public class ReservationsService {
+public class ReservationsServiceImpl implements ReservationService {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
     private ReservationsRepository reservationsRepository = new ReservationsRepository(entityManager);
 
-    public ReservationsService() {
+    public ReservationsServiceImpl() {
     }
 
+    @Override
     public Reservations findById(Long id) {
         try {
             return reservationsRepository.finById(id);
@@ -25,9 +27,10 @@ public class ReservationsService {
         return null;
     }
 
+    @Override
     public void createNewRecorde(Reservations reservations){
         try {
-            if(reservations == null){
+            if (reservations == null){
                 throw new RuntimeException("O cliente não pode ser nulo");
             }
             reservationsRepository.create(reservations);
@@ -37,9 +40,10 @@ public class ReservationsService {
         }
     }
 
+    @Override
     public void updateRecorde(Reservations reservations){
         try {
-            if(reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
+            if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
 
             reservationsRepository.update(reservations);
 
@@ -48,6 +52,7 @@ public class ReservationsService {
         }
     }
 
+    @Override
     public void delete(Reservations reservations){
         try {
             if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
@@ -58,9 +63,11 @@ public class ReservationsService {
             PrintError.printErro(e);
         }
     }
+
+    @Override
     public List<Reservations> findAll (){
         try {
-            return  reservationsRepository.findAll();
+            return reservationsRepository.findAll();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -69,23 +76,27 @@ public class ReservationsService {
         return List.of();
     }
 
+    @Override
     public List<Reservations> getFuncionarioReservations(Long idFuncionario){
         try {
-            return  reservationsRepository.getFuncionarioReservations(idFuncionario);
+            return reservationsRepository.getFuncionarioReservations(idFuncionario);
         } catch (Exception e) {
             PrintError.printErro(e);
         }
         return List.of();
     }
+
+    @Override
     public List<Reservations> getClienteReservations(Long idCliente){
        try {
-           return  reservationsRepository.getClienteReservations(idCliente);
+           return reservationsRepository.getClienteReservations(idCliente);
        } catch (Exception e) {
            PrintError.printErro(e);
        }
        return List.of();
     }
 
+    @Override
     public Long getSize(){
         try {
             return reservationsRepository.getSize();
@@ -95,6 +106,7 @@ public class ReservationsService {
         return 0L;
     }
 
+    @Override
     public List printReservationsForAllFuncionario(){
         try {
             return reservationsRepository.getFullJoinReservationsFuncionarios();
@@ -104,6 +116,7 @@ public class ReservationsService {
         return List.of();
     }
 
+    @Override
     public List<Object[]> getReservationsWithPaymentStatus(){
         try {
             return reservationsRepository.getReservationsWithPaymentStatus();
@@ -113,6 +126,7 @@ public class ReservationsService {
         return List.of();
     }
 
+    @Override
     public List<Object[]> getClientesWithReservations() {
         try {
             return reservationsRepository.getClientesWithReservations();
@@ -121,22 +135,17 @@ public class ReservationsService {
         }
         return List.of();
     }
+
+    @Override
     public List<Reservations> getConfirmedReservations(){
         return reservationsRepository.getConfirmedReservations();
     }
 
-    public List<Reservations> getReceiptOnStatus(String payStatus) {
-        try {
-            return reservationsRepository.getReceiptsBasedOffStatus(payStatus);
-        } catch (Exception err) {
-            PrintError.printErro(err);
-        }
-        return List.of();
-    }
+    public record ReceiptSummary(
+            List<Reservations> reservations, double totalValue
+    ) {}
 
-    public record ReceiptSummary(List<Reservations> reservations, double totalValue) {
-    }
-
+    @Override
     public ReceiptSummary processReceipts(String payStatus) {
         List<Reservations> receipts = reservationsRepository.getReceiptsBasedOffStatus(payStatus);
 
@@ -147,6 +156,7 @@ public class ReservationsService {
         return new ReceiptSummary(receipts, totalValue);
     }
 
+    @Override
     public void printReceipt(String payStatus) {
         try {
             ReceiptSummary summary = processReceipts(payStatus);
@@ -168,15 +178,6 @@ public class ReservationsService {
             System.out.printf("\nValor Total: R$ %.2f%n", summary.totalValue());
         } catch (Exception err) {
             PrintError.printErro(err);
-        }
-    }
-
-    public List<Object[]> getTableInfoForGUI(String pStatus) {
-        try {
-            return reservationsRepository.getTableInfoForGUI(pStatus);
-        } catch (Exception err) {
-            PrintError.printErro(err);
-            return List.of();
         }
     }
 }

@@ -6,7 +6,7 @@ import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.QuotaModel;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PayService;
-import org.ONE.model.services.QuotaService;
+import org.ONE.model.services.impl.QuotaServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
-    private final QuotaService quotaServices = new QuotaService();
+    private final QuotaServiceImpl quotaServices = new QuotaServiceImpl();
     private final FuncionarioService funcionarioServices = new FuncionarioService();
     private final PayService payServices = new PayService();
 

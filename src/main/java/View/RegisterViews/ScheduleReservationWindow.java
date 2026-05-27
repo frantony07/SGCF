@@ -9,7 +9,7 @@ import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
-import org.ONE.model.services.ReservationsService;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ScheduleReservationWindow extends JInternalFrame {
 
-    private ReservationsService reservationsServices = new ReservationsService();
+    private ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
     private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
     private FuncionarioService funcionarioServices = new FuncionarioService();
     private PasseioService passeioServices = new PasseioService();

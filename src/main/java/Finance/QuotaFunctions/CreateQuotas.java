@@ -2,14 +2,14 @@ package Finance.QuotaFunctions;
 
 import org.ONE.model.entity.QuotaModel;
 import org.ONE.model.services.FuncionarioService;
-import org.ONE.model.services.QuotaService;
+import org.ONE.model.services.impl.QuotaServiceImpl;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CreateQuotas {
     Scanner sc = new Scanner(System.in);
-    QuotaService quotaServices = new QuotaService();
+    QuotaServiceImpl quotaServices = new QuotaServiceImpl();
     public void createEmployeeQuota() {
         FuncionarioService funcionarioServices = new FuncionarioService();
 

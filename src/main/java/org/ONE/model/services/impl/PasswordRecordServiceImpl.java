@@ -1,20 +1,25 @@
-package org.ONE.model.services;
+package org.ONE.model.services.impl;
 
 import Functions.GenerateCode;
+import Functions.PrintError;
 import org.ONE.model.entity.PasswordReset;
 import org.ONE.model.entity.User;
 import org.ONE.model.repositories.CustomizerFactory;
 
 import jakarta.persistence.EntityManager;
+import org.ONE.model.services.EmailService;
+import org.ONE.model.services.PasswordRecordService;
+import org.ONE.model.services.PasswordResetService;
+
 import java.time.LocalDateTime;
 
-public class PasswordRecordeService {
+public class PasswordRecordServiceImpl implements PasswordRecordService {
 
    private final EntityManager em = CustomizerFactory.getEntityManager();
    private final PasswordResetService passwordResetService = new PasswordResetService();
    private final EmailService emailService = new EmailService();
 
-    public PasswordRecordeService() {
+    public PasswordRecordServiceImpl() {
     }
 
     public void requestPasswordReset(User user) {
@@ -38,10 +43,10 @@ public class PasswordRecordeService {
    }
 
    public void markAsUsed(PasswordReset token) {
-       em.getTransaction().begin();
-       token.setUsed(true);
-       em.merge(token);
-       em.getTransaction().commit();
+        try {
+            markAsUsed(token);
+        } catch (Exception err) {
+            PrintError.printErro(err);
+        }
    }
-
 }
