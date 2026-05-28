@@ -4,7 +4,6 @@ import Controller.Impl.PaymentControllerImpl;
 import Controller.PaymentController;
 import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.PayModel;
-import org.ONE.model.services.impl.PayServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -126,7 +125,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
                 return;
             }
 
-            payment.setStatus(Status.confirmada);
+            payment.setStatus(Status.CONFIRMADA);
 
             payController.updateRecords(payment);
 

@@ -42,7 +42,7 @@ public class ReservationControllerImpl implements ReservationController {
     @Override
     public List<Cliente> getAllClientes() {
         return clienteServices.findAll().stream()
-                .map(dto -> new Cliente(new ArrayList<>(dto.languageSpeak()), dto.countryOfCostumer(), dto.cnpj(), dto.cpf(), dto.name()))
+                .map(dto -> new Cliente(dto.languageSpeak(), dto.countryOfCostumer(), dto.cnpj(), dto.cpf(), dto.name()))
                 .collect(Collectors.toList());
     }
 

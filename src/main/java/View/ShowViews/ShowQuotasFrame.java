@@ -142,7 +142,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
             LocalDate endDate = activeQuota.getEndDate();
 
             double earned = payServices.sumEarningsForCompany(
-                    Status.confirmada,
+                    Status.CONFIRMADA,
                     startDate,
                     endDate
             );
@@ -193,7 +193,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
             double earned = payServices.sumEarningsByEmployee(
                     employeeId,
-                    Status.confirmada,
+                    Status.CONFIRMADA,
                     startDate,
                     endDate
             );
@@ -253,7 +253,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
         LocalDate endDate = activeQuota.getEndDate();
 
         double earned = payServices.sumEarningsForCompany(
-                Status.confirmada,
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );
@@ -267,7 +267,7 @@ public class ShowQuotasFrame extends javax.swing.JInternalFrame {
 
         double earned = payServices.sumEarningsByEmployee(
                 employeeId,
-                Status.confirmada,
+                Status.CONFIRMADA,
                 startDate,
                 endDate
         );

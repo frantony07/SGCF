@@ -1,5 +1,6 @@
 package org.ONE.model.services;
 
+import Controller.Record.UserDTO;
 import Functions.Bcrypt;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
@@ -18,11 +19,11 @@ public interface UserService {
 
     void delete(User user);
 
-    List<User> findByName(String name);
+    List<UserDTO> findByName(String name);
 
     User findByEmail(String email);
 
-    List<User> findAll ();
+    List<UserDTO> findAll ();
 
     Long getSize();
 

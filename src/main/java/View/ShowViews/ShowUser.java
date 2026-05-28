@@ -1,7 +1,8 @@
 package View.ShowViews;
 
-import org.ONE.model.entity.User;
-import org.ONE.model.services.UserService;
+import Controller.Impl.UserControllerImpl;
+import Controller.Record.UserDTO;
+import Controller.UserController;
 import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class ShowUser extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private UserService userService;
+    private UserController userController;
 
     private JTextField txtSearch;
     private JButton btnSearch;
@@ -22,7 +23,7 @@ public class ShowUser extends JInternalFrame {
     public ShowUser() {
         super("Lista de Usuários", true, true, true, true);
 
-        userService = new UserServiceImpl();
+        userController = new UserControllerImpl();
 
         setLocation(500, 100);
         setLayout(new BorderLayout());
@@ -62,13 +63,13 @@ public class ShowUser extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<User> list = userService.findAll();
+        List<UserDTO> list = userController.findAll();
 
-        for (User user : list) {
+        for (UserDTO user : list) {
             model.addRow(new Object[]{
-                    user.getId(),
-                    user.getUserName(),
-                    user.getEmail(),
+                    user.userName(),
+                    user.permission(),
+                    user.email()
 
             });
         }
@@ -79,17 +80,17 @@ public class ShowUser extends JInternalFrame {
 
         String name = txtSearch.getText();
 
-        List<User> list = userService.findByName(name);
+        List<UserDTO> list = userController.findByName(name);
 
         if (list.isEmpty()){
             JOptionPane.showMessageDialog(this,"nenhum usuario encontrado","erro" ,JOptionPane.ERROR_MESSAGE);
         }
 
-        for (User user : list) {
+        for (UserDTO user : list) {
             model.addRow(new Object[]{
-                    user.getId(),
-                    user.getUserName(),
-                    user.getEmail(),
+                    user.userName(),
+                    user.permission(),
+                    user.email()
 
             });
         }

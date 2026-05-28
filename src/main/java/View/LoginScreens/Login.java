@@ -1,8 +1,9 @@
 package View.LoginScreens;
 
+import Controller.Impl.UserControllerImpl;
+import Controller.UserController;
 import View.MainScreens;
 import org.ONE.model.entity.User;
-import org.ONE.model.services.UserService;
 import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
@@ -16,13 +17,13 @@ public class Login extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Login.class.getName());
 
-    private UserService userServices;
+    private UserController userController;
 
     public Login() {
 
         initComponents();
         setVisible(true);
-        userServices = new UserServiceImpl();
+        userController = new UserControllerImpl();
         setLocationRelativeTo(null);
         setTitle("Sistema de Reservas");
         var url = getClass().getResource("/icons/Waterfall.png");
@@ -148,7 +149,7 @@ public class Login extends javax.swing.JFrame {
 
                 @Override
                 protected User doInBackground() throws Exception {
-                    return userServices.authenticate(usuario, senha);
+                    return userController.authenticate(usuario, senha);
                 }
 
                 @Override
