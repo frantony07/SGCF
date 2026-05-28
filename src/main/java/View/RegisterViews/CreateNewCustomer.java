@@ -1,12 +1,10 @@
 package View.RegisterViews;
 
-import Controller.CustomerController;
-import Controller.Impl.CustomerControllerImpl;
-import Controller.Record.ClienteDTO;
 import Functions.CNPJ;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
+import Controller.Record.ClienteDTO;
 import org.ONE.model.entity.ENUM.CountryCostumer;
 import org.ONE.model.entity.ENUM.Language;
 import org.ONE.model.services.impl.ClienteServicesImpl;
@@ -15,12 +13,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateNewCustomer extends JInternalFrame {
 
     CountryCostumer CountryCostumer;
     ArrayList<Language> languageArrayList = loadLanguage.getLanguage();
-    CustomerController clienteController = new CustomerControllerImpl();
+    ClienteServicesImpl clienteServices = new ClienteServicesImpl();
 
     public CreateNewCustomer(){
         super("Criar novo cliente" , true,true,true,true);
@@ -146,8 +145,8 @@ public class CreateNewCustomer extends JInternalFrame {
 
             try {
 
-                ClienteDTO newCustomer = new ClienteDTO( selectedLangs,country,cnpj,cpf,name);
-                clienteController.createNewRecord(newCustomer);
+                ClienteDTO newCustomer = new ClienteDTO(new ArrayList<>(selectedLangs),country,cnpj,cpf,name);
+                clienteServices.createNewRecord(newCustomer);
 
                 JOptionPane.showMessageDialog(this, "Cliente " + name + " salvo com sucesso!");
 

@@ -66,7 +66,7 @@ public class Funcionario{
         this.languagesSpoken = languagesSpoken;
     }
 
-    public ArrayList<Language> getLanguagesSpoken() {return (ArrayList<Language>) languagesSpoken;}
+    public ArrayList<Language> getLanguagesSpoken() {return new ArrayList<>(languagesSpoken);}
 
     public void addNewLanguage(Language newLanguage){ languagesSpoken.add(newLanguage);}
 

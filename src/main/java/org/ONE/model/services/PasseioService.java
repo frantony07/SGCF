@@ -1,6 +1,7 @@
 package org.ONE.model.services;
 
 import Controller.Record.PasseioDTO;
+import org.ONE.model.entity.Passeio;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public interface PasseioService {
 
     List<PasseioDTO> findByName(String name);
 
-    List<PasseioDTO> findAll ();
+    List<PasseioDTO> findAll();
+    List<Passeio> findAllEntities();
 
     PasseioDTO findById(Long id);
 

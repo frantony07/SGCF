@@ -1,6 +1,5 @@
 package View.ShowViews;
 
-import Controller.Record.ClienteDTO;
 import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
@@ -19,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditReservationWindow extends JInternalFrame {
@@ -32,7 +32,8 @@ public class EditReservationWindow extends JInternalFrame {
 
     private JComboBox<Cliente> cbCliente;
     private JComboBox<Funcionario> cbFuncionario;
-    private JComboBox<Passeio> cbPasseio;
+    private JComboBox<PasseioDTO> cbPasseio;
+    private List<Passeio> allPasseios;
     private JTextField tfData;
     private JTextField tfValor;
 
@@ -99,9 +100,14 @@ public class EditReservationWindow extends JInternalFrame {
     }
 
     private JPanel buildFormPanel() {
-        List<ClienteDTO> clientes = clienteServices.findAll();
+        List<Cliente> clientes = clienteServices.findAll().stream()
+                .map(dto -> new Cliente(new ArrayList<>(dto.languageSpeak()), dto.countryOfCostumer(), dto.cnpj(), dto.cpf(), dto.name()))
+                .collect(java.util.stream.Collectors.toList());
         List<Funcionario> funcionarios = funcionarioServices.findAll();
-        List<PasseioDTO> passeios = passeioServices.findAll();
+        allPasseios = passeioServices.findAllEntities();
+        List<PasseioDTO> passeios = allPasseios.stream()
+                .map(p -> new PasseioDTO(p.getPrice(), p.getDurationOfTourInMinute(), p.getCountryTour(), p.getKmOftour(), p.getNameOfTour(), p.getLocations()))
+                .collect(java.util.stream.Collectors.toList());
 
         cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
@@ -119,9 +125,9 @@ public class EditReservationWindow extends JInternalFrame {
             return lbl;
         });
 
-        cbPasseio = new JComboBox<>(passeios.toArray(new Passeio[0]));
+        cbPasseio = new JComboBox<>(passeios.toArray(new PasseioDTO[0]));
         cbPasseio.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getNameOfTour() : "");
+            JLabel lbl = new JLabel(value != null ? value.nameOfTour() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
@@ -156,7 +162,10 @@ public class EditReservationWindow extends JInternalFrame {
 
         selectComboItem(cbCliente, r.getCliente().getId());
         selectComboItem(cbFuncionario, r.getFuncionario().getId());
-        selectComboItem(cbPasseio, r.getTour().getId());
+        long tourId = r.getTour().getId();
+        for (int i = 0; i < allPasseios.size(); i++) {
+            if (allPasseios.get(i).getId() == tourId) { cbPasseio.setSelectedIndex(i); break; }
+        }
         tfData.setText(r.getDate().toString());
         tfValor.setText(String.format("%.2f", r.getValue()));
     }
@@ -192,7 +201,8 @@ public class EditReservationWindow extends JInternalFrame {
 
             r.setCliente((Cliente) cbCliente.getSelectedItem());
             r.setFuncionario((Funcionario) cbFuncionario.getSelectedItem());
-            r.setTour((Passeio) cbPasseio.getSelectedItem());
+            int passeioIdx = cbPasseio.getSelectedIndex();
+            r.setTour(passeioIdx >= 0 ? allPasseios.get(passeioIdx) : null);
             r.setDate(novaData);
             r.setValue(novoValor);
 

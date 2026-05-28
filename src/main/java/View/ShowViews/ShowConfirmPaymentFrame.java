@@ -126,7 +126,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
                 return;
             }
 
-            payment.setStatus(Status.CONFIRMADA);
+            payment.setStatus(Status.confirmada);
 
             payController.updateRecords(payment);
 

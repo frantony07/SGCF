@@ -1,35 +1,24 @@
 package View.RegisterViews;
 
-import Controller.Record.ClienteDTO;
 import Controller.Record.PasseioDTO;
+import Controller.ReservationController;
 import View.ItensDefault;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.entity.Passeio;
-import org.ONE.model.entity.Reservations;
-import org.ONE.model.entity.ENUM.Status;
-import org.ONE.model.services.impl.ClienteServicesImpl;
-import org.ONE.model.services.FuncionarioService;
-import org.ONE.model.services.PasseioService;
-import org.ONE.model.services.impl.FuncionarioServiceImpl;
-import org.ONE.model.services.impl.PasseioServiceImpl;
-import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class ScheduleReservationWindow extends JInternalFrame {
 
-    private ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
-    private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
-    private FuncionarioService funcionarioServices = new FuncionarioServiceImpl();
-    private PasseioService passeioServices = new PasseioServiceImpl();
+    private final ReservationController reservationController;
 
-    public ScheduleReservationWindow() {
+    public ScheduleReservationWindow(ReservationController reservationController) {
         super("Agendar Reserva", true, true, true, true);
+        this.reservationController = reservationController;
 
         setSize(650, 450);
         setLocation(550, 100);
@@ -48,7 +37,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 0; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Passeio:", 14), gbc);
 
-        List<PasseioDTO> passeios = passeioServices.findAll();
+        List<Passeio> passeios = reservationController.getAllPasseios();
         JComboBox<Passeio> cbPasseio = new JComboBox<>(passeios.toArray(new Passeio[0]));
         cbPasseio.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getNameOfTour() + " - R$ " + String.format("%.2f", value.getPrice()) : "");
@@ -65,7 +54,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         JTextField tfValor = new JTextField(15);
         tfValor.setEditable(false);
         if (!passeios.isEmpty()) {
-            tfValor.setText(String.format("%.2f", passeios.get(0).price()));
+            tfValor.setText(String.format("%.2f", passeios.get(0).getPrice()));
         }
         cbPasseio.addActionListener(e -> {
             Passeio sel = (Passeio) cbPasseio.getSelectedItem();
@@ -77,7 +66,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Cliente:", 14), gbc);
 
-        List<ClienteDTO> clientes = clienteServices.findAll();
+        List<Cliente> clientes = reservationController.getAllClientes();
         JComboBox<Cliente> cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");
@@ -91,7 +80,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Funcionário:", 14), gbc);
 
-        List<Funcionario> funcionarios = funcionarioServices.findAll();
+        List<Funcionario> funcionarios = reservationController.getAllFuncionarios();
         JComboBox<Funcionario> cbFuncionario = new JComboBox<>(funcionarios.toArray(new Funcionario[0]));
         cbFuncionario.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");
@@ -114,33 +103,24 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.fill = GridBagConstraints.NONE;
         JButton btnAgendar = new JButton("Agendar");
         btnAgendar.addActionListener(e -> {
-            Passeio passeio = (Passeio) cbPasseio.getSelectedItem();
-            Cliente cliente = (Cliente) cbCliente.getSelectedItem();
+            Passeio passeio       = (Passeio)     cbPasseio.getSelectedItem();
+            Cliente cliente       = (Cliente)     cbCliente.getSelectedItem();
             Funcionario funcionario = (Funcionario) cbFuncionario.getSelectedItem();
-            String dataStr = tfData.getText().trim();
-
-            if (passeio == null || cliente == null || funcionario == null || dataStr.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+            String dataStr        = tfData.getText().trim();
 
             try {
-                LocalDate data = LocalDate.parse(dataStr);
-                if (data.isBefore(LocalDate.now())){
-                    JOptionPane.showMessageDialog(this, "a data não pode ser inferior a data atual" , "erro" , JOptionPane.ERROR_MESSAGE);
-                    dispose();
-                    return;
-                }
-                Reservations reservation = new Reservations(cliente, data, funcionario, passeio, passeio.getPrice(), Status.pendente);
-                reservationsServices.createNewRecorde(reservation);
+                reservationController.createReservation(passeio, cliente, funcionario, dataStr);
+
                 JOptionPane.showMessageDialog(this,
-                        "Reserva agendada com sucesso!\nCliente: " + cliente.getName() +
-                        "\nPasseio: " + passeio.getNameOfTour() +
-                        "\nData: " + data,
+                        "Reserva agendada com sucesso!\nCliente: " + (cliente != null ? cliente.getName() : "") +
+                        "\nPasseio: " + (passeio != null ? passeio.getNameOfTour() : "") +
+                        "\nData: " + dataStr,
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
                 tfData.setText(LocalDate.now().toString());
-            } catch (DateTimeParseException ex) {
-                JOptionPane.showMessageDialog(this, "Data inválida. Use o formato AAAA-MM-DD.", "Erro", JOptionPane.ERROR_MESSAGE);
+
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao agendar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
