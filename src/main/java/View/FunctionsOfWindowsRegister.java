@@ -1,10 +1,16 @@
 package View;
 
+import Controller.Impl.ReservationControllerImpl;
+import Controller.ReservationController;
 import View.RegisterViews.CreateNewCustomer;
 import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
 import View.RegisterViews.ScheduleReservationWindow;
+import org.ONE.model.services.impl.ClienteServicesImpl;
+import org.ONE.model.services.impl.FuncionarioServiceImpl;
+import org.ONE.model.services.impl.PasseioServiceImpl;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import javax.swing.*;
 
@@ -92,7 +98,15 @@ public class FunctionsOfWindowsRegister {
 
     public static ScheduleReservationWindow scheduleReservation(ScheduleReservationWindow win, JDesktopPane desktop, JPanel taskBar) {
         if (win == null || win.isClosed()) {
-            win = new ScheduleReservationWindow();
+
+            ReservationController controller = new ReservationControllerImpl(
+                new ReservationsServiceImpl(),
+                new ClienteServicesImpl(),
+                new FuncionarioServiceImpl(),
+                new PasseioServiceImpl()
+            );
+
+            win = new ScheduleReservationWindow(controller);
             win.setVisible(true);
             desktop.add(win);
             win.toFront();

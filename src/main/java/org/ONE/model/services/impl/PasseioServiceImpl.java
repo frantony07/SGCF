@@ -98,6 +98,11 @@ public class PasseioServiceImpl  implements PasseioService {
     }
 
     @Override
+    public List<Passeio> findAllEntities() {
+        return passeioRepository.findAll();
+    }
+
+    @Override
     public List<PasseioDTO> findAll() {
 
         return passeioRepository.findAll()
