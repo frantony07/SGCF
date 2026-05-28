@@ -1,6 +1,7 @@
 package View.RegisterViews;
 
-import Controller.Record.FuncionarioDTO;
+import Controller.EmployeeController;
+import Controller.Impl.EmployeeControllerImpl;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 public class CreateNewEmployee extends JInternalFrame {
     ArrayList<Language> languageArrayList = new ArrayList<>();
-    FuncionarioService funcionarioServices = new FuncionarioServiceImpl();
+    EmployeeController funcionarioController = new EmployeeControllerImpl();
 
     public CreateNewEmployee() {
         super("Criar novo funcionário", true, true, true, true);
@@ -102,8 +103,8 @@ public class CreateNewEmployee extends JInternalFrame {
             }
 
             try {
-                FuncionarioDTO employee = new FuncionarioDTO(cpf, nome, languages);
-                funcionarioServices.createNewRecorde(employee);
+                Funcionario employee = new Funcionario(cpf, nome, languages);
+                funcionarioController.createNewRecorde(employee);
 
                 String mensagem = "Funcionário: " + nome + "\nCPF: " + cpf + "\nIdiomas: " + languages;
                 JOptionPane.showMessageDialog(this, mensagem, "Sucesso", JOptionPane.INFORMATION_MESSAGE);

@@ -1,6 +1,7 @@
 package View.ShowViews;
 
-import Controller.Record.FuncionarioDTO;
+import Controller.EmployeeController;
+import Controller.Impl.EmployeeControllerImpl;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.impl.FuncionarioServiceImpl;
@@ -14,14 +15,14 @@ public class ShowEmployee extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private FuncionarioService employeeService;
+    private EmployeeController employeeController;
 
     private JTextField txtBusca;
 
     public ShowEmployee() {
         super("Lista de Funcionários", true, true, true, true);
 
-        employeeService = new FuncionarioServiceImpl();
+        employeeController = new EmployeeControllerImpl();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());
@@ -41,6 +42,7 @@ public class ShowEmployee extends JInternalFrame {
         add(topPanel, BorderLayout.NORTH);
 
         model = new DefaultTableModel();
+        model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("CPF");
 
@@ -60,12 +62,13 @@ public class ShowEmployee extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<FuncionarioDTO> lista = employeeService.findAll();
+        List<Funcionario> lista = employeeController.findAll();
 
-        for (FuncionarioDTO emp : lista) {
+        for (Funcionario emp : lista) {
             model.addRow(new Object[]{
-                    emp.name(),
-                    emp.cpf(),
+                    emp.getId(),
+                    emp.getName(),
+                    emp.getCpf(),
 
             });
         }
@@ -82,16 +85,17 @@ public class ShowEmployee extends JInternalFrame {
 
         model.setRowCount(0);
 
-        List<FuncionarioDTO> lista = employeeService.findByName(nome);
+        List<Funcionario> lista = employeeController.findByName(nome);
 
         if (lista.isEmpty()){
             JOptionPane.showMessageDialog(this,"Nenhum funcionario encontrado", "erro",JOptionPane.ERROR_MESSAGE);
         }
 
-        for (FuncionarioDTO emp : lista) {
+        for (Funcionario emp : lista) {
             model.addRow(new Object[]{
-                    emp.name(),
-                    emp.cpf(),
+                    emp.getId(),
+                    emp.getName(),
+                    emp.getCpf(),
 
             });
         }
