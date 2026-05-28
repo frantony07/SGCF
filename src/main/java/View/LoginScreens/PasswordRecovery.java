@@ -1,5 +1,7 @@
 package View.LoginScreens;
 
+import Controller.EmailController;
+import Controller.Impl.EmailControllerImpl;
 import Functions.GenerateCode;
 import org.ONE.model.entity.PasswordReset;
 import org.ONE.model.entity.User;
@@ -21,13 +23,13 @@ public class PasswordRecovery extends JFrame {
     private JButton btnVoltar;
     private UserService userServices;
     private PasswordResetService passwordResetService;
-    private EmailService emailService;
+    private EmailController emailController;
 
     public PasswordRecovery() {
 
         userServices = new UserServiceImpl();
         passwordResetService = new PasswordResetServiceimpl();
-        emailService = new EmailServiceImpl();
+        emailController = new EmailControllerImpl();
         initComponents();
     }
 
@@ -112,7 +114,7 @@ public class PasswordRecovery extends JFrame {
             passwordReset.setUser(user);
             passwordResetService.create(passwordReset);
 
-            emailService.sendEmail(
+            emailController.sendEmail(
                     email,
                     codigo,
                     ""

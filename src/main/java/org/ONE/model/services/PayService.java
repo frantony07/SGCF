@@ -13,8 +13,6 @@ import java.util.List;
 
 public interface PayService {
 
-
-
     void createNewRecorde(PayModelDTO payModel);
 
     void updateRecords(PayModel payModel);
@@ -33,7 +31,7 @@ public interface PayService {
 
     double sumEarningsByEmployee(Long employeeId, Status status,LocalDate start,LocalDate end) ;
 
-    public double sumEarningsForCompany(Status status,LocalDate start,LocalDate end) ;
+    double sumEarningsForCompany(Status status,LocalDate start,LocalDate end) ;
     
 
 }

@@ -1,11 +1,10 @@
 package View.RegisterViews;
 
+import Controller.Impl.TourControllerImpl;
 import Controller.Record.PasseioDTO;
+import Controller.TourController;
 import View.ItensDefault;
 import org.ONE.model.entity.ENUM.CountryTour;
-import org.ONE.model.entity.Passeio;
-import org.ONE.model.services.PasseioService;
-import org.ONE.model.services.impl.PasseioServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +18,7 @@ public class CreateNewTour extends JInternalFrame {
     private JTextField txtKm;
     private CountryTour countryTour;
 
-    private PasseioService passeioService;
+    private TourController tourController;
     private JComboBox<CountryTour> cbCountry;
 
     public CreateNewTour(){
@@ -38,7 +37,7 @@ public class CreateNewTour extends JInternalFrame {
             System.out.println("o icone é nulo");
         }
 
-        passeioService = new PasseioServiceImpl();
+        tourController = new TourControllerImpl();
 
         setTitle("Cadastrar Novo Passeio");
         setSize(500, 400);
@@ -165,7 +164,7 @@ public class CreateNewTour extends JInternalFrame {
 
             PasseioDTO passeio = new PasseioDTO(preco, duracao, countryTour, km, nome, localizacao);
 
-            passeioService.createNewRecord(passeio);
+            tourController.createNewRecord(passeio);
 
             JOptionPane.showMessageDialog(this,passeio.toString(), "passeio cadastrado com sucesso",JOptionPane.INFORMATION_MESSAGE);
 
