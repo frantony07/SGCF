@@ -1,6 +1,7 @@
 package View.RegisterViews;
 
 import Controller.Record.ClienteDTO;
+import Controller.Record.FuncionarioDTO;
 import Controller.Record.PasseioDTO;
 import View.ItensDefault;
 import org.ONE.model.entity.Cliente;
@@ -91,7 +92,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Funcionário:", 14), gbc);
 
-        List<Funcionario> funcionarios = funcionarioServices.findAll();
+        List<FuncionarioDTO> funcionarios = funcionarioServices.findAll();
         JComboBox<Funcionario> cbFuncionario = new JComboBox<>(funcionarios.toArray(new Funcionario[0]));
         cbFuncionario.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");

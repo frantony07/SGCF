@@ -1,5 +1,6 @@
 package View.RegisterViews;
 
+import Controller.Record.FuncionarioDTO;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
@@ -101,7 +102,7 @@ public class CreateNewEmployee extends JInternalFrame {
             }
 
             try {
-                Funcionario employee = new Funcionario(cpf, nome, languages);
+                FuncionarioDTO employee = new FuncionarioDTO(cpf, nome, languages);
                 funcionarioServices.createNewRecorde(employee);
 
                 String mensagem = "Funcionário: " + nome + "\nCPF: " + cpf + "\nIdiomas: " + languages;

@@ -1,5 +1,6 @@
 package View.ShowViews;
 
+import Controller.Record.FuncionarioDTO;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.impl.FuncionarioServiceImpl;
@@ -40,7 +41,6 @@ public class ShowEmployee extends JInternalFrame {
         add(topPanel, BorderLayout.NORTH);
 
         model = new DefaultTableModel();
-        model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("CPF");
 
@@ -60,13 +60,12 @@ public class ShowEmployee extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<Funcionario> lista = employeeService.findAll();
+        List<FuncionarioDTO> lista = employeeService.findAll();
 
-        for (Funcionario emp : lista) {
+        for (FuncionarioDTO emp : lista) {
             model.addRow(new Object[]{
-                    emp.getId(),
-                    emp.getName(),
-                    emp.getCpf(),
+                    emp.name(),
+                    emp.cpf(),
 
             });
         }
@@ -83,17 +82,16 @@ public class ShowEmployee extends JInternalFrame {
 
         model.setRowCount(0);
 
-        List<Funcionario> lista = employeeService.findByName(nome);
+        List<FuncionarioDTO> lista = employeeService.findByName(nome);
 
         if (lista.isEmpty()){
             JOptionPane.showMessageDialog(this,"Nenhum funcionario encontrado", "erro",JOptionPane.ERROR_MESSAGE);
         }
 
-        for (Funcionario emp : lista) {
+        for (FuncionarioDTO emp : lista) {
             model.addRow(new Object[]{
-                    emp.getId(),
-                    emp.getName(),
-                    emp.getCpf(),
+                    emp.name(),
+                    emp.cpf(),
 
             });
         }

@@ -1,6 +1,7 @@
 package View.ShowViews;
 
 import Controller.Record.ClienteDTO;
+import Controller.Record.FuncionarioDTO;
 import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
@@ -100,7 +101,7 @@ public class EditReservationWindow extends JInternalFrame {
 
     private JPanel buildFormPanel() {
         List<ClienteDTO> clientes = clienteServices.findAll();
-        List<Funcionario> funcionarios = funcionarioServices.findAll();
+        List<FuncionarioDTO> funcionarios = funcionarioServices.findAll();
         List<PasseioDTO> passeios = passeioServices.findAll();
 
         cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
