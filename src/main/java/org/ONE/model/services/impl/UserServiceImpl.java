@@ -1,5 +1,6 @@
 package org.ONE.model.services.impl;
 
+import Controller.Record.UserDTO;
 import Functions.Bcrypt;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
@@ -56,13 +57,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public List<User> findByName(String name){
+    public List<UserDTO> findByName(String name){
         try {
             if (name.matches("\\d+")) {
                 throw new RuntimeException("O nome não pode ser um número");
             }
 
-            return userRepository.findByName(name);
+            return userRepository.findByName(name).
+                    stream().
+                    map(user -> new UserDTO(user.getUserName(),user.getPermission(),user.getEmail())
+                    ).
+                    toList();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -86,9 +91,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public List<User> findAll (){
+    public List<UserDTO> findAll (){
         try {
-            return  userRepository.findAll();
+            return  userRepository.findAll().
+                    stream().
+                    map(user -> new UserDTO(user.getUserName(),user.getPermission(), user.getEmail())
+                    ).toList();
 
         } catch (Exception e) {
             PrintError.printErro(e);
