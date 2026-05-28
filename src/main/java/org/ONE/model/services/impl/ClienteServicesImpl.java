@@ -72,7 +72,7 @@ public class ClienteServicesImpl implements ClienteServices {
         return clienteRepository.findByName(name)
                 .stream()
                 .map(cliente ->new ClienteDTO(
-                        (ArrayList<Language>) cliente.getLanguageSpeak(),
+                         cliente.getLanguageSpeak(),
                         cliente.getCountryOfCostumer(),
                         cliente.getCnpj(),
                         cliente.getCpf(),
@@ -86,7 +86,7 @@ public class ClienteServicesImpl implements ClienteServices {
         return clienteRepository.findAll()
                 .stream()
                 .map(cliente -> new ClienteDTO(
-                        (ArrayList<Language>) cliente.getLanguageSpeak(),
+                        cliente.getLanguageSpeak(),
                         cliente.getCountryOfCostumer(),
                         cliente.getCnpj(),
                         cliente.getCpf(),

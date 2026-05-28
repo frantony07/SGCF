@@ -1,5 +1,6 @@
 package View.ShowViews;
 
+import Controller.Record.ClienteDTO;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 
@@ -39,7 +40,6 @@ public class ShowCustomer extends JInternalFrame {
 
 
         model = new DefaultTableModel();
-        model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("CPF");
         model.addColumn("CNPJ");
@@ -61,15 +61,14 @@ public class ShowCustomer extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<Cliente> lista = clienteService.findAll();
+        List<ClienteDTO> lista = clienteService.findAll();
 
-        for (Cliente c : lista) {
+        for (ClienteDTO c : lista) {
             model.addRow(new Object[]{
-                    c.getId(),
-                    c.getName(),
-                    c.getCpf(),
-                    c.getCnpj(),
-                    c.getCountryOfCostumer()
+                    c.name(),
+                    c.cpf(),
+                    c.cnpj(),
+                    c.countryOfCostumer()
             });
         }
     }
@@ -85,19 +84,18 @@ public class ShowCustomer extends JInternalFrame {
 
         model.setRowCount(0);
 
-        List<Cliente> lista = clienteService.findByName(nome);
+        List<ClienteDTO> lista = clienteService.findByName(nome);
 
         if (lista.isEmpty()){
              JOptionPane.showMessageDialog(this,"nenhum cliente encontrado","erro",JOptionPane.ERROR_MESSAGE);
         }
 
-        for (Cliente c : lista) {
+        for (ClienteDTO c : lista) {
             model.addRow(new Object[]{
-                    c.getId(),
-                    c.getName(),
-                    c.getCpf(),
-                    c.getCnpj(),
-                    c.getCountryOfCostumer()
+                    c.name(),
+                    c.cpf(),
+                    c.cnpj(),
+                    c.countryOfCostumer()
             });
         }
     }

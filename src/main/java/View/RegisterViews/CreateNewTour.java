@@ -1,5 +1,6 @@
 package View.RegisterViews;
 
+import Controller.Record.PasseioDTO;
 import View.ItensDefault;
 import org.ONE.model.entity.ENUM.CountryTour;
 import org.ONE.model.entity.Passeio;
@@ -162,9 +163,9 @@ public class CreateNewTour extends JInternalFrame {
 
 
 
-            Passeio passeio = new Passeio(preco, duracao, countryTour, km, nome, localizacao);
+            PasseioDTO passeio = new PasseioDTO(preco, duracao, countryTour, km, nome, localizacao);
 
-            passeioService.createNewRecorde(passeio);
+            passeioService.createNewRecord(passeio);
 
             JOptionPane.showMessageDialog(this,passeio.toString(), "passeio cadastrado com sucesso",JOptionPane.INFORMATION_MESSAGE);
 

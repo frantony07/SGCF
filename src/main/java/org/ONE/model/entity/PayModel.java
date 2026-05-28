@@ -21,10 +21,9 @@ public class PayModel {
     @Column(name = "total_account")
     private double total_account ;
 
-    public void ModelLedger(Long ID, Status status, Cliente cliente) {
-        this.id = ID;
-        this.status = status;
+    public PayModel(Cliente cliente, Status status) {
         this.cliente = cliente;
+        this.status = status;
     }
 
     public PayModel() {
@@ -39,6 +38,10 @@ public class PayModel {
     }
 
     public Cliente getReservation() {
+        return cliente;
+    }
+
+    public Cliente getCliente() {
         return cliente;
     }
 

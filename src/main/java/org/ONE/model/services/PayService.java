@@ -1,5 +1,6 @@
 package org.ONE.model.services;
 
+import Controller.Record.PayModelDTO;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.model.entity.ENUM.Status;
@@ -14,11 +15,11 @@ public interface PayService {
 
 
 
-    void createNewRecorde(PayModel payModel);
+    void createNewRecorde(PayModelDTO payModel);
 
     void updateRecords(PayModel payModel);
 
-    void delete(PayModel payModel);
+    void delete(PayModelDTO payModel);
 
     List<PayModel> findByName(String name);
 

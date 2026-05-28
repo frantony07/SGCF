@@ -1,5 +1,7 @@
 package View.RegisterViews;
 
+import Controller.Record.ClienteDTO;
+import Controller.Record.PasseioDTO;
 import View.ItensDefault;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
@@ -46,7 +48,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 0; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Passeio:", 14), gbc);
 
-        List<Passeio> passeios = passeioServices.findAll();
+        List<PasseioDTO> passeios = passeioServices.findAll();
         JComboBox<Passeio> cbPasseio = new JComboBox<>(passeios.toArray(new Passeio[0]));
         cbPasseio.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getNameOfTour() + " - R$ " + String.format("%.2f", value.getPrice()) : "");
@@ -63,7 +65,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         JTextField tfValor = new JTextField(15);
         tfValor.setEditable(false);
         if (!passeios.isEmpty()) {
-            tfValor.setText(String.format("%.2f", passeios.get(0).getPrice()));
+            tfValor.setText(String.format("%.2f", passeios.get(0).price()));
         }
         cbPasseio.addActionListener(e -> {
             Passeio sel = (Passeio) cbPasseio.getSelectedItem();
@@ -75,7 +77,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Cliente:", 14), gbc);
 
-        List<Cliente> clientes = clienteServices.findAll();
+        List<ClienteDTO> clientes = clienteServices.findAll();
         JComboBox<Cliente> cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");

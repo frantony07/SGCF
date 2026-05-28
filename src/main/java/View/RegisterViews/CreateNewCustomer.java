@@ -1,5 +1,6 @@
 package View.RegisterViews;
 
+import Controller.Record.ClienteDTO;
 import Functions.CNPJ;
 import Functions.CPF;
 import Functions.loadLanguage;
@@ -144,7 +145,7 @@ public class CreateNewCustomer extends JInternalFrame {
 
             try {
 
-                Cliente newCustomer = new Cliente((ArrayList<Language>) selectedLangs,country,cnpj,cpf,name);
+                ClienteDTO newCustomer = new ClienteDTO((ArrayList<Language>) selectedLangs,country,cnpj,cpf,name);
                 clienteServices.createNewRecord(newCustomer);
 
                 JOptionPane.showMessageDialog(this, "Cliente " + name + " salvo com sucesso!");

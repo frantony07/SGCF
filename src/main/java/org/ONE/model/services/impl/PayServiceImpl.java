@@ -1,5 +1,6 @@
 package org.ONE.model.services.impl;
 
+import Controller.Record.PayModelDTO;
 import Functions.PrintError;
 import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.PayModel;
@@ -13,11 +14,13 @@ public class PayServiceImpl implements PayService {
     private PayRepository payRepository = new PayRepository();
 
    @Override
-    public void createNewRecorde(PayModel payModel){
+    public void createNewRecorde(PayModelDTO pay){
         try {
-            if (payModel == null){
+            if (pay == null){
                 throw new RuntimeException("O cliente não pode ser nulo ");
             }
+            PayModel payModel = new PayModel(pay.cliente(), pay.status());
+
             payRepository.create(payModel);
 
         } catch (Exception e) {
@@ -28,7 +31,7 @@ public class PayServiceImpl implements PayService {
     @Override
     public void updateRecords(PayModel payModel){
         try {
-            if(payModel == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+            if(payModel == null){throw new RuntimeException("O pago não pode ser nulo ");}
 
             payRepository.update(payModel);
 
@@ -38,13 +41,15 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public void delete(PayModel payModel){
+    public void delete(PayModelDTO pay){
         try {
-            if (payModel == null) {
+            if (pay == null) {
                 throw new RuntimeException(
                         "O cliente não pode ser nulo"
                 );
             }
+            PayModel payModel = new PayModel(pay.cliente(), pay.status());
+
             payRepository.delete(payModel);
         } catch (Exception e) {
             PrintError.printErro(e);

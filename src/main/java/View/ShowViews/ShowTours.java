@@ -1,5 +1,6 @@
 package View.ShowViews;
 
+import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Passeio;
 import org.ONE.model.services.PasseioService;
 import org.ONE.model.services.impl.PasseioServiceImpl;
@@ -41,7 +42,6 @@ public class ShowTours extends JInternalFrame {
         add(topPanel, BorderLayout.NORTH);
 
         model = new DefaultTableModel();
-        model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("Preço");
         model.addColumn("Duração");
@@ -62,15 +62,14 @@ public class ShowTours extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<Passeio> lista = passeioService.findAll();
+        List<PasseioDTO> lista = passeioService.findAll();
 
-        for (Passeio passeio : lista) {
+        for (PasseioDTO passeio : lista) {
             model.addRow(new Object[]{
-                    passeio.getId(),
-                    passeio.getNameOfTour(),
-                    passeio.getPrice(),
-                    passeio.getDurationOfTourInMinute(),
-                    passeio.getCountry()
+                    passeio.nameOfTour(),
+                    passeio.price(),
+                    passeio.durationOfTourInMinute(),
+                    passeio.countryTour()
             });
         }
     }
@@ -92,7 +91,7 @@ public class ShowTours extends JInternalFrame {
             return;
         }
 
-        List<Passeio> lista = passeioService.findByName(nomeBusca);
+        List<PasseioDTO> lista = passeioService.findByName(nomeBusca);
 
         if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(
@@ -104,13 +103,12 @@ public class ShowTours extends JInternalFrame {
             return;
         }
 
-        for (Passeio passeio : lista) {
+        for (PasseioDTO passeio : lista) {
             model.addRow(new Object[]{
-                    passeio.getId(),
-                    passeio.getNameOfTour(),
-                    passeio.getPrice(),
-                    passeio.getDurationOfTourInMinute(),
-                    passeio.getCountry()
+                    passeio.nameOfTour(),
+                    passeio.price(),
+                    passeio.durationOfTourInMinute(),
+                    passeio.countryTour()
             });
         }
 
