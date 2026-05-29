@@ -99,12 +99,7 @@ public class FunctionsOfWindowsRegister {
     public static ScheduleReservationWindow scheduleReservation(ScheduleReservationWindow win, JDesktopPane desktop, JPanel taskBar) {
         if (win == null || win.isClosed()) {
 
-            ReservationController controller = new ReservationControllerImpl(
-                new ReservationsServiceImpl(),
-                new ClienteServicesImpl(),
-                new FuncionarioServiceImpl(),
-                new PasseioServiceImpl()
-            );
+            ReservationController controller = new ReservationControllerImpl();
 
             win = new ScheduleReservationWindow(controller);
             win.setVisible(true);

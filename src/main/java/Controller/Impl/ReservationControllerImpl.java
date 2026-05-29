@@ -1,5 +1,7 @@
 package Controller.Impl;
 
+import Controller.Record.FuncionarioDTO;
+import Controller.Record.PasseioDTO;
 import Controller.ReservationController;
 import Controller.Record.ClienteDTO;
 import org.ONE.model.entity.Cliente;
@@ -11,6 +13,11 @@ import org.ONE.model.services.ClienteServices;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
 import org.ONE.model.services.ReservationService;
+import org.ONE.model.services.impl.ClienteServicesImpl;
+import org.ONE.model.services.impl.FuncionarioServiceImpl;
+import org.ONE.model.services.impl.PasseioServiceImpl;
+import org.ONE.model.services.impl.ReservationsServiceImpl;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -19,20 +26,13 @@ import java.util.stream.Collectors;
 
 public class ReservationControllerImpl implements ReservationController {
 
-    private final ReservationService reservationService;
-    private final ClienteServices    clienteServices;
-    private final FuncionarioService funcionarioService;
-    private final PasseioService     passeioService;
+    private  ReservationService reservationService = new ReservationsServiceImpl();
+    private  ClienteServices    clienteServices = new ClienteServicesImpl();
+    private  FuncionarioService funcionarioService = new FuncionarioServiceImpl();
+    private  PasseioService     passeioService = new PasseioServiceImpl();
 
-    public ReservationControllerImpl(ReservationService reservationService,
-                                     ClienteServices clienteServices,
-                                     FuncionarioService funcionarioService,
-                                     PasseioService passeioService) {
-        this.reservationService = reservationService;
-        this.clienteServices    = clienteServices;
-        this.funcionarioService = funcionarioService;
-        this.passeioService     = passeioService;
-    }
+
+
 
     @Override
     public List<Passeio> getAllPasseios() {
@@ -40,14 +40,12 @@ public class ReservationControllerImpl implements ReservationController {
     }
 
     @Override
-    public List<Cliente> getAllClientes() {
-        return clienteServices.findAll().stream()
-                .map(dto -> new Cliente(dto.languageSpeak(), dto.countryOfCostumer(), dto.cnpj(), dto.cpf(), dto.name()))
-                .collect(Collectors.toList());
+    public List<ClienteDTO> getAllClientes() {
+        return clienteServices.findAll();
     }
 
     @Override
-    public List<Funcionario> getAllFuncionarios() {
+    public List<FuncionarioDTO> getAllFuncionarios() {
         return funcionarioService.findAll();
     }
 

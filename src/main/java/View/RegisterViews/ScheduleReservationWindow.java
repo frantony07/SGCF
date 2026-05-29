@@ -1,5 +1,7 @@
 package View.RegisterViews;
 
+import Controller.Record.ClienteDTO;
+import Controller.Record.FuncionarioDTO;
 import Controller.Record.PasseioDTO;
 import Controller.ReservationController;
 import View.ItensDefault;
@@ -66,7 +68,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Cliente:", 14), gbc);
 
-        List<Cliente> clientes = reservationController.getAllClientes();
+        List<ClienteDTO> clientes = reservationController.getAllClientes();
         JComboBox<Cliente> cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");
@@ -80,7 +82,7 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
         panel.add(ItensDefault.createBoldLabel("Funcionário:", 14), gbc);
 
-        List<Funcionario> funcionarios = reservationController.getAllFuncionarios();
+        List<FuncionarioDTO> funcionarios = reservationController.getAllFuncionarios();
         JComboBox<Funcionario> cbFuncionario = new JComboBox<>(funcionarios.toArray(new Funcionario[0]));
         cbFuncionario.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel lbl = new JLabel(value != null ? value.getName() : "");

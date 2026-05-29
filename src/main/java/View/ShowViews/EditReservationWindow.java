@@ -1,6 +1,7 @@
 package View.ShowViews;
 
 import Controller.Record.ClienteDTO;
+import Controller.Record.FuncionarioDTO;
 import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditReservationWindow extends JInternalFrame {
@@ -100,9 +102,8 @@ public class EditReservationWindow extends JInternalFrame {
     }
 
     private JPanel buildFormPanel() {
-        List<ClienteDTO> clientes = clienteServices.findAll().stream()
-                .map(dto -> new Cliente(new ArrayList<>(dto.languageSpeak()), dto.countryOfCostumer(), dto.cnpj(), dto.cpf(), dto.name()))
-                .collect(java.util.stream.Collectors.toList());
+        List<ClienteDTO> clientes = clienteServices.findAll();
+
         List<FuncionarioDTO> funcionarios = funcionarioServices.findAll();
         allPasseios = passeioServices.findAllEntities();
         List<PasseioDTO> passeios = allPasseios.stream()
