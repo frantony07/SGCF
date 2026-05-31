@@ -64,9 +64,4 @@ public class PaymentControllerImpl implements PaymentController {
         return payService.getSize();
 
     }
-
-
-
-
-
 }
