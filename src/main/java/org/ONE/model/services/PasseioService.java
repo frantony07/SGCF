@@ -1,26 +1,26 @@
 package org.ONE.model.services;
 
-import Functions.PrintError;
-import jakarta.persistence.EntityManager;
+import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Passeio;
-import org.ONE.model.repositories.CustomizerFactory;
-import org.ONE.model.repositories.PasseioRepository;
 
 import java.util.List;
 
 public interface PasseioService {
 
-    void createNewRecorde(Passeio passeio);
 
-    void updateRecorde(Passeio passeio);
 
-    void delete(Passeio passeio);
+    void delete(PasseioDTO passeio);
 
-    List<Passeio> findByName(String name);
+    void createNewRecord(PasseioDTO passeioDTO);
 
-    List<Passeio> findAll ();
+    void updateRecord(PasseioDTO passeioDTO);
 
-    Passeio findById(Long id);
+    List<PasseioDTO> findByName(String name);
+
+    List<PasseioDTO> findAll();
+    List<Passeio> findAllEntities();
+
+    PasseioDTO findById(Long id);
 
     Long getSize();
 }

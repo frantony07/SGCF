@@ -1,9 +1,15 @@
 package View.ShowViews;
 
+import Controller.Record.ClienteDTO;
+import Controller.Record.FuncionarioDTO;
+import Controller.Record.PasseioDTO;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.entity.Passeio;
 import org.ONE.model.entity.Reservations;
+import org.ONE.model.repositories.ClienteRepository;
+import org.ONE.model.repositories.CustomizerFactory;
+import org.ONE.model.repositories.FuncionarioRepository;
 import org.ONE.model.services.impl.ClienteServicesImpl;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
@@ -17,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditReservationWindow extends JInternalFrame {
@@ -28,9 +35,12 @@ public class EditReservationWindow extends JInternalFrame {
     private FuncionarioService funcionarioServices = new FuncionarioServiceImpl();
     private PasseioService passeioServices = new PasseioServiceImpl();
 
-    private JComboBox<Cliente> cbCliente;
-    private JComboBox<Funcionario> cbFuncionario;
-    private JComboBox<Passeio> cbPasseio;
+    private JComboBox<ClienteDTO> cbCliente;
+    private JComboBox<FuncionarioDTO> cbFuncionario;
+    private ClienteRepository clienteRepository = new ClienteRepository(CustomizerFactory.getEntityManager());
+    private FuncionarioRepository funcionarioRepository = new FuncionarioRepository(CustomizerFactory.getEntityManager());
+    private JComboBox<PasseioDTO> cbPasseio;
+    private List<Passeio> allPasseios;
     private JTextField tfData;
     private JTextField tfValor;
 
@@ -97,29 +107,33 @@ public class EditReservationWindow extends JInternalFrame {
     }
 
     private JPanel buildFormPanel() {
-        List<Cliente> clientes = clienteServices.findAll();
-        List<Funcionario> funcionarios = funcionarioServices.findAll();
-        List<Passeio> passeios = passeioServices.findAll();
+        List<ClienteDTO> clientes = clienteServices.findAll();
 
-        cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
+        List<FuncionarioDTO> funcionarios = funcionarioServices.findAll();
+        allPasseios = passeioServices.findAllEntities();
+        List<PasseioDTO> passeios = allPasseios.stream()
+                .map(p -> new PasseioDTO(p.getPrice(), p.getDurationOfTourInMinute(), p.getCountryTour(), p.getKmOftour(), p.getNameOfTour(), p.getLocations()))
+                .collect(java.util.stream.Collectors.toList());
+
+        cbCliente = new JComboBox<>(clientes.toArray(new ClienteDTO[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getName() : "");
+            JLabel lbl = new JLabel(value != null ? value.name() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
         });
 
-        cbFuncionario = new JComboBox<>(funcionarios.toArray(new Funcionario[0]));
+        cbFuncionario = new JComboBox<>(funcionarios.toArray(new FuncionarioDTO[0]));
         cbFuncionario.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getName() : "");
+            JLabel lbl = new JLabel(value != null ? value.name() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
         });
 
-        cbPasseio = new JComboBox<>(passeios.toArray(new Passeio[0]));
+        cbPasseio = new JComboBox<>(passeios.toArray(new PasseioDTO[0]));
         cbPasseio.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getNameOfTour() : "");
+            JLabel lbl = new JLabel(value != null ? value.nameOfTour() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
@@ -152,21 +166,23 @@ public class EditReservationWindow extends JInternalFrame {
         Reservations r = reservationsServices.findById(id);
         if (r == null) return;
 
-        selectComboItem(cbCliente, r.getCliente().getId());
-        selectComboItem(cbFuncionario, r.getFuncionario().getId());
-        selectComboItem(cbPasseio, r.getTour().getId());
+        selectComboItemByCpf(cbCliente, r.getCliente().getCpf());
+        selectComboItemByCpf(cbFuncionario, r.getFuncionario().getCpf());
+        long tourId = r.getTour().getId();
+        for (int i = 0; i < allPasseios.size(); i++) {
+            if (allPasseios.get(i).getId() == tourId) { cbPasseio.setSelectedIndex(i); break; }
+        }
         tfData.setText(r.getDate().toString());
         tfValor.setText(String.format("%.2f", r.getValue()));
     }
 
-    private <T> void selectComboItem(JComboBox<T> combo, long id) {
+    private <T> void selectComboItemByCpf(JComboBox<T> combo, String cpf) {
         for (int i = 0; i < combo.getItemCount(); i++) {
             Object item = combo.getItemAt(i);
-            long itemId = -1;
-            if (item instanceof Cliente c) itemId = c.getId();
-            else if (item instanceof Funcionario f) itemId = f.getId();
-            else if (item instanceof Passeio p) itemId = p.getId();
-            if (itemId == id) { combo.setSelectedIndex(i); return; }
+            String itemCpf = null;
+            if (item instanceof ClienteDTO c) itemCpf = c.cpf();
+            else if (item instanceof FuncionarioDTO f) itemCpf = f.cpf();
+            if (cpf != null && cpf.equals(itemCpf)) { combo.setSelectedIndex(i); return; }
         }
     }
 
@@ -188,9 +204,20 @@ public class EditReservationWindow extends JInternalFrame {
             LocalDate novaData = LocalDate.parse(tfData.getText().trim());
             double novoValor = Double.parseDouble(tfValor.getText().trim().replace(",", "."));
 
-            r.setCliente((Cliente) cbCliente.getSelectedItem());
-            r.setFuncionario((Funcionario) cbFuncionario.getSelectedItem());
-            r.setTour((Passeio) cbPasseio.getSelectedItem());
+            ClienteDTO clienteDTO = (ClienteDTO) cbCliente.getSelectedItem();
+            FuncionarioDTO funcionarioDTO = (FuncionarioDTO) cbFuncionario.getSelectedItem();
+
+            Cliente clienteSelecionado = clienteRepository.findByCpf(clienteDTO.cpf());
+            List<Funcionario> funcionarios = funcionarioRepository.findByCPF(funcionarioDTO.cpf());
+            if (clienteSelecionado == null || funcionarios.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cliente ou funcionário não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            r.setCliente(clienteSelecionado);
+            r.setFuncionario(funcionarios.get(0));
+            int passeioIdx = cbPasseio.getSelectedIndex();
+            r.setTour(passeioIdx >= 0 ? allPasseios.get(passeioIdx) : null);
             r.setDate(novaData);
             r.setValue(novoValor);
 

@@ -60,6 +60,14 @@ public class ClienteRepository {
         }
     }
 
+    public Cliente findByCpf(String cpf) {
+        return em.createQuery("select c from Cliente c where c.cpf = :cpf", Cliente.class)
+                .setParameter("cpf", cpf)
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
+    }
+
     public List<Cliente> findByName(String name) {
         return em.createQuery("select c from Cliente c where lower(c.name) like lower(:name)", Cliente.class)
                 .setParameter("name", name + "%")

@@ -33,7 +33,7 @@ public class Cliente{
     @Column(name = "country_of_customer")
     private CountryCostumer countryOfCostumer;
 
-    public Cliente(ArrayList<Language> languageSpeak, CountryCostumer countryOfCostumer, String cnpj, String cpf, String name) {
+    public Cliente(List<Language> languageSpeak, CountryCostumer countryOfCostumer, String cnpj, String cpf, String name) {
         this.languageSpeak = languageSpeak;
         this.countryOfCostumer = countryOfCostumer;
         this.cpf = cpf;

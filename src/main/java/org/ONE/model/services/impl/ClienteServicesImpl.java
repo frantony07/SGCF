@@ -1,12 +1,15 @@
 package org.ONE.model.services.impl;
 
+import Controller.Record.ClienteDTO;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.model.entity.Cliente;
+import org.ONE.model.entity.ENUM.Language;
 import org.ONE.model.repositories.ClienteRepository;
 import org.ONE.model.repositories.CustomizerFactory;
 import org.ONE.model.services.ClienteServices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteServicesImpl implements ClienteServices {
@@ -17,64 +20,87 @@ public class ClienteServicesImpl implements ClienteServices {
     public ClienteServicesImpl() {
     }
 
-    @Override
-    public void createNewRecord(Cliente cliente){
-        try {
-            if(cliente == null){
-                throw new RuntimeException("O cliente não pode ser nulo");
-            }
-            clienteRepository.create(cliente);
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-            throw e;
+
+    @Override
+    public void createNewRecord(ClienteDTO clienteDTO) {
+
+        if (clienteDTO == null) {
+            throw new IllegalArgumentException("O cliente não pode ser nulo");
         }
+
+        Cliente cliente = new Cliente(
+                clienteDTO.languageSpeak(),
+                clienteDTO.countryOfCostumer(),
+                clienteDTO.cnpj(),
+                clienteDTO.cpf(),
+                clienteDTO.name()
+        );
+
+        clienteRepository.create(cliente);
     }
 
     @Override
-    public void delete(Cliente cliente){
-        try {
-            if (cliente == null){throw new RuntimeException("O cliente não pode ser nulo");}
+    public void delete(ClienteDTO clienteDTO) {
 
-            clienteRepository.delete(cliente);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (clienteDTO == null) {
+            throw new IllegalArgumentException("O cliente não pode ser nulo");
         }
+
+        Cliente cliente = new Cliente(
+                clienteDTO.languageSpeak(),
+                clienteDTO.countryOfCostumer(),
+                clienteDTO.cnpj(),
+                clienteDTO.cpf(),
+                clienteDTO.name()
+        );
+
+        clienteRepository.delete(cliente);
     }
 
     @Override
-    public List<Cliente> findByName(String name){
-        try {
-            if (name.matches("\\d+")) {
-                throw new RuntimeException("O nome não pode ser um número");
-            }
+    public List<ClienteDTO> findByName(String name) {
 
-            return clienteRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Nome inválido");
         }
 
-        return List.of();
+        if (name.matches("\\d+")) {
+            throw new IllegalArgumentException("O nome não pode ser numérico");
+        }
+
+        return clienteRepository.findByName(name)
+                .stream()
+                .map(cliente ->new ClienteDTO(
+                        new ArrayList<>(cliente.getLanguageSpeak()),
+                        cliente.getCountryOfCostumer(),
+                        cliente.getCnpj(),
+                        cliente.getCpf(),
+                        cliente.getName()))
+                .toList();
     }
 
     @Override
-    public List<Cliente> findAll (){
-        try {
-            return clienteRepository.findAll();
+    public List<ClienteDTO> findAll() {
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
+        return clienteRepository.findAll()
+                .stream()
+                .map(cliente -> new ClienteDTO(
+                        new ArrayList<>(cliente.getLanguageSpeak()),
+                        cliente.getCountryOfCostumer(),
+                        cliente.getCnpj(),
+                        cliente.getCpf(),
+                        cliente.getName()
+                ))
+                .toList();
     }
 
+
     @Override
-    public Cliente findById(Long id) {
+    public ClienteDTO findById(Long id) {
         try {
-            return clienteRepository.findById(id);
+             Cliente cliente = clienteRepository.findById(id);
+             return new ClienteDTO(new ArrayList<>(cliente.getLanguageSpeak()), cliente.getCountryOfCostumer() ,cliente.getCnpj(), cliente.getCpf(),cliente.getName() );
         } catch (Exception err) {
             PrintError.printErro(err);
         }

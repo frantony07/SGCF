@@ -1,13 +1,20 @@
 package org.ONE.model.services.impl;
 
+import Controller.Record.FuncionarioDTO;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
+import org.ONE.model.entity.ENUM.Language;
 import org.ONE.model.entity.Funcionario;
+import org.ONE.model.repositories.ClienteRepository;
 import org.ONE.model.repositories.CustomizerFactory;
 import org.ONE.model.repositories.FuncionarioRepository;
 import org.ONE.model.services.FuncionarioService;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class FuncionarioServiceImpl implements FuncionarioService {
     private EntityManager entityManager = CustomizerFactory.getEntityManager();
@@ -15,11 +22,19 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 
     @Override
-    public  void createNewRecorde(Funcionario funcionario){
+    public  void createNewRecorde(FuncionarioDTO funcionarioDTO){
         try {
-            if(funcionario == null){
+            if(funcionarioDTO == null){
                 throw new RuntimeException("O funcionario não pode ser nulo ");
             }
+
+            Funcionario funcionario = new Funcionario(
+                    funcionarioDTO.cpf(),
+                    funcionarioDTO.name(),
+                    funcionarioDTO.languagesSpoken()
+
+            );
+
             funcionarioRepository.create(funcionario);
 
         } catch (Exception e) {
@@ -30,61 +45,78 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public void updateRecorde(Funcionario funcionario){
-        try {
-            if(funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
+    public void updateRecorde(FuncionarioDTO funcionarioDTO){
 
-            funcionarioRepository.update(funcionario);
+            if(funcionarioDTO == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
+        Funcionario funcionario = new Funcionario(
+                funcionarioDTO.cpf(),
+                funcionarioDTO.name(),
+                funcionarioDTO.languagesSpoken()
+
+        );
+
+        funcionarioRepository.update(funcionario);
+
     }
 
     @Override
-    public  void delete(Funcionario funcionario){
-        try {
-            if (funcionario == null){throw new RuntimeException("O funcionario não pode ser nulo ");}
+    public  void delete(FuncionarioDTO funcionarioDTO){
 
-            funcionarioRepository.delete(funcionario);
+            if (funcionarioDTO == null)
+            {throw new RuntimeException("O funcionario não pode ser nulo ");
+            };
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-    }
+            Funcionario funcionario = new Funcionario(
+                    funcionarioDTO.cpf(),
+                    funcionarioDTO.name(),
+                    funcionarioDTO.languagesSpoken()
+            );
+
+       funcionarioRepository.delete(funcionario);
+    };
 
     @Override
-    public List<Funcionario> findByName(String name){
-        try {
+    public List<FuncionarioDTO> findByName(String name) {
+
+            if (name == null || name.isBlank()) {
+                throw new RuntimeException("O nome não pode ser nulo ou vazio");
+            }
+
             if (name.matches("\\d+")) {
                 throw new RuntimeException("O  nome não pode ser um número");
             }
 
-            return funcionarioRepository.findByName(name);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
-
-        return List.of();
+        return funcionarioRepository.findByName(name)
+                .stream()
+                .map(funcionario -> new FuncionarioDTO(
+                        funcionario.getCpf(),
+                        funcionario.getName(),
+                        funcionario.getLanguagesSpoken()
+                ))
+                .toList();
     }
 
     @Override
-    public List<Funcionario> findAll (){
-        try {
-            return  funcionarioRepository.findAll();
+    public List<FuncionarioDTO> findAll(){
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
-        }
+        return funcionarioRepository.findAll()
+                .stream()
+                .map(funcionario -> new FuncionarioDTO(
+                        funcionario.getCpf(),
+                        funcionario.getName(),
+                        funcionario.getLanguagesSpoken()
+                ))
+                .toList();
 
-        return List.of();
     }
 
+
     @Override
-    public Funcionario findById(Long id) {
+    public FuncionarioDTO findById(Long id) {
         try {
-            return funcionarioRepository.findById(id);
+            Funcionario funcionario = funcionarioRepository.findById(id);
+            return new FuncionarioDTO(funcionario.getCpf(), funcionario.getName(), new ArrayList<>(funcionario.getLanguagesSpoken()));
         } catch (Exception e) {
             PrintError.printErro(e);
         }
@@ -112,3 +144,4 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         return 0L;
     }
 }
+

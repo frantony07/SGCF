@@ -1,5 +1,8 @@
 package View.ShowViews;
 
+import Controller.EmployeeController;
+import Controller.Impl.EmployeeControllerImpl;
+import Controller.Record.FuncionarioDTO;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.impl.FuncionarioServiceImpl;
@@ -13,14 +16,14 @@ public class ShowEmployee extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private FuncionarioService employeeService;
+    private EmployeeController employeeController;
 
     private JTextField txtBusca;
 
     public ShowEmployee() {
         super("Lista de Funcionários", true, true, true, true);
 
-        employeeService = new FuncionarioServiceImpl();
+        employeeController = new EmployeeControllerImpl();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());
@@ -60,13 +63,12 @@ public class ShowEmployee extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<Funcionario> lista = employeeService.findAll();
+        List<FuncionarioDTO> lista = employeeController.findAll();
 
-        for (Funcionario emp : lista) {
+        for (FuncionarioDTO emp : lista) {
             model.addRow(new Object[]{
-                    emp.getId(),
-                    emp.getName(),
-                    emp.getCpf(),
+                    emp.name(),
+                    emp.cpf(),
 
             });
         }
@@ -83,17 +85,16 @@ public class ShowEmployee extends JInternalFrame {
 
         model.setRowCount(0);
 
-        List<Funcionario> lista = employeeService.findByName(nome);
+        List<FuncionarioDTO> lista = employeeController.findByName(nome);
 
         if (lista.isEmpty()){
             JOptionPane.showMessageDialog(this,"Nenhum funcionario encontrado", "erro",JOptionPane.ERROR_MESSAGE);
         }
 
-        for (Funcionario emp : lista) {
+        for (FuncionarioDTO emp : lista) {
             model.addRow(new Object[]{
-                    emp.getId(),
-                    emp.getName(),
-                    emp.getCpf(),
+                    emp.name(),
+                    emp.cpf(),
 
             });
         }

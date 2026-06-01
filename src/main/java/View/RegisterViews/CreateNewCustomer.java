@@ -4,7 +4,7 @@ import Functions.CNPJ;
 import Functions.CPF;
 import Functions.loadLanguage;
 import View.ItensDefault;
-import org.ONE.model.entity.Cliente;
+import Controller.Record.ClienteDTO;
 import org.ONE.model.entity.ENUM.CountryCostumer;
 import org.ONE.model.entity.ENUM.Language;
 import org.ONE.model.services.impl.ClienteServicesImpl;
@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateNewCustomer extends JInternalFrame {
 
@@ -144,7 +145,7 @@ public class CreateNewCustomer extends JInternalFrame {
 
             try {
 
-                Cliente newCustomer = new Cliente((ArrayList<Language>) selectedLangs,country,cnpj,cpf,name);
+                ClienteDTO newCustomer = new ClienteDTO(new ArrayList<>(selectedLangs),country,cnpj,cpf,name);
                 clienteServices.createNewRecord(newCustomer);
 
                 JOptionPane.showMessageDialog(this, "Cliente " + name + " salvo com sucesso!");

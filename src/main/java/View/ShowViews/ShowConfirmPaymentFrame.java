@@ -1,9 +1,9 @@
 package View.ShowViews;
 
+import Controller.Impl.PaymentControllerImpl;
+import Controller.PaymentController;
 import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.entity.PayModel;
-import org.ONE.model.services.PayService;
-import org.ONE.model.services.impl.PayServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ShowConfirmPaymentFrame extends JInternalFrame {
 
-    private PayService payServices = new PayServiceImpl();
+    private PaymentController payController = new PaymentControllerImpl();
 
     private JTable paymentsTable;
     private DefaultTableModel tableModel;
@@ -88,7 +88,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
 
         tableModel.setRowCount(0);
 
-        List<PayModel> list = payServices.findAll();
+        List<PayModel> list = payController.findAll();
 
         for (PayModel payModel : list) {
             tableModel.addRow(new Object[]{
@@ -115,7 +115,7 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
 
             int idPayment = Integer.parseInt(text);
 
-            PayModel payment = payServices.findById(idPayment);
+            PayModel payment = payController.findById(idPayment);
 
             if (payment == null) {
                 JOptionPane.showMessageDialog(this,
@@ -125,9 +125,9 @@ public class ShowConfirmPaymentFrame extends JInternalFrame {
                 return;
             }
 
-            payment.setStatus(Status.CONFIRMADA);
+            payment.setStatus(Status.confirmada);
 
-            payServices.updateRecords(payment);
+            payController.updateRecords(payment);
 
             JOptionPane.showMessageDialog(this,
                     "Pagamento confirmado com sucesso!");

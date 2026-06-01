@@ -1,5 +1,6 @@
 package org.ONE.model.services.impl;
 
+import Controller.Record.PasseioDTO;
 import Functions.PrintError;
 import jakarta.persistence.EntityManager;
 import org.ONE.model.entity.Passeio;
@@ -15,50 +16,79 @@ public class PasseioServiceImpl  implements PasseioService {
     private PasseioRepository passeioRepository = new PasseioRepository(entityManager);
 
     @Override
-    public  void createNewRecorde(Passeio passeio){
-        try {
-            if(passeio == null){
-                throw new RuntimeException("O Passeio não pode ser nulo ");
-            }
-            passeioRepository.create(passeio);
+    public void createNewRecord(PasseioDTO passeioDTO) {
 
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (passeioDTO == null) {
+            throw new IllegalArgumentException("O passeio não pode ser nulo");
         }
+
+        Passeio passeio = new Passeio(
+                passeioDTO.price(),
+                passeioDTO.durationOfTourInMinute(),
+                passeioDTO.countryTour(),
+                passeioDTO.kmOftour(),
+                passeioDTO.nameOfTour(),
+                passeioDTO.locations()
+        );
+
+        passeioRepository.create(passeio);
     }
 
     @Override
-    public void updateRecorde(Passeio passeio){
-        try {
-            if(passeio == null){throw new RuntimeException("O passeio não pode ser nulo ");}
+    public void updateRecord(PasseioDTO passeioDTO) {
 
-            passeioRepository.update(passeio);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (passeioDTO == null) {
+            throw new IllegalArgumentException("O passeio não pode ser nulo");
         }
+
+        Passeio passeio = new Passeio(
+                passeioDTO.price(),
+                passeioDTO.durationOfTourInMinute(),
+                passeioDTO.countryTour(),
+                passeioDTO.kmOftour(),
+                passeioDTO.nameOfTour(),
+                passeioDTO.locations()
+        );
+
+        passeioRepository.update(passeio);
     }
 
     @Override
-    public  void delete(Passeio passeio){
-        try {
-            if (passeio == null){throw new RuntimeException("O cliente não pode ser nulo ");}
+    public void delete(PasseioDTO passeioDTO) {
 
-            passeioRepository.delete(passeio);
-
-        } catch (Exception e) {
-            PrintError.printErro(e);
+        if (passeioDTO == null) {
+            throw new IllegalArgumentException("O passeio não pode ser nulo");
         }
+
+        Passeio passeio = new Passeio(
+                passeioDTO.price(),
+                passeioDTO.durationOfTourInMinute(),
+                passeioDTO.countryTour(),
+                passeioDTO.kmOftour(),
+                passeioDTO.nameOfTour(),
+                passeioDTO.locations()
+        );
+
+        passeioRepository.delete(passeio);
     }
 
     @Override
-    public List<Passeio> findByName(String name){
+    public List<PasseioDTO> findByName(String name){
         try {
             if (name.matches("\\d+")) {
                 throw new RuntimeException("O nome não pode ser um número");
             }
 
-            return passeioRepository.findByName(name);
+            return passeioRepository.findByName(name).stream()
+                    .map(passeio -> new PasseioDTO(
+                            passeio.getPrice(),
+                            passeio.getDurationOfTourInMinute(),
+                            passeio.getCountryTour(),
+                            passeio.getKmOftour(),
+                            passeio.getNameOfTour(),
+                            passeio.getLocations()
+                    ))
+                    .toList();
 
         } catch (Exception e) {
             PrintError.printErro(e);
@@ -68,10 +98,44 @@ public class PasseioServiceImpl  implements PasseioService {
     }
 
     @Override
-    public List<Passeio> findAll (){return entityManager.createQuery("select f from Passeio f " , Passeio.class).getResultList();}
+    public List<Passeio> findAllEntities() {
+        return passeioRepository.findAll();
+    }
 
     @Override
-    public Passeio findById(Long id) {return passeioRepository.findById(id); }
+    public List<PasseioDTO> findAll() {
+
+        return passeioRepository.findAll()
+                .stream()
+                .map(passeio -> new PasseioDTO(
+                        passeio.getPrice(),
+                        passeio.getDurationOfTourInMinute(),
+                        passeio.getCountryTour(),
+                        passeio.getKmOftour(),
+                        passeio.getNameOfTour(),
+                        passeio.getLocations()
+                ))
+                .toList();
+    }
+
+    @Override
+    public PasseioDTO findById(Long id) {
+
+        Passeio passeio = passeioRepository.findById(id);
+
+        if (passeio == null) {
+            throw new IllegalArgumentException("Passeio não encontrado");
+        }
+
+        return new PasseioDTO(
+                passeio.getPrice(),
+                passeio.getDurationOfTourInMinute(),
+                passeio.getCountryTour(),
+                passeio.getKmOftour(),
+                passeio.getNameOfTour(),
+                passeio.getLocations()
+        );
+    }
 
     @Override
     public Long getSize(){
