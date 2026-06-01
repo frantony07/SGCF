@@ -95,6 +95,7 @@ public class ClienteServicesImpl implements ClienteServices {
                 .toList();
     }
 
+
     @Override
     public ClienteDTO findById(Long id) {
         try {

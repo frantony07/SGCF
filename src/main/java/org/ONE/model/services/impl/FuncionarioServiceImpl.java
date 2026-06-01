@@ -111,6 +111,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     }
 
+
     @Override
     public FuncionarioDTO findById(Long id) {
         try {

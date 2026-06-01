@@ -140,7 +140,7 @@ public class PayServiceImpl implements PayService {
                                         LocalDate start,
                                         LocalDate end) {
         try {
-            Double result = payRepository.sumEarningsForCompany(Status.CONFIRMADA, start, end);
+            Double result = payRepository.sumEarningsForCompany(Status.confirmada, start, end);
             return result == null ? 0.0 : result;
         } catch (Exception err) {
             PrintError.printErro(err);

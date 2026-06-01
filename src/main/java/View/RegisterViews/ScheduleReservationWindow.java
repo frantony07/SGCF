@@ -2,11 +2,8 @@ package View.RegisterViews;
 
 import Controller.Record.ClienteDTO;
 import Controller.Record.FuncionarioDTO;
-import Controller.Record.PasseioDTO;
 import Controller.ReservationController;
 import View.ItensDefault;
-import org.ONE.model.entity.Cliente;
-import org.ONE.model.entity.Funcionario;
 import org.ONE.model.entity.Passeio;
 
 import javax.swing.*;
@@ -69,9 +66,9 @@ public class ScheduleReservationWindow extends JInternalFrame {
         panel.add(ItensDefault.createBoldLabel("Cliente:", 14), gbc);
 
         List<ClienteDTO> clientes = reservationController.getAllClientes();
-        JComboBox<Cliente> cbCliente = new JComboBox<>(clientes.toArray(new Cliente[0]));
+        JComboBox<ClienteDTO> cbCliente = new JComboBox<>(clientes.toArray(new ClienteDTO[0]));
         cbCliente.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getName() : "");
+            JLabel lbl = new JLabel(value != null ? value.name() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
@@ -83,9 +80,9 @@ public class ScheduleReservationWindow extends JInternalFrame {
         panel.add(ItensDefault.createBoldLabel("Funcionário:", 14), gbc);
 
         List<FuncionarioDTO> funcionarios = reservationController.getAllFuncionarios();
-        JComboBox<Funcionario> cbFuncionario = new JComboBox<>(funcionarios.toArray(new Funcionario[0]));
+        JComboBox<FuncionarioDTO> cbFuncionario = new JComboBox<>(funcionarios.toArray(new FuncionarioDTO[0]));
         cbFuncionario.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            JLabel lbl = new JLabel(value != null ? value.getName() : "");
+            JLabel lbl = new JLabel(value != null ? value.name() : "");
             lbl.setOpaque(true);
             if (isSelected) lbl.setBackground(list.getSelectionBackground());
             return lbl;
@@ -105,16 +102,16 @@ public class ScheduleReservationWindow extends JInternalFrame {
         gbc.fill = GridBagConstraints.NONE;
         JButton btnAgendar = new JButton("Agendar");
         btnAgendar.addActionListener(e -> {
-            Passeio passeio       = (Passeio)     cbPasseio.getSelectedItem();
-            Cliente cliente       = (Cliente)     cbCliente.getSelectedItem();
-            Funcionario funcionario = (Funcionario) cbFuncionario.getSelectedItem();
-            String dataStr        = tfData.getText().trim();
+            Passeio passeio             = (Passeio)      cbPasseio.getSelectedItem();
+            ClienteDTO clienteDTO       = (ClienteDTO)   cbCliente.getSelectedItem();
+            FuncionarioDTO funcionarioDTO = (FuncionarioDTO) cbFuncionario.getSelectedItem();
+            String dataStr              = tfData.getText().trim();
 
             try {
-                reservationController.createReservation(passeio, cliente, funcionario, dataStr);
+                reservationController.createReservation(passeio, clienteDTO, funcionarioDTO, dataStr);
 
                 JOptionPane.showMessageDialog(this,
-                        "Reserva agendada com sucesso!\nCliente: " + (cliente != null ? cliente.getName() : "") +
+                        "Reserva agendada com sucesso!\nCliente: " + (clienteDTO != null ? clienteDTO.name() : "") +
                         "\nPasseio: " + (passeio != null ? passeio.getNameOfTour() : "") +
                         "\nData: " + dataStr,
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
