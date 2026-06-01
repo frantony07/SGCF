@@ -6,7 +6,7 @@ VALUES (NEW.fk_clientes_id, NEW.value, 'pendente')
     ON CONFLICT (fk_cliente_id)
         DO UPDATE SET
     total_account = CASE
-                   WHEN pay.status = 'CONFIRMADA' THEN EXCLUDED.total_account
+                   WHEN pay.status = 'confirmada' THEN EXCLUDED.total_account
                    ELSE pay.total_account + EXCLUDED.total_account
 END,
             status = 'pendente';
