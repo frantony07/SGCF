@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS meta (
-    id serial not null,
+    id serial not null primary key,
     start_date date not null,
     end_date date not null,
     target_value double precision not null,
