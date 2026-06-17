@@ -7,10 +7,6 @@ import View.RegisterViews.CreateNewEmployee;
 import View.RegisterViews.CreateNewTour;
 import View.RegisterViews.CreateNewUser;
 import View.RegisterViews.ScheduleReservationWindow;
-import org.ONE.model.services.impl.ClienteServicesImpl;
-import org.ONE.model.services.impl.FuncionarioServiceImpl;
-import org.ONE.model.services.impl.PasseioServiceImpl;
-import org.ONE.model.services.impl.ReservationsServiceImpl;
 
 import javax.swing.*;
 

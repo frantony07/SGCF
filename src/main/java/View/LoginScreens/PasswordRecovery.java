@@ -2,15 +2,13 @@ package View.LoginScreens;
 
 import Controller.EmailController;
 import Controller.Impl.EmailControllerImpl;
+import Controller.Impl.ResetPasswordControllerImpl;
+import Controller.Impl.UserControllerImpl;
+import Controller.ResetPasswordController;
+import Controller.UserController;
 import Functions.GenerateCode;
 import org.ONE.model.entity.PasswordReset;
 import org.ONE.model.entity.User;
-import org.ONE.model.services.EmailService;
-import org.ONE.model.services.PasswordResetService;
-import org.ONE.model.services.UserService;
-import org.ONE.model.services.impl.EmailServiceImpl;
-import org.ONE.model.services.impl.PasswordResetServiceimpl;
-import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,14 +19,14 @@ public class PasswordRecovery extends JFrame {
     private JTextField inputEmail;
     private JButton btnEnviar;
     private JButton btnVoltar;
-    private UserService userServices;
-    private PasswordResetService passwordResetService;
+    private UserController userController;
+    private ResetPasswordController passwordRecoveryController;
     private EmailController emailController;
 
     public PasswordRecovery() {
 
-        userServices = new UserServiceImpl();
-        passwordResetService = new PasswordResetServiceimpl();
+        userController = new UserControllerImpl();
+        passwordRecoveryController = new ResetPasswordControllerImpl();
         emailController = new EmailControllerImpl();
         initComponents();
     }
@@ -90,7 +88,7 @@ public class PasswordRecovery extends JFrame {
 
         try {
 
-            User user = userServices.findByEmail(email);
+            User user = userController.findByEmail(email);
             if(user == null) {
                 JOptionPane.showMessageDialog(
                         this,
@@ -112,7 +110,7 @@ public class PasswordRecovery extends JFrame {
 
             passwordReset.setUsed(false);
             passwordReset.setUser(user);
-            passwordResetService.create(passwordReset);
+            passwordRecoveryController.create(passwordReset);
 
             emailController.sendEmail(
                     email,

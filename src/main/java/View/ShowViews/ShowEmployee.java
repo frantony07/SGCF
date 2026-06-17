@@ -3,9 +3,7 @@ package View.ShowViews;
 import Controller.EmployeeController;
 import Controller.Impl.EmployeeControllerImpl;
 import Controller.Record.FuncionarioDTO;
-import org.ONE.model.entity.Funcionario;
-import org.ONE.model.services.FuncionarioService;
-import org.ONE.model.services.impl.FuncionarioServiceImpl;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

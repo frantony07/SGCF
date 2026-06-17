@@ -3,7 +3,6 @@ package View.ShowViews;
 import Controller.Impl.TourControllerImpl;
 import Controller.Record.PasseioDTO;
 import Controller.TourController;
-import org.ONE.model.services.impl.PasseioServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

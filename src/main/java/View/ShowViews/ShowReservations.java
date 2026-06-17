@@ -29,7 +29,7 @@ public class ShowReservations extends JInternalFrame {
                 new ReservationControllerImpl();
 
         setSize(1000, 500);
-        setLocation(550, 100);
+        setLocation(350, 100);
         setLayout(new BorderLayout());
 
         JPanel topPanel =

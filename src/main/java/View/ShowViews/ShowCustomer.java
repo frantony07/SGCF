@@ -1,8 +1,8 @@
 package View.ShowViews;
 
+import Controller.CustomerController;
+import Controller.Impl.CustomerControllerImpl;
 import Controller.Record.ClienteDTO;
-import org.ONE.model.entity.Cliente;
-import org.ONE.model.services.impl.ClienteServicesImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,13 +13,13 @@ public class ShowCustomer extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ClienteServicesImpl clienteService;
+    private CustomerController customerController;
     private JTextField txtBusca;
 
     public ShowCustomer() {
         super("Lista de Clientes", true, true, true, true);
 
-        clienteService = new ClienteServicesImpl();
+        customerController = new CustomerControllerImpl();
 
         setLocation(550, 100);
         setLayout(new BorderLayout());
@@ -62,7 +62,7 @@ public class ShowCustomer extends JInternalFrame {
     private void loadData() {
         model.setRowCount(0);
 
-        List<ClienteDTO> lista = clienteService.findAll();
+        List<ClienteDTO> lista = customerController.findAll();
 
         for (ClienteDTO c : lista) {
             model.addRow(new Object[]{
@@ -85,7 +85,7 @@ public class ShowCustomer extends JInternalFrame {
 
         model.setRowCount(0);
 
-        List<ClienteDTO> lista = clienteService.findByName(nome);
+        List<ClienteDTO> lista = customerController.findByName(nome);
 
         if (lista.isEmpty()){
              JOptionPane.showMessageDialog(this,"nenhum cliente encontrado","erro",JOptionPane.ERROR_MESSAGE);

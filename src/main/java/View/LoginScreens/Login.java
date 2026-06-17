@@ -4,7 +4,6 @@ import Controller.Impl.UserControllerImpl;
 import Controller.UserController;
 import View.MainScreens;
 import org.ONE.model.entity.User;
-import org.ONE.model.services.impl.UserServiceImpl;
 
 import javax.swing.*;
 

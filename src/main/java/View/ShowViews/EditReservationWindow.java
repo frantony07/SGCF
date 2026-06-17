@@ -1,8 +1,10 @@
 package View.ShowViews;
 
+import Controller.Impl.ReservationControllerImpl;
 import Controller.Record.ClienteDTO;
 import Controller.Record.FuncionarioDTO;
 import Controller.Record.PasseioDTO;
+import Controller.ReservationController;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.entity.Passeio;
@@ -15,7 +17,6 @@ import org.ONE.model.services.FuncionarioService;
 import org.ONE.model.services.PasseioService;
 import org.ONE.model.services.impl.FuncionarioServiceImpl;
 import org.ONE.model.services.impl.PasseioServiceImpl;
-import org.ONE.model.services.impl.ReservationsServiceImpl;
 import View.ItensDefault;
 
 import javax.swing.*;
@@ -23,14 +24,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditReservationWindow extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ReservationsServiceImpl reservationsServices = new ReservationsServiceImpl();
+    private ReservationController reservationController = new ReservationControllerImpl();
     private ClienteServicesImpl clienteServices = new ClienteServicesImpl();
     private FuncionarioService funcionarioServices = new FuncionarioServiceImpl();
     private PasseioService passeioServices = new PasseioServiceImpl();
@@ -76,7 +76,7 @@ public class EditReservationWindow extends JInternalFrame {
             if (txt.isEmpty()) { loadData(); return; }
             try {
                 long id = Long.parseLong(txt);
-                Reservations r = reservationsServices.findById(id);
+                Reservations r = reservationController.findById(id);
                 model.setRowCount(0);
                 if (r != null) {
                     model.addRow(toRow(r));
@@ -163,7 +163,7 @@ public class EditReservationWindow extends JInternalFrame {
         if (row < 0) return;
 
         Long id = (Long) model.getValueAt(row, 0);
-        Reservations r = reservationsServices.findById(id);
+        Reservations r = reservationController.findById(id);
         if (r == null) return;
 
         selectComboItemByCpf(cbCliente, r.getCliente().getCpf());
@@ -194,7 +194,7 @@ public class EditReservationWindow extends JInternalFrame {
         }
 
         Long id = (Long) model.getValueAt(row, 0);
-        Reservations r = reservationsServices.findById(id);
+        Reservations r = reservationController.findById(id);
         if (r == null) {
             JOptionPane.showMessageDialog(this, "Reserva não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
@@ -221,7 +221,8 @@ public class EditReservationWindow extends JInternalFrame {
             r.setDate(novaData);
             r.setValue(novoValor);
 
-            reservationsServices.updateRecorde(r);
+            reservationController.updateRecorde(r);
+
             JOptionPane.showMessageDialog(this, "Reserva atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             loadData();
         } catch (DateTimeParseException ex) {
@@ -235,7 +236,7 @@ public class EditReservationWindow extends JInternalFrame {
 
     private void loadData() {
         model.setRowCount(0);
-        for (Reservations r : reservationsServices.findAll()) {
+        for (Reservations r : reservationController.findAll()) {
             model.addRow(toRow(r));
         }
     }

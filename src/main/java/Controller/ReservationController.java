@@ -21,5 +21,7 @@ public interface ReservationController {
 
     List<Reservations> getConfirmedReservations();
 
+    void updateRecorde(Reservations r);
+
     void createReservation(Passeio passeio, ClienteDTO clienteDTO, FuncionarioDTO funcionarioDTO, String dateStr);
 }

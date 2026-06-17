@@ -128,4 +128,14 @@ public class ReservationControllerImpl implements ReservationController {
 
         reservationService.createNewRecorde(reservation);
     }
+
+    public Reservations findById(long id){
+        return reservationService.findById(id);
+    }
+
+    public  void updateRecorde(Reservations r){
+        reservationService.updateRecorde(r);
+    }
+
+
 }
