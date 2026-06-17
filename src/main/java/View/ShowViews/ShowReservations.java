@@ -1,8 +1,8 @@
 package View.ShowViews;
 
+import Controller.Impl.ReservationControllerImpl;
 import org.ONE.model.entity.Reservations;
 import org.ONE.model.services.impl.ReservationsServiceImpl;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class ShowReservations extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel model;
-    private ReservationsServiceImpl reservationsServices;
+    private ReservationControllerImpl reservationsController;
     private JTextField txtBusca;
 
     public ShowReservations() {
@@ -25,8 +25,8 @@ public class ShowReservations extends JInternalFrame {
                 true
         );
 
-        reservationsServices =
-                new ReservationsServiceImpl();
+        reservationsController =
+                new ReservationControllerImpl();
 
         setSize(1000, 500);
         setLocation(550, 100);
@@ -90,7 +90,7 @@ public class ShowReservations extends JInternalFrame {
 
         model.setRowCount(0);
         List<Reservations> lista =
-                reservationsServices.findAll();
+                reservationsController.findAll();
 
         for (Reservations r : lista) {
             model.addRow(new Object[]{
@@ -119,7 +119,7 @@ public class ShowReservations extends JInternalFrame {
         model.setRowCount(0);
 
         List<Reservations> lista =
-                reservationsServices
+                reservationsController
                         .getConfirmedReservations();
 
         for (Reservations r : lista) {
@@ -162,7 +162,7 @@ public class ShowReservations extends JInternalFrame {
         );
 
         Reservations reservation =
-                reservationsServices.findById(id);
+                reservationsController.findById(id);
         if(reservation == null) {
 
             JOptionPane.showMessageDialog(
@@ -182,7 +182,7 @@ public class ShowReservations extends JInternalFrame {
 
         if(confirmacao ==
                 JOptionPane.YES_OPTION) {
-            reservationsServices.delete(
+            reservationsController.delete(
                     reservation
             );
 

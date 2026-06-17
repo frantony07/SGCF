@@ -1,9 +1,9 @@
 package Controller.Impl;
 
 import Controller.Record.FuncionarioDTO;
-import Controller.Record.PasseioDTO;
 import Controller.ReservationController;
 import Controller.Record.ClienteDTO;
+import Functions.PrintError;
 import org.ONE.model.entity.Cliente;
 import org.ONE.model.entity.Funcionario;
 import org.ONE.model.entity.Passeio;
@@ -12,6 +12,7 @@ import org.ONE.model.entity.ENUM.Status;
 import org.ONE.model.repositories.ClienteRepository;
 import org.ONE.model.repositories.CustomizerFactory;
 import org.ONE.model.repositories.FuncionarioRepository;
+import org.ONE.model.repositories.ReservationsRepository;
 import org.ONE.model.services.PasseioService;
 import org.ONE.model.services.ReservationService;
 import org.ONE.model.services.ClienteServices;
@@ -34,7 +35,7 @@ public class ReservationControllerImpl implements ReservationController {
 
     private  ClienteRepository    clienteRepository = new ClienteRepository(CustomizerFactory.getEntityManager());
     private  FuncionarioRepository funcionarioRepository = new FuncionarioRepository(CustomizerFactory.getEntityManager());
-
+    private ReservationsRepository reservationsRepository = new ReservationsRepository(CustomizerFactory.getEntityManager());
 
     @Override
     public List<Passeio> getAllPasseios() {
@@ -50,6 +51,49 @@ public class ReservationControllerImpl implements ReservationController {
     public List<FuncionarioDTO> getAllFuncionarios() {
         return funcionarioService.findAll();
     }
+
+    @Override
+    public void delete(Reservations reservations){
+        try {
+            if (reservations == null){throw new RuntimeException("O cliente não pode ser nulo");}
+
+            reservationsRepository.delete(reservations);
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+    }
+
+    @Override
+    public List<Reservations> findAll(){
+        try {
+            return reservationsRepository.findAll();
+
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+
+        return List.of();
+    }
+
+    @Override
+    public Reservations findById(Long id) {
+        try {
+            return reservationsRepository.finById(id);
+        } catch (Exception e) {
+            PrintError.printErro(e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reservations> getConfirmedReservations(){
+        return reservationsRepository.getConfirmedReservations();
+    }
+
+    public record ReceiptSummary(
+            List<Reservations> reservations, double totalValue
+    ) {}
 
     @Override
     public void createReservation(Passeio passeio, ClienteDTO clienteDTO, FuncionarioDTO funcionarioDTO, String dateStr) {
